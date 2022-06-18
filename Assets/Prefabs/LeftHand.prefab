@@ -1,0 +1,368 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!95 &1002869925
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414080326835385174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+  m_Controller: {fileID: 9100000, guid: 29b5126fa64e94745a3c3e7f0cc7fdbd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &6569882417172638573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3654254530156674117}
+  - component: {fileID: 2377522033542471694}
+  m_Layer: 0
+  m_Name: LeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3654254530156674117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569882417172638573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6770135097963347247}
+  - {fileID: 4641379377115064812}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2377522033542471694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569882417172638573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b2622c1e9908848a7e733260983516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fingerSpeed: 20
+  threshold: 0.03
+  controllerAnimator: {fileID: 1029400571793785351}
+  handAnimator: {fileID: 1002869925}
+  grip:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Grip
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e9b0263f-5e0c-4fc4-a958-5d37a1ff47c6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 885a9880-dcf2-4ed5-b1a4-844ed229cf52
+        m_Path: <XRController>{LeftHand}/grip
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Grip
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -1627781180616849049, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  trigger:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Trigger
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 670f910b-77d2-42da-af2c-6eb763057cb6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: a80dbbe3-22a9-43fc-b1c9-de8e4e1bf884
+        m_Path: <XRController>{LeftHand}/trigger
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Trigger
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -451102563567159996, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  button1:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button 1
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 56aaeb15-decc-43a5-a1e6-5b1df44e4ce6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 7348becf-ebae-4a20-8307-a930d3a22df4
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Button 1
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -8679870873048092531, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  button2:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button 2
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f4f0d96c-a498-4607-b0bf-afb0d5f598e3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 52355c0c-e60a-4c3e-879d-ac751fc49b81
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Button 2
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 7523789795119335664, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  joystick:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Joystick
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b5b997c2-74c9-4723-b983-9d17a2d93dcf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: fe501ae2-4c4b-472e-bfd6-c26e5ceb8733
+        m_Path: <XRController>{LeftHand}/joystick
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Joystick
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 6822393611873361901, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  button1Touched:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button 1 Touched
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 1b1f4cf4-2789-4c33-9a55-6c7480457611
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -9069360843350067197, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  button2Touched:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button 2 Touched
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2123719a-ceeb-4d0f-b45a-118081d801a7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6855109425780166961, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  joystickTouched:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Joystick Touched
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: eafb2506-5677-41f2-a288-6d744237afdc
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -7031846372660499535, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  triggerTouched:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Trigger Touched
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 002a7d12-7810-4d8f-93b0-d613b82b6d34
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 8701504648710573903, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  gripTouched:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Grip Touched
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: dbc0584b-6dd4-41b9-892c-cbd068bca3b1
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 4421260953177710120, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+--- !u!1001 &5180200113497771527
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3654254530156674117}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.009000063
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04000002
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.72661614
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.003024958
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0019400427
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6870343
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.405
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.077
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 86.793
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: LeftHand
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+--- !u!1 &5414080326835385174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+  m_PrefabInstance: {fileID: 5180200113497771527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4641379377115064812 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+  m_PrefabInstance: {fileID: 5180200113497771527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7233224812024578338
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3654254530156674117}
+    m_Modifications:
+    - target: {fileID: 1309328378366352887, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_Name
+      value: Q2LeftControllerPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309328378366352887, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+--- !u!4 &6770135097963347247 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+  m_PrefabInstance: {fileID: 7233224812024578338}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1029400571793785351 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7649568446591402789, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+  m_PrefabInstance: {fileID: 7233224812024578338}
+  m_PrefabAsset: {fileID: 0}
