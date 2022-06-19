@@ -64,8 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b2622c1e9908848a7e733260983516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingerSpeed: 20
-  threshold: 0.03
+  handInfo: {fileID: 11400000, guid: a03f81601b474454fb2af29efa104016, type: 2}
   controllerAnimator: {fileID: 1029400571793785351}
   handAnimator: {fileID: 1002869925}
   grip:

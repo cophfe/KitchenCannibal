@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 //handles input for a single hand
 public class HandInputManager : MonoBehaviour
 {
 	[Header("Values")]
-	[SerializeField] float fingerSpeed = 1;
-	[SerializeField, Range(0.0f, 1.0f)] float threshold = 0.03f;
+	[SerializeField] HandInfo handInfo;
 
 	[Header("References")]
 	[SerializeField] Animator controllerAnimator;
@@ -45,6 +45,7 @@ public class HandInputManager : MonoBehaviour
 	int middleID;
 	int ringID;
 	int pinkyID;
+	int poseIndexID;
 
 	//input values
 	float gripPercent;
@@ -56,12 +57,21 @@ public class HandInputManager : MonoBehaviour
 	float middleTarget = 0;
 	float ringTarget = 0;
 	float pinkyTarget = 0;
+	float poseAmountTarget = 0;
 
 	float thumbCurrent = 0;
 	float indexCurrent = 0;
 	float middleCurrent = 0;
 	float ringCurrent = 0;
 	float pinkyCurrent = 0;
+	float poseAmountCurrent = 0;
+	int currentPoseIndex = 0;
+	int lastPoseIndex = 0;
+
+	//pose indexes
+	int okIndex;
+	int fingerGunIndex;
+	float poseSpeedModifier = 1.0f;
 
 	bool ControllerVisible { get => controllerVisible; set { SetControllerVisible(value); } }
 	bool controllerVisible = false;
@@ -80,6 +90,10 @@ public class HandInputManager : MonoBehaviour
 		middleID = Animator.StringToHash("Middle");
 		ringID = Animator.StringToHash("Ring");
 		pinkyID = Animator.StringToHash("Pinky");
+		poseIndexID = Animator.StringToHash("Pose Index");
+
+		okIndex = handInfo.FindPoseIndex("OK");
+		fingerGunIndex = handInfo.FindPoseIndex("Finger Gun");
 
 		trigger.action.performed += OnTriggerPress;
 		trigger.action.canceled += OnTriggerPress;
@@ -103,6 +117,7 @@ public class HandInputManager : MonoBehaviour
 		middleCurrent = middleTarget;
 		ringCurrent = ringTarget;
 		pinkyCurrent = pinkyTarget;
+		poseAmountCurrent = poseAmountTarget;
 	}
 
 	void OnTriggerPress(InputAction.CallbackContext ctx)
@@ -201,92 +216,171 @@ public class HandInputManager : MonoBehaviour
 
 	private void FindFingersTarget()
 	{
+		bool thumbPressed = buttonsTouched > 0;
+		bool gripPressed = gripPercent > handInfo.InputThreshold;
+		bool triggerPressed = triggerPercent > handInfo.InputThreshold;
+		
+		bool triggerDown = triggerPercent > 0.5f;
+		bool gripDown = gripPercent> 0.5f;
 
-		if (gripPercent > threshold)
+		//Debug.Log("Trigger percent: " + triggerPercent + " thumb down: " + thumbPressed);
+		
+		//will be set to 1 if needed
+		poseAmountTarget = 0;
+
+		if (gripPressed)
 		{
-			if (triggerPercent > threshold)
+			if (triggerPressed)
 			{
 				float pointerValue = triggerPercent;
 				indexTarget = pointerValue;
 
-				if (buttonsTouched > 0)
+				if (thumbPressed)
 				{
-					if (gripPercent > 0.5f)
-						thumbTarget = gripPercent;
-					else
-						thumbTarget = triggerPercent;
+					//if everything is pressed, do fist
+					thumbTarget = gripPercent;
 				}
 				else
 				{
-					if (triggerPercent > 0.5f)
+					//if everything but thumb is pressed dow thumbs up
+					if (triggerDown)
 						thumbTarget = -0.3f;
 					else
 						thumbTarget = -0.1f;
 				}
-					
+
 			}
 			else
 			{
-				if (gripPercent > 0.5f)
+				if (gripDown)
 				{
-					if (buttonsTouched > 0)
+					//if grip is down, trigger is not down, and thumb is down, point finger
+					if (thumbPressed)
+					{
+						thumbTarget = gripPercent;
 						indexTarget = -0.3f;
+					}
+					//if grip is down, trigger is not down, and thumb is not down, do finger guns
 					else
+					{
 						indexTarget = -0.1f;
+						thumbTarget = -0.3f;
+
+						poseAmountTarget = 1;
+						currentPoseIndex = fingerGunIndex;
+					}
 				}
 				else
-					indexTarget = 0;
-
-				if (buttonsTouched > 0)
 				{
-					thumbTarget = gripPercent;
+					indexTarget = 0;
+					//if nothing is down except thumbs, just move thumb down based on grip amount
+					if (thumbPressed)
+					{
+						thumbTarget = gripPercent;
+					}
+					//otherwise put thumbs in default position
+					else
+						thumbTarget = -0.1f;
 				}
-				else
-					thumbTarget = -0.1f;
-			}	
 
+
+			}
+
+			//move fingers based on grip amount
 			middleTarget = gripPercent;
 			ringTarget = gripPercent;
 			pinkyTarget = gripPercent;
 		}
-		else if (triggerPercent > threshold)
+		else if (triggerPressed)
 		{
+			//if not gripping, trigger somewhat down, and thumb down, do OK sign
+			if (triggerPercent > 0.2f && thumbPressed)
+			{
+				currentPoseIndex = okIndex;
+				poseAmountTarget = 1;
+				Debug.Log("OK!");
+			}
+			else
+			{
+				Debug.Log("NOT OK!");
+
+				if (thumbPressed)
+					thumbTarget = 0.0f;
+				else
+					thumbTarget = -0.1f;
+			}
+
+			//if not gripping but trigger is down, close index finger
 			float pointerValue = 0.2f + (triggerPercent * 0.4f);
 			indexTarget = pointerValue;
 			middleTarget = pointerValue / 3;
 			ringTarget = pointerValue / 4;
 			pinkyTarget = pointerValue / 5;
+
+			
 		}
 		else
 		{
+			//just move everything to default
 			indexTarget = 0;
 			middleTarget = 0;
 			ringTarget = 0;
 			pinkyTarget = 0;
 
-			if (buttonsTouched > 0)
+			//except thumbs o course
+			if (thumbPressed)
 				thumbTarget = 0.0f;
 			else
 				thumbTarget = -0.1f;
 		}
+
+		Debug.Log(poseAmountTarget);
+
 	}
 
 	private void UpdateFingers()
 	{
-		float currentSpeed = Time.deltaTime * fingerSpeed;
-		//move current to target values
-		thumbCurrent = Mathf.MoveTowards(thumbCurrent, thumbTarget, Mathf.Abs(thumbCurrent - thumbTarget) * currentSpeed);
-		indexCurrent =	Mathf.MoveTowards(indexCurrent, indexTarget	, Mathf.Abs(indexCurrent - indexTarget) * currentSpeed);
-		middleCurrent =	Mathf.MoveTowards(middleCurrent, middleTarget	, Mathf.Abs(middleCurrent - middleTarget) * currentSpeed);
-		ringCurrent =	Mathf.MoveTowards(ringCurrent, ringTarget	, Mathf.Abs(ringCurrent - ringTarget) * currentSpeed);
-		pinkyCurrent =	Mathf.MoveTowards(pinkyCurrent, pinkyTarget	, Mathf.Abs(pinkyCurrent - pinkyTarget) * currentSpeed);
+		float currentSpeed = Time.deltaTime * handInfo.FingerSpeed;
 
-		//moves hand values to current values
-		handAnimator.SetFloat(pinkyID, pinkyCurrent);
-		handAnimator.SetFloat(ringID, ringCurrent);
-		handAnimator.SetFloat(middleID, middleCurrent);
-		handAnimator.SetFloat(indexID, indexCurrent);
-		handAnimator.SetFloat(thumbID, thumbCurrent);
+		float thumbDiff = Mathf.Abs(thumbCurrent - thumbTarget); 
+		float indexDiff = Mathf.Abs(indexCurrent - indexTarget); 
+		float middleDiff = Mathf.Abs(middleCurrent - middleTarget);
+		float ringDiff = Mathf.Abs(ringCurrent - ringTarget);
+		float pinkyDiff = Mathf.Abs(pinkyCurrent - pinkyTarget); 
+		
+		float poseDiff = Mathf.Abs(poseAmountCurrent - poseAmountTarget); 
+
+		//if close enough to correct do not set animator values because slow
+		//this has not been tested for performance so it is kinda stupid
+		if (thumbDiff +
+			indexDiff +
+			middleDiff +
+			ringDiff +
+			pinkyDiff > 0.02f)
+		{
+			//move current to target values
+			thumbCurrent = Mathf.MoveTowards(thumbCurrent, thumbTarget, thumbDiff * currentSpeed);
+			indexCurrent = Mathf.MoveTowards(indexCurrent, indexTarget, indexDiff * currentSpeed);
+			middleCurrent = Mathf.MoveTowards(middleCurrent, middleTarget, middleDiff * currentSpeed);
+			ringCurrent = Mathf.MoveTowards(ringCurrent, ringTarget, ringDiff * currentSpeed);
+			pinkyCurrent = Mathf.MoveTowards(pinkyCurrent, pinkyTarget, pinkyDiff * currentSpeed);
+
+			//moves hand values to current values
+			handAnimator.SetFloat(pinkyID, pinkyCurrent);
+			handAnimator.SetFloat(ringID, ringCurrent);
+			handAnimator.SetFloat(middleID, middleCurrent);
+			handAnimator.SetFloat(indexID, indexCurrent);
+			handAnimator.SetFloat(thumbID, thumbCurrent);
+		}
+
+		poseAmountCurrent = Mathf.MoveTowards(poseAmountCurrent, poseAmountTarget, poseDiff * Time.deltaTime * handInfo.PoseSpeed * poseSpeedModifier);
+		handAnimator.SetLayerWeight(handInfo.PoseLayer, poseAmountCurrent);
+		if (currentPoseIndex != lastPoseIndex)
+		{
+			poseSpeedModifier = handInfo.FindPoseSpeedModifier(currentPoseIndex);
+			lastPoseIndex = currentPoseIndex;
+			handAnimator.SetInteger(poseIndexID, currentPoseIndex);
+		}
 	}
 
 	private void Update()
