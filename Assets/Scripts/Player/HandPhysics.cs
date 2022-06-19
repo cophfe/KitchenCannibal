@@ -6,16 +6,20 @@ public class HandPhysics : MonoBehaviour
 {
 	[SerializeField]
 	Transform target;
+	[SerializeField]
+	float maxForce = 20;
 
 	Rigidbody rb;
 	new Transform transform;
 
+	Quaternion lastRotation;
     void Start()
     {
 		transform = gameObject.transform;
 		rb = GetComponent<Rigidbody>();
 
 		transform.position = target.position;
+		rb.maxAngularVelocity = 1000000;
 	}
 
     // Update is called once per frame
@@ -24,12 +28,23 @@ public class HandPhysics : MonoBehaviour
 		FollowTarget();
 	}
 
+	private void Update()
+	{
+		//transform.rotation = target.rotation;
+	}
+
 	void FollowTarget()
 	{
-		float iDT = 1 / (Time.deltaTime == 0 ? Mathf.Infinity : Time.deltaTime);
-		rb.velocity = (target.position - transform.position) * iDT;
+		float iDT = Time.deltaTime == 0 ? 0 : (1 / Time.deltaTime);
+		Vector3 vel = Vector3.MoveTowards(Vector3.zero, (target.position - transform.position), maxForce);
+		rb.velocity = vel * iDT;
 
-		(target.rotation * Quaternion.Inverse(transform.rotation)).ToAngleAxis(out float angle, out Vector3 axis);
-		rb.angularVelocity = angle * Mathf.Deg2Rad * iDT * axis;
+		Quaternion rot = (target.rotation * Quaternion.Inverse(transform.rotation));
+		rot.ToAngleAxis(out float angle, out Vector3 axis);
+		
+		rb.angularVelocity = Mathf.Deg2Rad * angle * iDT * axis;
+		//lastRotation = transform.rotation;
+		//Vector3 angularVelocity = Mathf.Deg2Rad * angle * iDT * axis;
+
 	}
 }

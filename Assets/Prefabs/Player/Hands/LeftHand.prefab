@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &551180452698952009
+--- !u!1 &5414080326835385174
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,55 +8,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 931681206694759411}
-  - component: {fileID: 3433984004984716181}
-  - component: {fileID: 7816601186877833745}
-  - component: {fileID: 7733111719272676566}
+  - component: {fileID: 4641379377115064812}
+  - component: {fileID: 1732362219}
+  - component: {fileID: 2377522033542471694}
+  - component: {fileID: 4069875930768450587}
   m_Layer: 6
-  m_Name: RightHand
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &931681206694759411
+--- !u!4 &4641379377115064812
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551180452698952009}
-  m_LocalRotation: {x: -0.0030296817, y: -0.0019399045, z: -0.68703693, w: 0.7266136}
-  m_LocalPosition: {x: 0.2, y: 2.8610008, z: 0.6909999}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_GameObject: {fileID: 5414080326835385174}
+  m_LocalRotation: {x: -0.0030296175, y: 0.0019399726, z: 0.68703693, w: 0.7266136}
+  m_LocalPosition: {x: -0.2, y: 2.8610008, z: 0.6909999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2467584673592982155}
+  - {fileID: 2979651555985888915}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.405, y: 0.077, z: -86.793}
---- !u!54 &3433984004984716181
+  m_LocalEulerAnglesHint: {x: -0.405, y: -0.077, z: 86.793}
+--- !u!54 &1732362219
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551180452698952009}
+  m_GameObject: {fileID: 5414080326835385174}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 200
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7816601186877833745
+  m_CollisionDetection: 1
+--- !u!114 &2377522033542471694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551180452698952009}
+  m_GameObject: {fileID: 5414080326835385174}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8b2622c1e9908848a7e733260983516, type: 3}
@@ -64,146 +64,188 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handInfo: {fileID: 11400000, guid: a03f81601b474454fb2af29efa104016, type: 2}
   controllerAnimator: {fileID: 0}
-  handAnimator: {fileID: 271980123720818506}
+  handAnimator: {fileID: 621780530791658322}
+  controllerRenderer: {fileID: 0}
+  target: {fileID: 0}
   grip:
     m_UseReference: 1
     m_Action:
       m_Name: Grip
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 40abbbe6-f411-4ff0-b8b6-36d4cc47ce75
+      m_Id: e9b0263f-5e0c-4fc4-a958-5d37a1ff47c6
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 885a9880-dcf2-4ed5-b1a4-844ed229cf52
+        m_Path: <XRController>{LeftHand}/grip
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Grip
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 9012942004674474570, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: -1627781180616849049, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   trigger:
     m_UseReference: 1
     m_Action:
       m_Name: Trigger
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 7fa8c688-d7cf-426d-bdcd-8953c8317777
+      m_Id: 670f910b-77d2-42da-af2c-6eb763057cb6
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: a80dbbe3-22a9-43fc-b1c9-de8e4e1bf884
+        m_Path: <XRController>{LeftHand}/trigger
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Trigger
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -4242531140390161883, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: -451102563567159996, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   button1:
     m_UseReference: 1
     m_Action:
       m_Name: Button 1
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: b2630bfd-92d7-46b3-89be-35a7dd849360
+      m_Id: 56aaeb15-decc-43a5-a1e6-5b1df44e4ce6
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 7348becf-ebae-4a20-8307-a930d3a22df4
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Button 1
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -5730418296141769498, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: -8679870873048092531, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   button2:
     m_UseReference: 1
     m_Action:
       m_Name: Button 2
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 84cf1a49-aeb6-4f2d-b887-0b135a8d30b8
+      m_Id: f4f0d96c-a498-4607-b0bf-afb0d5f598e3
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 52355c0c-e60a-4c3e-879d-ac751fc49b81
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Button 2
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -1151904333057251140, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: 7523789795119335664, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   joystick:
     m_UseReference: 1
     m_Action:
       m_Name: Joystick
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 4dbdd5d9-5d13-4e2b-b828-453b8e9ba4c2
+      m_Id: b5b997c2-74c9-4723-b983-9d17a2d93dcf
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: fe501ae2-4c4b-472e-bfd6-c26e5ceb8733
+        m_Path: <XRController>{LeftHand}/joystick
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Joystick
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 3074500232342334926, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: 6822393611873361901, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   button1Touched:
     m_UseReference: 1
     m_Action:
       m_Name: Button 1 Touched
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 70b1465f-c525-403a-9ec0-cb515a8654ac
+      m_Id: 1b1f4cf4-2789-4c33-9a55-6c7480457611
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -4508530887735743179, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: -9069360843350067197, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   button2Touched:
     m_UseReference: 1
     m_Action:
       m_Name: Button 2 Touched
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 3f19658c-6da5-4858-af0e-3879bbf8b9aa
+      m_Id: 2123719a-ceeb-4d0f-b45a-118081d801a7
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 8965426291051876314, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: 6855109425780166961, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   joystickTouched:
     m_UseReference: 1
     m_Action:
       m_Name: Joystick Touched
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: e6298209-04ee-49a8-89b8-dfa3a003f19e
+      m_Id: eafb2506-5677-41f2-a288-6d744237afdc
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -7688559909361186135, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: -7031846372660499535, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   triggerTouched:
     m_UseReference: 1
     m_Action:
       m_Name: Trigger Touched
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: fdac96f9-8320-4b97-91cd-6d821e640077
+      m_Id: 002a7d12-7810-4d8f-93b0-d613b82b6d34
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -8249107959992114610, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+    m_Reference: {fileID: 8701504648710573903, guid: 0051576b947e73d4a9db49182af54463, type: 3}
   gripTouched:
     m_UseReference: 1
     m_Action:
       m_Name: Grip Touched
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 961a5c9f-3d52-4d46-ab91-75a74189d47b
+      m_Id: dbc0584b-6dd4-41b9-892c-cbd068bca3b1
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -6761587398019698940, guid: 0051576b947e73d4a9db49182af54463, type: 3}
---- !u!114 &7733111719272676566
+    m_Reference: {fileID: 4421260953177710120, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+--- !u!114 &4069875930768450587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551180452698952009}
+  m_GameObject: {fileID: 5414080326835385174}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddfcaf733aca18a489624400a7e53a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!1001 &5513675797559681567
+--- !u!1001 &5180200113497771527
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 931681206694759411}
+    m_TransformParent: {fileID: 4641379377115064812}
     m_Modifications:
     - target: {fileID: 46742169791298255, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
       propertyPath: m_Layer
@@ -249,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3183773264462188438, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf43c1642c63b6247986901706b503dd, type: 2}
     - target: {fileID: 3307671343809373545, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -395,13 +441,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
---- !u!4 &2467584673592982155 stripped
+--- !u!4 &2979651555985888915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7978722413372479636, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
-  m_PrefabInstance: {fileID: 5513675797559681567}
+  m_PrefabInstance: {fileID: 5180200113497771527}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &271980123720818506 stripped
+--- !u!95 &621780530791658322 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5711345631926041941, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
-  m_PrefabInstance: {fileID: 5513675797559681567}
+  m_PrefabInstance: {fileID: 5180200113497771527}
   m_PrefabAsset: {fileID: 0}

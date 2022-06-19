@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 
 //handles input for a single hand
-public class HandInputManager : MonoBehaviour
+public class HandManager : MonoBehaviour
 {
 	[Header("Values")]
 	[SerializeField] HandInfo handInfo;
@@ -14,6 +14,8 @@ public class HandInputManager : MonoBehaviour
 	[Header("References")]
 	[SerializeField] Animator controllerAnimator;
 	[SerializeField] Animator handAnimator;
+	[SerializeField] SkinnedMeshRenderer controllerRenderer;
+	[SerializeField] Transform target;
 
 	[Header("Inputs")]
 	//for hand and controller
@@ -73,9 +75,14 @@ public class HandInputManager : MonoBehaviour
 	int fingerGunIndex;
 	float poseSpeedModifier = 1.0f;
 
+	//Controller stuff
 	public bool ControllerVisible { get => controllerVisible; set { SetControllerVisible(value); } }
-	bool controllerVisible = false;
-
+	bool controllerVisible = true;
+	//controller opacity
+	int opacityId;
+	float fullOpacity;
+	Material controllerMaterial;
+	
 	private void Start()
 	{
 		triggerID = Animator.StringToHash("Trigger");
@@ -118,6 +125,14 @@ public class HandInputManager : MonoBehaviour
 		ringCurrent = ringTarget;
 		pinkyCurrent = pinkyTarget;
 		poseAmountCurrent = poseAmountTarget;
+
+		//find controller stuff
+		opacityId = Shader.PropertyToID("Opacity");
+		var materialList = new List<Material>();
+		controllerRenderer.GetMaterials(materialList);
+		controllerMaterial = materialList[0];
+		fullOpacity = controllerMaterial.GetFloat(opacityId);
+		SetControllerVisible(false);
 	}
 
 	void OnTriggerPress(InputAction.CallbackContext ctx)
@@ -189,8 +204,14 @@ public class HandInputManager : MonoBehaviour
 		if (value == controllerVisible)
 			return;
 
+		controllerVisible = value;
+		controllerRenderer.enabled = value;
+		controllerAnimator.enabled = value;
+
 		if (value)
 		{
+			controllerMaterial.SetFloat(opacityId, 0);
+
 			joystick.action.performed += OnJoystick;
 
 			button1.action.performed += OnButton1;
@@ -372,8 +393,26 @@ public class HandInputManager : MonoBehaviour
 		}
 	}
 
+	void UpdateControllerVisibility()
+	{
+		float distanceToTargetSq = (target.position - transform.position).sqrMagnitude;
+
+		if (distanceToTargetSq > handInfo.ControllerVisibleStart * handInfo.ControllerVisibleStart)
+		{
+			SetControllerVisible(true);
+			distanceToTargetSq = Mathf.Sqrt(distanceToTargetSq);
+			float opacity = fullOpacity * Mathf.Clamp01((distanceToTargetSq - handInfo.ControllerVisibleStart) / (handInfo.ControllerVisibleRange));
+			controllerMaterial.SetFloat(opacityId, opacity);
+		}
+		else
+		{
+			SetControllerVisible(false);
+		}
+	}
+	
 	private void Update()
 	{
 		UpdateFingers();
+		UpdateControllerVisibility();
 	}
 }

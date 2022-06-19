@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842443c07e17ccf44a1f85e695b29a37, type: 3}
   m_Name: HandInfo
   m_EditorClassIdentifier: 
+  <ControllerVisibleStart>k__BackingField: 0.1
+  <ControllerVisibleRange>k__BackingField: 0.1
   <FingerSpeed>k__BackingField: 20
   <ThumbSpeed>k__BackingField: 15
   <PoseSpeed>k__BackingField: 20

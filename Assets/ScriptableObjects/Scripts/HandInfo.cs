@@ -6,6 +6,11 @@ using UnityEngine;
 public class HandInfo : ScriptableObject
 {
 	[field: SerializeField]
+	public float ControllerVisibleStart { get; private set; } = 2.0f;
+	[field: SerializeField]
+	public float ControllerVisibleRange { get; private set; } = 1.0f;
+
+	[field: SerializeField]
 	public float FingerSpeed { get; private set; } = 20.0f;
 	
 	//thumb gets different speed because it generally moves further than other fingers
