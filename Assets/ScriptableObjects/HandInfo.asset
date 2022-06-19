@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HandInfo
   m_EditorClassIdentifier: 
   <FingerSpeed>k__BackingField: 20
+  <ThumbSpeed>k__BackingField: 15
   <PoseSpeed>k__BackingField: 20
   <InputThreshold>k__BackingField: 0.03
   <PoseLayer>k__BackingField: 5

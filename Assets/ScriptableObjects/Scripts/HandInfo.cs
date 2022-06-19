@@ -7,6 +7,10 @@ public class HandInfo : ScriptableObject
 {
 	[field: SerializeField]
 	public float FingerSpeed { get; private set; } = 20.0f;
+	
+	//thumb gets different speed because it generally moves further than other fingers
+	[field: SerializeField]
+	public float ThumbSpeed { get; private set; } = 10.0f;
 	[field: SerializeField]
 	public float PoseSpeed { get; private set; } = 20.0f;
 	[field: SerializeField, Range(0.0f, 1.0f)] 

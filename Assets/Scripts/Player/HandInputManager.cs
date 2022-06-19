@@ -73,7 +73,7 @@ public class HandInputManager : MonoBehaviour
 	int fingerGunIndex;
 	float poseSpeedModifier = 1.0f;
 
-	bool ControllerVisible { get => controllerVisible; set { SetControllerVisible(value); } }
+	public bool ControllerVisible { get => controllerVisible; set { SetControllerVisible(value); } }
 	bool controllerVisible = false;
 
 	private void Start()
@@ -157,7 +157,6 @@ public class HandInputManager : MonoBehaviour
 		else
 			buttonsTouched--;
 		FindFingersTarget();
-		Debug.Log("buttons touched: " + buttonsTouched);
 	}
 	void OnButton2Touched(InputAction.CallbackContext ctx)
 	{
@@ -166,7 +165,6 @@ public class HandInputManager : MonoBehaviour
 		else
 			buttonsTouched--;
 		FindFingersTarget();
-		Debug.Log("buttons touched: " + buttonsTouched);
 	}
 	void OnJoystickTouched(InputAction.CallbackContext ctx)
 	{
@@ -175,7 +173,6 @@ public class HandInputManager : MonoBehaviour
 		else
 			buttonsTouched--;
 		FindFingersTarget();
-		Debug.Log("buttons touched: " + buttonsTouched);
 	}
 	void OnTriggerTouched(InputAction.CallbackContext ctx)
 	{
@@ -223,8 +220,6 @@ public class HandInputManager : MonoBehaviour
 		bool triggerDown = triggerPercent > 0.5f;
 		bool gripDown = gripPercent> 0.5f;
 
-		//Debug.Log("Trigger percent: " + triggerPercent + " thumb down: " + thumbPressed);
-		
 		//will be set to 1 if needed
 		poseAmountTarget = 0;
 
@@ -298,12 +293,9 @@ public class HandInputManager : MonoBehaviour
 			{
 				currentPoseIndex = okIndex;
 				poseAmountTarget = 1;
-				Debug.Log("OK!");
 			}
 			else
 			{
-				Debug.Log("NOT OK!");
-
 				if (thumbPressed)
 					thumbTarget = 0.0f;
 				else
@@ -333,9 +325,6 @@ public class HandInputManager : MonoBehaviour
 			else
 				thumbTarget = -0.1f;
 		}
-
-		Debug.Log(poseAmountTarget);
-
 	}
 
 	private void UpdateFingers()
@@ -348,7 +337,6 @@ public class HandInputManager : MonoBehaviour
 		float ringDiff = Mathf.Abs(ringCurrent - ringTarget);
 		float pinkyDiff = Mathf.Abs(pinkyCurrent - pinkyTarget); 
 		
-		float poseDiff = Mathf.Abs(poseAmountCurrent - poseAmountTarget); 
 
 		//if close enough to correct do not set animator values because slow
 		//this has not been tested for performance so it is kinda stupid
@@ -359,7 +347,7 @@ public class HandInputManager : MonoBehaviour
 			pinkyDiff > 0.02f)
 		{
 			//move current to target values
-			thumbCurrent = Mathf.MoveTowards(thumbCurrent, thumbTarget, thumbDiff * currentSpeed);
+			thumbCurrent = Mathf.MoveTowards(thumbCurrent, thumbTarget, thumbDiff * Time.deltaTime * handInfo.ThumbSpeed);
 			indexCurrent = Mathf.MoveTowards(indexCurrent, indexTarget, indexDiff * currentSpeed);
 			middleCurrent = Mathf.MoveTowards(middleCurrent, middleTarget, middleDiff * currentSpeed);
 			ringCurrent = Mathf.MoveTowards(ringCurrent, ringTarget, ringDiff * currentSpeed);
@@ -373,6 +361,7 @@ public class HandInputManager : MonoBehaviour
 			handAnimator.SetFloat(thumbID, thumbCurrent);
 		}
 
+		float poseDiff = Mathf.Abs(poseAmountCurrent - poseAmountTarget);
 		poseAmountCurrent = Mathf.MoveTowards(poseAmountCurrent, poseAmountTarget, poseDiff * Time.deltaTime * handInfo.PoseSpeed * poseSpeedModifier);
 		handAnimator.SetLayerWeight(handInfo.PoseLayer, poseAmountCurrent);
 		if (currentPoseIndex != lastPoseIndex)
