@@ -40,6 +40,7 @@ public class OrderManager : MonoBehaviour
         bool completedOrder = true;
         for (int i = 0; i <= currentOrderIndex; i++)
         {
+           // if(orders[i].is) check if the order is currently active
             // The amount of ingredients present is not the same
             if (orders[i].recipe.recipeRequirements.Count != recipe.Count)
                 continue;

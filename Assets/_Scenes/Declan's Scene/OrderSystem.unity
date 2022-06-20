@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94a281391a09c84ca4ceba3b44e16bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientType: 3
+  ingredientType: 4
 --- !u!54 &1246272751
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -951,9 +951,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orders:
   - {fileID: 2010101531}
-  - {fileID: 2010101534}
-  - {fileID: 2010101534}
-  - {fileID: 2010101534}
   - {fileID: 2010101534}
   elaspedTime: 0
 --- !u!4 &2010101533
