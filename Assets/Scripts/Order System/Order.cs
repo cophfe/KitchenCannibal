@@ -9,7 +9,6 @@ public class Order : MonoBehaviour
     public Recipe recipe;
     public int reward;
     private bool timeStarted = false;
-    public OrderManager manager = null;
     public void StartTime()
     {
         timeStarted = true;
@@ -29,12 +28,14 @@ public class Order : MonoBehaviour
     public void OrderFailed()
     {
         // Run stuff here when order fails
+        timeStarted = false;
         Debug.Log(recipe.name + "Order failed");
         
     }
     
     public void OrderComplete()
     {
+        timeStarted = false;
         Debug.Log(recipe.name + " Order complete");
     }
 }

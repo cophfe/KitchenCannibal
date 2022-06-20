@@ -37,8 +37,8 @@ public class OrderManager : MonoBehaviour
 
     public bool CheckRecipe(List<RecipeRequirement> recipe)
     {
-
-        for (int i = 0; i < orders.Count; i++)
+        bool completedOrder = true;
+        for (int i = 0; i <= currentOrderIndex; i++)
         {
             // The amount of ingredients present is not the same
             if (orders[i].recipe.recipeRequirements.Count != recipe.Count)
@@ -55,26 +55,40 @@ public class OrderManager : MonoBehaviour
                     {
                         correctIngredients++;
                         correctIndex = y;
-                        break;
+                        break; // ingredient is the same
                     }
                 }
 
                 // An ingredient type did not match
-                if (correctIngredients != x)
-                    break;
+                if (correctIngredients != x + 1)
+                {
+                    completedOrder = false;
+                    break; // An ingredient from the order cannot be found checks other orders
+                }
+
                 else
                 {
                     if (recipe[correctIndex].amount != orders[i].recipe.recipeRequirements[x].amount)
-                        break;
+                    {
+                        completedOrder = false;
+                        break; // The amount of said ingredient needed is not present
+                    }
                 }
             }
-
+            
+            if (!completedOrder)
+            {
+                completedOrder = true;
+                continue;
+            }
+           
             // A match is found
             orders[i].OrderComplete();
             return true;
         }
 
         // Nothing is found
+        Debug.Log("Invalid Recipe");
         return false;
     }
 }
