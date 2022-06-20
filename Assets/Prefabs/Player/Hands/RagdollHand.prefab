@@ -13,7 +13,7 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &215447734
@@ -30,6 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHand: {fileID: 0}
   maxForce: 1
+  flip: 0
 --- !u!54 &1796018232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45,7 +46,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &2863930705533186637
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -128,7 +129,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -157,7 +158,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &1914641609714389288
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -240,7 +241,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -269,7 +270,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &655268602973721063
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -352,7 +353,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -381,7 +382,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &1391031241851031771
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -464,7 +465,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -493,7 +494,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &6087734899113193955
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -576,7 +577,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -605,7 +606,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &625553205203854869
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -688,7 +689,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -717,7 +718,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &7200463419356096035
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -800,7 +801,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -829,7 +830,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &8319593943673506345
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -912,7 +913,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -941,7 +942,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &5961510221606647484
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1024,7 +1025,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -1053,7 +1054,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &5873490603632323406
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1136,7 +1137,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -1165,7 +1166,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &3739026877167123828
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1248,7 +1249,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -1277,7 +1278,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &3769066453143861028
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1360,7 +1361,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -1389,7 +1390,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &7836251157783752854
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1472,7 +1473,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -1501,7 +1502,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &2393386164652262684
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1584,7 +1585,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
@@ -1613,7 +1614,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!153 &2982911331440238263
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1696,7 +1697,7 @@ ConfigurableJoint:
     maximumForce: 100
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 5000000
+    positionSpring: 50000
     positionDamper: 50
     maximumForce: 3000
   m_ProjectionMode: 1
