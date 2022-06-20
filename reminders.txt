@@ -19,6 +19,21 @@ Use prefabs when creating gameobjects that are either being used across multiple
 This means people working on other scenes can use your work, with it updating automatically when you change the prefab.
 DO NOT apply overrides to other people's prefabs!
 ----------------------------------------------
+SETUP EXTERNAL TOOLS FOR BUILDING TO ANDROID:
+ONLY FOR BUILDING FOR THE QUEST 2
+if this doesn't work notify connor or declan
+Scroll to android and change the paths to these specified paths:
+JDK:
+C:\Program Files\AndroidBuildTools\OpenJDK
+SDK:
+C:\Program Files\AndroidBuildTools\SDK
+NDK:
+C:\Program Files\AndroidBuildTools\NDK
+Gradle:
+C:\Program Files\AndroidBuildTools\Tools\gradle
+
+now you should be able to build to android
+----------------------------------------------
 Assets folders have been organised for efficiency purposes
 Here is the use case for all folders:
 
