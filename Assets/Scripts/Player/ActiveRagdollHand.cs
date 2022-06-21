@@ -123,7 +123,6 @@ public class ActiveRagdollHand : MonoBehaviour
 				dynamicBodies[i].followBody.AddTorque(targetRotation, ForceMode.VelocityChange);
 			}
 
-			//Do force
 			{
 				Vector3 targetPlusCOM = dynamicBodies[i].targetTransform.position + dynamicBodies[i].targetTransform.rotation * dynamicBodies[i].rbPosToCOM;
 				Vector3 fixForce = Vector3.ClampMagnitude(targetPlusCOM - dynamicBodies[i].followBody.worldCenterOfMass, maxWorldDistance);

@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403432564626534476}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &403432563815452120
 MonoBehaviour:
@@ -130,7 +130,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 403432565871784715}
-  - {fileID: 403432564681051501}
   - {fileID: 403432565403780201}
   - {fileID: 403432563815452119}
   - {fileID: 3283039816519667430}
@@ -175,14 +174,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403432564681051498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8700008, z: 0.73099995}
+  m_LocalPosition: {x: 0, y: 2.8700008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 403432565165283082}
   - {fileID: 403432565476917356}
   - {fileID: 403432565059060834}
-  m_Father: {fileID: 403432564626534476}
-  m_RootOrder: 1
+  m_Father: {fileID: 403432565871784715}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403432565059060835
 GameObject:
@@ -604,17 +603,25 @@ MonoBehaviour:
       m_Name: Position
       m_Type: 0
       m_ExpectedControlType: Vector3
-      m_Id: ac2acde3-f83f-4057-812d-1aded7780bfc
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 8c574ad5-cb32-4b9e-9fb5-2d25a81e0620
+        m_Id: 
         m_Path: <XRHMD>/centerEyePosition
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Position
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: 
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
@@ -624,17 +631,25 @@ MonoBehaviour:
       m_Name: Rotation
       m_Type: 0
       m_ExpectedControlType: Quaternion
-      m_Id: 3b177982-bb56-4a08-a9b3-5b6ea342fef7
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 3c805e5f-a2f5-410d-839f-ed4589661ee8
+        m_Id: 
         m_Path: <XRHMD>/centerEyeRotation
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Rotation
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: 
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
@@ -719,7 +734,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403432564626534476}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &403432565403780203
 MonoBehaviour:
@@ -1089,7 +1104,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.73099995}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 403432564681051501}
   m_Father: {fileID: 403432564626534476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1173,7 +1189,7 @@ Transform:
   - {fileID: 4591158318038183353}
   - {fileID: 7880832777873342914}
   m_Father: {fileID: 403432564626534476}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5725983407936083015
 MonoBehaviour:
@@ -1942,10 +1958,6 @@ PrefabInstance:
       propertyPath: targetHandModel
       value: 
       objectReference: {fileID: 8380323274601038029}
-    - target: {fileID: 2088823813204796986, guid: a538cf99bbd23fd458d1d7ba1d9c1d16, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6b9f885911ca09549b9f5b7ddcca5b84, type: 2}
     - target: {fileID: 6134531291307486082, guid: a538cf99bbd23fd458d1d7ba1d9c1d16, type: 3}
       propertyPath: m_Name
       value: LRagdollHand
