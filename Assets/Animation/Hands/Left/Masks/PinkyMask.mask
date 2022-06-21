@@ -13,55 +13,55 @@ AvatarMask:
     m_Weight: 1
   - m_Path: hands:hands_geom
     m_Weight: 0
-  - m_Path: hands:hands_geom/hands:Lhand
+  - m_Path: hands:hands_geom/hands:hand
     m_Weight: 1
-  - m_Path: hands:l_hand_world
+  - m_Path: hands:hand_world
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand
+  - m_Path: hands:hand_world/hands:b_hand
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_grip
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_grip
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_hand_ignore
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_hand_ignore
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_index1
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_index1
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_index1/hands:b_index2
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2/hands:b_l_index3
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_index1/hands:b_index2/hands:b_index3
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2/hands:b_l_index3/hands:b_l_index_ignore
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_index1/hands:b_index2/hands:b_index3/hands:b_index_ignore
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_middle1
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_middle1
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_middle1/hands:b_l_middle2
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_middle1/hands:b_middle2
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_middle1/hands:b_l_middle2/hands:b_l_middle3
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_middle1/hands:b_middle2/hands:b_middle3
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_middle1/hands:b_l_middle2/hands:b_l_middle3/hands:b_l_middle_ignore
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_middle1/hands:b_middle2/hands:b_middle3/hands:b_middle_ignore
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_pinky0
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_pinky0/hands:b_pinky1
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_pinky0/hands:b_pinky1/hands:b_pinky2
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2/hands:b_l_pinky3
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_pinky0/hands:b_pinky1/hands:b_pinky2/hands:b_pinky3
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2/hands:b_l_pinky3/hands:b_l_pinky_ignore
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_pinky0/hands:b_pinky1/hands:b_pinky2/hands:b_pinky3/hands:b_pinky_ignore
     m_Weight: 1
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_ring1
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1/hands:b_l_ring2
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_ring1/hands:b_ring2
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1/hands:b_l_ring2/hands:b_l_ring3
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_ring1/hands:b_ring2/hands:b_ring3
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1/hands:b_l_ring2/hands:b_l_ring3/hands:b_l_ring_ignore
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_ring1/hands:b_ring2/hands:b_ring3/hands:b_ring_ignore
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_thumb1
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1/hands:b_l_thumb2
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_thumb1/hands:b_thumb2
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1/hands:b_l_thumb2/hands:b_l_thumb3
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_thumb1/hands:b_thumb2/hands:b_thumb3
     m_Weight: 0
-  - m_Path: hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1/hands:b_l_thumb2/hands:b_l_thumb3/hands:b_l_thumb_ignore
+  - m_Path: hands:hand_world/hands:b_hand/hands:b_thumb1/hands:b_thumb2/hands:b_thumb3/hands:b_thumb_ignore
     m_Weight: 0

@@ -260,9 +260,97 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8198153250517706843, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7936611106611541902, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7933762536422608886, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7559702794518473221, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7197751059537571763, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7050073475120920950, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6876283200194998784, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:hand_world
+      objectReference: {fileID: 0}
+    - target: {fileID: -6169698842116934046, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5668648412387295760, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4262778880273556970, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_hand_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: -3959574773391659502, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: -2769075166366446032, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2463054059146146977, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: -1491597299205846170, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1436680099227639034, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring1
+      objectReference: {fileID: 0}
+    - target: {fileID: -117230168141329683, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_hand
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 28ba895fb770f444594cf96352670a22, type: 3}
       propertyPath: m_Name
       value: LeftHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897133222196087274, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198055888976155094, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007599326527850083, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 4388393809678860911, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304224110468163933, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521368409642672622, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb3
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 28ba895fb770f444594cf96352670a22, type: 3}
       propertyPath: m_Controller
@@ -271,6 +359,22 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 28ba895fb770f444594cf96352670a22, type: 3}
       propertyPath: m_CullingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5996635161325727197, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_grip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297735235770523284, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608457182678222256, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745067165577663835, guid: 28ba895fb770f444594cf96352670a22, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28ba895fb770f444594cf96352670a22, type: 3}

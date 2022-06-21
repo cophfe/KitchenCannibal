@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handInfo: {fileID: 11400000, guid: a03f81601b474454fb2af29efa104016, type: 2}
   controllerAnimator: {fileID: 0}
-  handAnimator: {fileID: 0}
+  handAnimator: {fileID: 5689254907421303029}
   controllerRenderer: {fileID: 0}
   target: {fileID: 0}
   grip:
@@ -179,7 +179,7 @@ Animator:
   m_GameObject: {fileID: 7880984793928219068}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
-  m_Controller: {fileID: 9100000, guid: f1148d43bbad1b74b8c90011dcc6f818, type: 2}
+  m_Controller: {fileID: 9100000, guid: 29b5126fa64e94745a3c3e7f0cc7fdbd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -195,6 +195,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2531182602340698704}
     m_Modifications:
+    - target: {fileID: -9068083127816450108, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -242,6 +246,106 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8411429161687842849, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:hand
+      objectReference: {fileID: 0}
+    - target: {fileID: -7979804620129300485, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_hand
+      objectReference: {fileID: 0}
+    - target: {fileID: -7807614220722075615, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6421239671683940948, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5092575726617432858, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: -4879418218688987193, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: -3084244928682438063, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2500355529433369295, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1183063713073851962, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1151709805749767551, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky1
+      objectReference: {fileID: 0}
+    - target: {fileID: -574732445527993878, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: -69206673161987460, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_thumb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 417695215352114881, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 2733608860974720880, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_ring1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2762434622733631829, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_grip
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870682243854316487, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880385028064339462, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:hand_world
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315687775787985550, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505369179087655737, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_index1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930343004240295668, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_hand_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224037715905798251, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481529342854523071, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739482701304743083, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky_ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 8125517416056524224, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_pinky3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186797967085707329, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_middle2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}

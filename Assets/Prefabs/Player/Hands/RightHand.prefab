@@ -447,6 +447,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 931681206694759411}
     m_Modifications:
+    - target: {fileID: -9068083127816450108, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_l_pinky0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -491,9 +495,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7979804620129300485, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_l_hand
+      objectReference: {fileID: 0}
+    - target: {fileID: -1151709805749767551, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_l_pinky1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
       propertyPath: m_Name
       value: RightHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880385028064339462, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:l_hand_world
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224037715905798251, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_l_pinky2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8125517416056524224, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
+      propertyPath: m_Name
+      value: hands:b_l_pinky3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d757d2aa75a46f4babc2c598f5b967f, type: 3}
