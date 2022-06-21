@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711433226240007175}
   - component: {fileID: 24845865542762466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5945176288473539040}
   - component: {fileID: 1457512386291831750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1653688257917931010}
   - component: {fileID: 6483018191865376351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5204353567788989133}
   - component: {fileID: 2516180186071014477}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5717828919297966588}
   - component: {fileID: 6387463608588725963}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7536218625169737121}
   - component: {fileID: 2792794649912574590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,7 +952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343531055827221828}
   - component: {fileID: 7534302959385446447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -997,7 +997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1139377567214032284}
   - component: {fileID: 2096043355845502902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1602,7 +1602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966605138793188176}
   - component: {fileID: 6928549310102862368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1647,7 +1647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1724358790300356399}
   - component: {fileID: 1671836815310450001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1804,7 +1804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000097252371538757}
   - component: {fileID: 1927670830285968906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1891,7 +1891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2329164644724034312}
   - component: {fileID: 1400396740219373483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2048,7 +2048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2181758590254345481}
   - component: {fileID: 6963965628045234960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2093,7 +2093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8363135853467769464}
   - component: {fileID: 7740614733016796484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2138,7 +2138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8349562884534789638}
   - component: {fileID: 4210963465649910196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2451,7 +2451,7 @@ PrefabInstance:
     - target: {fileID: 3183773264462188438, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cbf203c8949474b478c5749201a1b576, type: 2}
+      objectReference: {fileID: 2100000, guid: 6b9f885911ca09549b9f5b7ddcca5b84, type: 2}
     - target: {fileID: 3307671343809373545, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
       propertyPath: m_Layer
       value: 6
