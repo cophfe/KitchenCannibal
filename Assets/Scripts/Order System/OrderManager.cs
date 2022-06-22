@@ -11,6 +11,11 @@ public enum IngredientType
     buns = 5,
 }
 
+public enum CompletedRecipieType
+{
+    Burger,
+}
+
 public class OrderManager : MonoBehaviour
 {
     public List<Order> orders = null;
