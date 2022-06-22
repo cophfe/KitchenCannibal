@@ -40,7 +40,8 @@ public class ConveyorBeltSegment : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        other.attachedRigidbody.AddForce(direction * speed);
+        //other.attachedRigidbody.AddForce(direction * speed);
+        other.transform.position = other.transform.position + direction * speed * Time.deltaTime;
     }
     private void OnDrawGizmos()
     {

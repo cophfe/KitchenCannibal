@@ -38,4 +38,9 @@ public class Order : MonoBehaviour
         timeStarted = false;
         Debug.Log(recipe.name + " Order complete");
     }
+
+    public void DisplayOrder()
+    {
+
+    }
 }
