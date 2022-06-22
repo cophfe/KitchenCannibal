@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842443c07e17ccf44a1f85e695b29a37, type: 3}
+  m_Name: HandInfo
+  m_EditorClassIdentifier: 
+  <ControllerVisibleStart>k__BackingField: 0.1
+  <ControllerVisibleRange>k__BackingField: 0.1
+  <FingerSpeed>k__BackingField: 20
+  <ThumbSpeed>k__BackingField: 15
+  <PoseSpeed>k__BackingField: 20
+  <InputThreshold>k__BackingField: 0.03
+  <PoseLayer>k__BackingField: 5
+  <Poses>k__BackingField:
+  - <Name>k__BackingField: OK
+    <PoseMask>k__BackingField: {fileID: 31900000, guid: 54b20bb5e8172ac44a29060670641d65, type: 2}
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Finger Gun
+    <PoseMask>k__BackingField: {fileID: 31900000, guid: 54b20bb5e8172ac44a29060670641d65, type: 2}
+    <SpeedModifier>k__BackingField: 0.5

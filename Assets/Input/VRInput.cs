@@ -906,7 +906,7 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Turn"",
                     ""type"": ""Value"",
-                    ""id"": ""28af6492-4041-410b-be0a-7c28c84c12e9"",
+                    ""id"": ""27b69a74-d078-4455-9571-2f726872d071"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -943,17 +943,6 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""367a7376-98af-4e43-a129-ccef076942b6"",
-                    ""path"": ""<XRController>{RightHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Generic XR Controller"",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f66f247b-872a-4d7f-abd8-83e66192f099"",
                     ""path"": ""<XRController>{RightHand}/gripPressed"",
                     ""interactions"": """",
@@ -984,6 +973,17 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                     ""action"": ""Teleport Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""058c2242-ae9b-4e9f-a64f-e3affe5d65f8"",
+                    ""path"": ""<XRController>{RightHand}/Primary2DAxis"",
+                    ""interactions"": ""Sector(directions=12,sweepBehavior=1,pressPoint=0.9),Sector(directions=2,sweepBehavior=2,pressPoint=0.9)"",
+                    ""processors"": """",
+                    ""groups"": ""Generic XR Controller"",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -994,7 +994,7 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Turn"",
                     ""type"": ""Value"",
-                    ""id"": ""dc7392d4-1477-43d8-8316-cdc8627dd4c6"",
+                    ""id"": ""e6773f80-dc09-4873-bb01-2146468cb5ce"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1064,9 +1064,9 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d1363fb9-fb95-4612-92ae-ae303daade4c"",
+                    ""id"": ""f078cfcd-2239-4d2d-bdcf-91089fc1c210"",
                     ""path"": ""<XRController>{LeftHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
+                    ""interactions"": ""Sector(directions=12,sweepBehavior=1,pressPoint=0.9),Sector(directions=2,sweepBehavior=2,pressPoint=0.9)"",
                     ""processors"": """",
                     ""groups"": ""Noncontinuous Move"",
                     ""action"": ""Turn"",
