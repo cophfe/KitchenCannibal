@@ -8,14 +8,22 @@ using UnityEngine.Animations;
 //handles input for a single hand
 public class HandManager : MonoBehaviour
 {
+	[field: SerializeField] 
+	public Animator ControllerAnimator { get; private set; }
+	[field: SerializeField] 
+	public Animator HandAnimator { get; private set;  }
+
+	[field: SerializeField] 
+	public SkinnedMeshRenderer ControllerRenderer { get; private set; }
+	[field: SerializeField] 
+	public ActiveRagdollHand PhysicsHand { get; private set; }
+	[SerializeField]
+	XRRayInteractor teleporter;
+	[SerializeField]
+	LineRenderer teleporterRenderer;
+
 	[Header("Values")]
 	[SerializeField] HandInfo handInfo;
-
-	[Header("References")]
-	[SerializeField] Animator controllerAnimator;
-	[SerializeField] Animator handAnimator;
-	[SerializeField] SkinnedMeshRenderer controllerRenderer;
-	[SerializeField] Transform target;
 
 	[Header("Inputs")]
 	//for hand and controller
@@ -33,6 +41,9 @@ public class HandManager : MonoBehaviour
 	[SerializeField] InputActionProperty joystickTouched;
 	[SerializeField] InputActionProperty triggerTouched;
 	[SerializeField] InputActionProperty gripTouched;
+	
+	//for teleport visual
+	[SerializeField] InputActionProperty button2Pressed;
 
 	//controller also
 	int triggerID;
@@ -52,7 +63,7 @@ public class HandManager : MonoBehaviour
 	//input values
 	float gripPercent;
 	float triggerPercent;
-	int buttonsTouched = 0;
+	int thumbButtonsTouched = 0;
 
 	float thumbTarget = 0;
 	float indexTarget = 0;
@@ -82,9 +93,32 @@ public class HandManager : MonoBehaviour
 	int opacityId;
 	float fullOpacity;
 	Material controllerMaterial;
+
+	//teleport stuff
+	bool isTeleporting;
+	bool canTeleport = true;
+	public bool CanTeleport
+	{
+		get => canTeleport;
+		set
+		{
+			if (value == CanTeleport)
+				return;
+
+			canTeleport = value;
+
+			if (!value && isTeleporting)
+			{
+				EnableTeleporting(false);
+			}
+		}
+	}
 	
+
 	private void Start()
 	{
+		EnableTeleporting(false);
+
 		triggerID = Animator.StringToHash("Trigger");
 		gripID = Animator.StringToHash("Grip");
 		joystickXID = Animator.StringToHash("Joy X");
@@ -108,8 +142,8 @@ public class HandManager : MonoBehaviour
 		grip.action.canceled += OnGripPress;
 		button1Touched.action.performed += OnButton1Touched;
 		button1Touched.action.canceled += OnButton1Touched;
-		button2Touched.action.performed += OnButton2Touched;
-		button2Touched.action.canceled += OnButton2Touched;
+		//button2Touched.action.performed += OnButton2Touched;
+		//button2Touched.action.canceled += OnButton2Touched;
 		joystickTouched.action.performed += OnJoystickTouched;
 		joystickTouched.action.canceled += OnJoystickTouched;
 
@@ -129,16 +163,43 @@ public class HandManager : MonoBehaviour
 		//find controller stuff
 		opacityId = Shader.PropertyToID("Opacity");
 		var materialList = new List<Material>();
-		controllerRenderer.GetMaterials(materialList);
+		ControllerRenderer.GetMaterials(materialList);
 		controllerMaterial = materialList[0];
 		fullOpacity = controllerMaterial.GetFloat(opacityId);
 		SetControllerVisible(false);
+
+		button2Pressed.action.performed += OnTeleport;
+		button2Pressed.action.canceled += OnTeleport;
 	}
+
+	#region Teleport
+	private void OnTeleport(InputAction.CallbackContext ctx)
+	{
+		if (ctx.performed)
+		{
+			if (CanTeleport)
+			{
+				EnableTeleporting(true);
+
+			}
+		}
+		else
+			EnableTeleporting(false);
+	}
+
+	public void EnableTeleporting(bool value)
+	{
+		teleporter.enabled = value;
+		teleporterRenderer.enabled = value;
+		isTeleporting = value;
+		FindFingersTarget();
+	}
+	#endregion
 
 	void OnTriggerPress(InputAction.CallbackContext ctx)
 	{
 		if (controllerVisible)
-			controllerAnimator.SetFloat(triggerID, ctx.ReadValue<float>());
+			ControllerAnimator.SetFloat(triggerID, ctx.ReadValue<float>());
 
 		triggerPercent = ctx.ReadValue<float>();
 		FindFingersTarget();
@@ -146,47 +207,47 @@ public class HandManager : MonoBehaviour
 	void OnGripPress(InputAction.CallbackContext ctx)
 	{
 		if (controllerVisible)
-			controllerAnimator.SetFloat(gripID, ctx.ReadValue<float>());
+			ControllerAnimator.SetFloat(gripID, ctx.ReadValue<float>());
 
 		gripPercent = ctx.ReadValue<float>();
 		FindFingersTarget();
 	}
 	void OnJoystick(InputAction.CallbackContext ctx)
 	{
-		controllerAnimator.SetFloat(joystickXID, ctx.ReadValue<Vector2>().x); 
-		controllerAnimator.SetFloat(joystickYID, ctx.ReadValue<Vector2>().y);
+		ControllerAnimator.SetFloat(joystickXID, ctx.ReadValue<Vector2>().x);
+		ControllerAnimator.SetFloat(joystickYID, ctx.ReadValue<Vector2>().y);
 	}
 	void OnButton1(InputAction.CallbackContext ctx)
 	{
-		controllerAnimator.SetFloat(button1ID, ctx.performed ? 1 : 0);
+		ControllerAnimator.SetFloat(button1ID, ctx.performed ? 1 : 0);
 	}
 	void OnButton2(InputAction.CallbackContext ctx)
 	{
-		controllerAnimator.SetFloat(button2ID, ctx.performed ? 1 : 0);
+		ControllerAnimator.SetFloat(button2ID, ctx.performed ? 1 : 0);
 	}
 
 	void OnButton1Touched(InputAction.CallbackContext ctx)
 	{
 		if (ctx.performed)
-			buttonsTouched++;
+			thumbButtonsTouched++;
 		else
-			buttonsTouched--;
+			thumbButtonsTouched--;
 		FindFingersTarget();
 	}
 	void OnButton2Touched(InputAction.CallbackContext ctx)
 	{
 		if (ctx.performed)
-			buttonsTouched++;
+			thumbButtonsTouched++;
 		else
-			buttonsTouched--;
+			thumbButtonsTouched--;
 		FindFingersTarget();
 	}
 	void OnJoystickTouched(InputAction.CallbackContext ctx)
 	{
 		if (ctx.performed)
-			buttonsTouched++;
+			thumbButtonsTouched++;
 		else
-			buttonsTouched--;
+			thumbButtonsTouched--;
 		FindFingersTarget();
 	}
 	void OnTriggerTouched(InputAction.CallbackContext ctx)
@@ -205,8 +266,8 @@ public class HandManager : MonoBehaviour
 			return;
 
 		controllerVisible = value;
-		controllerRenderer.enabled = value;
-		controllerAnimator.enabled = value;
+		ControllerRenderer.enabled = value;
+		ControllerAnimator.enabled = value;
 
 		if (value)
 		{
@@ -234,7 +295,7 @@ public class HandManager : MonoBehaviour
 
 	private void FindFingersTarget()
 	{
-		bool thumbPressed = buttonsTouched > 0;
+		bool thumbPressed = thumbButtonsTouched > 0;
 		bool gripPressed = gripPercent > handInfo.InputThreshold;
 		bool triggerPressed = triggerPercent > handInfo.InputThreshold;
 		
@@ -244,7 +305,18 @@ public class HandManager : MonoBehaviour
 		//will be set to 1 if needed
 		poseAmountTarget = 0;
 
-		if (gripPressed)
+		if (isTeleporting)
+		{
+			indexTarget = -0.1f;
+			thumbTarget = -0.3f;
+			middleTarget = 1;
+			ringTarget = 1;
+			pinkyTarget = 1;
+
+			poseAmountTarget = 1;
+			currentPoseIndex = fingerGunIndex;
+		}
+		else if (gripPressed)
 		{
 			if (triggerPressed)
 			{
@@ -301,7 +373,6 @@ public class HandManager : MonoBehaviour
 
 
 			}
-
 			//move fingers based on grip amount
 			middleTarget = gripPercent;
 			ringTarget = gripPercent;
@@ -375,27 +446,27 @@ public class HandManager : MonoBehaviour
 			pinkyCurrent = Mathf.MoveTowards(pinkyCurrent, pinkyTarget, pinkyDiff * currentSpeed);
 
 			//moves hand values to current values
-			handAnimator.SetFloat(pinkyID, pinkyCurrent);
-			handAnimator.SetFloat(ringID, ringCurrent);
-			handAnimator.SetFloat(middleID, middleCurrent);
-			handAnimator.SetFloat(indexID, indexCurrent);
-			handAnimator.SetFloat(thumbID, thumbCurrent);
+			HandAnimator.SetFloat(pinkyID, pinkyCurrent);
+			HandAnimator.SetFloat(ringID, ringCurrent);
+			HandAnimator.SetFloat(middleID, middleCurrent);
+			HandAnimator.SetFloat(indexID, indexCurrent);
+			HandAnimator.SetFloat(thumbID, thumbCurrent);
 		}
 
 		float poseDiff = Mathf.Abs(poseAmountCurrent - poseAmountTarget);
 		poseAmountCurrent = Mathf.MoveTowards(poseAmountCurrent, poseAmountTarget, poseDiff * Time.deltaTime * handInfo.PoseSpeed * poseSpeedModifier);
-		handAnimator.SetLayerWeight(handInfo.PoseLayer, poseAmountCurrent);
+		HandAnimator.SetLayerWeight(handInfo.PoseLayer, poseAmountCurrent);
 		if (currentPoseIndex != lastPoseIndex)
 		{
 			poseSpeedModifier = handInfo.FindPoseSpeedModifier(currentPoseIndex);
 			lastPoseIndex = currentPoseIndex;
-			handAnimator.SetInteger(poseIndexID, currentPoseIndex);
+			HandAnimator.SetInteger(poseIndexID, currentPoseIndex);
 		}
 	}
 
 	void UpdateControllerVisibility()
 	{
-		float distanceToTargetSq = (target.position - transform.position).sqrMagnitude;
+		float distanceToTargetSq = (PhysicsHand.transform.position - transform.position).sqrMagnitude;
 
 		if (distanceToTargetSq > handInfo.ControllerVisibleStart * handInfo.ControllerVisibleStart)
 		{

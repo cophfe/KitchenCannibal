@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[field: SerializeField]
+	public HandManager LeftHand { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[field: SerializeField]
+	public HandManager RightHand{ get; private set; }
 }
