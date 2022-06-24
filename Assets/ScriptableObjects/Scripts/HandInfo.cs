@@ -6,6 +6,15 @@ using UnityEngine;
 public class HandInfo : ScriptableObject
 {
 	[field: SerializeField]
+	public string InteractableLayer { get; private set; } = "Interactable";
+	[field: SerializeField]
+	public float MoveToInteractableDistance { get; private set; } = 0.05f;
+	[field: SerializeField]
+	public float InteractableAttachAngle { get; private set; } = 3.0f;
+	[field: SerializeField]
+	public float InteractableAttachDistance { get; private set; } = 0.05f;
+
+	[field: SerializeField]
 	public float ControllerVisibleStart { get; private set; } = 2.0f;
 	[field: SerializeField]
 	public float ControllerVisibleRange { get; private set; } = 1.0f;
@@ -22,33 +31,44 @@ public class HandInfo : ScriptableObject
 	public float InputThreshold { get; private set; } = 0.03f;
 
 	[field: SerializeField] 
-	public int PoseLayer { get; private set; } = 5;
-	
+	public int PartHandPoseLayer { get; private set; } = 5;
+
+	[field: SerializeField]
+	public int FullHandPoseLayer { get; private set; } = 6;
 
 	[field: SerializeField]
 	public PoseInfo[] Poses { get; private set; }
 
 	//assumes is organised the same as the animator
+	//returns pose index and layer
 	public int FindPoseIndex(string name)
 	{
 		for (int i = 0; i < Poses.Length; i++)
 		{
 			if (Poses[i].Name == name)
 			{
-				return i + 1;
+				return (i + 1);
 			}
 		}
 
 		return 0;
 	}
 
-	//assumes is organised the same as the animator
 	public float FindPoseSpeedModifier(int poseIndex)
 	{
 		poseIndex--;
-		if (poseIndex < 0 || poseIndex >= Poses.Length)
+		if (poseIndex > 0 && poseIndex < Poses.Length)
 			return Poses[poseIndex].SpeedModifier;
 		return 1.0f;
+	}
+
+	public bool IsFullHandPose(int poseIndex)
+	{
+		poseIndex--;
+		if (poseIndex > 0 && poseIndex < Poses.Length)
+			return Poses[poseIndex].isFullHandPose;
+
+		return false;
 	}
 
 	[System.Serializable]
@@ -58,7 +78,7 @@ public class HandInfo : ScriptableObject
 		public string Name { get; private set; }
 
 		[field: SerializeField]
-		public AvatarMask PoseMask { get; private set; }
+		public bool isFullHandPose { get; private set; }
 
 		[field: SerializeField]
 		public float SpeedModifier { get; private set; }
