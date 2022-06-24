@@ -16,7 +16,7 @@ public class ActiveRagdollHand : MonoBehaviour
 	[SerializeField]
 	DynamicSettings palmSettings
 		= new DynamicSettings(0);
-	
+
 	[SerializeField]
 	float maxJointRotationalForce = 1000.0f;
 	[SerializeField]
@@ -24,27 +24,30 @@ public class ActiveRagdollHand : MonoBehaviour
 	[SerializeField]
 	float jointDamping = 0.5f;
 	[SerializeField]
-	float fingerMaxPalmDistance = 0.05f;
-	[SerializeField]
 	bool applyWorldForceToFingers = true;
 	[SerializeField]
 	bool applyWorldTorqueToFingers = true;
+	[SerializeField]
+	float palmDamping = 0.5f;
+	[SerializeField]
+	float palmOrientStrength = 1.0f;
 
 	//data about children containing joints + rigidbody
 	DynamicData[] dynamicBodies = null;
-	DynamicData mainBody;
+	DynamicData palm;
 	bool applyWorldToPalm = true;
 	float palmMass;
+	Transform palmTargetOverrideTransform;
 
 	private void Start()
 	{
 		List<DynamicData> dynamicBodiesList = new List<DynamicData>();
 
-		mainBody = new DynamicData(TargetHandModel, transform);
-		palmMass = mainBody.followBody.mass;
+		palm = new DynamicData(TargetHandModel, transform);
+		palmMass = palm.followBody.mass;
 
 		FindJointDataRecursive(TargetHandModel.GetChild(1), transform.GetChild(1), dynamicBodiesList);
-		
+
 		//so I can set values easier I'm just going to convert these to arrays
 		dynamicBodies = dynamicBodiesList.ToArray();
 
@@ -79,9 +82,9 @@ public class ActiveRagdollHand : MonoBehaviour
 			body.followBody.maxAngularVelocity = fingerSettings.maxAngularVelocity;
 		}
 
-		mainBody.followBody.angularDrag = palmSettings.angularDrag;
-		mainBody.followBody.drag = palmSettings.drag;
-		mainBody.followBody.maxAngularVelocity = palmSettings.maxAngularVelocity;
+		palm.followBody.angularDrag = palmSettings.angularDrag;
+		palm.followBody.drag = palmSettings.drag;
+		palm.followBody.maxAngularVelocity = palmSettings.maxAngularVelocity;
 
 		SetWorldForce(applyWorldForceToFingers, applyWorldTorqueToFingers, applyWorldToPalm);
 	}
@@ -101,7 +104,7 @@ public class ActiveRagdollHand : MonoBehaviour
 		}
 	}
 
-	void SetWorldForce(bool applyForceToFingers, bool applyTorqueToFingers, bool applyToPalm)
+	public void SetWorldForce(bool applyForceToFingers, bool applyTorqueToFingers, bool applyToPalm)
 	{
 		applyWorldToPalm = applyToPalm;
 		applyWorldForceToFingers = applyForceToFingers;
@@ -109,49 +112,80 @@ public class ActiveRagdollHand : MonoBehaviour
 
 		if (!applyForceToFingers)
 		{
-			mainBody.followBody.mass = 30 * palmMass;
+			palm.followBody.mass = 30 * palmMass;
 		}
 		else
 		{
-			mainBody.followBody.mass = palmMass;
+			palm.followBody.mass = palmMass;
 		}
+	}
+
+	public void SetPalmOverride(Transform palmOverride)
+	{
+		palmTargetOverrideTransform = palmOverride;
+	}
+
+	public Transform GetPalmOverride()
+	{
+		return palmTargetOverrideTransform;
+	}
+
+	public Transform GetPalmTarget()
+	{
+		if (palmTargetOverrideTransform != null)
+			return palmTargetOverrideTransform;
+		else
+			return palm.targetTransform;
+	}
+
+	public DynamicData GetPalm()
+	{
+		return palm;
 	}
 
 	public void Teleport(Vector3 newPosition, Quaternion newRotation)
 	{
-		mainBody.followTransform.position = newPosition;
-		mainBody.followTransform.rotation = newRotation;
+		palm.followTransform.position = newPosition;
+		palm.followTransform.rotation = newRotation;
 	}
 
 	private void FixedUpdate()
 	{
 		float iDT = Time.deltaTime == 0 ? 0 : 1 / Time.deltaTime;
-		
-		for (int i = 0; i < dynamicBodies.Length; i++)
-		{
-			ActiveRagdoll(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorqueToFingers, applyWorldForceToFingers);
 
-			dynamicBodies[i].followJoint.targetRotation = Quaternion.Inverse(dynamicBodies[i].localToJointSpace) * Quaternion.Inverse(dynamicBodies[i].targetTransform.localRotation) * dynamicBodies[i].anchor;
+		bool applyWorldTorque = applyWorldTorqueToFingers && applyWorldToPalm && palmTargetOverrideTransform == null;
+		bool applyWorldForce = applyWorldForceToFingers && applyWorldToPalm;
+
+		if (applyWorldTorque && applyWorldForce)
+		{
+			for (int i = 0; i < dynamicBodies.Length; i++)
+			{
+				ActiveRagdollRotation(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorque, applyWorldForce);
+				ActiveRagdollPosition(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorque, applyWorldForce);
+				dynamicBodies[i].followJoint.targetRotation = Quaternion.Inverse(dynamicBodies[i].localToJointSpace) * Quaternion.Inverse(dynamicBodies[i].targetTransform.localRotation) * dynamicBodies[i].anchor;
+			}
+		}
+		else if (applyWorldForce)
+		{
+			for (int i = 0; i < dynamicBodies.Length; i++)
+			{
+				ActiveRagdollPosition(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorque, applyWorldForce);
+				dynamicBodies[i].followJoint.targetRotation = Quaternion.Inverse(dynamicBodies[i].localToJointSpace) * Quaternion.Inverse(dynamicBodies[i].targetTransform.localRotation) * dynamicBodies[i].anchor;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < dynamicBodies.Length; i++)
+			{
+				dynamicBodies[i].followJoint.targetRotation = Quaternion.Inverse(dynamicBodies[i].localToJointSpace) * Quaternion.Inverse(dynamicBodies[i].targetTransform.localRotation) * dynamicBodies[i].anchor;
+			}
 		}
 
-		//also do for main body
-		ActiveRagdoll(ref mainBody, ref palmSettings, iDT, true, true);
-
-		//fingers cannot orient the palm in this case
-		if (!applyWorldForceToFingers)
+		if (applyWorldToPalm)
 		{
-			Quaternion fixRotationalForce = mainBody.targetTransform.rotation * Quaternion.Inverse(mainBody.followTransform.rotation);
-			fixRotationalForce.ToAngleAxis(out float angle, out Vector3 axis);
-			//fix angle switching randomly
-			if (angle > 180.0f)
-				angle -= 360.0f;
-			angle = Mathf.Clamp(angle, -palmSettings.maxAngleInfluence, palmSettings.maxAngleInfluence);
-
-			if (angle != 360.0f && angle != 0)
-			{
-				mainBody.followBody.angularVelocity = Mathf.Deg2Rad * angle * iDT * axis;
-			}
-
+			ActiveRagdollRotation(ref palm, ref palmSettings, iDT, false, true);
+			if (!applyWorldForceToFingers)
+				OrientPalm(iDT);
 		}
 
 		/*
@@ -170,60 +204,111 @@ public class ActiveRagdollHand : MonoBehaviour
 		 */
 	}
 
-	void ActiveRagdoll(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime, bool doTorque, bool doForce)
+
+	void ActiveRagdollRotation(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime, bool doTorque, bool doForce)
 	{
-		//ROTATIONAL FORCE (DOES NOT WORK)
-		if (doTorque)
+		Quaternion fixRotationalForce = data.targetTransform.rotation * Quaternion.Inverse(data.followTransform.rotation);
+		fixRotationalForce.ToAngleAxis(out float angle, out Vector3 axis);
+		//fix angle switching randomly
+		if (angle > 180.0f)
+			angle -= 360.0f;
+		angle = Mathf.Clamp(angle, -settings.maxAngleInfluence, settings.maxAngleInfluence);
+
+		Vector3 fixRotationAxis = angle * axis;
+
+		Vector3 angularVelocity;
+		if (angle != 360.0f && angle != 0)
 		{
-			Quaternion fixRotationalForce = data.targetTransform.rotation * Quaternion.Inverse(data.followTransform.rotation);
-			fixRotationalForce.ToAngleAxis(out float angle, out Vector3 axis);
-			//fix angle switching randomly
-			if (angle > 180.0f)
-				angle -= 360.0f;
-			angle = Mathf.Clamp(angle, -settings.maxAngleInfluence, settings.maxAngleInfluence);
-
-			Vector3 fixRotationAxis = angle * axis;
-
-			Vector3 angularVelocity;
-			if (angle != 360.0f && angle != 0)
-			{
-				angularVelocity = settings.rotationalStrength * (fixRotationAxis + settings.rotationalStrengthChange * (fixRotationAxis - data.lastFixRotation) * inverseDeltaTime);
-				data.lastFixRotation = fixRotationAxis;
-			}
-			else
-				angularVelocity = new Vector3(0f, 0f, 0f);
-
-			angularVelocity = Vector3.ClampMagnitude(angularVelocity, settings.maxRotationalForce);
-			data.followBody.AddTorque(angularVelocity, ForceMode.VelocityChange);
+			angularVelocity = settings.rotationalStrength * (fixRotationAxis + settings.rotationalStrengthChange * (fixRotationAxis - data.lastFixRotation) * inverseDeltaTime);
+			data.lastFixRotation = fixRotationAxis;
 		}
+		else
+			angularVelocity = new Vector3(0f, 0f, 0f);
 
-		//LINEAR FORCE (WORKS)
-		if (doForce)
+		angularVelocity = Vector3.ClampMagnitude(angularVelocity, settings.maxRotationalForce);
+		data.followBody.AddTorque(angularVelocity, ForceMode.VelocityChange);
+	}
+
+	void ActiveRagdollPosition	(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime, bool doTorque, bool doForce)
+	{
+		Vector3 targetPlusCOM;
+		if (palmTargetOverrideTransform)
 		{
-			Vector3 targetPlusCOM = data.targetTransform.TransformPoint(data.followBody.centerOfMass);
-			
-			//if (localToPalm) 
-			//{
-			//	targetPlusCOM = data.targetTransform.TransformPoint(data.followBody.centerOfMass);
-			//	targetPlusCOM = mainBody.targetTransform.InverseTransformPoint(targetPlusCOM);
-			//	targetPlusCOM = mainBody.followTransform.TransformPoint(targetPlusCOM);
-			//
-			//}
-			Vector3 fixForce = Vector3.ClampMagnitude(targetPlusCOM - data.followBody.worldCenterOfMass, settings.maxDistanceInfluence);
+			targetPlusCOM = data.targetTransform.TransformPoint(data.followBody.centerOfMass);
+			targetPlusCOM = palm.targetTransform.InverseTransformPoint(targetPlusCOM);
+			//targetPlusCOM = palmTargetOverrideTransform.TransformPoint(targetPlusCOM);
+
+			//only needs to be done once per joint
+			var worldToLocalMatrix = Matrix4x4.TRS(palmTargetOverrideTransform.position, palmTargetOverrideTransform.rotation, Vector3.one);
+			targetPlusCOM = worldToLocalMatrix.MultiplyPoint3x4(targetPlusCOM);
+		}
+		else
+			targetPlusCOM = data.targetTransform.TransformPoint(data.followBody.centerOfMass);
+
+		//if (localToPalm) 
+		//{
+		//	targetPlusCOM = data.targetTransform.TransformPoint(data.followBody.centerOfMass);
+		//	targetPlusCOM = mainBody.targetTransform.InverseTransformPoint(targetPlusCOM);
+		//	targetPlusCOM = mainBody.followTransform.TransformPoint(targetPlusCOM);
+		//
+		//}
+		Vector3 fixForce = Vector3.ClampMagnitude(targetPlusCOM - data.followBody.worldCenterOfMass, settings.maxDistanceInfluence);
 
 #if UNITY_EDITOR
-			Debug.DrawRay(data.followBody.worldCenterOfMass, fixForce, Color.red, Time.fixedDeltaTime);
+		Debug.DrawRay(data.followBody.worldCenterOfMass, fixForce, Color.red, Time.fixedDeltaTime, false);
 #endif
 
-			Vector3 targetForce = settings.linearStrength * (fixForce + settings.linearStrengthChange * (fixForce - data.lastFixForce) * inverseDeltaTime);
-			data.lastFixForce = fixForce;
+		Vector3 targetForce = settings.linearStrength * (fixForce + settings.linearStrengthChange * (fixForce - data.lastFixForce) * inverseDeltaTime);
+		data.lastFixForce = fixForce;
 
-			targetForce = Vector3.ClampMagnitude(targetForce, settings.maxForce);
-			data.followBody.AddForce(targetForce, ForceMode.VelocityChange);
+		targetForce = Vector3.ClampMagnitude(targetForce, settings.maxForce);
+		data.followBody.AddForce(targetForce, ForceMode.VelocityChange);
+	}
+
+	void OrientPalm(float inverseDeltaTime)
+	{
+		palm.followBody.angularVelocity *= 1f - palmDamping;
+		Quaternion fixRotationalForce = palm.targetTransform.rotation * Quaternion.Inverse(palm.followTransform.rotation);
+		fixRotationalForce.ToAngleAxis(out float angle, out Vector3 axis);
+		//fix angle switching randomly
+		if (angle > 180.0f)
+			angle -= 360.0f;
+
+		if (angle != 360.0f && angle != 0)
+		{
+			Vector3 angularVelocity = axis * (angle * Mathf.Deg2Rad) * inverseDeltaTime;
+			if (!float.IsNaN(angularVelocity.x))
+			{
+				palm.followBody.angularVelocity += angularVelocity * palmOrientStrength;
+				Debug.Log(palm.followBody.angularVelocity);
+
+				//for (int i = 0; i < dynamicBodies.Length; i++)
+				//{
+				//	OrientJointToPalm(ref dynamicBodies[i], ref fingerSettings, inverseDeltaTime);
+				//}
+			}
 		}
 	}
 
-	struct DynamicData
+	/*void OrientJointToPalm(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime)
+	{
+		Vector3 targetPlusCOM;
+		targetPlusCOM = data.targetTransform.TransformPoint(data.followBody.centerOfMass);
+		targetPlusCOM = mainBody.targetTransform.InverseTransformPoint(targetPlusCOM);
+		targetPlusCOM = mainBody.followTransform.TransformPoint(targetPlusCOM);
+		Vector3 fixForce = Vector3.ClampMagnitude(targetPlusCOM - data.followBody.worldCenterOfMass, settings.maxDistanceInfluence);
+
+#if UNITY_EDITOR
+		Debug.DrawRay(data.followBody.worldCenterOfMass, fixForce, Color.red, Time.fixedDeltaTime, false);
+#endif
+
+		Vector3 targetForce = settings.linearStrength * (fixForce + settings.linearStrengthChange * (fixForce - data.lastFixForce) * inverseDeltaTime);
+		data.lastFixForce = fixForce;
+
+		targetForce = Vector3.ClampMagnitude(targetForce, settings.maxForce);
+		data.followBody.AddForce(targetForce, ForceMode.VelocityChange);
+	}*/
+	public struct DynamicData
 	{
 		public Transform targetTransform;
 

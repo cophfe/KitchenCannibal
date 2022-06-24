@@ -140,20 +140,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf57c10765217e418615c9b1eaa1184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHandModel: {fileID: 0}
-  maxRotationalForce: 1000
-  maxForce: 1000
+  <TargetHandModel>k__BackingField: {fileID: 0}
+  fingerSettings:
+    maxRotationalForce: 100
+    maxForce: 100
+    angularDrag: 2
+    drag: 10
+    maxAngularVelocity: 500
+    maxDistanceInfluence: 0.5
+    maxAngleInfluence: 20
+    rotationalStrength: 2
+    linearStrength: 30
+    rotationalStrengthChange: 0.002
+    linearStrengthChange: 0.04
+  palmSettings:
+    maxRotationalForce: 1000
+    maxForce: 1000
+    angularDrag: 2
+    drag: 10
+    maxAngularVelocity: 1000
+    maxDistanceInfluence: 0.5
+    maxAngleInfluence: 20
+    rotationalStrength: 2
+    linearStrength: 30
+    rotationalStrengthChange: 0.002
+    linearStrengthChange: 0.04
   maxJointRotationalForce: 1000
+  maxJointForce: 3.402823e+38
   jointDamping: 0.5
-  drag: 0.5
-  angularDrag: 50
-  maxAngularVelocity: 1000
-  maxWorldDistance: 1
-  maxWorldAngle: 20
-  rotationalStrength: 0.3
-  linearStrength: 30
-  rotationalStrengthDerivitive: 0.005
-  linearStrengthDerivitive: 0.01
+  applyWorldForceToFingers: 1
+  applyWorldTorqueToFingers: 1
+  palmDamping: 1
+  palmOrientStrength: 1
 --- !u!54 &3096221858264668160
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1895,7 +1913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277850996745297689, guid: d2c9698b30fab3c46b844fe226ea3109, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.839
+      value: 1.108
       objectReference: {fileID: 0}
     - target: {fileID: 3277850996745297689, guid: d2c9698b30fab3c46b844fe226ea3109, type: 3}
       propertyPath: m_LocalRotation.w

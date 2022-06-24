@@ -12,12 +12,6 @@ public class PhysicsLocomotion : TeleportationProvider
 {
 	[SerializeField]
 	PlayerController playerController;
-	[SerializeField]
-	float playerRadius = 0.5f;
-	[SerializeField]
-	float playerHeadRadius = 0.2f;
-	[SerializeField]
-	LayerMask teleportationLayerMask;
 	
 	[SerializeField]
 	[Tooltip("The number of degrees clockwise to rotate when snap turning clockwise.")]
@@ -127,13 +121,7 @@ public class PhysicsLocomotion : TeleportationProvider
 		playerController.LeftHand.EnableTeleporting(false);
 		playerController.RightHand.EnableTeleporting(false);
 
-		Vector3 pos = teleportRequest.destinationPosition;
-		float height = system.xrOrigin.CameraInOriginSpacePos.y + playerHeadRadius;
-		Vector3 a = pos;
-		a.y += 0.01f;
-		Vector3 b = pos + Vector3.up * height;
-		
-		if (!Physics.CheckCapsule(a, b, playerRadius, teleportationLayerMask, QueryTriggerInteraction.Ignore))
+		if (playerController.CheckValidTeleportPoint(teleportRequest.destinationPosition))
 		{
 			currentRequest = teleportRequest;
 			validRequest = true;
