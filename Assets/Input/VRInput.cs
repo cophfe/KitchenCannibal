@@ -306,7 +306,7 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7ccfde4d-d271-42ff-9925-f6fa15a999b7"",
-                    ""path"": ""<XRController>{LeftHand}/secondaryTouch"",
+                    ""path"": ""<XRController>{LeftHand}/secondaryTouched"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -328,7 +328,7 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b82cf293-0542-4ec9-830a-1381ffd7ae46"",
-                    ""path"": ""<OculusTouchController>{LeftHand}/thumbstickTouched"",
+                    ""path"": ""<XRController>{LeftHand}/trackpadTouched"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -665,7 +665,7 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e858565c-e674-4617-9508-cd662433976f"",
-                    ""path"": ""<OculusTouchController>{RightHand}/thumbstickTouched"",
+                    ""path"": ""<XRController>{RightHand}/thumbstickTouched"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -906,46 +906,28 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Turn"",
                     ""type"": ""Value"",
-                    ""id"": ""28af6492-4041-410b-be0a-7c28c84c12e9"",
+                    ""id"": ""27b69a74-d078-4455-9571-2f726872d071"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Teleport Mode Cancel"",
+                    ""name"": ""Teleport"",
                     ""type"": ""Button"",
-                    ""id"": ""f596e7b0-037d-4dc4-a0bd-7c362325bee4"",
+                    ""id"": ""322ae296-feb7-40aa-a9e9-3ffe07eea57e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Teleport Mode Activate"",
-                    ""type"": ""Value"",
-                    ""id"": ""84f8ee2e-4904-44a4-86f2-4f1768c5b79f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Teleport Select"",
-                    ""type"": ""Value"",
-                    ""id"": ""f81f3eae-cfe0-4c9a-86db-239699203af0"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""367a7376-98af-4e43-a129-ccef076942b6"",
+                    ""id"": ""058c2242-ae9b-4e9f-a64f-e3affe5d65f8"",
                     ""path"": ""<XRController>{RightHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Generic XR Controller"",
                     ""action"": ""Turn"",
@@ -954,34 +936,12 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f66f247b-872a-4d7f-abd8-83e66192f099"",
-                    ""path"": ""<XRController>{RightHand}/gripPressed"",
+                    ""id"": ""6b8029f4-8295-45f5-a663-08bf1304202a"",
+                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Generic XR Controller"",
-                    ""action"": ""Teleport Mode Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e43c7136-8c0f-4208-bc94-db7b34a4fe70"",
-                    ""path"": ""<XRController>{RightHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=1)"",
-                    ""processors"": """",
-                    ""groups"": ""Generic XR Controller"",
-                    ""action"": ""Teleport Mode Activate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0104396e-df1a-465a-ab8a-bbdd5b760bfb"",
-                    ""path"": ""<XRController>{RightHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=-1,sweepBehavior=3)"",
-                    ""processors"": """",
-                    ""groups"": ""Generic XR Controller"",
-                    ""action"": ""Teleport Select"",
+                    ""action"": ""Teleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -994,82 +954,42 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Turn"",
                     ""type"": ""Value"",
-                    ""id"": ""dc7392d4-1477-43d8-8316-cdc8627dd4c6"",
+                    ""id"": ""e6773f80-dc09-4873-bb01-2146468cb5ce"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Teleport Mode Cancel"",
+                    ""name"": ""Teleport"",
                     ""type"": ""Button"",
-                    ""id"": ""689dd989-3ff9-4a65-adb2-a6114ab1dc01"",
+                    ""id"": ""cc4cebde-f2ed-48f4-b41a-b949a242af08"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Teleport Mode Activate"",
-                    ""type"": ""Value"",
-                    ""id"": ""689dddf7-462c-46ae-b2e4-cbbca540485c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Teleport Select"",
-                    ""type"": ""Value"",
-                    ""id"": ""8f65413b-1e7d-4547-b848-2139e551226e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""be1aea28-7b40-4aa4-a864-1cfd49a7c6a4"",
+                    ""id"": ""f078cfcd-2239-4d2d-bdcf-91089fc1c210"",
                     ""path"": ""<XRController>{LeftHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=-1,sweepBehavior=3)"",
-                    ""processors"": """",
-                    ""groups"": ""Noncontinuous Move"",
-                    ""action"": ""Teleport Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""160f6f7b-6c1b-4466-9d08-3c22f0f9fc6d"",
-                    ""path"": ""<XRController>{LeftHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=1)"",
-                    ""processors"": """",
-                    ""groups"": ""Noncontinuous Move"",
-                    ""action"": ""Teleport Mode Activate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fbd238e0-fe32-4fac-92d8-3b51c68a030d"",
-                    ""path"": ""<XRController>{LeftHand}/gripPressed"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Generic XR Controller"",
-                    ""action"": ""Teleport Mode Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d1363fb9-fb95-4612-92ae-ae303daade4c"",
-                    ""path"": ""<XRController>{LeftHand}/Primary2DAxis"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Noncontinuous Move"",
                     ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a06c3b68-4181-4f62-bee6-4114bcfd7f70"",
+                    ""path"": ""<XRController>{LeftHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Generic XR Controller"",
+                    ""action"": ""Teleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1123,15 +1043,11 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
         // RightHand
         m_RightHand = asset.FindActionMap("RightHand", throwIfNotFound: true);
         m_RightHand_Turn = m_RightHand.FindAction("Turn", throwIfNotFound: true);
-        m_RightHand_TeleportModeCancel = m_RightHand.FindAction("Teleport Mode Cancel", throwIfNotFound: true);
-        m_RightHand_TeleportModeActivate = m_RightHand.FindAction("Teleport Mode Activate", throwIfNotFound: true);
-        m_RightHand_TeleportSelect = m_RightHand.FindAction("Teleport Select", throwIfNotFound: true);
+        m_RightHand_Teleport = m_RightHand.FindAction("Teleport", throwIfNotFound: true);
         // LeftHand
         m_LeftHand = asset.FindActionMap("LeftHand", throwIfNotFound: true);
         m_LeftHand_Turn = m_LeftHand.FindAction("Turn", throwIfNotFound: true);
-        m_LeftHand_TeleportModeCancel = m_LeftHand.FindAction("Teleport Mode Cancel", throwIfNotFound: true);
-        m_LeftHand_TeleportModeActivate = m_LeftHand.FindAction("Teleport Mode Activate", throwIfNotFound: true);
-        m_LeftHand_TeleportSelect = m_LeftHand.FindAction("Teleport Select", throwIfNotFound: true);
+        m_LeftHand_Teleport = m_LeftHand.FindAction("Teleport", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1555,17 +1471,13 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_RightHand;
     private IRightHandActions m_RightHandActionsCallbackInterface;
     private readonly InputAction m_RightHand_Turn;
-    private readonly InputAction m_RightHand_TeleportModeCancel;
-    private readonly InputAction m_RightHand_TeleportModeActivate;
-    private readonly InputAction m_RightHand_TeleportSelect;
+    private readonly InputAction m_RightHand_Teleport;
     public struct RightHandActions
     {
         private @VRInput m_Wrapper;
         public RightHandActions(@VRInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Turn => m_Wrapper.m_RightHand_Turn;
-        public InputAction @TeleportModeCancel => m_Wrapper.m_RightHand_TeleportModeCancel;
-        public InputAction @TeleportModeActivate => m_Wrapper.m_RightHand_TeleportModeActivate;
-        public InputAction @TeleportSelect => m_Wrapper.m_RightHand_TeleportSelect;
+        public InputAction @Teleport => m_Wrapper.m_RightHand_Teleport;
         public InputActionMap Get() { return m_Wrapper.m_RightHand; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1578,15 +1490,9 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 @Turn.started -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTurn;
                 @Turn.performed -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTurn;
                 @Turn.canceled -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTurn;
-                @TeleportModeCancel.started -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportModeCancel;
-                @TeleportModeCancel.performed -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportModeCancel;
-                @TeleportModeCancel.canceled -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportModeCancel;
-                @TeleportModeActivate.started -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportModeActivate;
-                @TeleportModeActivate.performed -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportModeActivate;
-                @TeleportModeActivate.canceled -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportModeActivate;
-                @TeleportSelect.started -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportSelect;
-                @TeleportSelect.performed -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportSelect;
-                @TeleportSelect.canceled -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleportSelect;
+                @Teleport.started -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleport;
+                @Teleport.performed -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleport;
+                @Teleport.canceled -= m_Wrapper.m_RightHandActionsCallbackInterface.OnTeleport;
             }
             m_Wrapper.m_RightHandActionsCallbackInterface = instance;
             if (instance != null)
@@ -1594,15 +1500,9 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 @Turn.started += instance.OnTurn;
                 @Turn.performed += instance.OnTurn;
                 @Turn.canceled += instance.OnTurn;
-                @TeleportModeCancel.started += instance.OnTeleportModeCancel;
-                @TeleportModeCancel.performed += instance.OnTeleportModeCancel;
-                @TeleportModeCancel.canceled += instance.OnTeleportModeCancel;
-                @TeleportModeActivate.started += instance.OnTeleportModeActivate;
-                @TeleportModeActivate.performed += instance.OnTeleportModeActivate;
-                @TeleportModeActivate.canceled += instance.OnTeleportModeActivate;
-                @TeleportSelect.started += instance.OnTeleportSelect;
-                @TeleportSelect.performed += instance.OnTeleportSelect;
-                @TeleportSelect.canceled += instance.OnTeleportSelect;
+                @Teleport.started += instance.OnTeleport;
+                @Teleport.performed += instance.OnTeleport;
+                @Teleport.canceled += instance.OnTeleport;
             }
         }
     }
@@ -1612,17 +1512,13 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_LeftHand;
     private ILeftHandActions m_LeftHandActionsCallbackInterface;
     private readonly InputAction m_LeftHand_Turn;
-    private readonly InputAction m_LeftHand_TeleportModeCancel;
-    private readonly InputAction m_LeftHand_TeleportModeActivate;
-    private readonly InputAction m_LeftHand_TeleportSelect;
+    private readonly InputAction m_LeftHand_Teleport;
     public struct LeftHandActions
     {
         private @VRInput m_Wrapper;
         public LeftHandActions(@VRInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Turn => m_Wrapper.m_LeftHand_Turn;
-        public InputAction @TeleportModeCancel => m_Wrapper.m_LeftHand_TeleportModeCancel;
-        public InputAction @TeleportModeActivate => m_Wrapper.m_LeftHand_TeleportModeActivate;
-        public InputAction @TeleportSelect => m_Wrapper.m_LeftHand_TeleportSelect;
+        public InputAction @Teleport => m_Wrapper.m_LeftHand_Teleport;
         public InputActionMap Get() { return m_Wrapper.m_LeftHand; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1635,15 +1531,9 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 @Turn.started -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTurn;
                 @Turn.performed -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTurn;
                 @Turn.canceled -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTurn;
-                @TeleportModeCancel.started -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportModeCancel;
-                @TeleportModeCancel.performed -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportModeCancel;
-                @TeleportModeCancel.canceled -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportModeCancel;
-                @TeleportModeActivate.started -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportModeActivate;
-                @TeleportModeActivate.performed -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportModeActivate;
-                @TeleportModeActivate.canceled -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportModeActivate;
-                @TeleportSelect.started -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportSelect;
-                @TeleportSelect.performed -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportSelect;
-                @TeleportSelect.canceled -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleportSelect;
+                @Teleport.started -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleport;
+                @Teleport.performed -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleport;
+                @Teleport.canceled -= m_Wrapper.m_LeftHandActionsCallbackInterface.OnTeleport;
             }
             m_Wrapper.m_LeftHandActionsCallbackInterface = instance;
             if (instance != null)
@@ -1651,15 +1541,9 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
                 @Turn.started += instance.OnTurn;
                 @Turn.performed += instance.OnTurn;
                 @Turn.canceled += instance.OnTurn;
-                @TeleportModeCancel.started += instance.OnTeleportModeCancel;
-                @TeleportModeCancel.performed += instance.OnTeleportModeCancel;
-                @TeleportModeCancel.canceled += instance.OnTeleportModeCancel;
-                @TeleportModeActivate.started += instance.OnTeleportModeActivate;
-                @TeleportModeActivate.performed += instance.OnTeleportModeActivate;
-                @TeleportModeActivate.canceled += instance.OnTeleportModeActivate;
-                @TeleportSelect.started += instance.OnTeleportSelect;
-                @TeleportSelect.performed += instance.OnTeleportSelect;
-                @TeleportSelect.canceled += instance.OnTeleportSelect;
+                @Teleport.started += instance.OnTeleport;
+                @Teleport.performed += instance.OnTeleport;
+                @Teleport.canceled += instance.OnTeleport;
             }
         }
     }
@@ -1712,15 +1596,11 @@ public partial class @VRInput : IInputActionCollection2, IDisposable
     public interface IRightHandActions
     {
         void OnTurn(InputAction.CallbackContext context);
-        void OnTeleportModeCancel(InputAction.CallbackContext context);
-        void OnTeleportModeActivate(InputAction.CallbackContext context);
-        void OnTeleportSelect(InputAction.CallbackContext context);
+        void OnTeleport(InputAction.CallbackContext context);
     }
     public interface ILeftHandActions
     {
         void OnTurn(InputAction.CallbackContext context);
-        void OnTeleportModeCancel(InputAction.CallbackContext context);
-        void OnTeleportModeActivate(InputAction.CallbackContext context);
-        void OnTeleportSelect(InputAction.CallbackContext context);
+        void OnTeleport(InputAction.CallbackContext context);
     }
 }
