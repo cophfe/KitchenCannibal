@@ -11,7 +11,7 @@ using UnityEngine.Animations;
 public class XRInteractorLineModified : MonoBehaviour, IXRCustomReticleProvider
 {
 	[SerializeField]
-	PlayerController playerController;
+	PlayerController playerController = null;
 
 	const float k_MinLineWidth = 0.0001f;
 	const float k_MaxLineWidth = 0.05f;

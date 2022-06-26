@@ -5,7 +5,7 @@ using UnityEngine;
 public class HandPhysics : MonoBehaviour
 {
 	[SerializeField]
-	Transform target;
+	Transform target = null;
 	[SerializeField]
 	float maxForce = 20;
 
