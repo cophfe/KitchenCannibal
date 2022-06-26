@@ -11,7 +11,7 @@ using UnityEngine.Assertions;
 public class PhysicsLocomotion : TeleportationProvider
 {
 	[SerializeField]
-	PlayerController playerController;
+	PlayerController playerController = null;
 	
 	[SerializeField]
 	[Tooltip("The number of degrees clockwise to rotate when snap turning clockwise.")]
@@ -101,7 +101,7 @@ public class PhysicsLocomotion : TeleportationProvider
 			Vector3 desiredWorldLocation = currentRequest.destinationPosition + b;
 			xrOrigin.MoveCameraToWorldLocation(desiredWorldLocation);
 
-			TeleportHands();
+			//TeleportHands();
 		}
 
 		EndLocomotion();
@@ -232,7 +232,7 @@ public class PhysicsLocomotion : TeleportationProvider
 			{
 				xrOrigin.RotateAroundCameraUsingOriginUp(m_CurrentTurnAmount);
 
-				TeleportHands();
+				//TeleportHands();
 			}
 
 			m_CurrentTurnAmount = 0f;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowPlayerHand : MonoBehaviour
 {
 	[SerializeField]
-	Transform playerHand;
+	Transform playerHand = null;
 	[SerializeField]
 	float maxForce = 0.5f;
 	[SerializeField]

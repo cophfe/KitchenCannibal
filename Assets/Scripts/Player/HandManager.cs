@@ -21,15 +21,15 @@ public class HandManager : MonoBehaviour
 	public ActionBasedController Controller { get; private set; }
 
 	[SerializeField]
-	XRRayInteractor teleporter;
+	XRRayInteractor teleporter = null;
 	[SerializeField]
-	XRDirectInteractor interactor;
+	XRDirectInteractor interactor = null;
 	[SerializeField]
-	LineRenderer teleporterRenderer;
+	LineRenderer teleporterRenderer = null;
 
 	[Header("Values")]
-	[SerializeField] HandInfo handInfo;
-	[SerializeField] string grabLayer;
+	[SerializeField] HandInfo handInfo = null;
+	[SerializeField] string grabLayer = "";
 	[SerializeField] bool isLeftHand = true;
 
 	[Header("Inputs")]
@@ -269,6 +269,9 @@ public class HandManager : MonoBehaviour
 
 				foreach (var collider in colliders)
 				{
+					if (collider == null)
+						continue;
+
 					collider.gameObject.layer = grabLayerIndex;
 					interactorColliders.Add(collider);
 				}

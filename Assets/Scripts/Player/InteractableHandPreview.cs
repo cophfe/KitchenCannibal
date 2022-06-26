@@ -131,7 +131,7 @@ public class InteractableHandPreview : MonoBehaviour
 				}
 				else
 				{
-					Debug.LogWarning("Interactable Preview requires at an instance of HandInfo to exist in the assets folder for animation mirroring to work");
+					Debug.LogWarning("Interactable Preview requires an instance of HandInfo to exist in the assets folder for animation mirroring to work");
 				}
 			}
 		}	
