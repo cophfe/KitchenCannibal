@@ -1,0 +1,11 @@
+https://www.youtube.com/watch?v=glSsaRpHKos
+
+Create new material from the shader (Fire_A) and edit settings on the material.
+
+- Input image into "MainTexture" field (The more detailed the better)
+- Distortion (Scale_B_Distortion) gives ripple effect
+- Dissolve (Power_Dissolve) turns white into black (black = transparent)
+^ Negative values will increae white = increase HDR intensity (So fully opaque whites will glow more with bloom)
+- Time (Time_Speed) is what direction the the effects travel (-Y = Up)
+
+Credit: Corey Hunt
