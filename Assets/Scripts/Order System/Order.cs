@@ -41,7 +41,6 @@ public class Order : MonoBehaviour
         Destroy(display.gameObject);
     }
 
-
     public void CreateOrder(Vector3 position)
     {
         GameObject temp = Instantiate(ModelsAndImages.Instance.burgerPrefab);

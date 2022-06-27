@@ -22,12 +22,34 @@ public class OrderDisplay : MonoBehaviour
         { 
             for(int i = 0; i <order.recipe.recipeRequirements.Count; i++)
             {
-                if(i < 3)
+                if(i < 4)
                 {
                     orderIngredientAmount[i].text = order.recipe.recipeRequirements[i].amount.ToString();
-                    //orderIngredientImages = FindImagefor(IngredientType type);
+
+                    switch (order.recipe.recipeRequirements[i].ingredient)
+                    {
+                        case IngredientType.cookedMeat:
+                             orderIngredientImages[i].sprite = ModelsAndImages.Instance.cookedMeat;
+                            break;
+                        case IngredientType.buns:
+                             orderIngredientImages[i].sprite = ModelsAndImages.Instance.buns;
+                            break;
+                        case IngredientType.lettuce:
+                             orderIngredientImages[i].sprite = ModelsAndImages.Instance.lettuce;
+                            break;
+                        case IngredientType.tomatoe:
+                             orderIngredientImages[i].sprite = ModelsAndImages.Instance.tomatoe;
+                            break;
+                    }
                 }
-                
+
+                switch (order.recipe.completedRecipie)
+                {
+                    case CompletedRecipieType.BLT:
+                        orderImage.sprite = ModelsAndImages.Instance.BLT;
+                        break;
+                }
+
                 orderDescription.text = order.recipe.description;
             }
         }

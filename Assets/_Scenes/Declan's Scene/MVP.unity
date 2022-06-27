@@ -1952,7 +1952,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.05, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &210053209
 Mesh:
@@ -5794,7 +5794,7 @@ Transform:
   m_Children:
   - {fileID: 1488894976}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &693438163
 GameObject:
@@ -7727,7 +7727,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.05, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &933961094
 MonoBehaviour:
@@ -9667,7 +9667,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1401156390
 MonoBehaviour:
@@ -9684,7 +9684,7 @@ MonoBehaviour:
   display: {fileID: 0}
   startTime: 0
   timeTillFail: 1000
-  recipe: {fileID: 11400000, guid: ac46525309c915645a13790bad46202a, type: 2}
+  recipe: {fileID: 11400000, guid: df6521871ed9cfa4289f9d9473498961, type: 2}
   reward: 100
   orderRackIndex: 0
   rack: {fileID: 0}
@@ -9702,6 +9702,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burgerPrefab: {fileID: 5230050713971405304, guid: 9986c483c032d7b47bdca09ae0246d4c, type: 3}
+  BLT: {fileID: 21300000, guid: 96b4826ee3ca0a54fade509243edfdc3, type: 3}
+  buns: {fileID: 21300000, guid: f7f8bab9398a37b48a136d33ed1f2ebf, type: 3}
+  cookedMeat: {fileID: 21300000, guid: 630179c9333f3df4b81dba8fcbbff0f2, type: 3}
+  tomatoe: {fileID: 21300000, guid: b19a22372e4212b4e9fe8b8a6a7cfe29, type: 3}
+  lettuce: {fileID: 21300000, guid: 6b7f9c4b2053e5447a36cfd24e686464, type: 3}
 --- !u!1 &1420663282
 GameObject:
   m_ObjectHideFlags: 0
@@ -12072,7 +12077,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.05, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556890583
 GameObject:
@@ -15411,7 +15416,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.05, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1806927623
 GameObject:

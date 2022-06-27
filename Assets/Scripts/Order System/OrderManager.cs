@@ -9,11 +9,13 @@ public enum IngredientType
     mincedHumanMeat = 3,
     cookedMeat = 4,
     buns = 5,
+    lettuce = 6,
+    tomatoe = 7,
 }
 
 public enum CompletedRecipieType
 {
-    Burger,
+    BLT,
 }
 
 public class OrderManager : MonoBehaviour
