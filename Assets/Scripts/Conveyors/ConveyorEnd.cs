@@ -10,7 +10,7 @@ public class ConveyorEnd : MonoBehaviour
     {
         if (other.GetComponent<Order>() != null)
         {
-            // Destroy the object and give the reward
+            Destroy(other.gameObject);
         }
         else
         {
@@ -18,9 +18,5 @@ public class ConveyorEnd : MonoBehaviour
             obj.start = start;
             obj.Hide();
         }
-
-
-
-
     }
 }

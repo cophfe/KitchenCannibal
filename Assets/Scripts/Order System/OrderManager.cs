@@ -18,21 +18,27 @@ public enum CompletedRecipieType
 
 public class OrderManager : MonoBehaviour
 {
-    public List<Order> orders = null;
+    private Order[] orders = null;
     private int currentOrderIndex = 0;
+    [SerializeField] private OrderRack rack = null;
 
     public float elaspedTime = 0.0f;
+
+    private void Awake()
+    {
+        orders = GetComponents<Order>(); 
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentOrderIndex < orders.Count)
+        if (currentOrderIndex < orders.Length)
         {
             if (elaspedTime >= orders[currentOrderIndex].startTime)
             {
                 Debug.Log("Order: " + currentOrderIndex + " has started!");
                 // Create orders here
-                orders[currentOrderIndex].StartTime();
+                rack.AddOrder(orders[currentOrderIndex]);            
                 currentOrderIndex++;
             }
         }
@@ -40,12 +46,15 @@ public class OrderManager : MonoBehaviour
         elaspedTime += Time.deltaTime;
     }
 
-    public bool CheckRecipe(List<RecipeRequirement> recipe)
+    public bool CheckRecipe(List<RecipeRequirement> recipe, Vector3 spawnLocation)
     {
         bool completedOrder = true;
         for (int i = 0; i <= currentOrderIndex; i++)
         {
-           // if(orders[i].is) check if the order is currently active
+            // Has searched through all active orders
+            if (!orders[i].orderActive)
+                break;
+
             // The amount of ingredients present is not the same
             if (orders[i].recipe.recipeRequirements.Count != recipe.Count)
                 continue;
@@ -89,7 +98,7 @@ public class OrderManager : MonoBehaviour
             }
            
             // A match is found
-            orders[i].OrderComplete();
+            orders[i].CreateOrder(spawnLocation);
             return true;
         }
 

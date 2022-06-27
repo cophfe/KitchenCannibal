@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Order : MonoBehaviour
 {
+    [HideInInspector] public OrderDisplay display;
     public float startTime;
     public float timeTillFail;
     public Recipe recipe;
     public int reward;
     private bool timeStarted = false;
+    [HideInInspector] public int orderRackIndex = 0;
+    [HideInInspector] public OrderRack rack = null;
+    public bool orderActive = false;
     public void StartTime()
     {
+        orderActive = true;
         timeStarted = true;
     }
 
@@ -19,6 +25,7 @@ public class Order : MonoBehaviour
         if(timeStarted)
         {
             timeTillFail -= Time.deltaTime;
+            //display.UpdateTime(timeTillFail);
 
             if(timeTillFail <= 0.0f)
             OrderFailed();
@@ -30,17 +37,29 @@ public class Order : MonoBehaviour
         // Run stuff here when order fails
         timeStarted = false;
         Debug.Log(recipe.name + "Order failed");
-        
+        rack.RemoveOrder(orderRackIndex);
+        Destroy(display.gameObject);
     }
-    
-    public void OrderComplete()
+
+
+    public void CreateOrder(Vector3 position)
     {
+        GameObject temp = Instantiate(ModelsAndImages.Instance.burgerPrefab);
+        Order tempOrder = temp.GetComponent<Order>();
+        tempOrder.display = display;
+        tempOrder.recipe = recipe;
+        tempOrder.reward = reward;
+        tempOrder.orderRackIndex = orderRackIndex;
+        tempOrder.rack = rack;
+        tempOrder.transform.position = position;
+    }
+
+    public void OrderComplete()
+    {        
         timeStarted = false;
         Debug.Log(recipe.name + " Order complete");
-    }
-
-    public void DisplayOrder()
-    {
-
+        rack.RemoveOrder(orderRackIndex);
+        Destroy(display.gameObject);
+        Debug.Log("Order complete! " + reward + " Points awarded");
     }
 }
