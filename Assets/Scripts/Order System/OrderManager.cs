@@ -55,7 +55,7 @@ public class OrderManager : MonoBehaviour
         {
             // Has searched through all active orders
             if (!orders[i].orderActive)
-                break;
+                continue;
 
             // The amount of ingredients present is not the same
             if (orders[i].recipe.recipeRequirements.Count != recipe.Count)
@@ -100,6 +100,7 @@ public class OrderManager : MonoBehaviour
             }
            
             // A match is found
+            orders[i].orderActive = false;
             orders[i].CreateOrder(spawnLocation);
             return true;
         }
