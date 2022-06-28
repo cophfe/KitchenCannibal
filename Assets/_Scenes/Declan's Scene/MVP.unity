@@ -10593,18 +10593,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainAudioSource: {fileID: 0}
-  boneClips: []
-  healthInspectorClips: []
+  boneClips:
+  - {fileID: 8300000, guid: 1f446462d507cc840b334d731c55ff61, type: 3}
+  - {fileID: 8300000, guid: 0db34b9d443330d4e968490a79b6da96, type: 3}
+  - {fileID: 8300000, guid: 36e7bfe5ccf5ef64cb5317c0455f12e8, type: 3}
+  - {fileID: 8300000, guid: 7e41418959b2e8c43a5c34b010fe7e68, type: 3}
+  breadClips: []
+  clocheClips: []
   cupboardClips: []
   cuttingboardClips: []
-  torsoClips: []
-  limbClips: []
   fridgeClips: []
+  gamestateClips: []
+  grillClips: []
+  grinderClips: []
+  healthInspectorClips: []
+  knifeClips: []
+  limbClips: []
+  meatClips: []
+  musicClips: []
   orderClips:
   - {fileID: 8300000, guid: d51228db75c5fdd479bd8158a8cf465f, type: 3}
   - {fileID: 8300000, guid: 5e13cce028d854d479a3676b70ac352b, type: 3}
-  gameStateClips: []
-  meatClips: []
+  plateClips: []
+  handClips: []
+  saladClips: []
+  torsoClips: []
   vegetableClips: []
 --- !u!82 &1401156392
 AudioSource:
