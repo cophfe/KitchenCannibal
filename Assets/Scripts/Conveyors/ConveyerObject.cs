@@ -22,7 +22,7 @@ public class ConveyerObject : MonoBehaviour
 
     public void Hide()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
         timeLeft = (float)timeHidden;
         startCountdown = true;
     }
@@ -30,7 +30,7 @@ public class ConveyerObject : MonoBehaviour
     public void Show()
     {
         transform.position = start.transform.position;
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //gameObject.GetComponent<MeshRenderer>().enabled = true;
        startCountdown = false;
        Destroy(gameObject.GetComponent<ConveyerObject>());
     }
