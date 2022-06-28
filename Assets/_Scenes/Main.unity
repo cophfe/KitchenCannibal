@@ -9211,6 +9211,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 412607708}
+    - target: {fileID: 3261735643899016867, guid: aad2066e65526af4c9c944fc3ec061c3, type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261735643899016867, guid: aad2066e65526af4c9c944fc3ec061c3, type: 3}
+      propertyPath: m_SelectedFaces.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261735643899016867, guid: aad2066e65526af4c9c944fc3ec061c3, type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4546075799782962987, guid: aad2066e65526af4c9c944fc3ec061c3, type: 3}
       propertyPath: m_Name
       value: Cloche
