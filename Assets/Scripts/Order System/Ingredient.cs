@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
+    [HideInInspector] public float processedAmount = 0.0f;
+    public float timeToCook = 5.0f;
+    public float ingredientAmount = 0.0f;
     public IngredientType ingredientType;
 
     public void Process()

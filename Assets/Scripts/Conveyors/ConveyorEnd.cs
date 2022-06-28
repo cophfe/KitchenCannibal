@@ -10,17 +10,14 @@ public class ConveyorEnd : MonoBehaviour
     {
         if (other.GetComponent<Order>() != null)
         {
-            // Destroy the object and give the reward
+            Destroy(other.gameObject);
         }
         else
         {
             ConveyerObject obj = other.gameObject.AddComponent<ConveyerObject>();
             obj.start = start;
             obj.Hide();
+            obj.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
-
-
-
-
     }
 }

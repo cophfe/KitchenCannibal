@@ -15,6 +15,7 @@ public class ConveyorBeltSegment : MonoBehaviour
     public float speed = 0.5f;
     public ConveyorDirection conveyorDirection;
     private Vector3 direction;
+   [SerializeField] LayerMask disablePlayerInteractionLayer;
 
     private void OnValidate()
     {
@@ -43,6 +44,19 @@ public class ConveyorBeltSegment : MonoBehaviour
         //other.attachedRigidbody.AddForce(direction * speed);
         other.transform.position = other.transform.position + direction * speed * Time.deltaTime;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       Order temp = other.GetComponent<Order>();
+        if(temp != null)
+        {
+            temp.gameObject.layer = disablePlayerInteractionLayer;
+            temp.OrderComplete();
+        }
+    }
+
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

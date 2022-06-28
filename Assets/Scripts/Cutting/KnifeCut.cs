@@ -29,7 +29,8 @@ public class KnifeCut : MonoBehaviour
 	float noLongerSliceableVolume = 0.1f;
 	[SerializeField]
 	float deleteSliceableVolume = 0.01f;
-
+	[SerializeField]
+	int maxSliceAmount = 4;
 	[SerializeField]
 	Collider[] colliders = null;
 
@@ -57,6 +58,9 @@ public class KnifeCut : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		if (!rb)
 			rb = GetComponentInParent<Rigidbody>();
+
+		if (!sliceOrigin)
+			sliceOrigin = transform;
 	}
 
 #if UNITY_EDITOR
@@ -101,7 +105,7 @@ public class KnifeCut : MonoBehaviour
 	void ConsiderSlicing(GameObject objectToSlice)
 	{
 		Sliceable sliceable = objectToSlice.GetComponent<Sliceable>();
-		if (sliceable != null || sliceTimer > 0)
+		if (sliceable != null && sliceTimer < 0 && sliceable.CanBeSliced && sliceable.TimesSliced < maxSliceAmount)
 		{
 			float velocity = Vector3.Dot(rb.velocity, transform.TransformDirection(localSpeedDirection.normalized));
 			Debug.Log(velocity);
@@ -148,7 +152,7 @@ public class KnifeCut : MonoBehaviour
 				bool keep = false;
 				for (int j = 0; j < cols.Length; j++)
 				{
-					keep |= cols[i] == col.collider;
+					keep |= cols[j] == col.collider;
 				}	
 
 				if (!keep)
@@ -178,12 +182,13 @@ public class KnifeCut : MonoBehaviour
 
 	private void OnDrawGizmosSelected()
 	{
-		Debug.DrawRay(sliceOrigin.position, transform.TransformDirection(localSlicePlaneDirection.normalized), Color.red, Time.deltaTime, false);
-		Debug.DrawRay(sliceOrigin.position, transform.TransformDirection(localSpeedDirection.normalized), Color.blue, Time.deltaTime, false);
+		Vector3 sliceOrigin = this.sliceOrigin ? this.sliceOrigin.position : transform.position;
+		Debug.DrawRay(sliceOrigin, transform.TransformDirection(localSlicePlaneDirection.normalized), Color.red, 0, false);
+		Debug.DrawRay(sliceOrigin, transform.TransformDirection(localSpeedDirection.normalized), Color.blue, 0, false);
 
 		Gizmos.color = new Color(1, 0, 0, 0.5f);
-		Quaternion rot = Quaternion.LookRotation(transform.forward, transform.TransformDirection(localSlicePlaneDirection));
-		Gizmos.matrix = Matrix4x4.TRS(sliceOrigin.position, rot, Vector3.one);
+		Quaternion rot = Quaternion.LookRotation(transform.TransformDirection(localSpeedDirection), transform.TransformDirection(localSlicePlaneDirection));
+		Gizmos.matrix = Matrix4x4.TRS(sliceOrigin, rot, Vector3.one);
 		Gizmos.DrawCube(ignoreBoxOffset, ignoreBoxExtents);
 
 	}

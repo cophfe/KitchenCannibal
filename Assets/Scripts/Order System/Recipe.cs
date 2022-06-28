@@ -15,5 +15,6 @@ public class Recipe : ScriptableObject
     public string name;
     public string description;
 
+    public CompletedRecipieType completedRecipie;
     public List<RecipeRequirement> recipeRequirements;
 }
