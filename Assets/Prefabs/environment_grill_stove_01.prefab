@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 8734683818402048119}
   - component: {fileID: 5663293242250880978}
   - component: {fileID: 7601223478815691544}
+  - component: {fileID: 1827555807265411236}
   m_Layer: 0
   m_Name: environment_grill_stove_01
   m_TagString: Untagged
@@ -245,3 +246,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1827555807265411236
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249473063121629901}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.986031, y: 0.8330189, z: 0.50762606}
+  m_Center: {x: 0, y: 0.030901134, z: -0.035147607}
