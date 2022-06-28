@@ -68,7 +68,7 @@ public class Slicer
 		List<Vector3>[] previousSliceVerts = null;
 
 		List<Vector3> intersections = null;
-		Vector3 planeNormal = target.transform.InverseTransformDirection(worldPlaneNormal);
+		Vector3 planeNormal = target.transform.InverseTransformVector(worldPlaneNormal).normalized;
 		float origin = Vector3.Dot(target.transform.InverseTransformPoint(worldOrigin), planeNormal);
 		float[] volume = { 0, 0 };
 
@@ -101,7 +101,7 @@ public class Slicer
 			CalculateSlices(submesh, verts, uvs, intersections, vertexArray,
 				uvArray, tris, planeNormal, origin, volume);
 
-			if (sliceable.SlicedBefore)
+			if (sliceable.TimesSliced > 0)
 			{
 				submesh = data.GetSubMesh(1);
 				previousSliceVerts = new List<Vector3>[2]
@@ -231,7 +231,7 @@ public class Slicer
 					triangles[triIndex + 1] = (ushort)(submesh1VertCount + 2 * j + otherAddition);
 					triangles[triIndex + 2] = lastVertexIndex;
 				}
-				if (sliceable.SlicedBefore)
+				if (sliceable.TimesSliced > 0)
 				{
 					//the second submesh also contains previous created slice surface
 					int indicesCount = verts[i].Count + intersectIndicesCount;
@@ -311,8 +311,7 @@ public class Slicer
 				sliceableComponent.CanBeSliced = false;
 			}
 
-			sliceableComponent.SlicedBefore = true;
-			
+			sliceableComponent.TimesSliced = sliceableComponent.TimesSliced + 1;
 			meshes[i].RecalculateNormals();
 			meshes[i].RecalculateTangents();
 

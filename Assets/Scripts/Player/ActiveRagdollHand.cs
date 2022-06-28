@@ -39,7 +39,7 @@ public class ActiveRagdollHand : MonoBehaviour
 	float palmMass;
 	Transform palmTargetOverrideTransform;
 
-	private void Start()
+	private void Awake()
 	{
 		List<DynamicData> dynamicBodiesList = new List<DynamicData>();
 

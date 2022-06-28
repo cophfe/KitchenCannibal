@@ -21,6 +21,11 @@ public class InteractableHandPreview : MonoBehaviour
 	Hand hand = Hand.Left;
 	[SerializeField]
 	bool reload;
+	[SerializeField]
+	bool constantReloadAnimation;
+	
+	[HideInInspector, SerializeField]
+	HandInfo handInfo;
 
 	bool loaded = false;
 	enum Hand
@@ -97,7 +102,7 @@ public class InteractableHandPreview : MonoBehaviour
 				if (guids.Length > 0)
 				{
 					string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-					HandInfo handInfo = AssetDatabase.LoadAssetAtPath<HandInfo>(path);
+					handInfo = AssetDatabase.LoadAssetAtPath<HandInfo>(path);
 					
 					if (handInfo)
 					{
@@ -144,12 +149,16 @@ public class InteractableHandPreview : MonoBehaviour
 	}
 
 	private void Update()
-	{
+	{		
 		if (reload)
 		{
 			reload = false;
 			Unload();
 			Load();
+		}
+		if (constantReloadAnimation)
+		{
+			ReloadAnimation();
 		}
 
 		SetHandPosition();
@@ -200,4 +209,32 @@ public class InteractableHandPreview : MonoBehaviour
 	}
 #endif
 
+	void ReloadAnimation()
+	{
+		if (handInGrabPosition && handInfo != null && loaded)
+		{
+			int poseIndex = handInfo.FindPoseIndex(physData.HandGrabPose);
+			if (poseIndex != 0)
+			{
+				bool isFullHandPose = handInfo.IsFullHandPose(poseIndex);
+				int poseLayer;
+				string poseIndexID;
+				if (isFullHandPose)
+				{
+					poseLayer = handInfo.FullHandPoseLayer;
+					poseIndexID = "Pose Index";
+				}
+				else
+				{
+					poseLayer = handInfo.PartHandPoseLayer;
+					poseIndexID = "Part Hand Pose Index";
+				}
+
+				animator.speed = 0;
+				animator.SetInteger(poseIndexID, poseIndex);
+				animator.SetLayerWeight(poseLayer, 1);
+				animator.Update(0);
+			}
+		}
+	}
 }
