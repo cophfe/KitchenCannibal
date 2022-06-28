@@ -258,27 +258,11 @@ public class Slicer
 			Mesh.ApplyAndDisposeWritableMeshData(meshDatas, meshes);
 		}
 
-		//set meshfilter
-		var renderer = mf1.GetComponent<MeshRenderer>();
-
-		if (renderer && (sliceable.SliceMaterial || DefaultSliceMaterial))
-		{
-			if (renderer.sharedMaterials.Length < 2)
-			{
-				Material[] materials = new Material[2];
-				materials[0] = renderer.sharedMaterials[0];
-				materials[1] = sliceable.SliceMaterial ? sliceable.SliceMaterial : DefaultSliceMaterial;
-
-				renderer.sharedMaterials = materials;
-			}
-		}
-
 		Vector3 scale = target.transform.lossyScale;
 		float scaleVol = scale.x * scale.y * scale.z;
-		Debug.Log("Total volume of " + target.name + " before scale: " + (volume[0] + volume[1]));
 		volume[0] *= scaleVol;
 		volume[1] *= scaleVol;
-		Debug.Log("Total volume of " + target.name + " after scale: " + (volume[0] + volume[1]));
+		float volumeRatio = Mathf.Clamp(volume[0] / (volume[0] + volume[1]), 0.1f, 1);
 
 		List<Sliceable> list = new List<Sliceable>(2);
 
@@ -286,7 +270,7 @@ public class Slicer
 		bool targetUsed = false;
 		for (int i = 0; i < 2; i++)
 		{
-			Debug.Log("Slice " + i + " Volume: " + volume[i]);
+			//Debug.Log("Slice " + i + " Volume: " + volume[i]);
 
 			if (volume[i] < DoNotCreateVolume)
 				continue;
@@ -294,16 +278,33 @@ public class Slicer
 			GameObject slice;
 			if (targetUsed)
 			{
-				slice = GameObject.Instantiate(target, target.transform.parent);
+				slice = GameObject.Instantiate(target, sliceable.SliceHolder);
 			}
 			else
 			{
-				slice = target;
+				if (sliceable.TimesSliced == 0)
+				{
+					//the first sliceable is this one, so it is not deleted
+					sliceable.ParentSliceable = sliceable;
+					sliceable.SliceHolder = new GameObject(sliceable.name + " SliceHolder").transform;
+					sliceable.SliceHolder.parent = sliceable.transform.parent;
+					sliceable.SliceHolder.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+					//if this is the first sliceable, it is not destroyed, but it is disabled
+					//this is for a specific feature of the sliceable
+					slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+
+				}
+				else
+				{
+					slice = target;
+				}
 				targetUsed = true;
 			}
 
 			meshes[i].RecalculateBounds();
 			var sliceableComponent = slice.GetComponent<Sliceable>();
+			
+			SetSliceableMaterial(sliceableComponent);
 
 			if (volume[i] < DisallowCuttingVolume)
 			{
@@ -320,8 +321,25 @@ public class Slicer
 			var mC = slice.GetComponent<MeshCollider>();
 			if (mC)
 				mC.sharedMesh = meshes[i];
+			var rb = slice.GetComponent<Rigidbody>();
+			if (rb)
+			{
+				rb.mass = rb.mass * ((1-i) * volumeRatio + i * (1.0f - volumeRatio));
+			}
+
 
 			list.Add(sliceableComponent);
+		}
+
+		if (sliceable.TimesSliced == 0)
+		{
+			var mR = sliceable.GetComponent<MeshRenderer>();
+			if (mR)
+			{
+				mR.enabled = false;
+			}
+			sliceable.gameObject.SetActive(false);
+			sliceable.enabled = false;
 		}
 
 		return list;
@@ -685,5 +703,27 @@ public class Slicer
 	{
 
 		return Vector3.Dot(Vector3.Cross(p0, p1), p2) / 6.0f;
+	}
+
+	void SetSliceableMaterial(Sliceable sliceable)
+	{
+		var renderer = sliceable.GetComponent<MeshRenderer>();
+		if (renderer && (sliceable.SliceMaterial || DefaultSliceMaterial))
+		{
+			if (renderer.sharedMaterials.Length < 2)
+			{
+				Material[] materials = new Material[2];
+				materials[0] = renderer.sharedMaterials[0];
+				materials[1] = sliceable.SliceMaterial ? sliceable.SliceMaterial : DefaultSliceMaterial;
+
+				renderer.sharedMaterials = materials;
+			}
+			else
+			{
+				Material[] materials = renderer.sharedMaterials;
+				materials[1] = sliceable.SliceMaterial ? sliceable.SliceMaterial : DefaultSliceMaterial;
+				renderer.sharedMaterials = materials;
+			}
+		}
 	}
 }

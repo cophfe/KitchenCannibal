@@ -13,20 +13,18 @@ AvatarMask:
     m_Weight: 1
   - m_Path: hand_left
     m_Weight: 0
-  - m_Path: hand_right
-    m_Weight: 0
   - m_Path: Root_L
     m_Weight: 1
   - m_Path: Root_L/Wrist_L_0
     m_Weight: 1
   - m_Path: Root_L/Wrist_L_0/Index_L_1
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Index_L_1/Index_L_2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Index_L_1/Index_L_2/Index_L_3
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Index_L_1/Index_L_2/Index_L_3/Index_L_4
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Little_L_1
     m_Weight: 1
   - m_Path: Root_L/Wrist_L_0/Little_L_1/Little_L_2
@@ -36,66 +34,24 @@ AvatarMask:
   - m_Path: Root_L/Wrist_L_0/Little_L_1/Little_L_2/Little_L_3/Little_L_4
     m_Weight: 1
   - m_Path: Root_L/Wrist_L_0/Middle_L_1
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Middle_L_1/Middle_L_2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Middle_L_1/Middle_L_2/Middle_L_3
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Middle_L_1/Middle_L_2/Middle_L_3/Middle_L_4
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Ring_L_1
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Ring_L_1/Ring_L_2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Ring_L_1/Ring_L_2/Ring_L_3
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Ring_L_1/Ring_L_2/Ring_L_3/Ring_L_4
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Thumb_L_1
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Thumb_L_1/Thumb_L_2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_L/Wrist_L_0/Thumb_L_1/Thumb_L_2/Thumb_L_3
-    m_Weight: 1
-  - m_Path: Root_R
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Index_R_1
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Index_R_1/Index_R_2
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Index_R_1/Index_R_2/Index_R_3
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Index_R_1/Index_R_2/Index_R_3/Index_R_4
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Little_R_1
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Little_R_1/Little_R_2
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Little_R_1/Little_R_2/Little_R_3
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Little_R_1/Little_R_2/Little_R_3/Little_R_4
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Middle_R_1
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Middle_R_1/Middle_R_2
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Middle_R_1/Middle_R_2/Middle_R_3
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Middle_R_1/Middle_R_2/Middle_R_3/Middle_R_4
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Ring_R_1
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Ring_R_1/Ring_R_2
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Ring_R_1/Ring_R_2/Ring_R_3
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Ring_R_1/Ring_R_2/Ring_R_3/Ring_R_4
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Thumb_R_1
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Thumb_R_1/Thumb_R_2
-    m_Weight: 1
-  - m_Path: Root_R/Wrist_R_0/Thumb_R_1/Thumb_R_2/Thumb_R_3
-    m_Weight: 1
+    m_Weight: 0

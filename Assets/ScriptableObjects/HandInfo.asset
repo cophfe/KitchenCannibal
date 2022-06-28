@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: HandInfo
   m_EditorClassIdentifier: 
   <InteractableLayer>k__BackingField: Interactable
-  <MoveToInteractableDistance>k__BackingField: 0.001
-  <InteractableAttachAngle>k__BackingField: 1
-  <InteractableAttachDistance>k__BackingField: 0.000001
+  <InteractableTravellingLayer>k__BackingField: InteractableTravel
+  <MoveToInteractableDistance>k__BackingField: 0.004
+  <InteractableAttachAngle>k__BackingField: 3
+  <InteractableAttachDistance>k__BackingField: 0.0005
+  <TintStartDistance>k__BackingField: 0.25
+  <TintEndDistance>k__BackingField: 0.15
   <ControllerVisibleStart>k__BackingField: 0.1
   <ControllerVisibleRange>k__BackingField: 0.1
   <FingerSpeed>k__BackingField: 20
