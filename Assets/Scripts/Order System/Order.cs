@@ -43,7 +43,7 @@ public class Order : MonoBehaviour
 
     public void CreateOrder(Vector3 position)
     {
-        GameObject temp = Instantiate(ModelsAndImages.Instance.burgerPrefab);
+        GameObject temp = Instantiate(GameManager.Instance.modelsAndimages.burgerPrefab);
         Order tempOrder = temp.GetComponent<Order>();
         tempOrder.display = display;
         tempOrder.recipe = recipe;
@@ -60,5 +60,6 @@ public class Order : MonoBehaviour
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
         Debug.Log("Order complete! " + reward + " Points awarded");
+        GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
     }
 }

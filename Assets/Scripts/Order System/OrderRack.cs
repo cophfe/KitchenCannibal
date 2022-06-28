@@ -46,6 +46,7 @@ public class OrderRack : MonoBehaviour
             order.StartTime();
             order.orderRackIndex = openIndex;
             order.rack = this;
+            GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 0);
         }
     }
 
