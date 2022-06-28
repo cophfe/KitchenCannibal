@@ -7,6 +7,7 @@ public class Sliceable : MonoBehaviour
 	[field: SerializeField]
 	public Material SliceMaterial { get; private set; } = null;
 
-	public bool SlicedBefore { get; set; } = false;
 	public bool CanBeSliced { get; set; } = true;
+	public int TimesSliced { get; set; } = 0;
+	
 }
