@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewLeftHand
       objectReference: {fileID: 0}
+    - target: {fileID: 3850163603042095074, guid: 68030e623b7392f4ebe6ffb797f073a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbf203c8949474b478c5749201a1b576, type: 2}
     - target: {fileID: 4125629384585597579, guid: 68030e623b7392f4ebe6ffb797f073a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.021
