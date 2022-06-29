@@ -7,7 +7,9 @@ public class KnifeCut : MonoBehaviour
 	[SerializeField]
 	Material defaultSliceMaterial;
 	[SerializeField]
-	float sliceSpeed = 0.5f;
+	float sliceMinSpeed = 0.5f;
+	[SerializeField]
+	float cutImpulse = 0.04f;
 	[SerializeField]
 	Vector3 localSlicePlaneDirection = Vector3.right;
 	[SerializeField]
@@ -93,6 +95,7 @@ public class KnifeCut : MonoBehaviour
 			{
 				if (col == colliders[i])
 				{
+					//Debug.Log("Cutter: " + col.name);
 					ConsiderSlicing(collision.gameObject);
 					return;
 				}
@@ -108,30 +111,51 @@ public class KnifeCut : MonoBehaviour
 		if (sliceable != null && sliceTimer < 0 && sliceable.CanBeSliced && sliceable.TimesSliced < maxSliceAmount)
 		{
 			float velocity = Vector3.Dot(rb.velocity, transform.TransformDirection(localSpeedDirection.normalized));
-			Debug.Log(velocity);
-			if (velocity > sliceSpeed)
+			//Debug.Log(velocity);
+			if (velocity > sliceMinSpeed)
 			{
-				List<Sliceable> sliceables = slicer.Slice(sliceable, transform.TransformDirection(localSlicePlaneDirection).normalized, sliceOrigin ? sliceOrigin.position : transform.position);
+				Vector3 origin = sliceOrigin ? sliceOrigin.position : transform.position;
+				Vector3 sliceDirection  = transform.TransformDirection(localSlicePlaneDirection).normalized;
 
-				if (sliceable != null)
+				List<Sliceable> sliceables = slicer.Slice(sliceable, sliceDirection, origin);
+
+				if (sliceable != null && sliceables.Count > 0)
+				{
 					sliceTimer = sliceTimeout;
 
-				if (colliders != null && ignoreCollisionAfterHit && sliceables != null && sliceables.Count > 0)
-				{
-					for (int i = 0; i < sliceables.Count; i++)
+					if (colliders != null && ignoreCollisionAfterHit)
 					{
-						var col = sliceables[i].GetComponent<MeshCollider>();
-
-						if (col)
+						for (int i = 0; i < sliceables.Count; i++)
 						{
-							for (int j = 0; j < colliders.Length; j++)
+							//ignore mesh collider until it moves away
+							var col = sliceables[i].GetComponent<MeshCollider>();
+
+							if (col)
 							{
-								Physics.IgnoreCollision(col, colliders[j]);
+								for (int j = 0; j < colliders.Length; j++)
+								{
+									Physics.IgnoreCollision(col, colliders[j]);
+								}
+								justSliced.Add(new ColData() { timeElapsed = 0, collider = col });
 							}
-							justSliced.Add(new ColData() { timeElapsed = 0, collider = col }) ;
+						}
+
+						//also apply a force tangential to the cut plane
+						for (int i = 0; i < sliceables.Count; i++)
+						{
+							var rb = sliceables[i].GetComponent<Rigidbody>();
+							if (rb != null)
+							{
+								float direction = Mathf.Sign(Vector3.Dot(sliceDirection, rb.worldCenterOfMass) - Vector3.Dot(sliceDirection, origin));
+								rb.AddForce(direction * sliceDirection * cutImpulse, ForceMode.VelocityChange);
+							}
 						}
 					}
 				}
+
+				
+
+				
 			}
 		}
 	}

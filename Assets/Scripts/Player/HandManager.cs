@@ -23,7 +23,7 @@ public class HandManager : MonoBehaviour
 	[SerializeField]
 	XRRayInteractor teleporter = null;
 	[SerializeField]
-	XRDirectInteractor interactor = null;
+	DirectInteractor interactor = null;
 	[SerializeField]
 	LineRenderer teleporterRenderer = null;
 
@@ -104,6 +104,7 @@ public class HandManager : MonoBehaviour
 	//pose indexes
 	int okIndex;
 	int fingerGunIndex;
+	int grabbingIndex;
 	float poseSpeedModifier = 1.0f;
 
 	//Controller stuff
@@ -124,7 +125,12 @@ public class HandManager : MonoBehaviour
 	//Interaction
 	GrabState grabState = GrabState.NotGrabbing;
 	int interactableLayerIndex;
+	int interactableTravelLayerIndex;
 	int grabLayerIndex;
+	//hand force data (for resetting after slowing)
+	float handForceStrength;
+	float fingerForceStrength;
+
 
 	public enum GrabState
 	{
@@ -182,6 +188,7 @@ public class HandManager : MonoBehaviour
 
 		okIndex = handInfo.FindPoseIndex("OK");
 		fingerGunIndex = handInfo.FindPoseIndex("Finger Gun");
+		grabbingIndex = handInfo.FindPoseIndex("Grabbing");
 
 		trigger.action.performed += OnTriggerPress;
 		trigger.action.canceled += OnTriggerPress;
@@ -232,11 +239,17 @@ public class HandManager : MonoBehaviour
 
 		grabLayerIndex = LayerMask.NameToLayer(grabLayer);
 		interactableLayerIndex = LayerMask.NameToLayer(handInfo.InteractableLayer);
+		interactableTravelLayerIndex = LayerMask.NameToLayer(handInfo.InteractableTravellingLayer);
 
 		physicsRenderer = PhysicsHand.GetComponentInChildren<SkinnedMeshRenderer>();
 		interactorColliders = new List<Collider>();
+
+		var palmSet = PhysicsHand.PalmSettings.linearStrength;
+		handForceStrength = palmSet;
+
 	}
 
+	#region Grab
 	public GrabState GetGrabState()
 	{
 		return grabState;
@@ -246,16 +259,16 @@ public class HandManager : MonoBehaviour
 	{
 		grabbedInteractable.interactable = args.interactableObject;
 		grabbedInteractable.physicsData = args.interactableObject.transform.GetComponent<InteractablePhysicsData>();
-
+		
 		if (grabbedInteractable.physicsData != null)
 		{
-			if (grabbedInteractable.physicsData.CurrentlyInteractingHand != null)
-			{
-				grabbedInteractable.physicsData.QueuedHand = this;
-				return;
-			}
-
-			grabbedInteractable.physicsData.CurrentlyInteractingHand = this;
+			//if (grabbedInteractable.physicsData.CurrentlyInteractingHand != null)
+			//{
+			//	grabbedInteractable.physicsData.QueuedHand = this;
+			//	return;
+			//}
+			//
+			//grabbedInteractable.physicsData.CurrentlyInteractingHand = this;
 
 			foreach (var collider in interactorColliders)
 			{
@@ -272,37 +285,39 @@ public class HandManager : MonoBehaviour
 					if (collider == null)
 						continue;
 
-					collider.gameObject.layer = grabLayerIndex;
+					collider.gameObject.layer = interactableTravelLayerIndex;
 					interactorColliders.Add(collider);
 				}
 			}
 		}
 		grabState = GrabState.StartingGrab;
+		overridePose = grabbingIndex;
 	}
 
 	void OnDropObject(SelectExitEventArgs args)
 	{
-		var data = args.interactableObject.transform.GetComponent<InteractablePhysicsData>();
-		if (data)
-		{
-			if (data.QueuedHand == this)
-			{
-				return;
-			}
-			else if (data.CurrentlyInteractingHand == this && data.QueuedHand != null)
-			{
-				data.CurrentlyInteractingHand = null;
-				SelectEnterEventArgs selectEnterEventArgs = new SelectEnterEventArgs()
-				{
-					interactableObject = grabbedInteractable.interactable
-				};
-				data.QueuedHand.OnGrabObject(selectEnterEventArgs);
-				data.QueuedHand = null;
-				interactorColliders.Clear();
-			}
-		}
+		//var data = args.interactableObject.transform.GetComponent<InteractablePhysicsData>();
+		//if (data)
+		//{
+		//	if (data.QueuedHand == this)
+		//	{
+		//		return;
+		//	}
+		//	else if (data.CurrentlyInteractingHand == this && data.QueuedHand != null)
+		//	{
+		//		data.CurrentlyInteractingHand = null;
+		//		SelectEnterEventArgs selectEnterEventArgs = new SelectEnterEventArgs()
+		//		{
+		//			interactableObject = grabbedInteractable.interactable
+		//		};
+		//		data.QueuedHand.OnGrabObject(selectEnterEventArgs);
+		//		data.QueuedHand = null;
+		//		interactorColliders.Clear();
+		//	}
+		//	
+		//	data.CurrentlyInteractingHand = null;
+		//}
 
-		data.CurrentlyInteractingHand = null;
 		grabState = GrabState.NotGrabbing;
 
 		grabbedInteractable.physicsData = null;
@@ -314,7 +329,11 @@ public class HandManager : MonoBehaviour
 		FindFingersTarget();
 	
 		if (handJoint != null)
-			handJoint.connectedBody = null;
+		{
+			Destroy(handJoint);
+			handJoint = null;
+		}
+
 	}
 
 	bool ShouldMoveToInteractable()
@@ -335,10 +354,23 @@ public class HandManager : MonoBehaviour
 		overridePose = handInfo.FindPoseIndex(grabbedInteractable.physicsData.HandGrabPose);
 		FindFingersTarget();
 	
-			if (isLeftHand)
+		if (isLeftHand)
 			PhysicsHand.SetPalmOverride(grabbedInteractable.physicsData.PhysicsLeftHandAttachPoint);
 		else
 			PhysicsHand.SetPalmOverride(grabbedInteractable.physicsData.PhysicsRightHandAttachPoint);
+
+		if (!grabbedInteractable.physicsData.DoPhysicsInteractions)
+		{
+			var colliders = grabbedInteractable.physicsData.AllColliders;
+
+			foreach (var collider in colliders)
+			{
+				if (collider == null)
+					continue;
+
+				collider.gameObject.layer = grabLayerIndex;
+			}
+		}
 
 		PhysicsHand.SetWorldForce(true, false, true);
 		grabState = GrabState.MovingToInteractable;
@@ -348,7 +380,7 @@ public class HandManager : MonoBehaviour
 	{
 		if (grabbedInteractable.interactable != null)
 		{
-			var attachPoint = interactor.GetAttachTransform(null);
+			var attachPoint = PhysicsHand.transform;
 			var target = PhysicsHand.GetPalmTarget();
 
 			return Vector3.SqrMagnitude(attachPoint.position - target.position) < handInfo.InteractableAttachDistance
@@ -359,16 +391,33 @@ public class HandManager : MonoBehaviour
 
 	void AttachToInteractable()
 	{
+		
+
 		if (grabbedInteractable.physicsData)
 		{
+			//at this point, hijack the grab if it is a piece of a selectable
+			var sliceable = grabbedInteractable.physicsData.GetComponent<Sliceable>();
+			if (sliceable && sliceable.TimesSliced > 0)
+			{
+				//teleport parent slicable to slice piece position
+				//set grabbed interactable to parent interactable
+				//disable grab interactable on sliceable and on hover suck slices towards this like they are being selected 
+				//also disable all of their collision with everything
+
+				//Rigidbody.detectCollisions = false;
+
+				Debug.Log("Picking up slice piece");
+			}
+
 			handJoint = PhysicsHand.gameObject.AddComponent<FixedJoint>();
 			handJoint.enablePreprocessing = false;
 			handJoint.connectedBody = grabbedInteractable.physicsData.InteractableBody;
+			handJoint.massScale = handInfo.InteractableJointMassScale;
 		}
 
 		grabState = GrabState.Grabbed;
 	}
-
+	#endregion
 
 	#region HandDisconnect
 	private void OnTrackingState(InputAction.CallbackContext ctx)
@@ -748,23 +797,43 @@ public class HandManager : MonoBehaviour
 		UpdateFingers();
 		UpdateControllerVisibility();
 
-		//teleporting
-		if (!isTeleporting || thumbstick.action.triggered)
-			return;
-		if (!teleporter.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+		//highlighting
+		if (!interactor.hasSelection)
 		{
-			EnableTeleporting(false);
-			return;
-		}
-		if ((1 << hit.collider.gameObject.layer & PlayerController.TeleportSurfaceMask.value) == 0)
-		{
-			EnableTeleporting(false);
-			return;
+			var t= interactor.GetClosesetValidTarget(out float dSq);
+
+			if (t != null)
+			{
+				var tintComponent = t.transform.GetComponent<TintInteractable>();
+				if (tintComponent != null)
+				{
+					dSq = Mathf.Sqrt(dSq);
+					float percent = 1.0f - Mathf.Clamp01((dSq - handInfo.TintEndDistance) / (handInfo.TintStartDistance - handInfo.TintEndDistance));
+					tintComponent.RequestTint(percent);
+				}
+			}
 		}
 
-		PlayerController.Locomotor.QueueTeleportRequest(new TeleportRequest()
-		{ destinationPosition = hit.point });
-		EnableTeleporting(false);
+		//teleporting
+		{
+			if (!isTeleporting || thumbstick.action.triggered)
+				return;
+			if (!teleporter.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+			{
+				EnableTeleporting(false);
+				return;
+			}
+			if ((1 << hit.collider.gameObject.layer & PlayerController.TeleportSurfaceMask.value) == 0)
+			{
+				EnableTeleporting(false);
+				return;
+			}
+
+			PlayerController.Locomotor.QueueTeleportRequest(new TeleportRequest()
+			{ destinationPosition = hit.point });
+			EnableTeleporting(false);
+		}
+		
 	}
 
 	private void FixedUpdate()

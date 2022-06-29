@@ -28,6 +28,8 @@ public class ActiveRagdollHand : MonoBehaviour
 	[SerializeField]
 	bool applyWorldTorqueToFingers = true;
 	[SerializeField]
+	bool applyWorldForceToPalm = false;
+	[SerializeField]
 	float palmDamping = 0.5f;
 	[SerializeField]
 	float palmOrientStrength = 1.0f;
@@ -38,6 +40,9 @@ public class ActiveRagdollHand : MonoBehaviour
 	bool applyWorldToPalm = true;
 	float palmMass;
 	Transform palmTargetOverrideTransform;
+
+	public DynamicSettings PalmSettings { get => palmSettings; set => palmSettings = value; }
+	public DynamicSettings FingerSettings { get => fingerSettings; set => fingerSettings = value; }
 
 	private void Awake()
 	{
@@ -138,7 +143,7 @@ public class ActiveRagdollHand : MonoBehaviour
 			return palm.targetTransform;
 	}
 
-	public DynamicData GetPalm()
+	public DynamicData GetPalmData()
 	{
 		return palm;
 	}
@@ -160,8 +165,8 @@ public class ActiveRagdollHand : MonoBehaviour
 		{
 			for (int i = 0; i < dynamicBodies.Length; i++)
 			{
-				ActiveRagdollRotation(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorque, applyWorldForce);
-				ActiveRagdollPosition(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorque, applyWorldForce);
+				ActiveRagdollRotation(ref dynamicBodies[i], ref fingerSettings, iDT);
+				ActiveRagdollPosition(ref dynamicBodies[i], ref fingerSettings, iDT);
 				dynamicBodies[i].followJoint.targetRotation = Quaternion.Inverse(dynamicBodies[i].localToJointSpace) * Quaternion.Inverse(dynamicBodies[i].targetTransform.localRotation) * dynamicBodies[i].anchor;
 			}
 		}
@@ -169,7 +174,7 @@ public class ActiveRagdollHand : MonoBehaviour
 		{
 			for (int i = 0; i < dynamicBodies.Length; i++)
 			{
-				ActiveRagdollPosition(ref dynamicBodies[i], ref fingerSettings, iDT, applyWorldTorque, applyWorldForce);
+				ActiveRagdollPosition(ref dynamicBodies[i], ref fingerSettings, iDT);
 				dynamicBodies[i].followJoint.targetRotation = Quaternion.Inverse(dynamicBodies[i].localToJointSpace) * Quaternion.Inverse(dynamicBodies[i].targetTransform.localRotation) * dynamicBodies[i].anchor;
 			}
 		}
@@ -183,8 +188,10 @@ public class ActiveRagdollHand : MonoBehaviour
 
 		if (applyWorldToPalm)
 		{
-			ActiveRagdollRotation(ref palm, ref palmSettings, iDT, false, true);
-			if (!applyWorldForceToFingers)
+			if (applyWorldForceToPalm)
+				ActiveRagdollPosition(ref palm, ref palmSettings, iDT);
+			//ActiveRagdollRotation(ref palm, ref palmSettings, iDT);
+			//if (!applyWorldForceToFingers)
 				OrientPalm(iDT);
 		}
 
@@ -205,7 +212,7 @@ public class ActiveRagdollHand : MonoBehaviour
 	}
 
 
-	void ActiveRagdollRotation(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime, bool doTorque, bool doForce)
+	void ActiveRagdollRotation(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime)
 	{
 		Quaternion fixRotationalForce = data.targetTransform.rotation * Quaternion.Inverse(data.followTransform.rotation);
 		fixRotationalForce.ToAngleAxis(out float angle, out Vector3 axis);
@@ -229,7 +236,7 @@ public class ActiveRagdollHand : MonoBehaviour
 		data.followBody.AddTorque(angularVelocity, ForceMode.VelocityChange);
 	}
 
-	void ActiveRagdollPosition	(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime, bool doTorque, bool doForce)
+	void ActiveRagdollPosition	(ref DynamicData data, ref DynamicSettings settings, float inverseDeltaTime)
 	{
 		Vector3 targetPlusCOM;
 		if (palmTargetOverrideTransform)
@@ -268,7 +275,8 @@ public class ActiveRagdollHand : MonoBehaviour
 	void OrientPalm(float inverseDeltaTime)
 	{
 		palm.followBody.angularVelocity *= 1f - palmDamping;
-		Quaternion fixRotationalForce = palm.targetTransform.rotation * Quaternion.Inverse(palm.followTransform.rotation);
+		Quaternion rot = palmTargetOverrideTransform ? palmTargetOverrideTransform.rotation : palm.targetTransform.rotation;
+		Quaternion fixRotationalForce = rot * Quaternion.Inverse(palm.followTransform.rotation);
 		fixRotationalForce.ToAngleAxis(out float angle, out Vector3 axis);
 		//fix angle switching randomly
 		if (angle > 180.0f)
@@ -280,7 +288,7 @@ public class ActiveRagdollHand : MonoBehaviour
 			if (!float.IsNaN(angularVelocity.x))
 			{
 				palm.followBody.angularVelocity += angularVelocity * palmOrientStrength;
-				Debug.Log(palm.followBody.angularVelocity);
+				//Debug.Log(palm.followBody.angularVelocity);
 
 				//for (int i = 0; i < dynamicBodies.Length; i++)
 				//{
@@ -352,7 +360,7 @@ public class ActiveRagdollHand : MonoBehaviour
 	}
 
 	[System.Serializable]
-	struct DynamicSettings
+	public struct DynamicSettings
 	{
 		public float maxRotationalForce;
 		public float maxForce;

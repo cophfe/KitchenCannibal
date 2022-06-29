@@ -19,6 +19,8 @@ public class InteractablePhysicsData : MonoBehaviour
 	public bool RestrictedMovement { get; private set; }
 	[field: SerializeField]
 	public float MoveToDistanceModifier { get; private set; } = 1.0f;
+	[field: SerializeField]
+	public float MoveToForceModifier { get; private set; } = 0.5f;
 
 	public HandManager CurrentlyInteractingHand { get; set; } = null;
 	public HandManager QueuedHand { get; set; } = null;

@@ -13,4 +13,12 @@ public class DeviceSimDisabler : MonoBehaviour
 #endif
 	}
 
+	private void Start()
+	{
+		var inputDevices = new List<InputDevice>();
+		InputDevices.GetDevices(inputDevices);
+		if (inputDevices.Count > 0)
+			gameObject.SetActive(false);
+	}
+
 }
