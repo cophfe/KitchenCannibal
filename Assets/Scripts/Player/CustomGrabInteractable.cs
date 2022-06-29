@@ -11,12 +11,15 @@ using UnityEditor;
 [DisallowMultipleComponent]
 [CanSelectMultiple(false)]
 [RequireComponent(typeof(Rigidbody))]
-[AddComponentMenu("XR/ Slice Interactable", 11)]
+[AddComponentMenu("XR/Custom Grab Interactable", 11)]
 [HelpURL("https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.0/api/UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable.html")]
-public class SliceGrabInteractable : XRBaseInteractable
+public class CustomGrabInteractable : XRBaseInteractable
 {
 	[field: SerializeField]
 	public bool FirstInteractorTakesPriority { get; set; } = false;
+
+	[field: SerializeField]
+	public bool DisableGravity { get; set; } = true;
 
 	//i need to change literally ONE thing from xrgrabinteractablw
 	//but since almost everything isn't overrideable it is pretty asking me to copy the entire class over in order to change one tiny thing
@@ -124,7 +127,7 @@ public class SliceGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	MovementType m_MovementType = MovementType.Instantaneous;
+	MovementType m_MovementType = MovementType.VelocityTracking;
 
 	/// <summary>
 	/// Specifies how this object moves when selected, either through setting the velocity of the <see cref="Rigidbody"/>,
@@ -835,9 +838,13 @@ public class SliceGrabInteractable : XRBaseInteractable
 		m_OldDrag = rigidbody.drag;
 		m_OldAngularDrag = rigidbody.angularDrag;
 		rigidbody.isKinematic = m_CurrentMovementType == MovementType.Kinematic || m_CurrentMovementType == MovementType.Instantaneous;
-		rigidbody.useGravity = false;
-		rigidbody.drag = 0f;
-		rigidbody.angularDrag = 0f;
+		if (DisableGravity)
+		{
+			rigidbody.useGravity = false;
+			rigidbody.drag = 0f;
+			rigidbody.angularDrag = 0f;
+		}
+		
 	}
 
 	/// <summary>

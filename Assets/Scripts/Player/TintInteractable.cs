@@ -23,7 +23,7 @@ public class TintInteractable : MonoBehaviour
 	float lastTintMagnitude = 0;
 	bool shouldTint = false;
 	float tintMagnitude = 0;
-
+	float tintModify = 1.0f;
 	private MaterialPropertyBlock m_TintPropertyBlock;
 
 	private bool m_EmissionEnabled;
@@ -79,8 +79,13 @@ public class TintInteractable : MonoBehaviour
 	{
 		SetTint(shouldTint);
 		shouldTint = false;
+		tintModify = 1.0f;
 	}
 
+	public void RequestTintModifier(float modify)
+	{
+		tintModify = modify;
+	}
 	public void RequestTint( float tintMagnitude)
 	{
 		if (!shouldTint)
@@ -99,7 +104,7 @@ public class TintInteractable : MonoBehaviour
 		lastTintMagnitude = tintMagnitude;
 
 		Color value = on ? (m_TintColor * Mathf.LinearToGammaSpace(1f)) : Color.black;
-		value *= tintMagnitude;
+		value *= tintMagnitude * tintModify;
 
 		if (!m_EmissionEnabled && !m_HasLoggedMaterialInstance)
 		{

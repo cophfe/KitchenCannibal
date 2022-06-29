@@ -22,6 +22,8 @@ public class HandInfo : ScriptableObject
 	public float TintStartDistance { get; private set; } = 0.3f;
 	[field: SerializeField]
 	public float TintEndDistance { get; private set; } = 0.0f;
+	[field: SerializeField]
+	public float TintAlreadySelectedModifier { get; private set; } = 0.3f;
 
 	[field: SerializeField]
 	public float ControllerVisibleStart { get; private set; } = 2.0f;
