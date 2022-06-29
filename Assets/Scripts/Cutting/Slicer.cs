@@ -313,13 +313,21 @@ public class Slicer
 				continue;
 
 			GameObject slice;
+			Sliceable sliceableComponent;
+
 			if (targetUsed)
 			{
 				slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+				slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
+				sliceableComponent = slice.GetComponent<Sliceable>();
+				//apparently non serialized values r not cloned (makes sense i guess)
+				sliceableComponent.ParentSliceable = sliceable.ParentSliceable;
+				sliceableComponent.SliceHolder = sliceable.SliceHolder;
+				sliceableComponent.CanBeSliced = sliceable.CanBeSliced;
 			}
 			else
 			{
-				if (sliceable.TimesSliced == 0)
+ 				if (sliceable.TimesSliced == 0)
 				{
 					//the first sliceable is this one, so it is not deleted
 					sliceable.ParentSliceable = sliceable;
@@ -328,18 +336,25 @@ public class Slicer
 					sliceable.SliceHolder.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 					//if this is the first sliceable, it is not destroyed, but it is disabled
 					//this is for a specific feature of the sliceable
+
 					slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+					slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
+					sliceableComponent = slice.GetComponent<Sliceable>();
+					//apparently non serialized values r not cloned (makes sense i guess)
+					sliceableComponent.ParentSliceable = sliceable.ParentSliceable;
+					sliceableComponent.SliceHolder = sliceable.SliceHolder;
+					sliceableComponent.CanBeSliced = sliceable.CanBeSliced;
 
 				}
 				else
 				{
 					slice = target;
+					sliceableComponent = slice.GetComponent<Sliceable>();
 				}
 				targetUsed = true;
 			}
 
 			meshes[i].RecalculateBounds();
-			var sliceableComponent = slice.GetComponent<Sliceable>();
 			
 			SetSliceableMaterial(sliceableComponent);
 
@@ -349,7 +364,13 @@ public class Slicer
 				sliceableComponent.CanBeSliced = false;
 			}
 
-			sliceableComponent.TimesSliced = sliceableComponent.TimesSliced + 1;
+			var interactable = sliceableComponent.GetComponent<SliceGrabInteractable>();
+			if (interactable)
+			{
+				//these should only be selected by one hand at a time
+				interactable.FirstInteractorTakesPriority = true;
+			}
+			sliceableComponent.TimesSliced = sliceable.TimesSliced + 1;
 			meshes[i].RecalculateNormals();
 			//meshes[i].RecalculateTangents();
 
@@ -361,6 +382,7 @@ public class Slicer
 			var rb = slice.GetComponent<Rigidbody>();
 			if (rb)
 			{
+				sliceableComponent.AttachedRigidbody = rb;
 				rb.mass = rb.mass * ((1-i) * volumeRatio + i * (1.0f - volumeRatio));
 			}
 
@@ -376,6 +398,7 @@ public class Slicer
 				mR.enabled = false;
 			}
 			sliceable.gameObject.SetActive(false);
+			sliceable.ParentSliceable = null;
 			sliceable.enabled = false;
 		}
 
@@ -439,7 +462,6 @@ public class Slicer
 				int sideIndex0;
 				int sideIndex1;
 
-				ushort a, b, c;
 				if (positiveDistance[0] == positiveDistance[1])
 				{
 					(int1, intUV1) = GetIntersection(ref p1, ref p2, ref uv1, ref uv2, distanceToPlane[1], distanceToPlane[2]);

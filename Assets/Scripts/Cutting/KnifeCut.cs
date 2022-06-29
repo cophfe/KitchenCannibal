@@ -119,7 +119,7 @@ public class KnifeCut : MonoBehaviour
 
 				List<Sliceable> sliceables = slicer.Slice(sliceable, sliceDirection, origin);
 
-				if (sliceable != null && sliceables.Count > 0)
+				if (sliceables != null && sliceables.Count > 0)
 				{
 					sliceTimer = sliceTimeout;
 

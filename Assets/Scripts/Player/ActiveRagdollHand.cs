@@ -43,6 +43,7 @@ public class ActiveRagdollHand : MonoBehaviour
 
 	public DynamicSettings PalmSettings { get => palmSettings; set => palmSettings = value; }
 	public DynamicSettings FingerSettings { get => fingerSettings; set => fingerSettings = value; }
+	public float PalmOrientStrength { get => palmOrientStrength; set => palmOrientStrength = value; }
 
 	private void Awake()
 	{
