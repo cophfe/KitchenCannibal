@@ -992,7 +992,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b0dc84b797d9fb40881248ce48c6917, type: 2}
+  - {fileID: 2100000, guid: 6b9f885911ca09549b9f5b7ddcca5b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3786,6 +3786,10 @@ PrefabInstance:
       propertyPath: sliceMinSpeed
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 1061594696, guid: b16238034d9600f4c97d0fa48a9bcb0e, type: 3}
+      propertyPath: deleteSliceableVolume
+      value: 0.000009
+      objectReference: {fileID: 0}
     - target: {fileID: 1061594697, guid: b16238034d9600f4c97d0fa48a9bcb0e, type: 3}
       propertyPath: m_TintOnSelection
       value: 0
@@ -4219,7 +4223,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b0dc84b797d9fb40881248ce48c6917, type: 2}
+  - {fileID: 2100000, guid: 6b9f885911ca09549b9f5b7ddcca5b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

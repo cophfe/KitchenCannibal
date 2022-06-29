@@ -85,11 +85,6 @@ public class KnifeCut : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		
-	}
-
-	private void OnCollisionStay(Collision collision)
-	{
 		if (!enabled || !doOnCollision)
 			return;
 
@@ -100,7 +95,7 @@ public class KnifeCut : MonoBehaviour
 			{
 				if (col == colliders[i])
 				{
-					Debug.Log("Cutter: " + col.name);
+					//Debug.Log("Cutter: " + col.name);
 					ConsiderSlicing(collision.gameObject);
 					return;
 				}
