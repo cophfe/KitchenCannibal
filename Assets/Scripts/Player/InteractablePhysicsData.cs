@@ -22,9 +22,6 @@ public class InteractablePhysicsData : MonoBehaviour
 	[field: SerializeField]
 	public float MoveToForceModifier { get; private set; } = 0.5f;
 
-	public HandManager CurrentlyInteractingHand { get; set; } = null;
-	public HandManager QueuedHand { get; set; } = null;
-
 	public Rigidbody InteractableBody { get; private set; }
 	private void Awake()
 	{
