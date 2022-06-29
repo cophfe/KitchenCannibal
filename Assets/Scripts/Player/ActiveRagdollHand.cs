@@ -288,7 +288,7 @@ public class ActiveRagdollHand : MonoBehaviour
 			if (!float.IsNaN(angularVelocity.x))
 			{
 				palm.followBody.angularVelocity += angularVelocity * palmOrientStrength;
-				Debug.Log(palm.followBody.angularVelocity);
+				//Debug.Log(palm.followBody.angularVelocity);
 
 				//for (int i = 0; i < dynamicBodies.Length; i++)
 				//{
