@@ -3811,6 +3811,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.0000007785857
       objectReference: {fileID: 0}
+    - target: {fileID: 3782065705450337141, guid: efacf9bdb2fef3845acd9e95cad473e3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 5561349426305759274, guid: 68030e623b7392f4ebe6ffb797f073a0, type: 3}
     - target: {fileID: 3847796565562065352, guid: efacf9bdb2fef3845acd9e95cad473e3, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: -0.07056242

@@ -391,22 +391,24 @@ public class HandManager : MonoBehaviour
 
 	void AttachToInteractable()
 	{
-		//at this point, hijack the grab if it is a piece of a selectable
-		var sliceable = GetComponent<Sliceable>();
-		if (sliceable && sliceable.TimesSliced > 0)
-		{
-			//teleport parent slicable to slice piece position
-			//set grabbed interactable to parent interactable
-			//disable grab interactable on sliceable and on hover suck slices towards this like they are being selected 
-			//also disable all of their collision with everything
-
-			//Rigidbody.detectCollisions = false;
-
-			Debug.Log("Picking up slice piece");
-		}
+		
 
 		if (grabbedInteractable.physicsData)
 		{
+			//at this point, hijack the grab if it is a piece of a selectable
+			var sliceable = grabbedInteractable.physicsData.GetComponent<Sliceable>();
+			if (sliceable && sliceable.TimesSliced > 0)
+			{
+				//teleport parent slicable to slice piece position
+				//set grabbed interactable to parent interactable
+				//disable grab interactable on sliceable and on hover suck slices towards this like they are being selected 
+				//also disable all of their collision with everything
+
+				//Rigidbody.detectCollisions = false;
+
+				Debug.Log("Picking up slice piece");
+			}
+
 			handJoint = PhysicsHand.gameObject.AddComponent<FixedJoint>();
 			handJoint.enablePreprocessing = false;
 			handJoint.connectedBody = grabbedInteractable.physicsData.InteractableBody;
