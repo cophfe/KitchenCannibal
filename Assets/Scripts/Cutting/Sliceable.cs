@@ -14,6 +14,7 @@ public class Sliceable : MonoBehaviour
 	public Transform SliceHolder { get; set; }
 
 	public Rigidbody AttachedRigidbody { get; set; }
+	public bool Held { get; set; } = false;
 
 	private void Start()
 	{

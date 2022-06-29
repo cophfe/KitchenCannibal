@@ -74,7 +74,7 @@ public class Slicer
 		//float2 | float3 | float4 uv3(8, 12 or 16 bytes)
 		//float2 | float3 | float4 uv4(8, 12 or 16 bytes)
 		//float4 tangent(16 bytes)
-		if (!sliceable)
+		if (!sliceable || sliceable.Held || !sliceable.enabled)
 			return null;
 
 		GameObject target = sliceable.gameObject;
@@ -364,7 +364,7 @@ public class Slicer
 				sliceableComponent.CanBeSliced = false;
 			}
 
-			var interactable = sliceableComponent.GetComponent<SliceGrabInteractable>();
+			var interactable = sliceableComponent.GetComponent<CustomGrabInteractable>();
 			if (interactable)
 			{
 				//these should only be selected by one hand at a time
