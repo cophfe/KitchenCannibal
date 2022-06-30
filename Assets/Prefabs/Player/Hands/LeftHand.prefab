@@ -62,11 +62,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b2622c1e9908848a7e733260983516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ControllerAnimator>k__BackingField: {fileID: 0}
+  <HandAnimator>k__BackingField: {fileID: 0}
+  <ControllerRenderer>k__BackingField: {fileID: 0}
+  <PhysicsHand>k__BackingField: {fileID: 0}
+  <Controller>k__BackingField: {fileID: 0}
+  teleporter: {fileID: 0}
+  interactor: {fileID: 0}
+  teleporterRenderer: {fileID: 0}
   handInfo: {fileID: 11400000, guid: a03f81601b474454fb2af29efa104016, type: 2}
-  controllerAnimator: {fileID: 0}
-  handAnimator: {fileID: 621780530791658322}
-  controllerRenderer: {fileID: 0}
-  target: {fileID: 0}
+  grabLayer: 
+  isLeftHand: 1
   grip:
     m_UseReference: 1
     m_Action:
@@ -227,6 +233,54 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 4421260953177710120, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  thumbstick:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 575758ba-e4e4-40fd-b28d-e0d53104b4b4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  teleportActivate:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 070be164-4c66-4a4a-9fde-4ff6be83f89c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  teleportCancel:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 92936c94-4196-4652-adeb-92e5266189fa
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  trackingState:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a2a6e2eb-f1b1-494a-be6c-d746c373b819
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!114 &4069875930768450587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  maxForce: 20
 --- !u!1001 &5180200113497771527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -444,10 +499,5 @@ PrefabInstance:
 --- !u!4 &2979651555985888915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7978722413372479636, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
-  m_PrefabInstance: {fileID: 5180200113497771527}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &621780530791658322 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5711345631926041941, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
   m_PrefabInstance: {fileID: 5180200113497771527}
   m_PrefabAsset: {fileID: 0}

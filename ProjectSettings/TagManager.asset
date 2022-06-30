@@ -9,18 +9,18 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - IgnorePlayerInteraction
   - Water
   - UI
   - LeftHand
   - Controller
   - RightHand
+  - Teleport Surface
+  - 
+  - Interactable
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - InteractableTravel
   - 
   - 
   - 

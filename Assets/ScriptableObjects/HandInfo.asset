@@ -12,17 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842443c07e17ccf44a1f85e695b29a37, type: 3}
   m_Name: HandInfo
   m_EditorClassIdentifier: 
+  <InteractableLayer>k__BackingField: Interactable
+  <InteractableTravellingLayer>k__BackingField: InteractableTravel
+  <MoveToInteractableDistance>k__BackingField: 0.004
+  <InteractableAttachAngle>k__BackingField: 3
+  <InteractableAttachDistance>k__BackingField: 0.0005
+  <TintStartDistance>k__BackingField: 0.25
+  <TintEndDistance>k__BackingField: 0.15
   <ControllerVisibleStart>k__BackingField: 0.1
   <ControllerVisibleRange>k__BackingField: 0.1
   <FingerSpeed>k__BackingField: 20
   <ThumbSpeed>k__BackingField: 15
   <PoseSpeed>k__BackingField: 20
   <InputThreshold>k__BackingField: 0.03
-  <PoseLayer>k__BackingField: 5
+  <PartHandPoseLayer>k__BackingField: 5
+  <FullHandPoseLayer>k__BackingField: 6
   <Poses>k__BackingField:
   - <Name>k__BackingField: OK
-    <PoseMask>k__BackingField: {fileID: 31900000, guid: 54b20bb5e8172ac44a29060670641d65, type: 2}
+    <isFullHandPose>k__BackingField: 0
     <SpeedModifier>k__BackingField: 1
   - <Name>k__BackingField: Finger Gun
-    <PoseMask>k__BackingField: {fileID: 31900000, guid: 54b20bb5e8172ac44a29060670641d65, type: 2}
-    <SpeedModifier>k__BackingField: 0.5
+    <isFullHandPose>k__BackingField: 0
+    <SpeedModifier>k__BackingField: 0.7
+  - <Name>k__BackingField: Grab
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Grab Knife
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Grab Ball
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Grab Handle
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1

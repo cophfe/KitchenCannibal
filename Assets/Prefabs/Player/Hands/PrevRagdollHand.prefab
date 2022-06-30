@@ -90,17 +90,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -292,17 +292,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -494,17 +494,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -606,17 +606,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -718,17 +718,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -830,17 +830,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -987,7 +987,7 @@ CapsuleCollider:
   m_Height: 0.034794778
   m_Direction: 0
   m_Center: {x: -0.016054703, y: 0.0013255052, z: 0.00058164814}
---- !u!1 &4684114579384960155
+--- !u!1 &5039750315851780034
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -995,8 +995,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1139377567214032284}
-  - component: {fileID: 2096043355845502902}
+  - component: {fileID: 9213032681217081407}
+  - component: {fileID: 8061591666574354633}
   m_Layer: 6
   m_Name: Joint Collider
   m_TagString: Untagged
@@ -1004,34 +1004,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1139377567214032284
+--- !u!4 &9213032681217081407
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4684114579384960155}
+  m_GameObject: {fileID: 5039750315851780034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5381853856628475833}
+  m_Father: {fileID: 8836879707190386688}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2096043355845502902
+--- !u!136 &8061591666574354633
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4684114579384960155}
+  m_GameObject: {fileID: 5039750315851780034}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.0069320058
-  m_Height: 0.024955802
+  m_Radius: 0.009351783
+  m_Height: 0.0423035
   m_Direction: 0
-  m_Center: {x: -0.013713499, y: 0.0017917984, z: 0.0005816236}
+  m_Center: {x: -0.021017969, y: 0.0019091471, z: 0.0005816409}
 --- !u!54 &1811496528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1122,17 +1122,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -1234,17 +1234,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -1346,17 +1346,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -1458,17 +1458,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -1570,17 +1570,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -1665,7 +1665,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8836879707190386688}
+  m_Father: {fileID: 5381853856628475833}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1671836815310450001
@@ -1678,10 +1678,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.009351783
-  m_Height: 0.0423035
+  m_Radius: 0.0069320058
+  m_Height: 0.024955802
   m_Direction: 0
-  m_Center: {x: -0.021017969, y: 0.0019091471, z: 0.0005816409}
+  m_Center: {x: -0.013713499, y: 0.0017917984, z: 0.0005816236}
 --- !u!54 &215447694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1772,17 +1772,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -1867,20 +1867,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf57c10765217e418615c9b1eaa1184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHandModel: {fileID: 0}
-  maxRotationalForce: 1000
-  maxForce: 1000
+  <TargetHandModel>k__BackingField: {fileID: 0}
+  fingerSettings:
+    maxRotationalForce: 100
+    maxForce: 100
+    angularDrag: 2
+    drag: 10
+    maxAngularVelocity: 500
+    maxDistanceInfluence: 0.5
+    maxAngleInfluence: 20
+    rotationalStrength: 2
+    linearStrength: 30
+    rotationalStrengthChange: 0.002
+    linearStrengthChange: 0.04
+  palmSettings:
+    maxRotationalForce: 1000
+    maxForce: 1000
+    angularDrag: 2
+    drag: 10
+    maxAngularVelocity: 1000
+    maxDistanceInfluence: 0.5
+    maxAngleInfluence: 20
+    rotationalStrength: 2
+    linearStrength: 30
+    rotationalStrengthChange: 0.002
+    linearStrengthChange: 0.04
   maxJointRotationalForce: 1000
+  maxJointForce: 3.402823e+38
   jointDamping: 0.5
-  drag: 0.5
-  angularDrag: 50
-  maxAngularVelocity: 1000
-  maxWorldDistance: 1
-  maxWorldAngle: 20
-  rotationalStrength: 0.3
-  linearStrength: 30
-  rotationalStrengthDerivitive: 0.005
-  linearStrengthDerivitive: 0.01
+  applyWorldForceToFingers: 1
+  applyWorldTorqueToFingers: 1
+  palmDamping: 1
+  palmOrientStrength: 1
 --- !u!1 &6225570818962900449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,17 +2034,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -2263,17 +2281,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -2375,17 +2393,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_AngularYZDrive:
     serializedVersion: 3
     positionSpring: 1000
     positionDamper: 50
-    maximumForce: 100
+    maximumForce: 3.402823e+38
   m_SlerpDrive:
     serializedVersion: 3
     positionSpring: 50000
     positionDamper: 50
-    maximumForce: 3000
+    maximumForce: 3.402823e+38
   m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -2554,7 +2572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7978722413372479636, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.839
+      value: 1.108
       objectReference: {fileID: 0}
     - target: {fileID: 7978722413372479636, guid: 3b7f08b5dc127b0479ce5f54e613e97f, type: 3}
       propertyPath: m_LocalRotation.w
