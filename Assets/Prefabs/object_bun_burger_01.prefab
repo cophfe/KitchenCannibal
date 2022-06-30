@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8691318255231893389}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8591303053414941500}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 1834372004854339074}
   - component: {fileID: 1097107949825672017}
   - component: {fileID: 7266303503057465926}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: object_bun_burger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,6 +899,7 @@ MonoBehaviour:
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 3059873205943402640}
   <AllColliders>k__BackingField:
   - {fileID: 4900604622721201712}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 2
   <MoveToForceModifier>k__BackingField: 0.6
@@ -1011,6 +1012,7 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
   m_AttachTransform: {fileID: 8691318255231893389}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -1057,7 +1059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3059873205943402640}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

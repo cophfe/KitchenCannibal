@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5798181889907032958}
   - component: {fileID: 7591258565341782082}
   - component: {fileID: 1175128070661678559}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: object_torso_disembodied_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,10 +152,12 @@ MonoBehaviour:
   <AllColliders>k__BackingField:
   - {fileID: 4301956853699889300}
   - {fileID: 4372673910766569526}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 1
   <MoveToDistanceModifier>k__BackingField: 1
   <MoveToForceModifier>k__BackingField: 0.5
   <UniformAttachTransform>k__BackingField: 1
+  <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &7591258565341782082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +238,7 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
   m_AttachTransform: {fileID: 7769621066854891547}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -297,7 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8703070944512413428}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7769621066854891547}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3559259820324565159}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

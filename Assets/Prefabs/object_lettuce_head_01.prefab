@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6931674321896633092}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7635103981697377631}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 148365954306264366}
   - component: {fileID: 4252757073883059584}
   - component: {fileID: 467380457347833991}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: object_lettuce_head_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2356,6 +2356,7 @@ MonoBehaviour:
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 3791344401539853107}
   <AllColliders>k__BackingField:
   - {fileID: 3183438372802088205}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 3
   <MoveToForceModifier>k__BackingField: 0.5
@@ -2469,6 +2470,7 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
   m_AttachTransform: {fileID: 6931674321896633092}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -2529,7 +2531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3791344401539853107}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -8023489966805862752}
   - component: {fileID: 1630634299838218216}
   - component: {fileID: 8927043831647289087}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: object_tomato_single_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2295,6 +2295,7 @@ MonoBehaviour:
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 4540967235696121961}
   <AllColliders>k__BackingField:
   - {fileID: 8484855958014910046}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 3
   <MoveToForceModifier>k__BackingField: 0.7
@@ -2393,6 +2394,7 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
   m_AttachTransform: {fileID: 4439124908440057100}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -2454,7 +2456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4439124908440057100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2484,7 +2486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4933968119965213684}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,7 +2516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4540967235696121961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

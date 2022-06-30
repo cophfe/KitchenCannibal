@@ -88,6 +88,9 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -2302099879109586195, guid: 0051576b947e73d4a9db49182af54463, type: 3}
+  OnLocomote:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &403432564626534477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,8 +1554,8 @@ LineRenderer:
         inWeight: 0
         outWeight: 0.28471756
       - serializedVersion: 3
-        time: 0.13294174
-        value: 0.98637766
+        time: 0.2246852
+        value: 0.9115333
         inSlope: 0.28220874
         outSlope: 0.28220874
         tangentMode: 0
@@ -1560,7 +1563,7 @@ LineRenderer:
         inWeight: 0.7627446
         outWeight: 0.2626016
       - serializedVersion: 3
-        time: 0.295865
+        time: 0.5836076
         value: 0.99815476
         inSlope: -0.0009575709
         outSlope: -0.0009575709
@@ -1570,12 +1573,12 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.0006468
-        value: 0.0010135472
-        inSlope: -0.263703
-        outSlope: -0.263703
+        value: 0.84926105
+        inSlope: -0.48553175
+        outSlope: -0.48553175
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.2584794
+        inWeight: 0.4599738
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -2295,8 +2298,8 @@ LineRenderer:
         inWeight: 0
         outWeight: 0.28471756
       - serializedVersion: 3
-        time: 0.13294174
-        value: 0.98637766
+        time: 0.2246852
+        value: 0.9115333
         inSlope: 0.28220874
         outSlope: 0.28220874
         tangentMode: 0
@@ -2304,7 +2307,7 @@ LineRenderer:
         inWeight: 0.7627446
         outWeight: 0.2626016
       - serializedVersion: 3
-        time: 0.295865
+        time: 0.5836076
         value: 0.99815476
         inSlope: -0.0009575709
         outSlope: -0.0009575709
@@ -2314,12 +2317,12 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.0006468
-        value: 0.0010135472
-        inSlope: -0.263703
-        outSlope: -0.263703
+        value: 0.84926105
+        inSlope: -0.48553175
+        outSlope: -0.48553175
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.2584794
+        inWeight: 0.4599738
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

@@ -254,6 +254,32 @@ public class HandManager : MonoBehaviour
 		palmForceStrength = palmSet;
 		fingerForceStrength = fingerSet;
 		palmOrientStrength = PhysicsHand.PalmOrientStrength;
+
+		PlayerController.Locomotor.beginLocomotion += OnLocomote;
+		PlayerController.Locomotor.endLocomotion += OnLocomoteEnd;
+	}
+
+	private void OnLocomote(LocomotionSystem obj)
+	{
+		if (grabState != GrabState.NotGrabbing && grabbedInteractable.interactable != null)
+		{
+			//this will not work with sliced obj but whatever
+			if (((XRBaseInteractable)grabbedInteractable.interactable) is CustomGrabInteractable)
+			{
+				if ((grabbedInteractable.interactable as CustomGrabInteractable).DropOnLocomote)
+				{
+					interactor.OnSelectForceExit(grabbedInteractable.interactable);
+				}
+			}
+		}
+	}
+
+	private void OnLocomoteEnd(LocomotionSystem obj)
+	{
+		var pD = PhysicsHand.GetPalmData();
+
+		Transform t = PhysicsHand.GetPalmTarget();
+		pD.followTransform.SetPositionAndRotation(t.position, t.rotation);
 	}
 
 	#region Grab
@@ -948,18 +974,27 @@ public class HandManager : MonoBehaviour
 		//highlighting
 		if (!interactor.hasSelection)
 		{
-			var t= interactor.GetClosesetValidTarget(out float dSq);
+			var t= interactor.Get2ClosestValidTargets(out float dSq1, out float dSq2);
+			float d = dSq1;
 
-			if (t != null && ((XRBaseInteractable)t).IsSelectableBy((IXRSelectInteractor)interactor))
+			//if first is not selectable, instead select second
+			for (int i = 0; i < 2; i++)
 			{
-				var tintComponent = t.transform.GetComponent<TintInteractable>();
-				if (tintComponent != null)
+				if (t[i] != null && ((XRBaseInteractable)t[i]).IsSelectableBy((IXRSelectInteractor)interactor))
 				{
-					dSq = Mathf.Sqrt(dSq);
-					float percent = 1.0f - Mathf.Clamp01((dSq - handInfo.TintEndDistance) / (handInfo.TintStartDistance - handInfo.TintEndDistance));
-					tintComponent.RequestTint(percent);
+					var tintComponent = t[i].transform.GetComponent<TintInteractable>();
+					if (tintComponent != null)
+					{
+						d = Mathf.Sqrt(d);
+						float percent = 1.0f - Mathf.Clamp01((d - handInfo.TintEndDistance) / (handInfo.TintStartDistance - handInfo.TintEndDistance));
+						tintComponent.RequestTint(percent);
+					}
+					break;
 				}
+
+				d = dSq2;
 			}
+			
 		}
 		else
 		{
