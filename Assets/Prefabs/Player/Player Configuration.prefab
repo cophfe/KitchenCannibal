@@ -1219,7 +1219,7 @@ MonoBehaviour:
   teleporterRenderer: {fileID: 4480846438586116096}
   handInfo: {fileID: 11400000, guid: a03f81601b474454fb2af29efa104016, type: 2}
   grabLayer: RightHand
-  isLeftHand: 0
+  <IsLeftHand>k__BackingField: 0
   grip:
     m_UseReference: 1
     m_Action:
@@ -1923,7 +1923,7 @@ MonoBehaviour:
   teleporterRenderer: {fileID: 846249543}
   handInfo: {fileID: 11400000, guid: a03f81601b474454fb2af29efa104016, type: 2}
   grabLayer: LeftHand
-  isLeftHand: 1
+  <IsLeftHand>k__BackingField: 1
   grip:
     m_UseReference: 1
     m_Action:

@@ -42,7 +42,7 @@ public class MeatGrinder : MonoBehaviour
 	{
 		if ((1 << other.gameObject.layer & grindableLayers.value) != 0)
 		{
-			Debug.Log(other.attachedRigidbody + "ENTERED");
+			//Debug.Log(other.attachedRigidbody + "ENTERED");
 
 			var grindable = other.attachedRigidbody.GetComponentInParent<Grindable>();
 			if (grindable)
@@ -64,7 +64,7 @@ public class MeatGrinder : MonoBehaviour
 					grindable.RecordedColliders++;
 				}
 				
-				Debug.Log("entering: " + grindable.RecordedColliders);
+				//Debug.Log("entering: " + grindable.RecordedColliders);
 
 			}
 		}
@@ -90,7 +90,7 @@ public class MeatGrinder : MonoBehaviour
 					}
 				}
 
-				Debug.Log("exiting: " + grindable.RecordedColliders);
+				//Debug.Log("exiting: " + grindable.RecordedColliders);
 			}
 		}
 	}

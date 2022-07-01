@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class DirectInteractor : XRDirectInteractor
+public class HandInteractor : XRDirectInteractor
 {
 	public System.Action<Collider> onTriggerEnter;
+
+	public HandManager AttachedManager { get; set;}
 
 	new private void OnTriggerEnter(Collider other)
 	{

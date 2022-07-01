@@ -7,16 +7,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEditor;
 #endif
 
-//i need to change literally ONE thing from xrgrabinteractablw
-//but since almost everything isn't overrideable or is private it is pretty asking me to copy the entire class over in order to change one tiny thing
-//I regret using the xr toolkit so much, why does aie tell us to use it
-
+//slightly modified XRGrabInteractable
 [SelectionBase]
 [DisallowMultipleComponent]
 [CanSelectMultiple(false)]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(InteractablePhysicsData))]
 [AddComponentMenu("XR/Custom Grab Interactable", 11)]
-[HelpURL("https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.0/api/UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable.html")]
 public class CustomGrabInteractable : XRBaseInteractable
 {
 	[field: SerializeField]
@@ -71,17 +68,17 @@ public class CustomGrabInteractable : XRBaseInteractable
 		return interactorAttachTransform.rotation * m_InteractorLocalRotation;
 	}
 
-	const float k_DefaultTighteningAmount = 0.5f;
-	const float k_DefaultSmoothingAmount = 5f;
-	const float k_VelocityDamping = 1f;
-	const float k_VelocityScale = 1f;
-	const float k_AngularVelocityDamping = 1f;
-	const float k_AngularVelocityScale = 1f;
-	const int k_ThrowSmoothingFrameCount = 20;
-	const float k_DefaultAttachEaseInTime = 0.15f;
-	const float k_DefaultThrowSmoothingDuration = 0.25f;
-	const float k_DefaultThrowVelocityScale = 1.5f;
-	const float k_DefaultThrowAngularVelocityScale = 1f;
+	protected const float k_DefaultTighteningAmount = 0.5f;
+	protected const float k_DefaultSmoothingAmount = 5f;
+	protected const float k_VelocityDamping = 1f;
+	protected const float k_VelocityScale = 1f;
+	protected const float k_AngularVelocityDamping = 1f;
+	protected const float k_AngularVelocityScale = 1f;
+	protected const int k_ThrowSmoothingFrameCount = 20;
+	protected const float k_DefaultAttachEaseInTime = 0.15f;
+	protected const float k_DefaultThrowSmoothingDuration = 0.25f;
+	protected const float k_DefaultThrowVelocityScale = 1.5f;
+	protected const float k_DefaultThrowAngularVelocityScale = 1f;
 
 	/// <summary>
 	/// Controls the method used when calculating the target position of the object.
@@ -106,7 +103,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	Transform m_AttachTransform;
+	protected Transform m_AttachTransform;
 
 	/// <summary>
 	/// The attachment point Unity uses on this Interactable (will use this object's position if none set).
@@ -118,7 +115,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_AttachEaseInTime = k_DefaultAttachEaseInTime;
+	protected float m_AttachEaseInTime = k_DefaultAttachEaseInTime;
 
 	/// <summary>
 	/// Time in seconds Unity eases in the attach when selected (a value of 0 indicates no easing).
@@ -130,7 +127,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	MovementType m_MovementType = MovementType.VelocityTracking;
+	protected MovementType m_MovementType = MovementType.VelocityTracking;
 
 	/// <summary>
 	/// Specifies how this object moves when selected, either through setting the velocity of the <see cref="Rigidbody"/>,
@@ -654,7 +651,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		}
 	}
 
-	protected void PerformVelocityTrackingUpdate(float timeDelta, XRInteractionUpdateOrder.UpdatePhase updatePhase)
+	virtual protected void PerformVelocityTrackingUpdate(float timeDelta, XRInteractionUpdateOrder.UpdatePhase updatePhase)
 	{
 		if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Fixed)
 		{

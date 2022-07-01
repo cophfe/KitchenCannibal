@@ -23,39 +23,56 @@ public class HandManager : MonoBehaviour
 	[SerializeField]
 	XRRayInteractor teleporter = null;
 	[SerializeField]
-	DirectInteractor interactor = null;
+	HandInteractor interactor = null;
 	[SerializeField]
 	LineRenderer teleporterRenderer = null;
 
 	[Header("Values")]
-	[SerializeField] HandInfo handInfo = null;
-	[SerializeField] string grabLayer = "";
-	[SerializeField] bool isLeftHand = true;
+	[SerializeField] 
+	HandInfo handInfo = null;
+	[SerializeField] 
+	string grabLayer = "";
+	[field: SerializeField]
+	public bool IsLeftHand { get; set; } = true;
 
 	[Header("Inputs")]
 	//for hand and controller
-	[SerializeField] InputActionProperty grip;
-	[SerializeField] InputActionProperty trigger;
+	[SerializeField] 
+	InputActionProperty grip;
+	[SerializeField] 
+	InputActionProperty trigger;
 
 	//for controller
-	[SerializeField] InputActionProperty button1;
-	[SerializeField] InputActionProperty button2;
-	[SerializeField] InputActionProperty joystick;
+	[SerializeField] 
+	InputActionProperty button1;
+	[SerializeField] 
+	InputActionProperty button2;
+	[SerializeField] 
+	InputActionProperty joystick;
 
 	//for hand
-	[SerializeField] InputActionProperty button1Touched;
-	[SerializeField] InputActionProperty button2Touched;
-	[SerializeField] InputActionProperty joystickTouched;
-	[SerializeField] InputActionProperty triggerTouched;
-	[SerializeField] InputActionProperty gripTouched;
+	[SerializeField] 
+	InputActionProperty button1Touched;
+	[SerializeField] 
+	InputActionProperty button2Touched;
+	[SerializeField] 
+	InputActionProperty joystickTouched;
+	[SerializeField] 
+	InputActionProperty triggerTouched;
+	[SerializeField] 
+	InputActionProperty gripTouched;
 
 	//for teleport 
-	[SerializeField] InputActionProperty thumbstick;
-	[SerializeField] InputActionProperty teleportActivate;
-	[SerializeField] InputActionProperty teleportCancel;
+	[SerializeField] 
+	InputActionProperty thumbstick;
+	[SerializeField] 
+	InputActionProperty teleportActivate;
+	[SerializeField] 
+	InputActionProperty teleportCancel;
 
 	//for tracking fix
-	[SerializeField] InputActionProperty trackingState;
+	[SerializeField] 
+	InputActionProperty trackingState;
 
 	//controller also
 	int triggerID;
@@ -127,11 +144,13 @@ public class HandManager : MonoBehaviour
 	int interactableLayerIndex;
 	int interactableTravelLayerIndex;
 	int grabLayerIndex;
+	int ignoreBothHandsLayer;
 	//hand force data (for resetting after slowing)
 	float palmOrientStrength;
 	float palmForceStrength;
 	float fingerForceStrength;
 
+	bool twoHandedGrab;
 	bool disableSelectingSlice;
 	Sliceable selectingSlice;
 	Transform sliceAttach;
@@ -237,6 +256,7 @@ public class HandManager : MonoBehaviour
 		PhysicsHand.Teleport(target.position, target.rotation);
 
 		//interaction stuff
+		interactor.AttachedManager = this;
 		interactor.selectEntered.AddListener(OnGrabObject);
 		interactor.selectExited.AddListener(OnDropObject);
 		interactor.hoverEntered.AddListener(OnHoverObject);
@@ -245,6 +265,7 @@ public class HandManager : MonoBehaviour
 		grabLayerIndex = LayerMask.NameToLayer(grabLayer);
 		interactableLayerIndex = LayerMask.NameToLayer(handInfo.InteractableLayer);
 		interactableTravelLayerIndex = LayerMask.NameToLayer(handInfo.InteractableTravellingLayer);
+		ignoreBothHandsLayer = LayerMask.NameToLayer(handInfo.IgnoreHandsLayer);
 
 		physicsRenderer = PhysicsHand.GetComponentInChildren<SkinnedMeshRenderer>();
 		interactorColliders = new List<Collider>();
@@ -306,7 +327,7 @@ public class HandManager : MonoBehaviour
 
 					if (!physData.UniformAttachTransform && physData.PhysicsLeftHandAttachPoint && physData.PhysicsRightHandAttachPoint)
 					{
-						if (isLeftHand)
+						if (IsLeftHand)
 							interactable.GetAttachTransform(interactor).position = physData.PhysicsLeftHandAttachPoint.position;
 						else
 							interactable.GetAttachTransform(interactor).position = physData.PhysicsRightHandAttachPoint.position;
@@ -323,7 +344,12 @@ public class HandManager : MonoBehaviour
 
 		grabbedInteractable.interactable = args.interactableObject;
 		grabbedInteractable.physicsData = args.interactableObject.transform.GetComponent<InteractablePhysicsData>();
-		
+
+		//jank
+		twoHandedGrab = grabbedInteractable.interactable is TwoHandedGrabInteractable && grabbedInteractable.interactable.interactorsSelecting.Count == 2;
+		if (twoHandedGrab)
+			setLayer = ignoreBothHandsLayer;
+
 		if (grabbedInteractable.physicsData != null)
 		{
 			foreach (var collider in interactorColliders)
@@ -349,7 +375,7 @@ public class HandManager : MonoBehaviour
 
 			if (!grabbedInteractable.physicsData.UniformAttachTransform && grabbedInteractable.physicsData.PhysicsLeftHandAttachPoint && grabbedInteractable.physicsData.PhysicsRightHandAttachPoint)
 			{
-				if (isLeftHand)
+				if (IsLeftHand)
 					grabbedInteractable.interactable.GetAttachTransform(interactor).position = grabbedInteractable.physicsData.PhysicsLeftHandAttachPoint.position;
 				else
 					grabbedInteractable.interactable.GetAttachTransform(interactor).position = grabbedInteractable.physicsData.PhysicsRightHandAttachPoint.position;
@@ -411,6 +437,13 @@ public class HandManager : MonoBehaviour
 
 		}
 
+		bool twoHandedGrab = grabbedInteractable.interactable.isSelected;
+		if (!twoHandedGrab && this.twoHandedGrab)
+		{
+			//if was two hand grab and is no longer
+		}
+		this.twoHandedGrab = twoHandedGrab;
+
 		grabState = GrabState.NotGrabbing;
 
 		grabbedInteractable.physicsData = null;
@@ -448,8 +481,8 @@ public class HandManager : MonoBehaviour
 
 		overridePose = handInfo.FindPoseIndex(grabbedInteractable.physicsData.HandGrabPose);
 		FindFingersTarget();
-	
-		if (isLeftHand)
+
+		if (IsLeftHand)
 			PhysicsHand.SetPalmOverride(grabbedInteractable.physicsData.PhysicsLeftHandAttachPoint);
 		else
 			PhysicsHand.SetPalmOverride(grabbedInteractable.physicsData.PhysicsRightHandAttachPoint);
@@ -462,7 +495,7 @@ public class HandManager : MonoBehaviour
 		PhysicsHand.PalmSettings = palmSet;
 		PhysicsHand.PalmOrientStrength = grabbedInteractable.physicsData.MoveToForceModifier * palmOrientStrength;
 
-		if (!grabbedInteractable.physicsData.DoPhysicsInteractions)
+		if (!grabbedInteractable.physicsData.DoPhysicsInteractions && !twoHandedGrab)
 		{
 			var colliders = grabbedInteractable.physicsData.AllColliders;
 
@@ -1049,7 +1082,7 @@ public class HandManager : MonoBehaviour
 				break;
 			case GrabState.Grabbed:
 				{
-					
+					twoHandedGrab = grabbedInteractable.interactable.interactorsSelecting.Count == 2;
 				}
 				break;
 			case GrabState.NotGrabbing:
@@ -1059,10 +1092,11 @@ public class HandManager : MonoBehaviour
 					selectingSlice.gameObject.SetActive(false);
 					selectingSlice = null;
 				}
+
 				int len = interactorColliders.Count;
 				for (int i = 0; i < len; i++)
 				{
-					if (interactorColliders[i].gameObject.layer != grabLayerIndex)
+					if (!(interactorColliders[i].gameObject.layer == grabLayerIndex || interactorColliders[i].gameObject.layer == ignoreBothHandsLayer))
 					{
 						interactorColliders.RemoveAt(i);
 						i--;
@@ -1070,7 +1104,10 @@ public class HandManager : MonoBehaviour
 					}
 					else if (!physicsRenderer.bounds.Intersects(interactorColliders[i].bounds))
 					{
-						interactorColliders[i].gameObject.layer = interactableLayerIndex;
+						//will break a teensy tiny bit if pick up object while intersecting the two hand grab but its whatever
+
+						int setLayer = twoHandedGrab ? PlayerController.GetOppositeHand(this).grabLayerIndex : interactableLayerIndex;
+						interactorColliders[i].gameObject.layer = setLayer;
 						interactorColliders.RemoveAt(i);
 						i--;
 						len--;
