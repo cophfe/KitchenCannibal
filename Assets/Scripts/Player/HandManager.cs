@@ -435,14 +435,14 @@ public class HandManager : MonoBehaviour
 			PhysicsHand.FingerSettings = finSet;
 			PhysicsHand.PalmSettings = palmSet;
 
-		}
+			grabbedInteractable.physicsData.ResetAttachPosition();
 
-		bool twoHandedGrab = grabbedInteractable.interactable.isSelected;
-		if (!twoHandedGrab && this.twoHandedGrab)
-		{
-			//if was two hand grab and is no longer
 		}
-		this.twoHandedGrab = twoHandedGrab;
+		if (grabbedInteractable.interactable != null)
+		{
+			twoHandedGrab = args.interactableObject.isSelected;
+		}
+	
 
 		grabState = GrabState.NotGrabbing;
 
@@ -1096,7 +1096,7 @@ public class HandManager : MonoBehaviour
 				int len = interactorColliders.Count;
 				for (int i = 0; i < len; i++)
 				{
-					if (!(interactorColliders[i].gameObject.layer == grabLayerIndex || interactorColliders[i].gameObject.layer == ignoreBothHandsLayer))
+					if (interactorColliders[i] == null || !(interactorColliders[i].gameObject.layer == grabLayerIndex || interactorColliders[i].gameObject.layer == ignoreBothHandsLayer))
 					{
 						interactorColliders.RemoveAt(i);
 						i--;

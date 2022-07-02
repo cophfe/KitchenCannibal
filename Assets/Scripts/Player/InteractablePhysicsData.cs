@@ -33,14 +33,16 @@ public class InteractablePhysicsData : MonoBehaviour
 	//public Quaternion AttachRotation { get; private set; }
 
 	public Rigidbody InteractableBody { get; private set; }
+	public XRBaseInteractable Interactable { get; private set; }
+
 	private void Awake()
 	{
 		InteractableBody = GetComponent<Rigidbody>();
+		Interactable = GetComponent<XRBaseInteractable>();
 		
-		var inter = GetComponent<XRBaseInteractable>();
-		if (inter)
+		if (Interactable)
 		{
-			var t = inter.GetAttachTransform(null);
+			var t = Interactable.GetAttachTransform(null);
 			AttachPosition = t.localPosition;
 			//AttachRotation = t.localRotation;
 		}
@@ -51,6 +53,33 @@ public class InteractablePhysicsData : MonoBehaviour
 			{
 				Physics.IgnoreCollision(igCol, col);
 			}
+		}
+	}
+
+	public void SetAttachData(Transform attach, Transform lAttach, Transform rAttach)
+	{
+		if (Interactable)
+		{
+			if (attach)
+				Interactable.GetAttachTransform(null).SetPositionAndRotation(attach.position, attach.rotation);
+			if (PhysicsLeftHandAttachPoint && lAttach)
+				PhysicsLeftHandAttachPoint.SetPositionAndRotation(lAttach.position, lAttach.rotation);
+			if (PhysicsRightHandAttachPoint && rAttach)
+				PhysicsRightHandAttachPoint.SetPositionAndRotation(rAttach.position, rAttach.rotation);
+			
+		}
+	}
+
+	public void SetRestricted (bool isRestricted)
+	{
+		RestrictedMovement = isRestricted;
+	}
+
+	public void ResetAttachPosition()
+	{
+		if (Interactable && !(Interactable is TwoHandedGrabInteractable) && !UniformAttachTransform)
+		{
+			Interactable.GetAttachTransform(null).localPosition = AttachPosition;
 		}
 	}
 }

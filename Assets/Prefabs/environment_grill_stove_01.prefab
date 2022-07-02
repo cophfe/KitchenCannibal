@@ -378,6 +378,8 @@ MonoBehaviour:
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 0
   <DropOnLocomote>k__BackingField: 0
+  maxForceApplyDistance: 0.8
+  <HandDetectDistanceModifer>k__BackingField: 0.6
   m_AttachTransform: {fileID: 5834638745098934474}
   m_AttachEaseInTime: 0.4
   m_MovementType: 0
@@ -1024,6 +1026,8 @@ MonoBehaviour:
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 0
   <DropOnLocomote>k__BackingField: 0
+  maxForceApplyDistance: 0.8
+  <HandDetectDistanceModifer>k__BackingField: 0.6
   m_AttachTransform: {fileID: 5834638746902616760}
   m_AttachEaseInTime: 0.4
   m_MovementType: 0

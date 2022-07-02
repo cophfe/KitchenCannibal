@@ -449,8 +449,8 @@ GameObject:
   - component: {fileID: 1061594695}
   - component: {fileID: 1061594696}
   - component: {fileID: 1061594698}
-  - component: {fileID: 1061594699}
   - component: {fileID: 153188992}
+  - component: {fileID: 3723670023513655482}
   m_Layer: 0
   m_Name: object_knife_kitchen_01
   m_TagString: Untagged
@@ -608,7 +608,7 @@ MonoBehaviour:
   <MoveToForceModifier>k__BackingField: 0.5
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
---- !u!114 &1061594699
+--- !u!114 &153188992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -617,7 +617,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 907800442920264004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 08831cd945af58347a0214291927b0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_TintRenderers:
+  - {fileID: 1700631957787623569}
+--- !u!114 &3723670023513655482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907800442920264004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7ccba3611e2754d9e089e11d3b3501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -717,6 +732,11 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  <FirstInteractorTakesPriority>k__BackingField: 0
+  <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
+  maxForceApplyDistance: 1.4
+  <HandDetectDistanceModifer>k__BackingField: 0.8
   m_AttachTransform: {fileID: 547822503}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -754,18 +774,3 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &153188992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907800442920264004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08831cd945af58347a0214291927b0a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  m_TintRenderers:
-  - {fileID: 1700631957787623569}

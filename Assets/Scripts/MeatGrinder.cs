@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class MeatGrinder : MonoBehaviour
 {
@@ -12,12 +14,41 @@ public class MeatGrinder : MonoBehaviour
 	LayerMask grindableLayers;
 	[SerializeField]
 	Collider[] ignoreColliders;
+	[SerializeField]
+	HingeJoint handleJoint;
+	[SerializeField]
+	float angleToMeatSpeed = 1/360.0f;
+	[SerializeField]
+	//(or meat pool)
+	Rigidbody meatPrefab;
+	[SerializeField]
+	Rigidbody slowBody;
+	[SerializeField]
+	Transform meatStart;
+	[SerializeField]
+	Transform meatEnd;
+	[SerializeField]
+	float backwardsDampeningModifier = 10;
+	[SerializeField]
+	UnityEvent onMeatAdded;
+	[SerializeField]
+	UnityEvent onMeatProcessed;
 
 	List<Grindable> recordedGrindables;
 
+	float heldMeat = 0;
+	float processedMeat = 0;
+	float angle = 0;
+
+	float drag;
+	Rigidbody jointRb;
+	Rigidbody meat = null;
 	private void Start()
 	{
 		recordedGrindables = new List<Grindable>();
+		angle = handleJoint.angle;
+		jointRb = handleJoint.GetComponent<Rigidbody>();
+		drag = slowBody.drag;
 	}
 
 	private void OnEnable()
@@ -63,9 +94,6 @@ public class MeatGrinder : MonoBehaviour
 				{
 					grindable.RecordedColliders++;
 				}
-				
-				//Debug.Log("entering: " + grindable.RecordedColliders);
-
 			}
 		}
 	}
@@ -89,17 +117,101 @@ public class MeatGrinder : MonoBehaviour
 						}
 					}
 				}
-
-				//Debug.Log("exiting: " + grindable.RecordedColliders);
 			}
 		}
 	}
 
 	private void OnAddEnter(Collider other)
 	{
+		if ((1 << other.gameObject.layer & grindableLayers.value) != 0)
+		{
+			var grindable = other.attachedRigidbody.GetComponentInParent<Grindable>();
+			if (grindable && grindable.RecordedColliders > 0 && recordedGrindables.Contains(grindable))
+			{
+				grindable.RecordedColliders = 0;
+				recordedGrindables.Remove(grindable);
+
+				Process(grindable);
+			}
+		}
+	}
+
+	void Process(Grindable grindable)
+	{
+		onMeatAdded?.Invoke();
+		heldMeat += grindable.MeatValue;
+		Destroy(grindable.gameObject);
+		//(switch with return to pool, if do this will also need to undo ignore collision and reset transforms)
 	}
 
 	private void OnAddExit(Collider other)
 	{
+	}
+
+	private void FixedUpdate()
+	{
+		float currentAngle = handleJoint.angle;
+		float deltaAngle = Mathf.DeltaAngle(angle, currentAngle);
+
+		if (deltaAngle < 0)
+		{
+			slowBody.drag = drag * backwardsDampeningModifier;
+			//Debug.Log(angle + ": Moving backwards");
+		}
+		else
+		{
+			slowBody.drag = drag;
+			//Debug.Log(angle + ": Moving forwards");
+
+			if (heldMeat > 0 && heldMeat + processedMeat >= 0.98f)
+			{
+				float newHeld = Mathf.Max(0, heldMeat - deltaAngle * angleToMeatSpeed);
+				processedMeat += heldMeat - newHeld;
+				heldMeat = newHeld;
+
+				UpdateMeat();
+			}
+		}
+
+		
+
+		angle = currentAngle;
+	}
+
+	void UpdateMeat()
+	{
+		if (processedMeat >= 0.98f)
+		{
+			processedMeat %= 1;
+		
+			if (meat != null)
+			{
+				meat.position = meatEnd.position;
+				meat.rotation = meatEnd.rotation;
+
+				meat.isKinematic = false;
+				var interactable = meat.GetComponent<XRBaseInteractable>();
+				if (interactable != null)
+					interactable.enabled = true;
+				meat = null;
+			}
+		}
+		else if (processedMeat > 0)
+		{
+			if (meat == null)
+			{
+				meat = Instantiate(meatPrefab);
+				meat.isKinematic = true;
+				var interactable = meat.GetComponent<XRBaseInteractable>();
+				if (interactable != null)
+					interactable.enabled = false;
+				
+				onMeatProcessed?.Invoke();
+			}
+
+			meat.position = Vector3.Lerp(meatStart.position, meatEnd.position, processedMeat);
+			meat.rotation = Quaternion.Lerp(meatStart.rotation, meatEnd.rotation, processedMeat);
+		}
+		
 	}
 }

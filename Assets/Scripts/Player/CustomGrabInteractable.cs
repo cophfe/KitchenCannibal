@@ -23,9 +23,41 @@ public class CustomGrabInteractable : XRBaseInteractable
 	public bool DisableGravity { get; private set; } = true;
 	[field: SerializeField]
 	public bool DropOnLocomote { get; private set; } = false;
+	[SerializeField]
+	float maxForceApplyDistance = 0.8f;
+	[field: SerializeField]
+	public float HandDetectDistanceModifer { get; set; } = 1.0f;
 
 	protected Transform overrideTarget = null;
+	public bool EnableSelecting { get; set; } = true;
 
+	public override float GetDistanceSqrToInteractor(IXRInteractor interactor)
+	{
+		Transform transform = interactor?.GetAttachTransform(this);
+		if (transform == null)
+		{
+			return float.MaxValue;
+		}
+
+		Vector3 position = transform.position;
+		float num = float.MaxValue;
+		foreach (Collider collider in colliders)
+		{
+			if (!(collider == null) && collider.gameObject.activeInHierarchy && collider.enabled)
+			{
+				num = Mathf.Min((position - collider.transform.position).sqrMagnitude, num);
+			}
+		}
+
+		return num /( HandDetectDistanceModifer * HandDetectDistanceModifer);
+	}
+
+
+	public void ResetLocalPose()
+	{
+		if (isSelected)
+			UpdateInteractorLocalPose(interactorsSelecting[0]);
+	}
 	public void OverrideTargetPositionAndRotation(Transform target)
 	{
 		overrideTarget = target;
@@ -33,7 +65,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 
 	public override bool IsSelectableBy(IXRSelectInteractor interactor)
 	{
-		return !FirstInteractorTakesPriority || (!isSelected || interactorsSelecting[0] == interactor);
+		return EnableSelecting && (!FirstInteractorTakesPriority || (!isSelected || interactorsSelecting[0] == interactor));
 	}
 
 	/// <summary>
@@ -663,6 +695,8 @@ public class CustomGrabInteractable : XRBaseInteractable
 				var positionDelta = m_AttachPointCompatibilityMode == AttachPointCompatibilityMode.Default
 					? m_TargetWorldPosition - transform.position
 					: m_TargetWorldPosition - m_Rigidbody.worldCenterOfMass;
+
+				positionDelta = Vector3.ClampMagnitude(positionDelta, maxForceApplyDistance);
 				var velocity = positionDelta / timeDelta;
 
 				if (!float.IsNaN(velocity.x))
