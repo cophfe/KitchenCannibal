@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2406819424542408463}
-  m_LocalRotation: {x: 0.12692773, y: -0.10886609, z: -0.64186907, w: 0.7483593}
-  m_LocalPosition: {x: 0.0787, y: 0.0327, z: 0}
+  m_LocalRotation: {x: -0.05061009, y: -0.30637023, z: -0.6523382, w: 0.69139767}
+  m_LocalPosition: {x: 0.0703, y: 0.0085, z: 0.0341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2853203853420986883}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 2.879, y: -19.044, z: -81.722}
+  m_LocalEulerAnglesHint: {x: -28.015, y: -23.896, z: -80.626}
 --- !u!1 &2853203853420986892
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8858039127820706365}
   - component: {fileID: 7828199426754475886}
   - component: {fileID: 526345771091134073}
+  - component: {fileID: 4608410911141619444}
   m_Layer: 11
   m_Name: Meat
   m_TagString: Untagged
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Meat
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 1486360100716607235}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 5326692113062966447}
@@ -220,6 +221,7 @@ MonoBehaviour:
   <DisableGravity>k__BackingField: 1
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 1.4
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 1947577997141134258}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -257,6 +259,26 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+--- !u!114 &4608410911141619444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2853203853420986892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47087dbaf5078de43809c455308b98a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  processedAmount: 0
+  timeToCook: 5
+  ingredientAmount: 1
+  ingredientType: 0
+  burntColour: {r: 0.13207549, g: 0.07831072, b: 0.06541474, a: 1}
+  cookedColour: {r: 0.254717, g: 0.078097194, b: 0.09979341, a: 0}
+  renderer: {fileID: 3487647770414198779}
+  materialIndex: 0
 --- !u!1 &3603748075681617789
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,13 +302,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3603748075681617789}
-  m_LocalRotation: {x: 0.1269295, y: 0.108863614, z: 0.64186573, w: 0.74836224}
-  m_LocalPosition: {x: -0.0783, y: 0.0327, z: 0}
+  m_LocalRotation: {x: -0.05061511, y: 0.3063701, z: 0.6523355, w: 0.69139993}
+  m_LocalPosition: {x: -0.0703, y: 0.0085, z: 0.0341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2853203853420986883}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 2.879, y: 19.044, z: 81.722}
+  m_LocalEulerAnglesHint: {x: -28.015, y: 23.896, z: 80.626}
 --- !u!1 &7595497639590613694
 GameObject:
   m_ObjectHideFlags: 0

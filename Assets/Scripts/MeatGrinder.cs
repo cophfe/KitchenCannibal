@@ -41,13 +41,11 @@ public class MeatGrinder : MonoBehaviour
 	float angle = 0;
 
 	float drag;
-	Rigidbody jointRb;
 	Rigidbody meat = null;
 	private void Start()
 	{
 		recordedGrindables = new List<Grindable>();
 		angle = handleJoint.angle;
-		jointRb = handleJoint.GetComponent<Rigidbody>();
 		drag = slowBody.drag;
 	}
 
@@ -139,7 +137,7 @@ public class MeatGrinder : MonoBehaviour
 	void Process(Grindable grindable)
 	{
 		onMeatAdded?.Invoke();
-		heldMeat += grindable.MeatValue;
+		heldMeat += grindable.ingredientAmount;
 		Destroy(grindable.gameObject);
 		//(switch with return to pool, if do this will also need to undo ignore collision and reset transforms)
 	}
@@ -189,6 +187,7 @@ public class MeatGrinder : MonoBehaviour
 				meat.position = meatEnd.position;
 				meat.rotation = meatEnd.rotation;
 
+				meat.detectCollisions = true;
 				meat.isKinematic = false;
 				var interactable = meat.GetComponent<XRBaseInteractable>();
 				if (interactable != null)
@@ -201,6 +200,8 @@ public class MeatGrinder : MonoBehaviour
 			if (meat == null)
 			{
 				meat = Instantiate(meatPrefab);
+				//need to fix bug. this will cause other bug tho
+				meat.detectCollisions = false;
 				meat.isKinematic = true;
 				var interactable = meat.GetComponent<XRBaseInteractable>();
 				if (interactable != null)

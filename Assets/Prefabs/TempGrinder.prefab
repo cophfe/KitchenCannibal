@@ -567,13 +567,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893501690730341327}
-  m_LocalRotation: {x: -0.99896467, y: 0.009153813, z: -0.02311246, w: -0.03809987}
-  m_LocalPosition: {x: -0.842, y: -0.7, z: 0.13}
+  m_LocalRotation: {x: -0.9986092, y: 0.028177503, z: -0.023833886, w: -0.037652787}
+  m_LocalPosition: {x: -0.65, y: -0.62, z: 0.143}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6984184553249605586}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -184.39, y: -2.6140137, z: 0.94999695}
+  m_LocalEulerAnglesHint: {x: -184.39, y: -2.6140137, z: 3.1320038}
 --- !u!1 &1893501690854552187
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893501690854552187}
   m_LocalRotation: {x: -0.99896467, y: 0.009153813, z: -0.02311246, w: -0.03809987}
-  m_LocalPosition: {x: -0.69, y: -0.56, z: 0.13}
+  m_LocalPosition: {x: -0.5, y: -0.57, z: 0.148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6984184553249605586}
@@ -2624,7 +2624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Handle
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 1893501690730341326}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 1893501690854552186}

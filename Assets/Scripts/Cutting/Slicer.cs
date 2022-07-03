@@ -18,6 +18,7 @@ public class Slicer
 	List<Vector2>[] uvs = null;
 	List<ushort>[] tris = null;
 	List<Vector3>[] previousSliceVerts;
+	List<Vector3> intersections = new List<Vector3>();
 
 	public Slicer(float disallowCuttingVolume, float doNotCreateVolume, Material defaultSliceMaterial)
 	{
@@ -27,24 +28,25 @@ public class Slicer
 
 		previousSliceVerts = new List<Vector3>[2]
 		{
-			new List<Vector3>(),
-			new List<Vector3>()
+			new List<Vector3>(40),
+			new List<Vector3>(40)
 		};
 		verts = new List<Vector3>[2]
 		{
-			new List<Vector3>(),
-			new List<Vector3>()
+			new List<Vector3>(100),
+			new List<Vector3>(100)
 		};
 		uvs = new List<Vector2>[2]
 		{
-			new List<Vector2>(),
-			new List<Vector2>()
+			new List<Vector2>(100),
+			new List<Vector2>(100)
 		};
 		tris = new List<ushort>[2]
 		{
-			new List<ushort>(),
-			new List<ushort>()
+			new List<ushort>(300),
+			new List<ushort>(300)
 		};
+		intersections = new List<Vector3>(100);
 	}
 
 	static Vector3 GetIntersection(ref Vector3 p0, ref Vector3 p1, float d0, float d1)
@@ -89,8 +91,6 @@ public class Slicer
 
 		Mesh readMesh = mf1.sharedMesh;
 		
-
-		List<Vector3> intersections = null;
 		Vector3 planeNormal = target.transform.InverseTransformVector(worldPlaneNormal).normalized;
 		float origin = Vector3.Dot(target.transform.InverseTransformPoint(worldOrigin), planeNormal);
 		float[] volume = { 0, 0 };
@@ -127,8 +127,8 @@ public class Slicer
 
 			//also get tris
 			var triArray = data.GetIndexData<ushort>();
-			
-			intersections = new List<Vector3>(submesh.vertexCount / 2);
+
+			intersections.Clear(); 
 
 			CalculateSlices(submesh, verts, uvs, tris, intersections, vertexArray,
 				uvArray, triArray, planeNormal, origin, volume);
@@ -145,11 +145,8 @@ public class Slicer
 			}
 			else
 			{
-				previousSliceVerts = new List<Vector3>[2]
-				{
-					new List<Vector3>(0),
-					new List<Vector3>(0)
-				};
+				previousSliceVerts[0].Clear();
+				previousSliceVerts[1].Clear();
 			}
 			vertexArray.Dispose();
 			uvArray.Dispose();
@@ -343,13 +340,15 @@ public class Slicer
 					sliceable.SliceHolder = new GameObject(sliceable.name + " SliceHolder").transform;
 					sliceable.SliceHolder.parent = sliceable.transform.parent;
 					sliceable.SliceHolder.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-					//if this is the first sliceable, it is not destroyed, but it is disabled
-					//this is for a specific feature of the sliceable
+					//if first time sliced, process ingredient (turn from lettuce into sliced lettuce
+					if (sliceable.Ingredient)
+						sliceable.Ingredient.Process();
 
+					//if this is the first sliceable, it is not destroyed, but it is disabled
 					slice = GameObject.Instantiate(target, sliceable.SliceHolder);
 					slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
 					sliceableComponent = slice.GetComponent<Sliceable>();
-					//apparently non serialized values r not cloned (makes sense i guess)
+					//apparently non serialized values are not cloned (makes sense i guess)
 					sliceableComponent.ParentSliceable = sliceable.ParentSliceable;
 					sliceableComponent.SliceHolder = sliceable.SliceHolder;
 					sliceableComponent.CanBeSliced = sliceable.CanBeSliced;
@@ -383,6 +382,8 @@ public class Slicer
 			meshes[i].RecalculateNormals();
 			//meshes[i].RecalculateTangents();
 
+			float sliceVolumeRatio = ((1 - i) * volumeRatio + i * (1.0f - volumeRatio));
+
 			var mF = slice.GetComponent<MeshFilter>();
 			mF.sharedMesh = meshes[i];
 			var mC = slice.GetComponent<MeshCollider>();
@@ -392,9 +393,14 @@ public class Slicer
 			if (rb)
 			{
 				sliceableComponent.AttachedRigidbody = rb;
-				rb.mass = rb.mass * ((1-i) * volumeRatio + i * (1.0f - volumeRatio));
+				rb.mass = rb.mass * sliceVolumeRatio;
 			}
-
+			var ingredient = slice.GetComponent<Ingredient>();
+			if (ingredient)
+			{
+				sliceableComponent.Ingredient = ingredient;
+				ingredient.ingredientAmount *= sliceVolumeRatio;
+			}
 
 			list.Add(sliceableComponent);
 		}
@@ -403,9 +409,7 @@ public class Slicer
 		{
 			var mR = sliceable.GetComponent<MeshRenderer>();
 			if (mR)
-			{
 				mR.enabled = false;
-			}
 			sliceable.gameObject.SetActive(false);
 			sliceable.ParentSliceable = null;
 			sliceable.enabled = false;

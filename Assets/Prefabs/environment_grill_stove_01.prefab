@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Knob
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 5834638745722216113}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 5834638746749853911}
@@ -380,7 +380,7 @@ MonoBehaviour:
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 0.8
   <HandDetectDistanceModifer>k__BackingField: 0.6
-  m_AttachTransform: {fileID: 5834638745098934474}
+  m_AttachTransform: {fileID: 5834638746659560960}
   m_AttachEaseInTime: 0.4
   m_MovementType: 0
   m_VelocityDamping: 1
@@ -625,13 +625,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5834638745722216112}
-  m_LocalRotation: {x: -0.000000029802319, y: -0, z: -0.48652798, w: 0.873665}
-  m_LocalPosition: {x: 0.0274, y: -0.0164, z: 0}
+  m_LocalRotation: {x: 0.22596906, y: -0.33913872, z: -0.5312556, w: 0.7427587}
+  m_LocalPosition: {x: 0.0095, y: -0.0178, z: 0.0473}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5834638745098934474}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -58.225}
+  m_LocalEulerAnglesHint: {x: -1.413, y: -48.083, z: -70.518}
 --- !u!1 &5834638745783924225
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,13 +655,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5834638745783924225}
-  m_LocalRotation: {x: -0.000000029802319, y: -0, z: -0.48652798, w: 0.873665}
-  m_LocalPosition: {x: 0.0274, y: -0.0164, z: 0}
+  m_LocalRotation: {x: 0.22596906, y: -0.33913872, z: -0.5312556, w: 0.7427587}
+  m_LocalPosition: {x: 0.0095, y: -0.0178, z: 0.0473}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5834638746902616760}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -58.225}
+  m_LocalEulerAnglesHint: {x: -1.413, y: -48.083, z: -70.518}
 --- !u!1 &5834638746320604190
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,13 +803,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5834638746749853910}
-  m_LocalRotation: {x: 0, y: 0, z: 0.48652595, w: 0.8736661}
-  m_LocalPosition: {x: -0.0274, y: -0.0164, z: 0}
+  m_LocalRotation: {x: 0.23058993, y: 0.41407537, z: 0.42841092, w: 0.76930743}
+  m_LocalPosition: {x: -0.006, y: -0.0164, z: 0.0533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5834638745098934474}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 58.225}
+  m_LocalEulerAnglesHint: {x: 0, y: 56.582, z: 58.225}
 --- !u!1 &5834638746902616763
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Knob
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 5834638745783924238}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 5834638747204976617}
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 0.8
   <HandDetectDistanceModifer>k__BackingField: 0.6
-  m_AttachTransform: {fileID: 5834638746902616760}
+  m_AttachTransform: {fileID: 5834638745151554060}
   m_AttachEaseInTime: 0.4
   m_MovementType: 0
   m_VelocityDamping: 1
@@ -1111,13 +1111,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5834638747204976616}
-  m_LocalRotation: {x: 0, y: 0, z: 0.48652595, w: 0.8736661}
-  m_LocalPosition: {x: -0.0274, y: -0.0164, z: 0}
+  m_LocalRotation: {x: 0.23058993, y: 0.41407537, z: 0.42841092, w: 0.76930743}
+  m_LocalPosition: {x: -0.006, y: -0.0164, z: 0.0533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5834638746902616760}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 58.225}
+  m_LocalEulerAnglesHint: {x: 0, y: 56.582, z: 58.225}
 --- !u!1 &8249473063121629901
 GameObject:
   m_ObjectHideFlags: 0

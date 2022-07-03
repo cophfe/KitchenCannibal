@@ -9,12 +9,12 @@ public class RotationDetector : MonoBehaviour
 	[SerializeField]
 	float rotationAmount;
 
-	[SerializeField]
-	UnityEvent onRotated;
-	[SerializeField]
-	UnityEvent onStopRotated;
-	[SerializeField]
-	UnityEvent whileRotated;
+	[field: SerializeField]
+	public UnityEvent OnRotated {  get; private set; }
+	[field: SerializeField]
+	public UnityEvent OnStopRotated { get; private set; }
+	[field: SerializeField]
+	public UnityEvent WhileRotated { get; private set; }
 
 	bool rotated = false;
 
@@ -45,19 +45,19 @@ public class RotationDetector : MonoBehaviour
 		//if is rotated and was previously rotated
 		if (isRotated && rotated)
 		{
-			whileRotated?.Invoke();
+			WhileRotated?.Invoke();
 		}
 		//if is rotated and wasn't previously rotated
 		else if (isRotated)
 		{
-			onRotated?.Invoke();
-			whileRotated?.Invoke();
+			OnRotated?.Invoke();
+			WhileRotated?.Invoke();
 			rotated = true;
 		}
 		//if is previously rotated and is no longer rotated
 		else if (rotated)
 		{
-			onStopRotated?.Invoke();
+			OnStopRotated?.Invoke();
 			rotated = false;
 		}
 	}

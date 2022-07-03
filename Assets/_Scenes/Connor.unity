@@ -3027,18 +3027,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 667646906}
     m_Modifications:
-    - target: {fileID: 1061594696, guid: b16238034d9600f4c97d0fa48a9bcb0e, type: 3}
-      propertyPath: deleteSliceableVolume
-      value: 0.000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061594696, guid: b16238034d9600f4c97d0fa48a9bcb0e, type: 3}
-      propertyPath: noLongerSliceableVolume
-      value: 0.00002
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061594699, guid: b16238034d9600f4c97d0fa48a9bcb0e, type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 361843289}
     - target: {fileID: 563784611419929598, guid: b16238034d9600f4c97d0fa48a9bcb0e, type: 3}
       propertyPath: m_RootOrder
       value: 8

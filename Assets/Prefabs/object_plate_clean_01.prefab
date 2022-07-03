@@ -832,7 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Plate
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 9108543584490924918}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 8774186471929530755}
@@ -940,7 +940,7 @@ MonoBehaviour:
   <DisableGravity>k__BackingField: 1
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 0.8
-  handDetectionModifer: 1
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 3929732184985253023}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -1031,13 +1031,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778403567723222685}
-  m_LocalRotation: {x: 0.011492, y: 0.019904725, z: 0.49986795, w: 0.86579657}
-  m_LocalPosition: {x: -0.2432, y: 0, z: -0.0013}
+  m_LocalRotation: {x: -0.1244836, y: 0.16737683, z: 0.66808385, w: 0.71424985}
+  m_LocalPosition: {x: -0.2427, y: -0.0098, z: 0.0032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1527839629992976650}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 2.634, z: 60}
+  m_LocalEulerAnglesHint: {x: -23.67, y: 4.557, z: 85.219}
 --- !u!1 &4795009028245957555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,10 +1061,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4795009028245957555}
-  m_LocalRotation: {x: 0.011491201, y: -0.019903436, z: -0.49986744, w: 0.8657969}
-  m_LocalPosition: {x: 0.0068, y: 0, z: -0.0013}
+  m_LocalRotation: {x: -0.124485455, y: -0.16737834, z: -0.6680847, w: 0.7142484}
+  m_LocalPosition: {x: 0.0073, y: -0.0098, z: 0.0032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1527839629992976650}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -2.634, z: -60}
+  m_LocalEulerAnglesHint: {x: -23.67, y: -4.557, z: -85.219}

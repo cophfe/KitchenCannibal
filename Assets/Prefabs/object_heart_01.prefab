@@ -53,13 +53,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672543332948666827}
-  m_LocalRotation: {x: -0.004371383, y: 0.13181111, z: 0.4660579, w: 0.8748696}
-  m_LocalPosition: {x: -0.0667, y: -0.0061, z: -0.0207}
+  m_LocalRotation: {x: -0.044631287, y: 0.093460746, z: 0.56836206, w: 0.8162339}
+  m_LocalPosition: {x: -0.0587, y: -0.0245, z: 0.0011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6003711173500435903}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -7.499, y: 13.21, z: 55.22}
+  m_LocalEulerAnglesHint: {x: -10.317, y: 5.941, z: 69.164}
 --- !u!1 &2929608033738727341
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,13 +83,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2929608033738727341}
-  m_LocalRotation: {x: -0, y: -0, z: -0.86229545, w: 0.5064056}
-  m_LocalPosition: {x: 0.0528, y: -0.0582, z: -0.0152}
+  m_LocalRotation: {x: 0.06276547, y: -0.13335702, z: -0.8949129, w: 0.42119744}
+  m_LocalPosition: {x: 0.0495, y: -0.0564, z: 0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6003711173500435903}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -119.151}
+  m_LocalEulerAnglesHint: {x: -10.709, y: -13.218, z: -128.347}
 --- !u!1 &7396289408325618050
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   <DisableGravity>k__BackingField: 1
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 1.4
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 5299185031366787908}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Heart
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 2483071016745193847}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 1201407196838756215}
@@ -352,7 +353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b768c96b76e7b4c989dc25a1df195e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MeatValue>k__BackingField: 0.5
+  processedAmount: 0
+  timeToCook: 5
+  ingredientAmount: 0.5
+  ingredientType: 2
   <GrindColliders>k__BackingField: []
 --- !u!114 &8911745231473847070
 MonoBehaviour:

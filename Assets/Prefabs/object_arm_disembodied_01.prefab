@@ -109,13 +109,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188761090020251117}
-  m_LocalRotation: {x: 0.57673407, y: 0.0000001369044, z: 0.000000054948025, w: 0.81693196}
-  m_LocalPosition: {x: -0.123, y: 0.0002, z: -0}
+  m_LocalRotation: {x: 0.07995583, y: -0.08780106, z: -0.9913184, w: -0.056443557}
+  m_LocalPosition: {x: -0.0969, y: -0.0202, z: -0.0043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7963083955000675350}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 70.442, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.551, y: -8.695, z: -185.713}
 --- !u!1 &796817298476371666
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,13 +281,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049557529319961485}
-  m_LocalRotation: {x: -0.010550956, y: -0.96638083, z: 0.2568984, w: 0.00023922508}
-  m_LocalPosition: {x: -0.071, y: 0.0436, z: -0.0169}
+  m_LocalRotation: {x: -0.010496774, y: -0.9910778, z: 0.13286677, w: -0.0010944195}
+  m_LocalPosition: {x: -0.0712, y: 0.0342, z: -0.0143}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6161947608896030082}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 29.77, y: -179.612, z: 1.354}
+  m_LocalEulerAnglesHint: {x: 15.271, y: -179.963, z: 1.219}
 --- !u!1 &1080502254919804001
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Bone
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 6859596558176742329}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 7073567018453935206}
@@ -694,6 +694,7 @@ MonoBehaviour:
   <DisableGravity>k__BackingField: 1
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 1.4
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 1615631483670160896}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -1038,13 +1039,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3358747100046425970}
-  m_LocalRotation: {x: 0.57673407, y: 0.0000001369044, z: 0.000000054948025, w: 0.81693196}
-  m_LocalPosition: {x: -0.12300006, y: 0.00019999393, z: -0.000000007858034}
+  m_LocalRotation: {x: 0.09225854, y: -0.06104132, z: -0.048842866, w: 0.9926614}
+  m_LocalPosition: {x: -0.0898, y: 0.0094, z: -0.0025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7963083955000675350}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 70.442, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.207, y: -7.602, z: -6.314}
 --- !u!1 &3426612765036012939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,7 +1310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Arm
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 3386275545750926862}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 7853300718334810137}
@@ -1427,6 +1428,7 @@ MonoBehaviour:
   <DisableGravity>k__BackingField: 1
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 0.1
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 6970795922745774166}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -1476,7 +1478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b768c96b76e7b4c989dc25a1df195e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MeatValue>k__BackingField: 1
+  processedAmount: 0
+  timeToCook: 5
+  ingredientAmount: 1
+  ingredientType: 2
   <GrindColliders>k__BackingField:
   - {fileID: 7236886328374276474}
   - {fileID: 4162030991302302253}

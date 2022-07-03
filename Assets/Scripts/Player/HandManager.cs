@@ -135,7 +135,6 @@ public class HandManager : MonoBehaviour
 	//teleport stuff
 	bool isTeleporting;
 	bool canTeleport = true;
-	Vector2 teleportDirection;
 	//tracking
 	int lastTrackingState = -1;
 
@@ -247,7 +246,6 @@ public class HandManager : MonoBehaviour
 		//teleport stuff
 		teleportActivate.action.performed += OnTeleportActivate;
 		teleportCancel.action.performed += OnTeleportCancel;
-		joystick.action.performed += OnTeleportDirection;
 
 		trackingState.action.performed += OnTrackingState;
 		trackingState.action.canceled += OnTrackingState;
@@ -562,8 +560,15 @@ public class HandManager : MonoBehaviour
 				{
 					PickUpSlice(target);
 				}
-
 			}
+
+			var finSet = PhysicsHand.FingerSettings;
+			var palmSet = PhysicsHand.PalmSettings;
+			finSet.linearStrength = fingerForceStrength;
+			palmSet.linearStrength = palmForceStrength;
+			PhysicsHand.FingerSettings = finSet;
+			PhysicsHand.PalmSettings = palmSet;
+			PhysicsHand.PalmOrientStrength = palmOrientStrength;
 
 			handJoint = PhysicsHand.gameObject.AddComponent<FixedJoint>();
 			handJoint.enablePreprocessing = false;
@@ -643,11 +648,6 @@ public class HandManager : MonoBehaviour
 	#endregion
 
 	#region Teleport
-	void OnTeleportDirection(InputAction.CallbackContext ctx)
-	{
-		teleportDirection = ctx.ReadValue<Vector2>();
-	}
-
 	private void OnTeleportActivate(InputAction.CallbackContext ctx)
 	{
 		EnableTeleporting(true);
@@ -957,7 +957,7 @@ public class HandManager : MonoBehaviour
 				}
 				poseLayer = handInfo.FullHandPoseLayer;
 				otherPoseLayer = handInfo.PartHandPoseLayer;
-				HandAnimator.SetInteger(fullHandPoseIndexID, currentPoseIndex);
+				HandAnimator.SetFloat(fullHandPoseIndexID, currentPoseIndex);
 			}
 			else
 			{
@@ -969,7 +969,7 @@ public class HandManager : MonoBehaviour
 				}
 				poseLayer = handInfo.PartHandPoseLayer;
 				otherPoseLayer = handInfo.FullHandPoseLayer;
-				HandAnimator.SetInteger(partHandPoseIndexID, currentPoseIndex);
+				HandAnimator.SetFloat(partHandPoseIndexID, currentPoseIndex);
 			}
 		}
 

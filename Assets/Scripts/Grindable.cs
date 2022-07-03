@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grindable : MonoBehaviour
+public class Grindable : Ingredient
 {
-	[field: SerializeField]
-	public float MeatValue { get; private set; }
-	
 	//yes yes, another list of colliders
 	[field: SerializeField]
 	public Collider[] GrindColliders { get; private set; }
