@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529806a063f6e0a45bbd58622af76052, type: 3}
   m_Name: InteractablePreviewData
   m_EditorClassIdentifier: 
-  <LeftHandAnimatedPrefab>k__BackingField: {fileID: 6880758972329977411, guid: 99acd7f8616175e4997f53ded20a153e, type: 3}
-  <RightHandAnimatedPrefab>k__BackingField: {fileID: 7005671410364540950, guid: 378cf0c830b3dfd49a3ae596810f6571, type: 3}
+  <LeftHandAnimatedPrefab>k__BackingField: {fileID: 6808773842723296025, guid: efacf9bdb2fef3845acd9e95cad473e3, type: 3}
+  <RightHandAnimatedPrefab>k__BackingField: {fileID: 66576706692880094, guid: 95d0185e6ac0c0741bd8a7a5ffc21320, type: 3}
+  <LeftControllerPrefab>k__BackingField: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+  <RightControllerPrefab>k__BackingField: {fileID: 2438757715876879646, guid: 8565c76e56dc0e04e9857fe5d1a1c013, type: 3}
   <OverrideMaterial>k__BackingField: {fileID: 2100000, guid: cbf203c8949474b478c5749201a1b576, type: 2}
+  <ControllerOverrideMaterial>k__BackingField: {fileID: 2100000, guid: 9fa4261072068e5498d27f056c883efa, type: 2}
