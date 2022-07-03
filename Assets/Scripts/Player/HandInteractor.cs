@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class DirectInteractor : XRDirectInteractor
+public class HandInteractor : XRDirectInteractor
 {
 	public System.Action<Collider> onTriggerEnter;
+
+	public HandManager AttachedManager { get; set;}
 
 	new private void OnTriggerEnter(Collider other)
 	{
@@ -33,6 +35,39 @@ public class DirectInteractor : XRDirectInteractor
 
 		distanceSq = dist;
 		return target;
+	}
+
+	//usually only 1 object (in my game) is marked unselectable, so this allows me to get the second closest interactable in that case
+	public IXRInteractable[] Get2ClosestValidTargets(out float distSq1, out float distSq2)
+	{
+		IXRInteractable t1 = null;
+		IXRInteractable t2 = null;
+
+		float d1 = 1000000;
+		float d2 = 1000000;
+
+		foreach (var uvT in unsortedValidTargets)
+		{
+			float dist2 = uvT.GetDistanceSqrToInteractor(this);
+			if (dist2 < d1)
+			{
+				t2 = t1;
+				t1 = uvT;
+
+				d2 = d1;
+				d1 = dist2;
+			}
+			else if (dist2 < d2)
+			{
+				t2 = uvT;
+				d2 = dist2;
+			}
+		}
+
+		distSq1 = d1;
+		distSq2 = d2;
+
+		return new IXRInteractable[2]{ t1, t2};
 	}
 
 	public virtual void OnSelectForceExit(IXRSelectInteractable interactable)

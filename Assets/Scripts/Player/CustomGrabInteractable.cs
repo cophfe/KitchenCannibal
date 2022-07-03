@@ -7,33 +7,65 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEditor;
 #endif
 
+//slightly modified XRGrabInteractable
 [SelectionBase]
 [DisallowMultipleComponent]
 [CanSelectMultiple(false)]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(InteractablePhysicsData))]
 [AddComponentMenu("XR/Custom Grab Interactable", 11)]
-[HelpURL("https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.0/api/UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable.html")]
 public class CustomGrabInteractable : XRBaseInteractable
 {
 	[field: SerializeField]
 	public bool FirstInteractorTakesPriority { get; set; } = false;
 
 	[field: SerializeField]
-	public bool DisableGravity { get; set; } = true;
+	public bool DisableGravity { get; private set; } = true;
+	[field: SerializeField]
+	public bool DropOnLocomote { get; private set; } = false;
+	[SerializeField]
+	float maxForceApplyDistance = 0.8f;
+	[field: SerializeField]
+	public float HandDetectDistanceModifer { get; set; } = 1.0f;
 
-	//i need to change literally ONE thing from xrgrabinteractablw
-	//but since almost everything isn't overrideable it is pretty asking me to copy the entire class over in order to change one tiny thing
-	//I regret using the builtin toolkit so much, why does aie tell us to use it
+	protected Transform overrideTarget = null;
+	public bool EnableSelecting { get; set; } = true;
 
+	public override float GetDistanceSqrToInteractor(IXRInteractor interactor)
+	{
+		Transform transform = interactor?.GetAttachTransform(this);
+		if (transform == null)
+		{
+			return float.MaxValue;
+		}
+
+		Vector3 position = transform.position;
+		float num = float.MaxValue;
+		foreach (Collider collider in colliders)
+		{
+			if (!(collider == null) && collider.gameObject.activeInHierarchy && collider.enabled)
+			{
+				num = Mathf.Min((position - collider.transform.position).sqrMagnitude, num);
+			}
+		}
+
+		return num /( HandDetectDistanceModifer * HandDetectDistanceModifer);
+	}
+
+
+	public void ResetLocalPose()
+	{
+		if (isSelected)
+			UpdateInteractorLocalPose(interactorsSelecting[0]);
+	}
 	public void OverrideTargetPositionAndRotation(Transform target)
 	{
 		overrideTarget = target;
 	}
-	Transform overrideTarget = null;
 
 	public override bool IsSelectableBy(IXRSelectInteractor interactor)
 	{
-		return !FirstInteractorTakesPriority || (!isSelected || interactorsSelecting[0] == interactor);
+		return EnableSelecting && (!FirstInteractorTakesPriority || (!isSelected || interactorsSelecting[0] == interactor));
 	}
 
 	/// <summary>
@@ -41,7 +73,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	/// </summary>
 	/// <param name="interactor">Interactor that is initiating the selection.</param>
 	/// <returns>Returns the attach position in world space.</returns>
-	Vector3 GetWorldAttachPosition(IXRInteractor interactor)
+	virtual protected Vector3 GetWorldAttachPosition(IXRInteractor interactor)
 	{
 		var interactorAttachTransform = overrideTarget ? overrideTarget : interactor.GetAttachTransform(this);
 
@@ -59,7 +91,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	/// </summary>
 	/// <param name="interactor">Interactor that is initiating the selection.</param>
 	/// <returns>Returns the attach rotation in world space.</returns>
-	Quaternion GetWorldAttachRotation(IXRInteractor interactor)
+	virtual protected Quaternion GetWorldAttachRotation(IXRInteractor interactor)
 	{
 		if (!m_TrackRotation)
 			return m_TargetWorldRotation;
@@ -68,17 +100,17 @@ public class CustomGrabInteractable : XRBaseInteractable
 		return interactorAttachTransform.rotation * m_InteractorLocalRotation;
 	}
 
-	const float k_DefaultTighteningAmount = 0.5f;
-	const float k_DefaultSmoothingAmount = 5f;
-	const float k_VelocityDamping = 1f;
-	const float k_VelocityScale = 1f;
-	const float k_AngularVelocityDamping = 1f;
-	const float k_AngularVelocityScale = 1f;
-	const int k_ThrowSmoothingFrameCount = 20;
-	const float k_DefaultAttachEaseInTime = 0.15f;
-	const float k_DefaultThrowSmoothingDuration = 0.25f;
-	const float k_DefaultThrowVelocityScale = 1.5f;
-	const float k_DefaultThrowAngularVelocityScale = 1f;
+	protected const float k_DefaultTighteningAmount = 0.5f;
+	protected const float k_DefaultSmoothingAmount = 5f;
+	protected const float k_VelocityDamping = 1f;
+	protected const float k_VelocityScale = 1f;
+	protected const float k_AngularVelocityDamping = 1f;
+	protected const float k_AngularVelocityScale = 1f;
+	protected const int k_ThrowSmoothingFrameCount = 20;
+	protected const float k_DefaultAttachEaseInTime = 0.15f;
+	protected const float k_DefaultThrowSmoothingDuration = 0.25f;
+	protected const float k_DefaultThrowVelocityScale = 1.5f;
+	protected const float k_DefaultThrowAngularVelocityScale = 1f;
 
 	/// <summary>
 	/// Controls the method used when calculating the target position of the object.
@@ -103,7 +135,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	Transform m_AttachTransform;
+	protected Transform m_AttachTransform;
 
 	/// <summary>
 	/// The attachment point Unity uses on this Interactable (will use this object's position if none set).
@@ -115,7 +147,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_AttachEaseInTime = k_DefaultAttachEaseInTime;
+	protected float m_AttachEaseInTime = k_DefaultAttachEaseInTime;
 
 	/// <summary>
 	/// Time in seconds Unity eases in the attach when selected (a value of 0 indicates no easing).
@@ -127,7 +159,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	MovementType m_MovementType = MovementType.VelocityTracking;
+	protected MovementType m_MovementType = MovementType.VelocityTracking;
 
 	/// <summary>
 	/// Specifies how this object moves when selected, either through setting the velocity of the <see cref="Rigidbody"/>,
@@ -151,7 +183,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, Range(0f, 1f)]
-	float m_VelocityDamping = k_VelocityDamping;
+	protected float m_VelocityDamping = k_VelocityDamping;
 
 	/// <summary>
 	/// Scale factor of how much to dampen the existing velocity when tracking the position of the Interactor.
@@ -169,7 +201,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_VelocityScale = k_VelocityScale;
+	protected float m_VelocityScale = k_VelocityScale;
 
 	/// <summary>
 	/// Scale factor Unity applies to the tracked velocity while updating the <see cref="Rigidbody"/>
@@ -187,7 +219,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, Range(0f, 1f)]
-	float m_AngularVelocityDamping = k_AngularVelocityDamping;
+	protected float m_AngularVelocityDamping = k_AngularVelocityDamping;
 
 	/// <summary>
 	/// Scale factor of how much Unity dampens the existing angular velocity when tracking the rotation of the Interactor.
@@ -205,7 +237,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_AngularVelocityScale = k_AngularVelocityScale;
+	protected float m_AngularVelocityScale = k_AngularVelocityScale;
 
 	/// <summary>
 	/// Scale factor Unity applies to the tracked angular velocity while updating the <see cref="Rigidbody"/>
@@ -223,7 +255,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	bool m_TrackPosition = true;
+	protected bool m_TrackPosition = true;
 
 	/// <summary>
 	/// Whether this object should follow the position of the Interactor when selected.
@@ -236,7 +268,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	bool m_SmoothPosition;
+	protected bool m_SmoothPosition;
 
 	/// <summary>
 	/// Whether Unity applies smoothing while following the position of the Interactor when selected.
@@ -250,7 +282,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, Range(0f, 20f)]
-	float m_SmoothPositionAmount = k_DefaultSmoothingAmount;
+	protected float m_SmoothPositionAmount = k_DefaultSmoothingAmount;
 
 	/// <summary>
 	/// Scale factor for how much smoothing is applied while following the position of the Interactor when selected.
@@ -265,7 +297,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, Range(0f, 1f)]
-	float m_TightenPosition = k_DefaultTighteningAmount;
+	protected float m_TightenPosition = k_DefaultTighteningAmount;
 
 	/// <summary>
 	/// Reduces the maximum follow position difference when using smoothing.
@@ -284,7 +316,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	bool m_TrackRotation = true;
+	protected bool m_TrackRotation = true;
 
 	/// <summary>
 	/// Whether this object should follow the rotation of the Interactor when selected.
@@ -297,7 +329,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	bool m_SmoothRotation;
+	protected bool m_SmoothRotation;
 
 	/// <summary>
 	/// Apply smoothing while following the rotation of the Interactor when selected.
@@ -311,7 +343,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, Range(0f, 20f)]
-	float m_SmoothRotationAmount = k_DefaultSmoothingAmount;
+	protected float m_SmoothRotationAmount = k_DefaultSmoothingAmount;
 
 	/// <summary>
 	/// Scale factor for how much smoothing is applied while following the rotation of the Interactor when selected.
@@ -326,7 +358,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, Range(0f, 1f)]
-	float m_TightenRotation = k_DefaultTighteningAmount;
+	protected float m_TightenRotation = k_DefaultTighteningAmount;
 
 	/// <summary>
 	/// Reduces the maximum follow rotation difference when using smoothing.
@@ -345,7 +377,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	bool m_ThrowOnDetach = true;
+	protected bool m_ThrowOnDetach = true;
 
 	/// <summary>
 	/// Whether this object inherits the velocity of the Interactor when released.
@@ -357,7 +389,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_ThrowSmoothingDuration = k_DefaultThrowSmoothingDuration;
+	protected float m_ThrowSmoothingDuration = k_DefaultThrowSmoothingDuration;
 
 	/// <summary>
 	/// Time period to average thrown velocity over.
@@ -370,7 +402,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	AnimationCurve m_ThrowSmoothingCurve = AnimationCurve.Linear(1f, 1f, 1f, 0f);
+	protected AnimationCurve m_ThrowSmoothingCurve = AnimationCurve.Linear(1f, 1f, 1f, 0f);
 
 	/// <summary>
 	/// The curve to use to weight thrown velocity smoothing (most recent frames to the right).
@@ -383,7 +415,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_ThrowVelocityScale = k_DefaultThrowVelocityScale;
+	protected float m_ThrowVelocityScale = k_DefaultThrowVelocityScale;
 
 	/// <summary>
 	/// Scale factor Unity applies to this object's velocity inherited from the Interactor when released.
@@ -396,7 +428,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	float m_ThrowAngularVelocityScale = k_DefaultThrowAngularVelocityScale;
+	protected float m_ThrowAngularVelocityScale = k_DefaultThrowAngularVelocityScale;
 
 	/// <summary>
 	/// Scale factor Unity applies to this object's angular velocity inherited from the Interactor when released.
@@ -409,7 +441,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField, FormerlySerializedAs("m_GravityOnDetach")]
-	bool m_ForceGravityOnDetach;
+	protected bool m_ForceGravityOnDetach;
 
 	/// <summary>
 	/// Forces this object to have gravity when released
@@ -422,7 +454,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	bool m_RetainTransformParent = true;
+	protected bool m_RetainTransformParent = true;
 
 	/// <summary>
 	/// Whether Unity sets the parent of this object back to its original parent this object was a child of after this object is dropped.
@@ -434,7 +466,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	[SerializeField]
-	AttachPointCompatibilityMode m_AttachPointCompatibilityMode = AttachPointCompatibilityMode.Default;
+	protected AttachPointCompatibilityMode m_AttachPointCompatibilityMode = AttachPointCompatibilityMode.Default;
 
 	/// <summary>
 	/// Controls the method used when calculating the target position of the object.
@@ -456,40 +488,40 @@ public class CustomGrabInteractable : XRBaseInteractable
 	}
 
 	// Point we are attaching to on this Interactable (in Interactor's attach coordinate space)
-	Vector3 m_InteractorLocalPosition;
-	Quaternion m_InteractorLocalRotation;
+	protected Vector3 m_InteractorLocalPosition;
+	protected Quaternion m_InteractorLocalRotation;
 
 	// Point we are moving towards each frame (eventually will be at Interactor's attach point)
-	Vector3 m_TargetWorldPosition;
-	Quaternion m_TargetWorldRotation;
+	protected Vector3 m_TargetWorldPosition;
+	protected Quaternion m_TargetWorldRotation;
 
-	float m_CurrentAttachEaseTime;
-	MovementType m_CurrentMovementType;
+	protected float m_CurrentAttachEaseTime;
+	protected MovementType m_CurrentMovementType;
 
-	bool m_DetachInLateUpdate;
-	Vector3 m_DetachVelocity;
-	Vector3 m_DetachAngularVelocity;
+	protected bool m_DetachInLateUpdate;
+	protected Vector3 m_DetachVelocity;
+	protected Vector3 m_DetachAngularVelocity;
 
-	int m_ThrowSmoothingCurrentFrame;
-	readonly float[] m_ThrowSmoothingFrameTimes = new float[k_ThrowSmoothingFrameCount];
-	readonly Vector3[] m_ThrowSmoothingVelocityFrames = new Vector3[k_ThrowSmoothingFrameCount];
-	readonly Vector3[] m_ThrowSmoothingAngularVelocityFrames = new Vector3[k_ThrowSmoothingFrameCount];
+	protected int m_ThrowSmoothingCurrentFrame;
+	protected readonly float[] m_ThrowSmoothingFrameTimes = new float[k_ThrowSmoothingFrameCount];
+	protected readonly Vector3[] m_ThrowSmoothingVelocityFrames = new Vector3[k_ThrowSmoothingFrameCount];
+	protected readonly Vector3[] m_ThrowSmoothingAngularVelocityFrames = new Vector3[k_ThrowSmoothingFrameCount];
 
-	Rigidbody m_Rigidbody;
-	Vector3 m_LastPosition;
-	Quaternion m_LastRotation;
+	protected Rigidbody m_Rigidbody;
+	protected Vector3 m_LastPosition;
+	protected Quaternion m_LastRotation;
 
 	// Rigidbody's settings upon select, kept to restore these values when dropped
-	bool m_WasKinematic;
-	bool m_UsedGravity;
-	float m_OldDrag;
-	float m_OldAngularDrag;
+	protected bool m_WasKinematic;
+	protected bool m_UsedGravity;
+	protected float m_OldDrag;
+	protected float m_OldAngularDrag;
 
-	Transform m_OriginalSceneParent;
+	protected Transform m_OriginalSceneParent;
 
 	// Account for teleportation to avoid throws with unintentionally high energy
-	TeleportationProvider m_TeleportationProvider;
-	Pose m_PoseBeforeTeleport;
+	protected TeleportationProvider m_TeleportationProvider;
+	protected Pose m_PoseBeforeTeleport;
 
 	/// <inheritdoc />
 	protected override void Awake()
@@ -575,7 +607,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		return m_AttachTransform != null ? m_AttachTransform : base.GetAttachTransform(interactor);
 	}
 
-	void UpdateTarget(IXRInteractor interactor, float timeDelta)
+	protected void UpdateTarget(IXRInteractor interactor, float timeDelta)
 	{
 		// Compute the unsmoothed target world position and rotation
 		var rawTargetWorldPosition = GetWorldAttachPosition(interactor);
@@ -613,7 +645,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		}
 	}
 
-	void PerformInstantaneousUpdate(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+	protected void PerformInstantaneousUpdate(XRInteractionUpdateOrder.UpdatePhase updatePhase)
 	{
 		if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic ||
 			updatePhase == XRInteractionUpdateOrder.UpdatePhase.OnBeforeRender)
@@ -630,7 +662,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		}
 	}
 
-	void PerformKinematicUpdate(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+	protected void PerformKinematicUpdate(XRInteractionUpdateOrder.UpdatePhase updatePhase)
 	{
 		if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Fixed)
 		{
@@ -651,7 +683,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		}
 	}
 
-	void PerformVelocityTrackingUpdate(float timeDelta, XRInteractionUpdateOrder.UpdatePhase updatePhase)
+	virtual protected void PerformVelocityTrackingUpdate(float timeDelta, XRInteractionUpdateOrder.UpdatePhase updatePhase)
 	{
 		if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Fixed)
 		{
@@ -663,6 +695,8 @@ public class CustomGrabInteractable : XRBaseInteractable
 				var positionDelta = m_AttachPointCompatibilityMode == AttachPointCompatibilityMode.Default
 					? m_TargetWorldPosition - transform.position
 					: m_TargetWorldPosition - m_Rigidbody.worldCenterOfMass;
+
+				positionDelta = Vector3.ClampMagnitude(positionDelta, maxForceApplyDistance);
 				var velocity = positionDelta / timeDelta;
 
 				if (!float.IsNaN(velocity.x))
@@ -689,7 +723,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		}
 	}
 
-	void UpdateInteractorLocalPose(IXRInteractor interactor)
+	protected void UpdateInteractorLocalPose(IXRInteractor interactor)
 	{
 		if (m_AttachPointCompatibilityMode == AttachPointCompatibilityMode.Legacy)
 		{
@@ -708,7 +742,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		m_InteractorLocalRotation = Quaternion.Inverse(Quaternion.Inverse(transform.rotation) * thisAttachTransform.rotation);
 	}
 
-	void UpdateInteractorLocalPoseLegacy(IXRInteractor interactor)
+	protected void UpdateInteractorLocalPoseLegacy(IXRInteractor interactor)
 	{
 		// In order to move the Interactable to the Interactor we need to
 		// calculate the Interactable attach point in the coordinate system of the
@@ -725,7 +759,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		m_InteractorLocalRotation = Quaternion.Inverse(Quaternion.Inverse(transform.rotation) * thisAttachTransform.rotation);
 	}
 
-	void UpdateCurrentMovementType()
+	protected void UpdateCurrentMovementType()
 	{
 		// Special case where the interactor will override this objects movement type (used for Sockets and other absolute interactors)
 		var interactor = interactorsSelecting[0];
@@ -866,7 +900,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 			m_Rigidbody.useGravity |= m_ForceGravityOnDetach;
 	}
 
-	void SmoothVelocityStart(IXRInteractor interactor)
+	protected void SmoothVelocityStart(IXRInteractor interactor)
 	{
 		SetTeleportationProvider(interactor);
 
@@ -879,7 +913,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		m_ThrowSmoothingCurrentFrame = 0;
 	}
 
-	void SmoothVelocityEnd()
+	protected void SmoothVelocityEnd()
 	{
 		if (m_ThrowOnDetach)
 		{
@@ -892,7 +926,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		ClearTeleportationProvider();
 	}
 
-	void SmoothVelocityUpdate(IXRInteractor interactor)
+	protected void SmoothVelocityUpdate(IXRInteractor interactor)
 	{
 		var interactorAttachTransform = interactor.GetAttachTransform(this);
 		var interactorPosition = interactorAttachTransform.position;
@@ -912,7 +946,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		m_LastRotation = interactorRotation;
 	}
 
-	Vector3 GetSmoothedVelocityValue(Vector3[] velocityFrames)
+	protected Vector3 GetSmoothedVelocityValue(Vector3[] velocityFrames)
 	{
 		var calcVelocity = new Vector3();
 		var totalWeights = 0f;
@@ -936,13 +970,16 @@ public class CustomGrabInteractable : XRBaseInteractable
 		return Vector3.zero;
 	}
 
-	void OnBeginTeleportation(LocomotionSystem locomotionSystem)
+	protected void OnBeginTeleportation(LocomotionSystem locomotionSystem)
 	{
+		if (DropOnLocomote)
+			Drop();
+
 		var originTransform = locomotionSystem.xrOrigin.Origin.transform;
 		m_PoseBeforeTeleport = new Pose(originTransform.position, originTransform.rotation);
 	}
 
-	void OnEndTeleportation(LocomotionSystem locomotionSystem)
+	protected void OnEndTeleportation(LocomotionSystem locomotionSystem)
 	{
 		var originTransform = locomotionSystem.xrOrigin.Origin.transform;
 		var translated = originTransform.position - m_PoseBeforeTeleport.position;
@@ -960,7 +997,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		m_LastRotation = rotated * m_LastRotation;
 	}
 
-	void SetTeleportationProvider(IXRInteractor interactor)
+	protected void SetTeleportationProvider(IXRInteractor interactor)
 	{
 		ClearTeleportationProvider();
 		var interactorTransform = interactor?.transform;
@@ -975,7 +1012,7 @@ public class CustomGrabInteractable : XRBaseInteractable
 		m_TeleportationProvider.endLocomotion += OnEndTeleportation;
 	}
 
-	void ClearTeleportationProvider()
+	protected void ClearTeleportationProvider()
 	{
 		if (m_TeleportationProvider == null)
 			return;

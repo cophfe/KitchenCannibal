@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1527839629992976654}
   - component: {fileID: 8343068357586353770}
   - component: {fileID: 4376887599458271370}
-  - component: {fileID: 3828160238074177143}
   - component: {fileID: 3172563582059509331}
+  - component: {fileID: 2114034096060724827}
   m_Layer: 0
   m_Name: object_plate_clean_01
   m_TagString: Untagged
@@ -832,17 +832,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Plate
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 9108543584490924918}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 8774186471929530755}
   <AllColliders>k__BackingField:
   - {fileID: 1527839629992976654}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
   <MoveToForceModifier>k__BackingField: 0.5
   <UniformAttachTransform>k__BackingField: 0
---- !u!114 &3828160238074177143
+  <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
+--- !u!114 &3172563582059509331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -851,7 +853,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1527839629992976653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 08831cd945af58347a0214291927b0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_TintRenderers: []
+--- !u!114 &2114034096060724827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527839629992976653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7ccba3611e2754d9e089e11d3b3501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -920,8 +936,13 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  <FirstInteractorTakesPriority>k__BackingField: 0
+  <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
+  maxForceApplyDistance: 0.8
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 3929732184985253023}
-  m_AttachEaseInTime: 0.3
+  m_AttachEaseInTime: 0.5
   m_MovementType: 0
   m_VelocityDamping: 1
   m_VelocityScale: 1
@@ -957,20 +978,6 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &3172563582059509331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527839629992976653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08831cd945af58347a0214291927b0a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  m_TintRenderers: []
 --- !u!1 &2373719320641200567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,13 +1031,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778403567723222685}
-  m_LocalRotation: {x: 0.011492, y: 0.019904725, z: 0.49986795, w: 0.86579657}
-  m_LocalPosition: {x: -0.2432, y: 0, z: -0.0013}
+  m_LocalRotation: {x: -0.1244836, y: 0.16737683, z: 0.66808385, w: 0.71424985}
+  m_LocalPosition: {x: -0.2427, y: -0.0098, z: 0.0032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1527839629992976650}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 2.634, z: 60}
+  m_LocalEulerAnglesHint: {x: -23.67, y: 4.557, z: 85.219}
 --- !u!1 &4795009028245957555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,10 +1061,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4795009028245957555}
-  m_LocalRotation: {x: 0.011491201, y: -0.019903436, z: -0.49986744, w: 0.8657969}
-  m_LocalPosition: {x: 0.0068, y: 0, z: -0.0013}
+  m_LocalRotation: {x: -0.124485455, y: -0.16737834, z: -0.6680847, w: 0.7142484}
+  m_LocalPosition: {x: 0.0073, y: -0.0098, z: 0.0032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1527839629992976650}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -2.634, z: -60}
+  m_LocalEulerAnglesHint: {x: -23.67, y: -4.557, z: -85.219}

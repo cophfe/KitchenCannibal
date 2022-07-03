@@ -16,9 +16,11 @@ public class Sliceable : MonoBehaviour
 	public Rigidbody AttachedRigidbody { get; set; }
 	public bool Held { get; set; } = false;
 
+	public Ingredient Ingredient { get; set; }
 	private void Start()
 	{
 		AttachedRigidbody = GetComponent<Rigidbody>();
+		Ingredient = GetComponent<Ingredient>();
 	}
 
 }

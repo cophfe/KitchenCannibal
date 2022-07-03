@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6931674321896633092}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7635103981697377631}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,13 +53,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2181485412674625371}
-  m_LocalRotation: {x: -0.7877958, y: 0.6136321, z: -0.03271105, w: 0.041993584}
+  m_LocalRotation: {x: -0.78772193, y: 0.6135747, z: 0.03377048, w: -0.043357015}
   m_LocalPosition: {x: -0.1041, y: 0.1031, z: 0.0127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5377264676077294955}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -1.491, y: 174.082, z: -104.091}
+  m_LocalEulerAnglesHint: {x: 1.539, y: 186.111, z: -104.086}
 --- !u!1 &5377264676077294958
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,8 +78,8 @@ GameObject:
   - component: {fileID: 8910497132180191506}
   - component: {fileID: 148365954306264366}
   - component: {fileID: 4252757073883059584}
-  - component: {fileID: 467380457347833991}
-  m_Layer: 0
+  - component: {fileID: 9101201733789751809}
+  m_Layer: 11
   m_Name: object_lettuce_head_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2350,12 +2350,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Large Ball
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 7635103981697377631}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 3791344401539853107}
   <AllColliders>k__BackingField:
   - {fileID: 3183438372802088205}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 3
   <MoveToForceModifier>k__BackingField: 0.5
@@ -2469,6 +2470,9 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
+  maxForceApplyDistance: 0.8
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 6931674321896633092}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -2506,7 +2510,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &467380457347833991
+--- !u!114 &9101201733789751809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2515,11 +2519,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5377264676077294958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08831cd945af58347a0214291927b0a0, type: 3}
+  m_Script: {fileID: 11500000, guid: b94a281391a09c84ca4ceba3b44e16bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  m_TintRenderers: []
+  processedAmount: 0
+  timeToCook: 5
+  ingredientAmount: 1
+  ingredientType: 6
 --- !u!1 &7350782181341488586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,7 +2535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3791344401539853107}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2543,10 +2549,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7350782181341488586}
-  m_LocalRotation: {x: 0.7869684, y: 0.6146931, z: 0.048691623, w: 0.021500705}
+  m_LocalRotation: {x: -0.78684044, y: -0.6147046, z: -0.05027282, w: -0.022208009}
   m_LocalPosition: {x: 0.1041, y: 0.1031, z: 0.0127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5377264676077294955}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -1.491, y: 174.082, z: 104.091}
+  m_LocalEulerAnglesHint: {x: -1.539, y: -186.111, z: 104.086}

@@ -46,6 +46,10 @@ public class PlayerController : MonoBehaviour
 		return !Physics.CheckCapsule(a, b, PlayerRadius, TeleportCollisionMask, QueryTriggerInteraction.Ignore);
 	}
 
+	public HandManager GetOppositeHand(HandManager hand)
+	{
+		return hand == LeftHand ? RightHand : LeftHand;
+	}
 	private void OnEnable()
 	{
 		

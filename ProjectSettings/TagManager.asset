@@ -18,8 +18,8 @@ TagManager:
   - Teleport Surface
   - 
   - Interactable
-  - 
-  - 
+  - Bounds
+  - HandIgnore
   - InteractableTravel
   - 
   - 
