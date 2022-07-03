@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public ModelsAndImages modelsAndimages = null;
     [HideInInspector] public OrderManager orderManager = null;
     [HideInInspector] public AudioMananger audioManager = null;
+    [HideInInspector] public HealthInspector healthInspector = null;
+    [HideInInspector] public ScoreKeeper scoreKeeper = null;
 
     #region Singleton/Initialize
     private static GameManager m_Instance;                       // The current instance of MenuController
@@ -34,9 +36,21 @@ public class GameManager : MonoBehaviour
         audioManager = GetComponent<AudioMananger>();
         if (audioManager == null)
             Debug.LogError("Missing a 'AudioManager' component");
+        
+        healthInspector = GetComponent<HealthInspector>();
+        if (healthInspector == null)
+            Debug.LogError("Missing a 'HealthInspector' component");
+        
+        scoreKeeper = GetComponent<ScoreKeeper>();
+        if (scoreKeeper == null)
+            Debug.LogError("Missing a 'ScoreKeeper' component");
     }
     #endregion
 
-
+    private void Start()
+    {
+        healthInspector.StartInspection();
+        scoreKeeper.ResetScore();
+    }
 
 }

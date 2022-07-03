@@ -28,7 +28,7 @@ public enum SoundSources
 
 public class AudioMananger : MonoBehaviour
 {
-    public AudioSource mainAudioSource = null;
+    private AudioSource mainAudioSource = null;
     private List<AudioClip>[] clipList = new List<AudioClip>[20];
     [SerializeField] private List<AudioClip> boneClips;
     [SerializeField] private List<AudioClip> breadClips;
@@ -98,7 +98,8 @@ public class AudioMananger : MonoBehaviour
 
     public void PlayOneShot(SoundSources source, int index)
     {
-        Debug.Log("Playing sound type: '"+ source.ToString() + "' with index: " + index);
-        mainAudioSource.PlayOneShot(GetClip(source, index));
+        AudioClip temp = GetClip(source, index);
+        Debug.Log("Playing sound type: '"+ source.ToString() + "' with index: " + index + " named: " + temp.name);
+        mainAudioSource.PlayOneShot(temp);
     }
 }
