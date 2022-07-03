@@ -20,6 +20,8 @@ public class KnifeCut : MonoBehaviour
 	bool doOnTrigger = false;
 	[SerializeField]
 	bool doOnCollision= true;
+	[SerializeField]
+	string interactableLayer = "Interactable";
 
 	[SerializeField]
 	bool ignoreCollisionAfterHit = true;
@@ -45,7 +47,7 @@ public class KnifeCut : MonoBehaviour
 	
 	Rigidbody rb;
 	float sliceTimer = 0;
-
+	int interactableLayerIndex;
 	List<ColData> justSliced;
 	struct ColData
 	{
@@ -63,6 +65,8 @@ public class KnifeCut : MonoBehaviour
 
 		if (!sliceOrigin)
 			sliceOrigin = transform;
+
+		interactableLayerIndex = LayerMask.NameToLayer(interactableLayer);
 	}
 
 #if UNITY_EDITOR
@@ -117,9 +121,12 @@ public class KnifeCut : MonoBehaviour
 				Vector3 origin = sliceOrigin ? sliceOrigin.position : transform.position;
 				Vector3 sliceDirection  = transform.TransformDirection(localSlicePlaneDirection).normalized;
 
+				//this is a quick solution to cutting something after picking it up
+				sliceable.gameObject.layer = interactableLayerIndex;
+
 				List<Sliceable> sliceables = slicer.Slice(sliceable, sliceDirection, origin);
 
-				if (sliceable != null && sliceables.Count > 0)
+				if (sliceables != null && sliceables.Count > 0)
 				{
 					sliceTimer = sliceTimeout;
 

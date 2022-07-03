@@ -37,6 +37,8 @@ public class Order : MonoBehaviour
         // Run stuff here when order fails
         timeStarted = false;
         Debug.Log(recipe.name + "Order failed");
+        GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 0);
+        GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderFailed);
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
     }
@@ -61,5 +63,7 @@ public class Order : MonoBehaviour
         Destroy(display.gameObject);
         Debug.Log("Order complete! " + reward + " Points awarded");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
+        GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
+
     }
 }

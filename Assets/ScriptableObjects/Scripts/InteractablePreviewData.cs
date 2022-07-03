@@ -10,6 +10,12 @@ public class InteractablePreviewData : ScriptableObject
 	[field: SerializeField]
 	public Animator RightHandAnimatedPrefab { get; private set; }
 	[field: SerializeField]
+	public Transform LeftControllerPrefab { get; private set; }
+	[field: SerializeField]
+	public Transform RightControllerPrefab { get; private set; }
+	[field: SerializeField]
 	public Material OverrideMaterial { get; private set; }
+	[field: SerializeField]
+	public Material ControllerOverrideMaterial { get; private set; }
 
 }
