@@ -8,6 +8,8 @@ public class HandInfo : ScriptableObject
 	[field: SerializeField]
 	public string InteractableLayer { get; private set; } = "Interactable";
 	[field: SerializeField]
+	public string IgnoreHandsLayer { get; private set; } = "HandIgnore";
+	[field: SerializeField]
 	public string InteractableTravellingLayer { get; private set; } = "InteractableTravel";
 	[field: SerializeField]
 	public float MoveToInteractableDistance { get; private set; } = 0.05f;

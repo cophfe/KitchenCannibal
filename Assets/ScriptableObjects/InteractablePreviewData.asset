@@ -16,5 +16,5 @@ MonoBehaviour:
   <RightHandAnimatedPrefab>k__BackingField: {fileID: 66576706692880094, guid: 95d0185e6ac0c0741bd8a7a5ffc21320, type: 3}
   <LeftControllerPrefab>k__BackingField: {fileID: 4149444341506915341, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
   <RightControllerPrefab>k__BackingField: {fileID: 2438757715876879646, guid: 8565c76e56dc0e04e9857fe5d1a1c013, type: 3}
-  <OverrideMaterial>k__BackingField: {fileID: 2100000, guid: cbf203c8949474b478c5749201a1b576, type: 2}
+  <OverrideMaterial>k__BackingField: {fileID: 2100000, guid: 1b0dc84b797d9fb40881248ce48c6917, type: 2}
   <ControllerOverrideMaterial>k__BackingField: {fileID: 2100000, guid: 9fa4261072068e5498d27f056c883efa, type: 2}
