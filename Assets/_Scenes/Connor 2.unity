@@ -9489,18 +9489,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1175264421, guid: bc63ee9b17f96cb4c95ce7d0bcc1e1b8, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175264423, guid: bc63ee9b17f96cb4c95ce7d0bcc1e1b8, type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175264425, guid: bc63ee9b17f96cb4c95ce7d0bcc1e1b8, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 403432564626534476, guid: bc63ee9b17f96cb4c95ce7d0bcc1e1b8, type: 3}
       propertyPath: m_RootOrder
       value: 0

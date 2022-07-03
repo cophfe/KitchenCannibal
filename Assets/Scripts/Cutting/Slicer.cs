@@ -173,17 +173,16 @@ public class Slicer
 				intersections[i] = intersections[i + 1];
 				intersections[i + 1] = cache;
 
-
-				intersectionVolume += CalculateTriangleVolume(intersections[i], intersections[i + 1], universalPoint);
-				
 			}
+			intersectionVolume += CalculateTriangleVolume(intersections[i], intersections[i + 1], universalPoint);
 		}
+		//one is inverted because the winding direction is backwards
 		volume[0] += intersectionVolume;
 		volume[1] -= intersectionVolume;
 
 		//https://catlikecoding.com/unity/tutorials/procedural-meshes/creating-a-mesh/
 		//allocate meshes using the better mesh api, for performance
-		//there is a strong possibility I'm making this slower with this method
+		//there is a strong possibility I'm making this slower with this method, i don't know what i am doing
 
 		Mesh[] meshes; 
 		{
@@ -297,9 +296,8 @@ public class Slicer
 
 		Vector3 scale = target.transform.lossyScale;
 		float scaleVol = scale.x * scale.y * scale.z;
-		volume[0] *= scaleVol;
-		volume[1] *= scaleVol;
 		float volumeRatio = Mathf.Clamp(volume[0] / (volume[0] + volume[1]), 0.1f, 1);
+		//Debug.Log("intersection volume: " + scaleVol * intersectionVolume);
 
 		List<Sliceable> list = new List<Sliceable>(2);
 
@@ -307,7 +305,18 @@ public class Slicer
 		bool targetUsed = false;
 		for (int i = 0; i < 2; i++)
 		{
-			//Debug.Log("Slice " + i + " Volume: " + volume[i]);
+			volume[i] *= scaleVol;
+
+			//float actualVolume = 0;
+			//Vector3[] verts = meshes[i].vertices;
+			//int[] tris = meshes[i].triangles;
+			//for (int t = 0; t < tris.Length; t+= 3)
+			//{
+			//	actualVolume += CalculateTriangleVolume(verts[tris[t]], verts[tris[t + 1]], verts[tris[t + 2]]);
+			//}
+			//actualVolume *= scaleVol;
+			//Debug.Log("Slice " + i + " Calculated volume: " + volume[i] + ". Actual volume: " + actualVolume + ". Difference: " + (volume[i] - actualVolume));
+
 
 			if (volume[i] < DoNotCreateVolume)
 				continue;
@@ -446,9 +455,6 @@ public class Slicer
 				//uvs[sideIndex].Add(uv0);
 				//uvs[sideIndex].Add(uv1);
 				//uvs[sideIndex].Add(uv2);
-
-				//find volume of triangles
-				volume[sideIndex] += CalculateTriangleVolume(p0, p1, p2);
 			}
 			//otherwise they are intersecting
 			else
@@ -512,22 +518,10 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], 
-						p0, uv0			,
-						int1, intUV1	,
-						p2, uv2			,
-						ref volume[sideIndex0]);
-					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], 
-						int1, intUV1	, 
-						int2, intUV2	,
-						p2, uv2			, 
-						ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p0, uv0, int1, intUV1, p2, uv2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1, int2, intUV2, p2, uv2, ref volume[sideIndex0]);
 					//side 2
-					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], 
-						int1, intUV1	, 
-						p1, uv1			,
-						int2, intUV2	,
-						ref volume[sideIndex1]);
+					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], int1, intUV1, p1, uv1, int2, intUV2, ref volume[sideIndex1]);
 
 					//verts[sideIndex0].Add(p0);
 					//verts[sideIndex0].Add(int1);
@@ -566,22 +560,10 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], 
-						int1, intUV1,
-						p1, uv1,
-						p2, uv2,
-						ref volume[sideIndex0]);
-					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], 
-						int1, intUV1, 
-						p2, uv2,
-						int2, intUV2, 
-						ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1, p1, uv1, p2, uv2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1, p2, uv2, int2, intUV2, ref volume[sideIndex0]);
 					//side 2
-					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], 
-						p0, uv0, 
-						int1, intUV1,
-						int2, intUV2,
-						ref volume[sideIndex1]);
+					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], p0, uv0, int1, intUV1, int2, intUV2, ref volume[sideIndex1]);
 					
 
 					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1);
@@ -697,19 +679,23 @@ public class Slicer
 					sideIndex0 = positiveDistance[0] ? 0 : 1;
 					sideIndex1 = 1 - sideIndex0;
 
+					AddTriangle(verts[sideIndex0], p0, p1, int1, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], p0, int1, int2, ref volume[sideIndex0]);
+					//side 2					   
+					AddTriangle(verts[sideIndex1], int1, p2, int2, ref volume[sideIndex1]);
 					//do side 1
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(p1);
-					verts[sideIndex0].Add(int1);
-
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(int2);
-
-					//do side 2
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(p2);
-					verts[sideIndex1].Add(int2);
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(p1);
+					//verts[sideIndex0].Add(int1);
+					//
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(int2);
+					//
+					////do side 2
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(p2);
+					//verts[sideIndex1].Add(int2);
 				}
 				else if (positiveDistance[0] == positiveDistance[2])
 				{
@@ -719,19 +705,24 @@ public class Slicer
 					sideIndex0 = positiveDistance[0] ? 0 : 1;
 					sideIndex1 = 1 - sideIndex0;
 
+					AddTriangle(verts[sideIndex0], p0, int1, p2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], int1, int2, p2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], int1, p1, int2, ref volume[sideIndex1]);
+
 					//do side 1
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p2);
-
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(int2);
-					verts[sideIndex0].Add(p2);
-
-					//do side 2
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(p1);
-					verts[sideIndex1].Add(int2);
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p2);
+					//
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(int2);
+					//verts[sideIndex0].Add(p2);
+					//
+					////do side 2
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(p1);
+					//verts[sideIndex1].Add(int2);
 				}
 				else
 				{
@@ -742,30 +733,28 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					verts[sideIndex1].Add(p0);
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(int2);
+					AddTriangle(verts[sideIndex0], int1, p1, p2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], int1, p2, int2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], p0, int1, int2, ref volume[sideIndex1]);
 
-					//do side 2
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p1);
-					verts[sideIndex0].Add(p2);
+					////do side 1
+					//verts[sideIndex1].Add(p0);
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(int2);
 
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p2);
-					verts[sideIndex0].Add(int2);
+					////do side 2
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p1);
+					//verts[sideIndex0].Add(p2);
+
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p2);
+					//verts[sideIndex0].Add(int2);
 				}
 
 				intersections.Add(int2);
 				intersections.Add(int1);
-
-				int c0 = verts[sideIndex0].Count;
-				int c1 = verts[sideIndex1].Count;
-				//find volume of triangles
-				volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 3], verts[sideIndex0][c0 - 2], verts[sideIndex0][c0 - 1]);
-				volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 6], verts[sideIndex0][c0 - 5], verts[sideIndex0][c0 - 4]);
-				
-				volume[sideIndex1] += CalculateTriangleVolume(verts[sideIndex1][c1 - 3], verts[sideIndex1][c1 - 2], verts[sideIndex1][c1 - 1]);
 			}
 		}
 	}
@@ -792,6 +781,15 @@ public class Slicer
 
 			return index;
 		}
+	}
+
+	void AddTriangle(List<Vector3> verts, Vector3 pA,
+		Vector3 pB, Vector3 pC, ref float volume)
+	{
+		verts.Add(pA);
+		verts.Add(pB);
+		verts.Add(pC);
+		volume += CalculateTriangleVolume(pA, pB, pC);
 	}
 
 	//int AddVertex(List<Vector3> verts, List<Vector2> uvs, List<ushort> tris, Vector3 vertex, Vector2 uv)

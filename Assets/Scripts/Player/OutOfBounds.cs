@@ -22,7 +22,7 @@ public class OutOfBounds : MonoBehaviour
 	private void Awake()
 	{		
 		var volume = camera.GetComponentInChildren<Volume>();
-		if ((volume && volume.profile.TryGet<ColorAdjustments>(out colorAdjuster)));
+		if (volume && volume.profile.TryGet<ColorAdjustments>(out colorAdjuster));
 		{
 		}
 
