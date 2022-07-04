@@ -30,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8785707319777659789}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.24669094, y: 1.1046785, z: 0.033777714}
-  m_LocalScale: {x: 196.78474, y: 196.78474, z: 196.78474}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4974526487334674066
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -134,9 +134,12 @@ MonoBehaviour:
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 0}
   <AllColliders>k__BackingField:
   - {fileID: 5063522411416645366}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
   <MoveToForceModifier>k__BackingField: 0.5
+  <UniformAttachTransform>k__BackingField: 0
+  <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &9195825953724738136
 MonoBehaviour:
   m_ObjectHideFlags: 0
