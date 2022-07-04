@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Main.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 0
     path: Assets/_Scenes/Connor.unity
     guid: 96ce59cd6dd379f42a26d808c16a0fcd
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Zaneski.unity
     guid: c37e91c165154fe418abbe908d5cc12a
   m_configObjects:
