@@ -35,6 +35,7 @@ public class MeatGrinder : MonoBehaviour
 	UnityEvent onMeatProcessed;
 
 	List<Grindable> recordedGrindables;
+	public AudioSource audioSource;
 
 	float heldMeat = 0;
 	float processedMeat = 0;
@@ -215,4 +216,26 @@ public class MeatGrinder : MonoBehaviour
 		}
 		
 	}
+
+
+	public void OnStartGrind()
+    {
+		//if(meat has bones)
+		//{
+		//	audioSource.clip = GameManager.Instance.audioManager.GetClip(SoundSources.Limb, 0);
+  //      }
+		//else
+  //      {
+		//	audioSource.clip = GameManager.Instance.audioManager.GetClip(SoundSources.Limb, 6);
+  //      }
+
+		//audioSource.loop = true;
+		//audioSource.Play();
+    }
+
+	public void OnEndGrind()
+    {
+		//audioSource.loop = false;
+		//audioSource.Stop();
+    }
 }

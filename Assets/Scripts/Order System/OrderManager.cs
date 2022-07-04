@@ -4,18 +4,22 @@ using UnityEngine;
 
 public enum IngredientType
 {
-    empty = 1,
-    humanMeat = 2,
-    mincedHumanMeat = 3,
-    cookedMeat = 4,
-    buns = 5,
-    lettuce = 6,
-    tomatoe = 7,
+    Lettuce,
+    SlicedLettuce,
+    Tomatoe,
+    SlicedTomatoe,
+    MincedMeat,
+    CookedMeat,
+    BurntMeat,
+    Bread,
+    SlicedBread
 }
 
 public enum CompletedRecipieType
 {
-    BLT,
+    Burger,
+    Salad,
+    HotDog,
 }
 
 public class OrderManager : MonoBehaviour
@@ -28,7 +32,7 @@ public class OrderManager : MonoBehaviour
 
     private void Awake()
     {
-        orders = GetComponents<Order>(); 
+        orders = GetComponents<Order>();
     }
 
     // Update is called once per frame
@@ -40,7 +44,7 @@ public class OrderManager : MonoBehaviour
             {
                 Debug.Log("Order: " + currentOrderIndex + " has started!");
                 // Create orders here
-                rack.AddOrder(orders[currentOrderIndex]);            
+                rack.AddOrder(orders[currentOrderIndex]);
                 currentOrderIndex++;
             }
         }
@@ -51,7 +55,7 @@ public class OrderManager : MonoBehaviour
     public bool CheckRecipe(List<RecipeRequirement> recipe, Vector3 spawnLocation)
     {
         bool completedOrder = true;
-        for (int i = 0; i <= currentOrderIndex; i++)
+        for (int i = 0; i < currentOrderIndex; i++)
         {
             // Has searched through all active orders
             if (!orders[i].orderActive)
@@ -92,13 +96,13 @@ public class OrderManager : MonoBehaviour
                     }
                 }
             }
-            
+
             if (!completedOrder)
             {
                 completedOrder = true;
                 continue;
             }
-           
+
             // A match is found
             orders[i].orderActive = false;
             orders[i].CreateOrder(spawnLocation);
