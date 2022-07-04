@@ -427,13 +427,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272396608121376940}
-  m_LocalRotation: {x: 0, y: -0.04594706, z: 0, w: 0.9989439}
-  m_LocalPosition: {x: -0.009299949, y: 0.00019998099, z: -0.0000000037325663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.02, y: 0.0098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2122039935953627464}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -5.267, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492505652491028241
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +767,7 @@ MonoBehaviour:
   breakAttach: {fileID: 5360522561288776179}
   breakLAttach: {fileID: 1418256788689371327}
   breakRAttach: {fileID: 2809286578150617882}
+  audioSource: {fileID: 0}
 --- !u!138 &9156060587114989764
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -838,13 +839,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2358053258629837314}
-  m_LocalRotation: {x: -0.045946874, y: 0, z: -0.9989439, w: 0}
-  m_LocalPosition: {x: -0.009299949, y: 0.00019998099, z: -0.0000000037325663}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -0.02, y: -0.0191, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2122039935953627464}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 180, y: 185.267, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &2556961579964579976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,7 +1165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4694085160609692824}
   m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: 0, w: 0}
-  m_LocalPosition: {x: 0.001, y: 0, z: 0}
+  m_LocalPosition: {x: -0.02, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2122039935953627464}
@@ -1482,6 +1483,7 @@ MonoBehaviour:
   timeToCook: 5
   ingredientAmount: 1
   ingredientType: 2
+  hasBoneShards: 0
   <GrindColliders>k__BackingField:
   - {fileID: 7236886328374276474}
   - {fileID: 4162030991302302253}
