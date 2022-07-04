@@ -28,16 +28,16 @@ public class OrderDisplay : MonoBehaviour
 
                     switch (order.recipe.recipeRequirements[i].ingredient)
                     {
-                        case IngredientType.cookedMeat:
+                        case IngredientType.CookedMeat:
                              orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.cookedMeat;
                             break;
-                        case IngredientType.buns:
+                        case IngredientType.Bread:
                              orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.buns;
                             break;
-                        case IngredientType.lettuce:
+                        case IngredientType.Lettuce:
                              orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.lettuce;
                             break;
-                        case IngredientType.tomatoe:
+                        case IngredientType.Tomatoe:
                              orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.tomatoe;
                             break;
                     }
@@ -45,7 +45,7 @@ public class OrderDisplay : MonoBehaviour
 
                 switch (order.recipe.completedRecipie)
                 {
-                    case CompletedRecipieType.BLT:
+                    case CompletedRecipieType.Burger:
                         orderImage.sprite = orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.BLT;
                         break;
                 }

@@ -17,7 +17,7 @@ public class ConveyorEnd : MonoBehaviour
             ConveyerObject obj = other.gameObject.AddComponent<ConveyerObject>();
             obj.start = start;
             obj.Hide();
-            obj.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.attachedRigidbody.velocity = Vector3.zero;
         }
     }
 }

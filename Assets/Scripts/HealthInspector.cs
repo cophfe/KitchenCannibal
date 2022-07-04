@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class HealthInspector : MonoBehaviour
 {
+    public int timeBetweeninspections = 180;
     public int warningDuration = 10;
+    public float counter = 0.0f;
+    private bool hasStarted = false;
 
     IEnumerator HealthInscpectorCalled()
     {
+        hasStarted = true;
         StartWarning();
         {
             yield return new WaitForSeconds((float)warningDuration);
         }
 
         OnArrive();
+        counter = timeBetweeninspections;
+        hasStarted = false;
     }
 
     private void StartWarning()
@@ -51,5 +57,20 @@ public class HealthInspector : MonoBehaviour
     public void StartInspection()
     {
         StartCoroutine(HealthInscpectorCalled());
+    }
+    private void Awake()
+    {
+        counter = timeBetweeninspections;
+    }
+
+    private void Update()
+    {
+        if (!hasStarted)
+        {
+        counter -= Time.deltaTime;
+            if (counter <= 0)
+                StartInspection();
+
+        }
     }
 }
