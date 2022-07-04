@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 821117679675251993}
   - component: {fileID: 4233795614189947761}
   m_Layer: 0
-  m_Name: Order 1
+  m_Name: ReworkedOrder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

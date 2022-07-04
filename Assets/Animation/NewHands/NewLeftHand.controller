@@ -180,7 +180,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Thumb
     m_Mirror: 0
-  m_BlendParameter: Pose Index
+  m_BlendParameter: Part Hand Pose Index
   m_BlendParameterY: Thumb
   m_MinThreshold: 1
   m_MaxThreshold: 2

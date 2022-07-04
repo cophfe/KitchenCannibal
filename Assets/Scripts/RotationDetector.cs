@@ -8,6 +8,8 @@ public class RotationDetector : MonoBehaviour
 {
 	[SerializeField]
 	float rotationAmount;
+	[SerializeField]
+	Vector3 secondaryAxis = Vector3.right;
 
 	[field: SerializeField]
 	public UnityEvent OnRotated {  get; private set; }
@@ -76,20 +78,17 @@ public class RotationDetector : MonoBehaviour
 	{
 		var joint = GetComponent<HingeJoint>();
 
-		//this is wrong for some joint axis but eh i don't care this is used for one small thing
-		Vector3 rot = Vector3.right;
-
 		Gizmos.color = Color.cyan;
-		Vector3 vec = Quaternion.AngleAxis(rotationAmount, joint.axis) * rot;
+		Vector3 vec = Quaternion.AngleAxis(rotationAmount, joint.axis) * secondaryAxis;
 		Gizmos.DrawRay(transform.position, transform.TransformDirection(vec) * 0.14f);
 
 		if (joint.useLimits)
 		{
 			Gizmos.color = Color.red;
 
-			vec = Quaternion.AngleAxis(joint.limits.max, joint.axis) * rot;
+			vec = Quaternion.AngleAxis(joint.limits.max, joint.axis) * secondaryAxis;
 			Gizmos.DrawRay(transform.position, transform.TransformDirection(vec) * 0.1f);
-			vec = Quaternion.AngleAxis(joint.limits.min, joint.axis) * rot;
+			vec = Quaternion.AngleAxis(joint.limits.min, joint.axis) * secondaryAxis;
 			Gizmos.DrawRay(transform.position, transform.TransformDirection(vec) * 0.1f);
 		}
 		

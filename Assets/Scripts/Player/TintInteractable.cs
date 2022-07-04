@@ -7,30 +7,30 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class TintInteractable : MonoBehaviour
 {
 	[StructLayout(LayoutKind.Sequential, Size = 1)]
-	private struct ShaderPropertyLookup
+	protected struct ShaderPropertyLookup
 	{
 		public static readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
 	}
 
 	[Tooltip("Tint color for interactable.")]
 	[SerializeField]
-	Color m_TintColor = Color.yellow;
+	protected Color m_TintColor = Color.yellow;
 	[SerializeField]
 	[Tooltip("Renderer(s) to use for tinting (will default to any Renderer on the GameObject if not specified).")]
-	private List<Renderer> m_TintRenderers = new List<Renderer>();
+	protected List<Renderer> m_TintRenderers = new List<Renderer>();
 
-	bool tinted = false;
-	float lastTintMagnitude = 0;
-	bool shouldTint = false;
-	float tintMagnitude = 0;
-	float tintModify = 1.0f;
-	private MaterialPropertyBlock m_TintPropertyBlock;
+	protected bool tinted = false;
+	protected float lastTintMagnitude = 0;
+	protected bool shouldTint = false;
+	protected float tintMagnitude = 0;
+	protected float tintModify = 1.0f;
+	protected MaterialPropertyBlock m_TintPropertyBlock;
 
-	private bool m_EmissionEnabled;
+	protected bool m_EmissionEnabled;
 
-	private bool m_HasLoggedMaterialInstance;
+	protected bool m_HasLoggedMaterialInstance;
 
-	private static readonly List<Material> s_Materials = new List<Material>();
+	protected static readonly List<Material> s_Materials = new List<Material>();
 
 	public Color tintColor
 	{
@@ -56,7 +56,7 @@ public class TintInteractable : MonoBehaviour
 		}
 	}
 
-	protected void Awake()
+	protected virtual void Awake()
 	{
 		if (m_TintRenderers.Count == 0)
 		{
@@ -96,7 +96,7 @@ public class TintInteractable : MonoBehaviour
 		shouldTint = true;
 	}
 
-	public void SetTint(bool on)
+	public virtual void SetTint(bool on)
 	{
 		if (tinted == on && (!on || tintMagnitude * tintModify == lastTintMagnitude))
 			return;
