@@ -7,9 +7,18 @@ public class SocketInteractor : XRSocketInteractor
 {
 	[SerializeField]
 	Collider[] colliders;
+	[SerializeField]
+	float whileSelectingDetectDistanceModifier = 0.5f;
+
+	CustomGrabInteractable attachedInt;
+	float grabMultiplier;
 
 	protected override void OnEnable()
 	{
+		attachedInt = GetComponent<CustomGrabInteractable>();
+		if (attachedInt)
+			grabMultiplier = attachedInt.HandDetectDistanceModifer;
+
 		if (colliders == null || colliders.Length == 0)
 		{
 			colliders = GetComponentsInChildren<Collider>();
@@ -19,6 +28,9 @@ public class SocketInteractor : XRSocketInteractor
 	}
 	protected override void OnSelectEntered(SelectEnterEventArgs args)
 	{
+		if (attachedInt)
+			attachedInt.HandDetectDistanceModifer = grabMultiplier * whileSelectingDetectDistanceModifier;
+
 		var physData = args.interactableObject.transform.GetComponent<InteractablePhysicsData>();
 		if (physData)
 		{
@@ -37,6 +49,9 @@ public class SocketInteractor : XRSocketInteractor
 
 	protected override void OnSelectExited(SelectExitEventArgs args)
 	{
+		if (attachedInt)
+			attachedInt.HandDetectDistanceModifer = grabMultiplier;
+
 		var physData = args.interactorObject.transform.GetComponent<InteractablePhysicsData>();
 		if (physData)
 		{

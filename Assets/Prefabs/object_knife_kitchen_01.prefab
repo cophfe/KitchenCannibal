@@ -568,7 +568,7 @@ MonoBehaviour:
   sliceTimeout: 0.6
   noLongerSliceableVolume: 0.00002
   deleteSliceableVolume: 0.000006
-  maxSliceAmount: 4
+  maxSliceAmount: 8
   colliders:
   - {fileID: 473375538}
   - {fileID: 631639233}

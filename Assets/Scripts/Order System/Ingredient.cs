@@ -120,7 +120,10 @@ public class Ingredient : MonoBehaviour
 					return;
             }
 
-			audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(source, value));
+			if (!audiosource)
+				Debug.LogWarning("Audio source missing on " + gameObject.name);
+			else
+				audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(source, value));
 
 		}
 	}

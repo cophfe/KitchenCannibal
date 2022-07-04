@@ -45,7 +45,7 @@ public class Order : MonoBehaviour
         Destroy(display.gameObject);
     }
 
-    public void CreateOrder(Vector3 position)
+    public void CreateOrder(Transform spawnTransform)
     {
 		GameObject prefab;
 		switch (recipe.completedRecipie)
@@ -69,7 +69,8 @@ public class Order : MonoBehaviour
         tempOrder.orderRackIndex = orderRackIndex;
         tempOrder.rack = rack;
 		tempOrder.hasBones = hasBones;
-		tempOrder.transform.position = position;
+		tempOrder.transform.position = spawnTransform.position;
+		tempOrder.transform.rotation = spawnTransform.rotation;
 	}
 
 	public void OrderComplete()

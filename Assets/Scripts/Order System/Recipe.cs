@@ -6,7 +6,7 @@ using UnityEngine;
 public class RecipeRequirement
 {
     public IngredientType ingredient;
-    public int amount;
+    public float amount;
 }
 
 [CreateAssetMenu(fileName = "Recipe", menuName = "New Recipe")]

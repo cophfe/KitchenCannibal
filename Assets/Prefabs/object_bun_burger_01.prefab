@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   processedAmount: 0
   timeToCook: 5
-  ingredientAmount: 1
+  ingredientAmount: 2
   ingredientType: 8
   hasBoneShards: 0
 --- !u!82 &3230287402769506520

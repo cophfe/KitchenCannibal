@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Cookable : Ingredient
 {
@@ -15,6 +16,10 @@ public class Cookable : Ingredient
 	new MeshRenderer renderer;
 	[SerializeField, Min(0)]
 	int materialIndex = 0;
+	[field: SerializeField]
+	public UnityEvent OnCookableCook { get; set; }
+	[field: SerializeField]
+	public UnityEvent OnCookableBurn { get; set; }
 
 	float cookSpeed = 0;
 
@@ -72,7 +77,12 @@ public class Cookable : Ingredient
 
 				//after cooking it can cook again once (therefore becoming burnt)
 				if (cooked)
+				{
+					OnCookableBurn?.Invoke();
 					enabled = false;
+				}
+				else
+					OnCookableCook?.Invoke();
 
 				cooked = true;
 			}

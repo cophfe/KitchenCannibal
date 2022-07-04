@@ -9,7 +9,7 @@ public class PhysicsButton : MonoBehaviour
 	[SerializeField]
 	Vector3 acceleration = new Vector3(0, 100, 0);
 	[SerializeField]
-	Renderer renderer;
+	new Renderer renderer;
 	[SerializeField]
 	bool coolDownOnPressDown = true;
 	[SerializeField]
