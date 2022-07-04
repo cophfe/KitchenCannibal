@@ -5,6 +5,14 @@ using UnityEngine.Events;
 
 public class CookSurface : MonoBehaviour
 {
+	static readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
+
+	[SerializeField]
+	Renderer cookSurfaceRenderer;
+	[SerializeField]
+	float emissionAmountCooking = 0.1f;
+	[SerializeField]
+	float emissionChangeSpeed = 1.0f;
 	[SerializeField]
 	RotationDetector[] rotationDetectors;
 	[field: SerializeField]
@@ -12,6 +20,11 @@ public class CookSurface : MonoBehaviour
 	
 	List<Cookable> cookables = new List<Cookable>();
 	int rotatedCount = 0;
+
+	float currentEmission = 0;
+	Material surfaceMaterial;
+
+	bool cooking = false;
 
 	private void Awake()
 	{
@@ -21,7 +34,11 @@ public class CookSurface : MonoBehaviour
 			detector.OnStopRotated.AddListener(OnUnRotated);
 		}
 
-		enabled = false;
+		surfaceMaterial = cookSurfaceRenderer.material;
+		surfaceMaterial.SetColor(emissionColor, Color.black);
+		//this should be true but just in case
+		cookSurfaceRenderer.sharedMaterial = surfaceMaterial;
+		cooking = false;
 	}
 
 	void OnRotated()
@@ -29,13 +46,13 @@ public class CookSurface : MonoBehaviour
 		rotatedCount++;
 
 		if (rotatedCount > 0)
-			enabled = true;
+			cooking = true;
 	}
 	void OnUnRotated()
 	{
 		rotatedCount--;
 		if (rotatedCount <= 0)
-			enabled = false;
+			cooking = false;
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -67,6 +84,9 @@ public class CookSurface : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (!cooking)
+			return;
+
 		foreach (var c in cookables)
 		{
 			if (c)
@@ -76,5 +96,15 @@ public class CookSurface : MonoBehaviour
 				c.Cooking |= true;
 			}
 		}
+	}
+
+	private void Update()
+	{
+		float target = cooking ? emissionAmountCooking : 0;
+		if (currentEmission == target)
+			return;
+		currentEmission = Mathf.MoveTowards(currentEmission, target, Time.deltaTime * emissionChangeSpeed);
+		surfaceMaterial.SetColor(emissionColor, currentEmission * Color.white);
+		
 	}
 }
