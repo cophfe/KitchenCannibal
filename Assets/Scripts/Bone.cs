@@ -23,6 +23,9 @@ public class Bone : MonoBehaviour
 	CustomGrabInteractable boneInteractable;
 	Rigidbody rb;
 	FixedJoint joint;
+
+	public AudioSource audioSource = null;
+
 	private void OnEnable()
 	{
 		joint = GetComponent<FixedJoint>();
@@ -92,5 +95,7 @@ public class Bone : MonoBehaviour
 			boneInteractable.interactionManager.SelectEnter(selector, boneInteractable);
 
 		}
+
+		audioSource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Bone, 2));
 	}
 }

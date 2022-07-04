@@ -18,9 +18,9 @@ MonoBehaviour:
   recipeRequirements:
   - ingredient: 5
     amount: 1
-  - ingredient: 6
+  - ingredient: 1
     amount: 1
-  - ingredient: 7
+  - ingredient: 3
     amount: 1
-  - ingredient: 4
+  - ingredient: 8
     amount: 1

@@ -99,7 +99,7 @@ public class AudioMananger : MonoBehaviour
     public void PlayOneShot(SoundSources source, int index)
     {
         AudioClip temp = GetClip(source, index);
-        Debug.Log("Playing sound type: '"+ source.ToString() + "' with index: " + index + " named: " + temp.name);
+        //Debug.Log("Playing sound type: '"+ source.ToString() + "' with index: " + index + " named: " + temp.name);
         mainAudioSource.PlayOneShot(temp);
     }
 }

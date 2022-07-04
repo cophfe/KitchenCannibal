@@ -9,11 +9,11 @@ public class Order : MonoBehaviour
     public float startTime;
     public float timeTillFail;
     public Recipe recipe;
-    public int reward;
     private bool timeStarted = false;
     [HideInInspector] public int orderRackIndex = 0;
     [HideInInspector] public OrderRack rack = null;
     public bool orderActive = false;
+    private float startingTime = 0.0f;
     public void StartTime()
     {
         orderActive = true;
@@ -22,13 +22,13 @@ public class Order : MonoBehaviour
 
     private void Update()
     {
-        if(timeStarted)
+        if (timeStarted)
         {
             timeTillFail -= Time.deltaTime;
-            //display.UpdateTime(timeTillFail);
+            display.UpdateTime(timeTillFail / startingTime);
 
-            if(timeTillFail <= 0.0f)
-            OrderFailed();
+            if (timeTillFail <= 0.0f)
+                OrderFailed();
         }
     }
 
@@ -49,21 +49,28 @@ public class Order : MonoBehaviour
         Order tempOrder = temp.GetComponent<Order>();
         tempOrder.display = display;
         tempOrder.recipe = recipe;
-        tempOrder.reward = reward;
         tempOrder.orderRackIndex = orderRackIndex;
         tempOrder.rack = rack;
         tempOrder.transform.position = position;
     }
 
     public void OrderComplete()
-    {        
+    {
+        if (display == null)
+            return;
+
         timeStarted = false;
         Debug.Log(recipe.name + " Order complete");
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
-        Debug.Log("Order complete! " + reward + " Points awarded");
+
+        Debug.Log("Order complete! Points awarded");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
         GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
 
+    }
+    private void Awake()
+    {
+        startingTime = timeTillFail;
     }
 }
