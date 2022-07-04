@@ -275,6 +275,8 @@ MonoBehaviour:
   timeToCook: 5
   ingredientAmount: 1
   ingredientType: 0
+  hasBoneShards: 0
+  processedThroughCook: 1
   burntColour: {r: 0.13207549, g: 0.07831072, b: 0.06541474, a: 1}
   cookedColour: {r: 0.254717, g: 0.078097194, b: 0.09979341, a: 0}
   renderer: {fileID: 3487647770414198779}

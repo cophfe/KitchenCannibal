@@ -23,13 +23,14 @@ public enum SoundSources
     Hand,
     Salad,
     Torso,
-    Vegetable
+    Vegetable,
+    BonesMeal
 }
 
 public class AudioMananger : MonoBehaviour
 {
     private AudioSource mainAudioSource = null;
-    private List<AudioClip>[] clipList = new List<AudioClip>[20];
+    private List<AudioClip>[] clipList = new List<AudioClip>[21];
     [SerializeField] private List<AudioClip> boneClips;
     [SerializeField] private List<AudioClip> breadClips;
     [SerializeField] private List<AudioClip> clocheClips;
@@ -50,6 +51,7 @@ public class AudioMananger : MonoBehaviour
     [SerializeField] private List<AudioClip> saladClips;
     [SerializeField] private List<AudioClip> torsoClips;
     [SerializeField] private List<AudioClip> vegetableClips;
+    [SerializeField] private List<AudioClip> bonesClips;
     
 
     /// <summary>
@@ -81,6 +83,7 @@ public class AudioMananger : MonoBehaviour
         clipList[17] = saladClips;
         clipList[18] = torsoClips;
         clipList[19] = vegetableClips;
+        clipList[20] = bonesClips;
     }
 
 

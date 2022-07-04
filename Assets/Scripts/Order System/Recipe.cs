@@ -12,7 +12,7 @@ public class RecipeRequirement
 [CreateAssetMenu(fileName = "Recipe", menuName = "New Recipe")]
 public class Recipe : ScriptableObject
 {
-    public string name;
+    new public string name;
     public string description;
 
     public CompletedRecipieType completedRecipie;

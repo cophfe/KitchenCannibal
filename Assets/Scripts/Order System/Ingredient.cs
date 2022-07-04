@@ -66,46 +66,64 @@ public class Ingredient : MonoBehaviour
     {
         if (collision.relativeVelocity.sqrMagnitude > GameManager.Instance.minimumCollisionVelocity)
         {
+			SoundSources source;
+			int value;
+
             switch (ingredientType)
             {
                 case IngredientType.Lettuce:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Vegetable, Random.Range(4, 9)));
+					source = SoundSources.Vegetable; 
+					value = Random.Range(4, 9);
                     break;
 
                 case IngredientType.SlicedLettuce:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Vegetable, Random.Range(4, 9)));
+					source = SoundSources.Vegetable; 
+					value = Random.Range(4, 9);
                     break;
 
                 case IngredientType.Tomatoe:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Vegetable, Random.Range(4, 9)));
+					source = SoundSources.Vegetable; 
+					value = Random.Range(4, 9);
                     break;
 
                 case IngredientType.SlicedTomatoe:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Vegetable, Random.Range(4, 9)));
+					source = SoundSources.Vegetable; 
+					value = Random.Range(4, 9);
                     break;
 
                 case IngredientType.MincedMeat:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Meat, Random.Range(0, 2)));
+					source = SoundSources.Meat; 
+					value = Random.Range(0, 2);
                     break;
 
                 case IngredientType.CookedMeat:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Meat, Random.Range(0, 2)));
+					source = SoundSources.Meat; 
+					value = Random.Range(0, 2);
                     break;
 
                 case IngredientType.BurntMeat:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Meat, Random.Range(0, 2)));
+					source = SoundSources.Meat; 
+					value = Random.Range(0, 2);
                     break;
 
                 case IngredientType.Bread:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Bread, Random.Range(1, 4)));
+					source = SoundSources.Bread; 
+					value = Random.Range(1, 4);
                     break;
 
                 case IngredientType.SlicedBread:
-                    audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Bread, Random.Range(1, 4)));
+					source = SoundSources.Bread; 
+					value = Random.Range(1, 4);
                     break;
+				default:
+					Debug.LogWarning("Could not find ingredient audio");
+					return;
             }
-        }
-    }
+
+			audiosource.PlayOneShot(GameManager.Instance.audioManager.GetClip(source, value));
+
+		}
+	}
 
     public void PlayKnifeSound()
     {

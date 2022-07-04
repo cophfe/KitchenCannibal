@@ -14,6 +14,8 @@ public class Order : MonoBehaviour
     [HideInInspector] public OrderRack rack = null;
     public bool orderActive = false;
     private float startingTime = 0.0f;
+	public bool hasBones = false;
+
     public void StartTime()
     {
         orderActive = true;
@@ -45,16 +47,32 @@ public class Order : MonoBehaviour
 
     public void CreateOrder(Vector3 position)
     {
-        GameObject temp = Instantiate(GameManager.Instance.modelsAndimages.burgerPrefab);
+		GameObject prefab;
+		switch (recipe.completedRecipie)
+		{
+			case CompletedRecipieType.Burger:
+				prefab = GameManager.Instance.modelsAndimages.burgerPrefab;
+				break;
+			case CompletedRecipieType.Salad:
+				prefab = GameManager.Instance.modelsAndimages.saladPrefab;
+				break;
+			case CompletedRecipieType.HotDog:
+				prefab = GameManager.Instance.modelsAndimages.hotdogPrefab;
+				break;
+			default:
+				return;
+		}
+		GameObject temp = Instantiate(prefab);
         Order tempOrder = temp.GetComponent<Order>();
         tempOrder.display = display;
         tempOrder.recipe = recipe;
         tempOrder.orderRackIndex = orderRackIndex;
         tempOrder.rack = rack;
-        tempOrder.transform.position = position;
-    }
+		tempOrder.hasBones = hasBones;
+		tempOrder.transform.position = position;
+	}
 
-    public void OrderComplete()
+	public void OrderComplete()
     {
         if (display == null)
             return;
@@ -66,7 +84,13 @@ public class Order : MonoBehaviour
 
         Debug.Log("Order complete! Points awarded");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
-        GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
+		if (hasBones)
+		{
+			GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.BonesOrder);
+			GameManager.Instance.healthInspector.OnBonesMeal();
+		}
+		else
+			GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
 
     }
     private void Awake()

@@ -18,7 +18,7 @@ public class RotationDetector : MonoBehaviour
 	[field: SerializeField]
 	public UnityEvent WhileRotated { get; private set; }
 
-	bool rotated = false;
+	public bool Rotated { get; private set; } = false;
 
 	bool inverseComparison;
 
@@ -45,7 +45,7 @@ public class RotationDetector : MonoBehaviour
 	void CallEvents(bool isRotated)
 	{
 		//if is rotated and was previously rotated
-		if (isRotated && rotated)
+		if (isRotated && Rotated)
 		{
 			WhileRotated?.Invoke();
 		}
@@ -54,13 +54,13 @@ public class RotationDetector : MonoBehaviour
 		{
 			OnRotated?.Invoke();
 			WhileRotated?.Invoke();
-			rotated = true;
+			Rotated = true;
 		}
 		//if is previously rotated and is no longer rotated
-		else if (rotated)
+		else if (Rotated)
 		{
 			OnStopRotated?.Invoke();
-			rotated = false;
+			Rotated = false;
 		}
 	}
 

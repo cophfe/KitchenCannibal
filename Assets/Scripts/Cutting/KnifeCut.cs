@@ -82,9 +82,7 @@ public class KnifeCut : MonoBehaviour
 		if (!enabled || !doOnTrigger)
 			return;
 
-		ConsiderSlicing(other.gameObject);
-
-
+		ConsiderSlicing(other.attachedRigidbody);
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -100,17 +98,20 @@ public class KnifeCut : MonoBehaviour
 				if (col == colliders[i])
 				{
 					//Debug.Log("Cutter: " + col.name);
-					ConsiderSlicing(collision.gameObject);
+					ConsiderSlicing(collision.rigidbody);
 					return;
 				}
 			}
 		}
 		else
-			ConsiderSlicing(collision.gameObject);
+			ConsiderSlicing(collision.rigidbody);
 	}
 
-	void ConsiderSlicing(GameObject objectToSlice)
+	void ConsiderSlicing(Rigidbody objectToSlice)
 	{
+		if (!objectToSlice)
+			return;
+
 		Sliceable sliceable = objectToSlice.GetComponent<Sliceable>();
 		if (sliceable != null && sliceTimer < 0 && sliceable.CanBeSliced && sliceable.TimesSliced < maxSliceAmount)
 		{

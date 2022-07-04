@@ -48,7 +48,7 @@ public class OrderDisplay : MonoBehaviour
             switch (order.recipe.completedRecipie)
             {
                 case CompletedRecipieType.Burger:
-                    orderImage.sprite = GameManager.Instance.modelsAndimages.BLT;
+                    orderImage.sprite = GameManager.Instance.modelsAndimages.burger;
                     break;
             }
 
@@ -64,6 +64,5 @@ public class OrderDisplay : MonoBehaviour
     {
         // Update the timer display
         amountLeft.fillAmount = percent;
-        Debug.Log(percent);
     }
 }

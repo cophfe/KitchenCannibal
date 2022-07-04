@@ -7,6 +7,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Bone : MonoBehaviour
 {
 	[SerializeField]
+	ParticleSystem blood;
+	[SerializeField]
+	Ingredient limbIngredient;
+	[SerializeField]
 	CustomGrabInteractable limbInteractable;
 	[SerializeField]
 	InteractionLayerMask layerMask;
@@ -96,6 +100,8 @@ public class Bone : MonoBehaviour
 
 		}
 
+		limbIngredient.hasBoneShards = false;
+		blood?.Play();
 		audioSource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Bone, 2));
 	}
 }

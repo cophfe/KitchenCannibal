@@ -11,9 +11,14 @@ public class RecipeCheckArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger: " + other.name);
+		if (!enabled)
+			return;
 
-        Ingredient newIngredient = other.gameObject.GetComponent<Ingredient>();
+
+		if (!other.attachedRigidbody)
+			return;
+
+        Ingredient newIngredient = other.attachedRigidbody.GetComponent<Ingredient>();
         if(newIngredient != null)
         {
             objects.Add(other.gameObject);
@@ -50,4 +55,9 @@ public class RecipeCheckArea : MonoBehaviour
             objects.Clear();
         }
     }
+
+	private void Update()
+	{
+		
+	}
 }

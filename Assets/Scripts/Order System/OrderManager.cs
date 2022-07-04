@@ -8,6 +8,7 @@ public enum IngredientType
     SlicedLettuce,
     Tomatoe,
     SlicedTomatoe,
+    RawMeat,
     MincedMeat,
     CookedMeat,
     BurntMeat,

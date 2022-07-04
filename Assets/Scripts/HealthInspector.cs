@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class HealthInspector : MonoBehaviour
 {
-    public int timeBetweeninspections = 180;
+    public int timeBetweenInspections = 180;
     public int warningDuration = 10;
+	public CheckFridge fridgeChecker;
     public float counter = 0.0f;
     private bool hasStarted = false;
+	public float timeTakenFromBones = 20;
 
     IEnumerator HealthInscpectorCalled()
     {
@@ -18,7 +20,7 @@ public class HealthInspector : MonoBehaviour
         }
 
         OnArrive();
-        counter = timeBetweeninspections;
+        counter = timeBetweenInspections;
         hasStarted = false;
     }
 
@@ -58,9 +60,14 @@ public class HealthInspector : MonoBehaviour
     {
         StartCoroutine(HealthInscpectorCalled());
     }
+
+	public void OnBonesMeal()
+	{
+		GameManager.Instance.audioManager.PlayOneShot(SoundSources.BonesMeal, 0);
+	}
     private void Awake()
     {
-        counter = timeBetweeninspections;
+        counter = timeBetweenInspections;
     }
 
     private void Update()

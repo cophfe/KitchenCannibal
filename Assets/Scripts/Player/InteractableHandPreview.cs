@@ -15,6 +15,10 @@ public class InteractableHandPreview : MonoBehaviour
 	[SerializeField]
 	bool enablePreview = true;
 	[SerializeField]
+	bool enableController = true;
+	[SerializeField]
+	bool enableHand = true;
+	[SerializeField]
 	bool handInGrabPosition = true;
 
 	[SerializeField]
@@ -85,7 +89,7 @@ public class InteractableHandPreview : MonoBehaviour
 			Debug.LogWarning("Interactable Preview requires at an instance of InteractablePreviewData to exist in the assets folder");
 		}
 
-		if (previewData && previewData.LeftHandAnimatedPrefab && previewData.RightHandAnimatedPrefab)
+		if (enableHand && previewData && previewData.LeftHandAnimatedPrefab && previewData.RightHandAnimatedPrefab)
 		{
 			Animator prefab = hand == Hand.Left ? previewData.LeftHandAnimatedPrefab : previewData.RightHandAnimatedPrefab;
 			animator = Instantiate(prefab, Vector3.zero, Quaternion.identity);
@@ -144,7 +148,7 @@ public class InteractableHandPreview : MonoBehaviour
 			}
 		}
 
-		if (previewData && previewData.LeftControllerPrefab && previewData.RightControllerPrefab)
+		if (enableController && previewData && previewData.LeftControllerPrefab && previewData.RightControllerPrefab)
 		{
 			Transform prefab = hand == Hand.Left ? previewData.LeftControllerPrefab : previewData.RightControllerPrefab;
 			controller = Instantiate(prefab, Vector3.zero, Quaternion.identity);

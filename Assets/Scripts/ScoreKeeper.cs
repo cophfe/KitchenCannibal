@@ -6,6 +6,7 @@ public enum ScoreChange
 {
     OrderComplete,
     OrderFailed,
+	BonesOrder,
     HealthInspectorPass,
     HealthInspectorFail,
 }
@@ -17,7 +18,7 @@ public class ScoreKeeper : MonoBehaviour
     private int ordersFailed = 0;
     private int healthInspectorPass = 0;
     private int healthInspectorFail = 0;
-
+	private int taintedMeals = 0;
     public void ResetScore()
     {
         playerScore = 0.0f;
@@ -33,8 +34,12 @@ public class ScoreKeeper : MonoBehaviour
                 ordersComplete++;
                 value = 1.0f;
                 break;
-
-            case ScoreChange.OrderFailed:
+			case ScoreChange.BonesOrder:
+                ordersComplete++;
+				taintedMeals++;
+				value = 1.0f;
+				break;
+			case ScoreChange.OrderFailed:
                 ordersFailed++;
                 value = -1.0f;
                 break;

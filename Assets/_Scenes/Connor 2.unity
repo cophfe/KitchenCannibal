@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.019837186, g: 0.0195172, b: 0.022233052, a: 1}
+  m_IndirectSpecularColor: {r: 0.019793743, g: 0.019244293, b: 0.021837462, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -525,7 +525,6 @@ MonoBehaviour:
   startTime: 0
   timeTillFail: 30
   recipe: {fileID: 11400000, guid: 91a58a973e17f1844bf630704f1869bc, type: 2}
-  reward: 0
   orderRackIndex: 0
   rack: {fileID: 0}
   orderActive: 0
@@ -9339,7 +9338,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: aad2066e65526af4c9c944fc3ec061c3, type: 3}
 --- !u!4 &517828011 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4546075799782962992, guid: aad2066e65526af4c9c944fc3ec061c3, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 517828010}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &520039414
@@ -12184,7 +12183,7 @@ Transform:
   - {fileID: 616753613}
   - {fileID: 867566589}
   m_Father: {fileID: 1109128328}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &753640739 stripped
 MonoBehaviour:
@@ -20022,7 +20021,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 517828011}
+  - {fileID: 752730984}
   - {fileID: 1323422719}
   - {fileID: 658185731}
   - {fileID: 1948145585}
@@ -20039,7 +20038,7 @@ Transform:
   - {fileID: 303072680}
   - {fileID: 709387605}
   - {fileID: 780527250}
-  - {fileID: 752730984}
+  - {fileID: 517828011}
   - {fileID: 125488176}
   - {fileID: 403360586}
   - {fileID: 2115484561}
@@ -20138,6 +20137,7 @@ MonoBehaviour:
   onMeatProcessed:
     m_PersistentCalls:
       m_Calls: []
+  audioSource: {fileID: 0}
 --- !u!1001 &1141631448
 PrefabInstance:
   m_ObjectHideFlags: 0
