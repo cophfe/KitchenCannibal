@@ -71,6 +71,4 @@ public class GameManager : MonoBehaviour
     {
         activeIngredients.Remove(ingrdient);
     }
-
-
 }

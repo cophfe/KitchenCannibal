@@ -66,11 +66,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: f7f8bab9398a37b48a136d33ed1f2ebf, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 821117679675251993}
   - component: {fileID: 4233795614189947761}
   m_Layer: 0
-  m_Name: Order 1
+  m_Name: ReworkedOrder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   - {fileID: 3090461127339843630}
   - {fileID: 1191378911614816583}
   orderDescription: {fileID: 7285034327297189150}
+  amountLeft: {fileID: 4876015876417318851}
 --- !u!1 &1027871709284630113
 GameObject:
   m_ObjectHideFlags: 0
