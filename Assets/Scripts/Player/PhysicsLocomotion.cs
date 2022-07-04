@@ -32,9 +32,6 @@ public class PhysicsLocomotion : TeleportationProvider
 	[SerializeField]
 	private InputActionProperty m_RightHandSnapTurnAction;
 
-	[SerializeField]
-	UnityEvent OnLocomote;
-
 	private float m_CurrentTurnAmount;
 	int leftTurnValue = 0;
 	int rightTurnValue = 0;

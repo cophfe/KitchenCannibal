@@ -9,9 +9,8 @@ public class TorsoShake : MonoBehaviour
 	public bool EnableOrganShake { get; set; } = false;
 	[SerializeField]
 	float shakeSensitivity = 1.0f;
-
 	[SerializeField]
-	Vector3 organVelocityBias = Vector3.up;
+	ParticleSystem system;
 	[SerializeField]
 	float organVelocityMagnitude = 1.0f;
 	[SerializeField]
@@ -102,7 +101,8 @@ public class TorsoShake : MonoBehaviour
 				Vector3 velocity = rb.velocity;
 				velocity += Random.onUnitSphere * organVelocityMagnitude;
 				rigidBody.velocity = velocity;
-
+				system.transform.forward = rigidBody.velocity.normalized;
+				system.Play();
 				var cols = rigidBody.GetComponentsInChildren<Collider>();
 
 				foreach (var col in cols)

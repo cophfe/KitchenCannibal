@@ -16,11 +16,11 @@ MonoBehaviour:
   description: 
   completedRecipie: 0
   recipeRequirements:
-  - ingredient: 4
-    amount: 1
-  - ingredient: 5
-    amount: 1
   - ingredient: 6
     amount: 1
-  - ingredient: 7
+  - ingredient: 3
+    amount: 1
+  - ingredient: 1
+    amount: 1
+  - ingredient: 9
     amount: 1

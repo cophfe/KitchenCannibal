@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39687361632943e49a26e29a59bb3061, type: 3}
   m_Name: Crappy Paddy
   m_EditorClassIdentifier: 
-  name: Crappy Paddy
-  description: The secret formular
+  name: Salad
+  description: a salad
+  completedRecipie: 1
   recipeRequirements:
   - ingredient: 3
     amount: 1
-  - ingredient: 5
+  - ingredient: 1
     amount: 0
