@@ -18,7 +18,7 @@ public class InteractableHandPreview : MonoBehaviour
 	bool handInGrabPosition = true;
 
 	[SerializeField]
-	Hand hand = Hand.Left;
+	Hand hand = Hand.Right;
 	[SerializeField]
 	bool reload;
 	[SerializeField]
@@ -129,7 +129,7 @@ public class InteractableHandPreview : MonoBehaviour
 								}
 
 								animator.speed = 0;
-								animator.SetInteger(poseIndexID, poseIndex);
+								animator.SetFloat(poseIndexID, poseIndex);
 								animator.SetLayerWeight(poseLayer, 1);
 								animator.Update(0);
 							}

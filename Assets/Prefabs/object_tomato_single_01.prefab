@@ -18,7 +18,8 @@ GameObject:
   - component: {fileID: -8023489966805862752}
   - component: {fileID: 1630634299838218216}
   - component: {fileID: 8927043831647289087}
-  m_Layer: 0
+  - component: {fileID: 3219921622205068461}
+  m_Layer: 11
   m_Name: object_tomato_single_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2289,14 +2290,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066663058c455143a5baa330d3d9380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HandGrabPose>k__BackingField: Grab
+  <HandGrabPose>k__BackingField: Ball
   <DoPhysicsInteractions>k__BackingField: 0
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 4933968119965213684}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 4540967235696121961}
   <AllColliders>k__BackingField:
   - {fileID: 8484855958014910046}
+  <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
-  <MoveToDistanceModifier>k__BackingField: 3
+  <MoveToDistanceModifier>k__BackingField: 1
   <MoveToForceModifier>k__BackingField: 0.7
   <UniformAttachTransform>k__BackingField: 1
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
@@ -2393,6 +2395,9 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 1
+  <DropOnLocomote>k__BackingField: 0
+  maxForceApplyDistance: 0.8
+  <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 4439124908440057100}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
@@ -2445,6 +2450,22 @@ MonoBehaviour:
   m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_TintRenderers:
   - {fileID: 2299907222517055028}
+--- !u!114 &3219921622205068461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2299907222517054987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94a281391a09c84ca4ceba3b44e16bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  processedAmount: 0
+  timeToCook: 5
+  ingredientAmount: 1
+  ingredientType: 7
 --- !u!1 &5032999960484102708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,7 +2475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4439124908440057100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2484,7 +2505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4933968119965213684}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,7 +2535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4540967235696121961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RPhysicsAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -98,10 +98,10 @@ public class TintInteractable : MonoBehaviour
 
 	public void SetTint(bool on)
 	{
-		if (tinted == on && tintMagnitude == lastTintMagnitude)
+		if (tinted == on && (!on || tintMagnitude * tintModify == lastTintMagnitude))
 			return;
 		tinted = on;
-		lastTintMagnitude = tintMagnitude;
+		lastTintMagnitude = tintMagnitude * tintModify;
 
 		Color value = on ? (m_TintColor * Mathf.LinearToGammaSpace(1f)) : Color.black;
 		value *= tintMagnitude * tintModify;
