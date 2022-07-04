@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 5190176915361260437}
   - component: {fileID: 5190176915361260432}
   - component: {fileID: 1401156387}
+  - component: {fileID: 5190176914564288696}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -418,6 +419,7 @@ MonoBehaviour:
   orderManager: {fileID: 0}
   audioManager: {fileID: 0}
   healthInspector: {fileID: 0}
+  scoreKeeper: {fileID: 0}
 --- !u!114 &5190176915361260432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,3 +453,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warningDuration: 10
+--- !u!114 &5190176914564288696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190176915361260436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6e8c3ad67693c4aa66d06a3bd29432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScore: 0
