@@ -18576,6 +18576,10 @@ PrefabInstance:
       propertyPath: timeBetweeninspections
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5190176915361260432, guid: c99c96adecc2bc34bb26e38e1228d286, type: 3}
+      propertyPath: timeTillFail
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5190176915361260434, guid: c99c96adecc2bc34bb26e38e1228d286, type: 3}
       propertyPath: rack
       value: 

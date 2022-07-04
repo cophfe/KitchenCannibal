@@ -13,6 +13,7 @@ public class Order : MonoBehaviour
     [HideInInspector] public int orderRackIndex = 0;
     [HideInInspector] public OrderRack rack = null;
     public bool orderActive = false;
+    private float startingTime = 0.0f;
     public void StartTime()
     {
         orderActive = true;
@@ -24,7 +25,7 @@ public class Order : MonoBehaviour
         if (timeStarted)
         {
             timeTillFail -= Time.deltaTime;
-            //display.UpdateTime(timeTillFail);
+            display.UpdateTime(timeTillFail / startingTime);
 
             if (timeTillFail <= 0.0f)
                 OrderFailed();
@@ -67,5 +68,9 @@ public class Order : MonoBehaviour
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
         GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
 
+    }
+    private void Awake()
+    {
+        startingTime = timeTillFail;
     }
 }
