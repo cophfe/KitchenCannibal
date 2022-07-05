@@ -34,4 +34,9 @@ public class WinText : MonoBehaviour
 		Inspector.text = $"INSPECTORS FOOLED: {keeper.HealthInspectorPass}/{keeper.HealthInspectorPass + keeper.HealthInspectorFail}";
 		Tainted.text = $"ORDERS TAINTED: {keeper.TaintedMeals}";
 	}
+
+	private void Awake()
+	{
+		gameObject.SetActive(false);
+	}
 }

@@ -103,7 +103,7 @@ public class PhysicsButton : MonoBehaviour
 			WhilePressed?.Invoke();
 		}
 		//if is pressed and wasn't previously pressed
-		else if (isPressed && !onCooldown)
+		else if (isPressed)
 		{
 			if (!coolDownOnPressDown)
 				StartCooldown();
@@ -113,7 +113,7 @@ public class PhysicsButton : MonoBehaviour
 			Pressed = true;
 		}
 		//if is previously pressed and is no longer pressed
-		else if (Pressed && !onCooldown)
+		else if (Pressed)
 		{
 			if (coolDownOnPressDown)
 				StartCooldown();

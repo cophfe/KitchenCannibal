@@ -73,7 +73,10 @@ public class GameManager : MonoBehaviour
 		currentOrderCount--;
 
 		if (winText && currentOrderCount <= 0)
+		{
 			winText.SetText(scoreKeeper);
+			healthInspector.Disable();
+		}
 	}
 
 
