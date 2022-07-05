@@ -20,9 +20,10 @@ public class Order : MonoBehaviour
     {
         orderActive = true;
         timeStarted = true;
-    }
+		GameManager.Instance.RegisterOrder();
+	}
 
-    private void Update()
+	private void Update()
     {
         if (timeStarted)
         {
@@ -101,7 +102,5 @@ public class Order : MonoBehaviour
 	private void Awake()
     {
         startingTime = timeTillFail;
-		if (enabled)
-			GameManager.Instance.RegisterOrder();
     }
 }

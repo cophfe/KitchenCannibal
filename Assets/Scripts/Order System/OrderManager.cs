@@ -62,6 +62,19 @@ public class OrderManager : MonoBehaviour
 			if (!orders[i].orderActive)
 				continue;
 
+			switch (orders[i].recipe.completedRecipie)
+			{
+				case CompletedRecipieType.Burger:
+					Debug.Log("checking burger recipe");
+					break;
+				case CompletedRecipieType.Salad:
+					Debug.Log("checking salad recipe");
+					break;
+				case CompletedRecipieType.HotDog:
+					Debug.Log("checking hotdog recipe");
+					break;
+			}
+
 			//check if there is enough ingredient for each requirement
 			int requirementsFufilled = 0;
 			for (int j = 0; j < orders[i].recipe.recipeRequirements.Count; j++)
@@ -78,7 +91,7 @@ public class OrderManager : MonoBehaviour
 					}
 				}
 
-				if (amount > requirement.amount)
+				if (amount > 0.3f)
 					requirementsFufilled++;
 				else
 					Debug.Log("not enough ingredient found: " + requirement.ingredient);
@@ -115,10 +128,10 @@ public class OrderManager : MonoBehaviour
             orders[i].orderActive = false;
             orders[i].CreateOrder(spawnTransform);
             return true;
-        }
+		}
 
-        // Nothing is found
-        Debug.Log("Invalid Recipe");
+		// Nothing is found
+		Debug.Log("Invalid Recipe");
         return false;
-    }
+	}
 }

@@ -8,6 +8,7 @@ public class RecipeCheckArea : MonoBehaviour
     public List<Ingredient> ingredients;
 	public float checkRadius = 0.1f;
 	public Vector3 checkOffset;
+	public float checkUnderDistance = 0.05f;
 	[SerializeField]
 	AudioSource audioSource = null;
 	[SerializeField]
@@ -48,7 +49,7 @@ public class RecipeCheckArea : MonoBehaviour
 			var rb = cols[i].attachedRigidbody;
 			if (rb)
 			{
-				if (cols[i].transform.position.y < (transform.position + test).y)
+				if (cols[i].transform.position.y + checkUnderDistance < (transform.position + test).y)
 					continue;
 
 				var ingredient = rb.GetComponent<Ingredient>();
