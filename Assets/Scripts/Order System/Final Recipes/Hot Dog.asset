@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hot Dog
   m_EditorClassIdentifier: 
   name: Hot Dog
-  description: 
-  completedRecipie: 0
+  description: Hot Dog
+  completedRecipie: 2
   recipeRequirements:
   - ingredient: 5
     amount: 1

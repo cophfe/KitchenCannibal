@@ -8,14 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HoverSocket
-  m_Shader: {fileID: -6465566751694194690, guid: 5d111fba0a7ad5c4daa36508459aa6bd, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 9bf2f647173f36141b32a2dd41f96f6c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -78,21 +79,24 @@ Material:
     m_Floats:
     - Opacity: 0.49
     - Vector1_1: 0.29
+    - Vector1_31f78968d1774b6fb9c45b3ae7c58f25: 1.45
+    - Vector1_40819170a3aa4231a7a9c8f8f59c3c39: 0.37
     - Vector1_476675f4b3884a95b4f1fbb6d5ef531a: 0.28
     - Vector1_49c9b118221b4507805d709d353da7fd: 1.68
     - Vector1_6881558470d246519c7c6d1093e619fc: 0.23
     - Vector1_bf0283a27f1b49039ea8e4302c4497c4: 0.103
+    - Vector1_c1ff078621e64882a8b8d49217b0c013: -0.16
     - Vector1_f37f97134a2f44fc8359b5100a81b8d2: 0.52
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -105,15 +109,16 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
     - Color_1: {r: 0.20302086, g: 0.33962262, b: 0.05286579, a: 0}
     - Color_2a668833c91b401db2cc7fa3d68f08a2: {r: 0.12300229, g: 1, b: 0, a: 0}
+    - Color_5ac1f69d266b4ac289438b80b2502a45: {r: 0.28910673, g: 0.4811321, b: 0.24283554, a: 0.3764706}
     - Color_a4ec69f575974b639be0cebee98a4a13: {r: 0.81064796, g: 1, b: 0.7216981, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.088113785, g: 1, b: 0, a: 0.34901962}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

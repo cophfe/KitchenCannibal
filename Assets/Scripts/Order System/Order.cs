@@ -13,6 +13,9 @@ public class Order : MonoBehaviour
     [HideInInspector] public int orderRackIndex = 0;
     [HideInInspector] public OrderRack rack = null;
     public bool orderActive = false;
+    private float startingTime = 0.0f;
+	public bool hasBones = false;
+
     public void StartTime()
     {
         orderActive = true;
@@ -24,7 +27,8 @@ public class Order : MonoBehaviour
         if (timeStarted)
         {
             timeTillFail -= Time.deltaTime;
-            //display.UpdateTime(timeTillFail);
+            if(display != null)
+                display.UpdateTime(timeTillFail / startingTime);
 
             if (timeTillFail <= 0.0f)
                 OrderFailed();
@@ -40,20 +44,39 @@ public class Order : MonoBehaviour
         GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderFailed);
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
-    }
 
-    public void CreateOrder(Vector3 position)
+		GameManager.Instance.DeregisterOrder();
+	}
+
+	public void CreateOrder(Transform spawnTransform)
     {
-        GameObject temp = Instantiate(GameManager.Instance.modelsAndimages.burgerPrefab);
+		GameObject prefab;
+		switch (recipe.completedRecipie)
+		{
+			case CompletedRecipieType.Burger:
+				prefab = GameManager.Instance.modelsAndimages.burgerPrefab;
+				break;
+			case CompletedRecipieType.Salad:
+				prefab = GameManager.Instance.modelsAndimages.saladPrefab;
+				break;
+			case CompletedRecipieType.HotDog:
+				prefab = GameManager.Instance.modelsAndimages.hotdogPrefab;
+				break;
+			default:
+				return;
+		}
+		GameObject temp = Instantiate(prefab);
         Order tempOrder = temp.GetComponent<Order>();
         tempOrder.display = display;
         tempOrder.recipe = recipe;
         tempOrder.orderRackIndex = orderRackIndex;
         tempOrder.rack = rack;
-        tempOrder.transform.position = position;
-    }
+		tempOrder.hasBones = hasBones;
+		tempOrder.transform.position = spawnTransform.position;
+		tempOrder.transform.rotation = spawnTransform.rotation;
+	}
 
-    public void OrderComplete()
+	public void OrderComplete()
     {
         if (display == null)
             return;
@@ -65,7 +88,20 @@ public class Order : MonoBehaviour
 
         Debug.Log("Order complete! Points awarded");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
-        GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
+		if (hasBones)
+		{
+			GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.BonesOrder);
+			GameManager.Instance.healthInspector.OnBonesMeal();
+		}
+		else
+			GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
 
+		GameManager.Instance.DeregisterOrder();
+	}
+	private void Awake()
+    {
+        startingTime = timeTillFail;
+		if (enabled)
+			GameManager.Instance.RegisterOrder();
     }
 }

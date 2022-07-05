@@ -80,7 +80,7 @@ public class Slicer
 			return null;
 
 		GameObject target = sliceable.gameObject;
-		MeshFilter mf1 = target.GetComponent<MeshFilter>();
+		MeshFilter mf1 = target.GetComponentInChildren<MeshFilter>();
 		if (!mf1)
 			return null;
 
@@ -324,6 +324,7 @@ public class Slicer
 			if (targetUsed)
 			{
 				slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+				slice.transform.SetPositionAndRotation(target.transform.position, target.transform.rotation);
 				slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
 				sliceableComponent = slice.GetComponent<Sliceable>();
 				//apparently non serialized values r not cloned (makes sense i guess)
@@ -346,6 +347,7 @@ public class Slicer
 
 					//if this is the first sliceable, it is not destroyed, but it is disabled
 					slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+					slice.transform.SetPositionAndRotation(target.transform.position, target.transform.rotation);
 					slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
 					sliceableComponent = slice.GetComponent<Sliceable>();
 					//apparently non serialized values are not cloned (makes sense i guess)
@@ -360,6 +362,7 @@ public class Slicer
 					sliceableComponent = slice.GetComponent<Sliceable>();
 				}
 				targetUsed = true;
+
 			}
 
 			meshes[i].RecalculateBounds();
@@ -384,9 +387,9 @@ public class Slicer
 
 			float sliceVolumeRatio = ((1 - i) * volumeRatio + i * (1.0f - volumeRatio));
 
-			var mF = slice.GetComponent<MeshFilter>();
+			var mF = slice.GetComponentInChildren<MeshFilter>();
 			mF.sharedMesh = meshes[i];
-			var mC = slice.GetComponent<MeshCollider>();
+			var mC = slice.GetComponentInChildren<MeshCollider>();
 			if (mC)
 				mC.sharedMesh = meshes[i];
 			var rb = slice.GetComponent<Rigidbody>();
@@ -398,8 +401,11 @@ public class Slicer
 			var ingredient = slice.GetComponent<Ingredient>();
 			if (ingredient)
 			{
+
 				sliceableComponent.Ingredient = ingredient;
 				ingredient.ingredientAmount *= sliceVolumeRatio;
+				if (targetUsed)
+					ingredient.PlayKnifeSound();
 			}
 
 			list.Add(sliceableComponent);
@@ -407,7 +413,7 @@ public class Slicer
 
 		if (sliceable.TimesSliced == 0)
 		{
-			var mR = sliceable.GetComponent<MeshRenderer>();
+			var mR = sliceable.GetComponentInChildren<MeshRenderer>();
 			if (mR)
 				mR.enabled = false;
 			sliceable.gameObject.SetActive(false);
@@ -900,7 +906,7 @@ public class Slicer
 
 	void SetSliceableMaterial(Sliceable sliceable)
 	{
-		var renderer = sliceable.GetComponent<MeshRenderer>();
+		var renderer = sliceable.GetComponentInChildren<MeshRenderer>();
 		if (renderer && (sliceable.SliceMaterial || DefaultSliceMaterial))
 		{
 			if (renderer.sharedMaterials.Length < 2)

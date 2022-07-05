@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39687361632943e49a26e29a59bb3061, type: 3}
   m_Name: BLT
   m_EditorClassIdentifier: 
-  name: BLT
+  name: Burger
   description: A Regular BLT
   completedRecipie: 0
   recipeRequirements:
-  - ingredient: 5
+  - ingredient: 6
     amount: 1
   - ingredient: 1
     amount: 1
   - ingredient: 3
     amount: 1
-  - ingredient: 8
+  - ingredient: 9
     amount: 1

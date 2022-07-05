@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Salad
   m_EditorClassIdentifier: 
   name: Salad
-  description: 
-  completedRecipie: 0
+  description: Salad
+  completedRecipie: 1
   recipeRequirements:
   - ingredient: 6
     amount: 1

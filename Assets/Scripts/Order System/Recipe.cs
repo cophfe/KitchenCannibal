@@ -6,13 +6,13 @@ using UnityEngine;
 public class RecipeRequirement
 {
     public IngredientType ingredient;
-    public int amount;
+    public float amount;
 }
 
 [CreateAssetMenu(fileName = "Recipe", menuName = "New Recipe")]
 public class Recipe : ScriptableObject
 {
-    public string name;
+    new public string name;
     public string description;
 
     public CompletedRecipieType completedRecipie;

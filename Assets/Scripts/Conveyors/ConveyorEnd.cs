@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class ConveyorEnd : MonoBehaviour
 {
-    [SerializeField] private ConveyorStart start;
 
+	[SerializeField] private ConveyorStart start;
+	
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Order>() != null)
+		var rb = other.attachedRigidbody;
+		if (!rb)
+			return;
+
+		var order = rb.GetComponent<Order>();
+        if (order)
         {
-            Destroy(other.gameObject);
+			Destroy(rb.gameObject);
         }
         else
         {
-            ConveyerObject obj = other.gameObject.AddComponent<ConveyerObject>();
+            ConveyerObject obj = rb.gameObject.AddComponent<ConveyerObject>();
             obj.start = start;
             obj.Hide();
-            other.attachedRigidbody.velocity = Vector3.zero;
+			rb.velocity = Vector3.zero;
         }
     }
 }
