@@ -27,7 +27,8 @@ public class Order : MonoBehaviour
         if (timeStarted)
         {
             timeTillFail -= Time.deltaTime;
-            display.UpdateTime(timeTillFail / startingTime);
+            if(display != null)
+                display.UpdateTime(timeTillFail / startingTime);
 
             if (timeTillFail <= 0.0f)
                 OrderFailed();

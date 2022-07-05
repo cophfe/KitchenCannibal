@@ -99,9 +99,7 @@ public class OrderManager : MonoBehaviour
 					completedOrder = false;
 					break;
 				}
-
 			}
-
 
 			if (!completedOrder)
             {

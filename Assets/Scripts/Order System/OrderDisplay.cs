@@ -32,7 +32,7 @@ public class OrderDisplay : MonoBehaviour
                         case IngredientType.CookedMeat:
                             orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.cookedMeat;
                             break;
-                        case IngredientType.SlicedBread:
+                        case IngredientType.Bread:
                             orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.buns;
                             break;
                         case IngredientType.SlicedLettuce:

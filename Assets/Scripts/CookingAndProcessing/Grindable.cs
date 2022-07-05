@@ -11,10 +11,13 @@ public class Grindable : Ingredient
 	//colliders of this object that have been recorded
 	public int RecordedColliders { get; set; } = 0;
 
-	private void Awake()
+	protected override void Awake()
 	{
+		
 		if (GrindColliders == null || GrindColliders.Length == 0)
 			GrindColliders = transform.GetComponentsInChildren<Collider>();
+
+		base.Awake();
 	}
 
 }
