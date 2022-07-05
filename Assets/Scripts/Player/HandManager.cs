@@ -187,6 +187,7 @@ public class HandManager : MonoBehaviour
 		}
 	}
 
+	bool thumbstickDown = false;
 	public PlayerController PlayerController { get; set; }
 
 	private void Start()
@@ -245,6 +246,7 @@ public class HandManager : MonoBehaviour
 
 		//teleport stuff
 		teleportActivate.action.performed += OnTeleportActivate;
+		teleportActivate.action.canceled += OnTeleportActivateCancel;
 		teleportCancel.action.performed += OnTeleportCancel;
 
 		trackingState.action.performed += OnTrackingState;
@@ -650,7 +652,12 @@ public class HandManager : MonoBehaviour
 	#region Teleport
 	private void OnTeleportActivate(InputAction.CallbackContext ctx)
 	{
+		thumbstickDown = true;
 		EnableTeleporting(true);
+	}
+	private void OnTeleportActivateCancel(InputAction.CallbackContext ctx)
+	{
+		thumbstickDown = false;
 	}
 
 	private void OnTeleportCancel(InputAction.CallbackContext ctx)
@@ -668,6 +675,7 @@ public class HandManager : MonoBehaviour
 		if (value == teleporter.enabled)
 			return;
 
+		thumbstickDown = value;
 		interactor.enabled = !value;
 		Controller.enableInputActions = !value;
 		teleporter.enabled = value;
@@ -1044,7 +1052,7 @@ public class HandManager : MonoBehaviour
 
 		//teleporting
 		{
-			if (!isTeleporting || thumbstick.action.triggered)
+			if (!isTeleporting || thumbstickDown)
 				return;
 			if (!teleporter.TryGetCurrent3DRaycastHit(out RaycastHit hit))
 			{

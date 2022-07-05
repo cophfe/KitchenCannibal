@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public ModelsAndImages modelsAndimages = null;
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public HealthInspector healthInspector = null;
     [HideInInspector] public ScoreKeeper scoreKeeper = null;
 
+    [HideInInspector] public List<Ingredient> activeIngredients = null;
+    public float minimumCollisionVelocity = 0.5f;
+    
     #region Singleton/Initialize
     private static GameManager m_Instance;                       // The current instance of MenuController
     public static GameManager Instance                           // The public current instance of MenuController
@@ -17,14 +21,17 @@ public class GameManager : MonoBehaviour
         get { return m_Instance; }
     }
 
-    void Awake()
+    private void OnEnable()
     {
         // Initialize Singleton
         if (m_Instance != null && m_Instance != this)
             Destroy(this.gameObject);
         else
             m_Instance = this;
+    }
 
+    void Awake()
+    {
         modelsAndimages = GetComponent<ModelsAndImages>();
         if (modelsAndimages == null)
             Debug.LogError("Missing a 'ModelsAndImages' component");
@@ -44,13 +51,24 @@ public class GameManager : MonoBehaviour
         scoreKeeper = GetComponent<ScoreKeeper>();
         if (scoreKeeper == null)
             Debug.LogError("Missing a 'ScoreKeeper' component");
+
+        activeIngredients = new List<Ingredient>();
     }
     #endregion
 
     private void Start()
-    {
-        healthInspector.StartInspection();
+    { 
         scoreKeeper.ResetScore();
     }
 
+
+    public void RegisterIngredient(Ingredient ingrdient)
+    {
+        activeIngredients.Add(ingrdient);
+    }
+    
+    public void DeRegisterIngredient(Ingredient ingrdient)
+    {
+        activeIngredients.Remove(ingrdient);
+    }
 }

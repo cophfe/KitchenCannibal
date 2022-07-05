@@ -4,18 +4,23 @@ using UnityEngine;
 
 public enum IngredientType
 {
-    empty = 1,
-    humanMeat = 2,
-    mincedHumanMeat = 3,
-    cookedMeat = 4,
-    buns = 5,
-    lettuce = 6,
-    tomatoe = 7,
+    Lettuce,
+    SlicedLettuce,
+    Tomatoe,
+    SlicedTomatoe,
+    RawMeat,
+    MincedMeat,
+    CookedMeat,
+    BurntMeat,
+    Bread,
+    SlicedBread
 }
 
 public enum CompletedRecipieType
 {
-    BLT,
+    Burger,
+    Salad,
+    HotDog,
 }
 
 public class OrderManager : MonoBehaviour
@@ -28,7 +33,7 @@ public class OrderManager : MonoBehaviour
 
     private void Awake()
     {
-        orders = GetComponents<Order>(); 
+        orders = GetComponents<Order>();
     }
 
     // Update is called once per frame
@@ -40,7 +45,7 @@ public class OrderManager : MonoBehaviour
             {
                 Debug.Log("Order: " + currentOrderIndex + " has started!");
                 // Create orders here
-                rack.AddOrder(orders[currentOrderIndex]);            
+                rack.AddOrder(orders[currentOrderIndex]);
                 currentOrderIndex++;
             }
         }
@@ -48,60 +53,67 @@ public class OrderManager : MonoBehaviour
         elaspedTime += Time.deltaTime;
     }
 
-    public bool CheckRecipe(List<RecipeRequirement> recipe, Vector3 spawnLocation)
+    public bool CheckRecipe(List<Ingredient> recipe, Transform spawnTransform)
     {
         bool completedOrder = true;
-        for (int i = 0; i <= currentOrderIndex; i++)
-        {
-            // Has searched through all active orders
-            if (!orders[i].orderActive)
-                continue;
+		for (int i = 0; i < currentOrderIndex; i++)
+		{
+			// Has searched through all active orders
+			if (!orders[i].orderActive)
+				continue;
 
-            // The amount of ingredients present is not the same
-            if (orders[i].recipe.recipeRequirements.Count != recipe.Count)
-                continue;
+			//check if there is enough ingredient for each requirement
+			int requirementsFufilled = 0;
+			for (int j = 0; j < orders[i].recipe.recipeRequirements.Count; j++)
+			{
+				var requirement = orders[i].recipe.recipeRequirements[j];
+				float amount = 0;
+				for (int k = 0; k < recipe.Count; k++)
+				{
+					var ingredient = recipe[k];
+					if (ingredient.ingredientType == requirement.ingredient)
+					{
 
-            int correctIngredients = 0;
-            int correctIndex = 0;
-            for (int x = 0; x < orders[i].recipe.recipeRequirements.Count; x++)
-            {
-                for (int y = 0; y < recipe.Count; y++)
-                {
-                    // Ingredient is the same
-                    if (orders[i].recipe.recipeRequirements[x].ingredient == recipe[y].ingredient)
-                    {
-                        correctIngredients++;
-                        correctIndex = y;
-                        break; // ingredient is the same
-                    }
-                }
+						amount += ingredient.ingredientAmount;
+					}
+				}
 
-                // An ingredient type did not match
-                if (correctIngredients != x + 1)
-                {
-                    completedOrder = false;
-                    break; // An ingredient from the order cannot be found checks other orders
-                }
+				if (amount > requirement.amount)
+					requirementsFufilled++;
+				else
+					Debug.Log("not enough ingredient found: " + requirement.ingredient);
+			}
 
-                else
-                {
-                    if (recipe[correctIndex].amount != orders[i].recipe.recipeRequirements[x].amount)
-                    {
-                        completedOrder = false;
-                        break; // The amount of said ingredient needed is not present
-                    }
-                }
-            }
-            
-            if (!completedOrder)
+			if (requirementsFufilled < orders[i].recipe.recipeRequirements.Count)
+			{
+				completedOrder = false;
+			}
+
+			//check their are no non matching ingredients
+			foreach (var ingredient in recipe)
+			{
+				bool matchFound = false;
+				foreach (var req in orders[i].recipe.recipeRequirements)
+				{
+					matchFound |= ingredient.ingredientType == req.ingredient;
+				}
+				if (!matchFound)
+				{
+					Debug.Log("incorrect ingredient found: " + ingredient.ingredientType);
+					completedOrder = false;
+					break;
+				}
+			}
+
+			if (!completedOrder)
             {
                 completedOrder = true;
                 continue;
             }
-           
+
             // A match is found
             orders[i].orderActive = false;
-            orders[i].CreateOrder(spawnLocation);
+            orders[i].CreateOrder(spawnTransform);
             return true;
         }
 

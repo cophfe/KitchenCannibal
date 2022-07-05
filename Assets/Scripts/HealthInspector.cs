@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class HealthInspector : MonoBehaviour
 {
+    public int timeBetweenInspections = 180;
     public int warningDuration = 10;
+	public CheckFridge fridgeChecker;
+    public float counter = 0.0f;
+    private bool hasStarted = false;
+	public float timeTakenFromBones = 20;
 
     IEnumerator HealthInscpectorCalled()
     {
+        hasStarted = true;
         StartWarning();
         {
             yield return new WaitForSeconds((float)warningDuration);
         }
 
         OnArrive();
+        counter = timeBetweenInspections;
+        hasStarted = false;
     }
 
     private void StartWarning()
@@ -26,12 +34,12 @@ public class HealthInspector : MonoBehaviour
     {
         Debug.Log("Health Inspector: Arrive");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.HealthInspector, 7);
-        // Check if all human meat is in the fridge
-        // for each human meat 
-        // if (meat x !infridge)
-        // OnCaught();
-        // else
-        // OnAvoidCaught()
+		// Check if all human meat is in the fridge
+		// for each human meat 
+		if (fridgeChecker.AreAllInBox())
+			OnAvoidCaught();
+        else
+			OnCaught();
     }
 
     private void OnCaught()
@@ -51,5 +59,25 @@ public class HealthInspector : MonoBehaviour
     public void StartInspection()
     {
         StartCoroutine(HealthInscpectorCalled());
+    }
+
+	public void OnBonesMeal()
+	{
+		GameManager.Instance.audioManager.PlayOneShot(SoundSources.BonesMeal, 0);
+	}
+    private void Awake()
+    {
+        counter = timeBetweenInspections;
+    }
+
+    private void Update()
+    {
+        if (!hasStarted)
+        {
+        counter -= Time.deltaTime;
+            if (counter <= 0)
+                StartInspection();
+
+        }
     }
 }

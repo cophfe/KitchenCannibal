@@ -8,6 +8,8 @@ public class RotationDetector : MonoBehaviour
 {
 	[SerializeField]
 	float rotationAmount;
+	[SerializeField]
+	Vector3 secondaryAxis = Vector3.right;
 
 	[field: SerializeField]
 	public UnityEvent OnRotated {  get; private set; }
@@ -16,7 +18,7 @@ public class RotationDetector : MonoBehaviour
 	[field: SerializeField]
 	public UnityEvent WhileRotated { get; private set; }
 
-	bool rotated = false;
+	public bool Rotated { get; private set; } = false;
 
 	bool inverseComparison;
 
@@ -43,7 +45,7 @@ public class RotationDetector : MonoBehaviour
 	void CallEvents(bool isRotated)
 	{
 		//if is rotated and was previously rotated
-		if (isRotated && rotated)
+		if (isRotated && Rotated)
 		{
 			WhileRotated?.Invoke();
 		}
@@ -52,13 +54,13 @@ public class RotationDetector : MonoBehaviour
 		{
 			OnRotated?.Invoke();
 			WhileRotated?.Invoke();
-			rotated = true;
+			Rotated = true;
 		}
 		//if is previously rotated and is no longer rotated
-		else if (rotated)
+		else if (Rotated)
 		{
 			OnStopRotated?.Invoke();
-			rotated = false;
+			Rotated = false;
 		}
 	}
 
@@ -76,20 +78,17 @@ public class RotationDetector : MonoBehaviour
 	{
 		var joint = GetComponent<HingeJoint>();
 
-		//this is wrong for some joint axis but eh i don't care this is used for one small thing
-		Vector3 rot = Vector3.right;
-
 		Gizmos.color = Color.cyan;
-		Vector3 vec = Quaternion.AngleAxis(rotationAmount, joint.axis) * rot;
+		Vector3 vec = Quaternion.AngleAxis(rotationAmount, joint.axis) * secondaryAxis;
 		Gizmos.DrawRay(transform.position, transform.TransformDirection(vec) * 0.14f);
 
 		if (joint.useLimits)
 		{
 			Gizmos.color = Color.red;
 
-			vec = Quaternion.AngleAxis(joint.limits.max, joint.axis) * rot;
+			vec = Quaternion.AngleAxis(joint.limits.max, joint.axis) * secondaryAxis;
 			Gizmos.DrawRay(transform.position, transform.TransformDirection(vec) * 0.1f);
-			vec = Quaternion.AngleAxis(joint.limits.min, joint.axis) * rot;
+			vec = Quaternion.AngleAxis(joint.limits.min, joint.axis) * secondaryAxis;
 			Gizmos.DrawRay(transform.position, transform.TransformDirection(vec) * 0.1f);
 		}
 		

@@ -897,7 +897,10 @@ public class CustomGrabInteractable : XRBaseInteractable
 		rigidbody.angularDrag = m_OldAngularDrag;
 
 		if (!isSelected)
+		{
+			rigidbody.isKinematic = m_WasKinematic && !m_ForceGravityOnDetach;
 			m_Rigidbody.useGravity |= m_ForceGravityOnDetach;
+		}
 	}
 
 	protected void SmoothVelocityStart(IXRInteractor interactor)
