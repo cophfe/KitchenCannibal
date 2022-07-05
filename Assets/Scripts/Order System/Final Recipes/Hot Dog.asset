@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Hot Dog
   completedRecipie: 2
   recipeRequirements:
-  - ingredient: 5
+  - ingredient: 6
     amount: 1
-  - ingredient: 4
+  - ingredient: 9
     amount: 1
