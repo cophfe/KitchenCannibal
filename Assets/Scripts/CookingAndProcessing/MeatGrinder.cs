@@ -7,6 +7,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class MeatGrinder : MonoBehaviour
 {
 	[SerializeField]
+	Transform blade0;
+	[SerializeField]
+	Transform blade1;
+	[SerializeField]
 	CollisionTriggerEvent recordTrigger;
 	[SerializeField]
 	CollisionTriggerEvent addTrigger;
@@ -201,6 +205,12 @@ public class MeatGrinder : MonoBehaviour
 		lastDeltaAngle = deltaAngle;
 
 		angle = currentAngle;
+
+		Vector3 axis = transform.TransformDirection(handleJoint.axis);
+		if (blade0)
+			blade0.Rotate(axis, angle);
+		if (blade1)
+			blade1.Rotate(axis, -angle);
 	}
 
 	void UpdateMeat()
