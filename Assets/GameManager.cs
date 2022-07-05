@@ -5,6 +5,7 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
+    public WinText winText;
     [HideInInspector] public ModelsAndImages modelsAndimages = null;
     [HideInInspector] public OrderManager orderManager = null;
     [HideInInspector] public AudioMananger audioManager = null;
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public List<Ingredient> activeIngredients = null;
     public float minimumCollisionVelocity = 0.5f;
-    
+
+	int currentOrderCount = 0;
     #region Singleton/Initialize
     private static GameManager m_Instance;                       // The current instance of MenuController
     public static GameManager Instance                           // The public current instance of MenuController
@@ -61,8 +63,25 @@ public class GameManager : MonoBehaviour
         scoreKeeper.ResetScore();
     }
 
+	public void RegisterOrder()
+	{
+		currentOrderCount++;
+	}
 
-    public void RegisterIngredient(Ingredient ingrdient)
+	public void DeregisterOrder()
+	{
+		currentOrderCount--;
+
+		if (winText && currentOrderCount <= 0)
+		{
+			winText.SetText(scoreKeeper);
+			healthInspector.Disable();
+		}
+	}
+
+
+
+	public void RegisterIngredient(Ingredient ingrdient)
     {
         activeIngredients.Add(ingrdient);
     }

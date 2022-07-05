@@ -21,30 +21,32 @@ public class OrderDisplay : MonoBehaviour
     {
         if (order != null)
         {
-            for (int i = 0; i < order.recipe.recipeRequirements.Count; i++)
+            for (int i = 0; i < order.recipe.recipeRequirements.Count && i < 4; i++)
             {
-                if (i < 4)
+                orderIngredientAmount[i].text = order.recipe.recipeRequirements[i].amount.ToString();
+
+                switch (order.recipe.recipeRequirements[i].ingredient)
                 {
-                    orderIngredientAmount[i].text = order.recipe.recipeRequirements[i].amount.ToString();
-
-                    switch (order.recipe.recipeRequirements[i].ingredient)
-                    {
-                        case IngredientType.CookedMeat:
-                            orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.cookedMeat;
-                            break;
-                        case IngredientType.Bread:
-                            orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.buns;
-                            break;
-                        case IngredientType.SlicedLettuce:
-                            orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.lettuce;
-                            break;
-                        case IngredientType.SlicedTomatoe:
-                            orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.tomatoe;
-                            break;
-                    }
+                    case IngredientType.CookedMeat:
+                        orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.cookedMeat;
+                        break;
+                    case IngredientType.Bread:
+                        orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.buns;
+                        break;
+                    case IngredientType.SlicedLettuce:
+                        orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.lettuce;
+                        break;
+                    case IngredientType.SlicedTomatoe:
+                        orderIngredientImages[i].sprite = GameManager.Instance.modelsAndimages.tomatoe;
+                        break;
                 }
-
             }
+			for (int i = order.recipe.recipeRequirements.Count; i < 4; i++)
+			{
+				orderIngredientAmount[i].text = "";
+				orderIngredientImages[i].enabled = false;
+			}
+
             switch (order.recipe.completedRecipie)
             {
                 case CompletedRecipieType.Burger:
