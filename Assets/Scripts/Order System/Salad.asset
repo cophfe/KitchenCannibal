@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39687361632943e49a26e29a59bb3061, type: 3}
-  m_Name: Crappy Paddy
+  m_Name: Salad
   m_EditorClassIdentifier: 
   name: Salad
   description: a salad

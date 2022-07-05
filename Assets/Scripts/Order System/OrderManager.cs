@@ -73,12 +73,15 @@ public class OrderManager : MonoBehaviour
 					var ingredient = recipe[k];
 					if (ingredient.ingredientType == requirement.ingredient)
 					{
+
 						amount += ingredient.ingredientAmount;
 					}
 				}
 
 				if (amount > requirement.amount)
 					requirementsFufilled++;
+				else
+					Debug.Log("not enough ingredient found: " + requirement.ingredient);
 			}
 
 			if (requirementsFufilled < orders[i].recipe.recipeRequirements.Count)
@@ -96,12 +99,11 @@ public class OrderManager : MonoBehaviour
 				}
 				if (!matchFound)
 				{
+					Debug.Log("incorrect ingredient found: " + ingredient.ingredientType);
 					completedOrder = false;
 					break;
 				}
-
 			}
-
 
 			if (!completedOrder)
             {

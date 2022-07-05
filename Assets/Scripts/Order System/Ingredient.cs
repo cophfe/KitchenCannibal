@@ -11,7 +11,7 @@ public class Ingredient : MonoBehaviour
     private AudioSource audiosource = null;
     public bool hasBoneShards = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         audiosource = GetComponent<AudioSource>();
         if (audiosource == null)
@@ -91,9 +91,14 @@ public class Ingredient : MonoBehaviour
 					value = Random.Range(4, 9);
                     break;
 
+                case IngredientType.RawMeat:
+                    source = SoundSources.Meat;
+                    value = Random.Range(0, 2);
+                    break;
+
                 case IngredientType.MincedMeat:
-					source = SoundSources.Meat; 
-					value = Random.Range(0, 2);
+                    source = SoundSources.Meat;
+                    value = Random.Range(0, 2);
                     break;
 
                 case IngredientType.CookedMeat:
