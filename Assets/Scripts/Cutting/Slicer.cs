@@ -401,9 +401,11 @@ public class Slicer
 			var ingredient = slice.GetComponent<Ingredient>();
 			if (ingredient)
 			{
+
 				sliceableComponent.Ingredient = ingredient;
 				ingredient.ingredientAmount *= sliceVolumeRatio;
-				ingredient.PlayKnifeSound();
+				if (targetUsed)
+					ingredient.PlayKnifeSound();
 			}
 
 			list.Add(sliceableComponent);

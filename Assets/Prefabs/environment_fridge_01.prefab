@@ -47,6 +47,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 19456
+  ignoreTag: Organ
 --- !u!1 &140190902332552171
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4882745746745810428
 Transform:
   m_ObjectHideFlags: 0
@@ -574,7 +575,7 @@ HingeJoint:
   m_Anchor: {x: 0.016, y: 0.61751616, z: -0.0023}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.325, y: 1.3725162, z: 0.26520002}
+  m_ConnectedAnchor: {x: 0.58479977, y: 1.4025161, z: 1.1749998}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -820,7 +821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7000817554136091206
 Transform:
   m_ObjectHideFlags: 0
@@ -1085,7 +1086,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.14682901, z: -0.001}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.3326, y: 1.701829, z: 0.26650003}
+  m_ConnectedAnchor: {x: 0.58350027, y: 1.7318289, z: 0.5173998}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -1405,6 +1406,7 @@ Transform:
   - {fileID: 3699123681995587813}
   - {fileID: 245834663}
   - {fileID: 6064332760726922180}
+  - {fileID: 9080779578177848547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1723,7 +1725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6673116874230743051
 Transform:
   m_ObjectHideFlags: 0
@@ -1988,7 +1990,7 @@ HingeJoint:
   m_Anchor: {x: -0.0193, y: 0.61751616, z: -0.0023}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.32630002, y: 1.3725162, z: 0.26520002}
+  m_ConnectedAnchor: {x: 0.58480024, y: 1.4025161, z: 0.52369976}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -2164,6 +2166,133 @@ MonoBehaviour:
   closedDamper: 1
   slamForce: 300
   slamDamper: 1
+--- !u!1 &5659335776413290389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9080779578177848547}
+  - component: {fileID: 1269513573070874847}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9080779578177848547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659335776413290389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.563, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4065376180101627120}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1269513573070874847
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659335776413290389}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 3966418613768241647, guid: 6b450ca0c8b4b5e4cb87065aea01fe9a, type: 2}
+  m_audioClip: {fileID: 8300000, guid: b92e370a60c2abb4ab972117952572cc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 45
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5680304570091516380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2463,7 +2592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2921761679544453044
 Transform:
   m_ObjectHideFlags: 0
@@ -2728,7 +2857,7 @@ HingeJoint:
   m_Anchor: {x: 0.0003, y: 0.14976673, z: -0.0012}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.3329, y: 1.7077667, z: 0.26630002}
+  m_ConnectedAnchor: {x: 0.5836997, y: 1.7377666, z: 1.1828998}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -3215,7 +3344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7789785673680606973, guid: c9debf1920929f543abb7c7a3cfae582, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.028739825
+      value: 0.028739855
       objectReference: {fileID: 0}
     - target: {fileID: 7789785673680606973, guid: c9debf1920929f543abb7c7a3cfae582, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -3235,7 +3364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7820016015230305298, guid: c9debf1920929f543abb7c7a3cfae582, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.0019999146
+      value: -0.0019999295
       objectReference: {fileID: 0}
     - target: {fileID: 8587295334872053601, guid: c9debf1920929f543abb7c7a3cfae582, type: 3}
       propertyPath: m_Mesh
