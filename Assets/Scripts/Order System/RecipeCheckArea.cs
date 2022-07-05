@@ -6,7 +6,7 @@ public class RecipeCheckArea : MonoBehaviour
 {
     [SerializeField] OrderManager orderManager = null;
     public List<Ingredient> ingredients;
-	public Vector3 checkExtents;
+	public float checkRadius = 0.1f;
 	public Vector3 checkOffset;
 	[SerializeField]
 	AudioSource audioSource = null;
@@ -41,12 +41,16 @@ public class RecipeCheckArea : MonoBehaviour
 	public void CheckIngredients()
 	{
 		cooldownTimer = cooldown;
-		var cols = Physics.OverlapBox(transform.position + checkOffset, checkExtents / 2, transform.rotation);
+		Vector3 test = transform.TransformDirection(checkOffset);
+		var cols = Physics.OverlapSphere(transform.position + test, checkRadius);
 		for (int i = 0; i < cols.Length; i++)
 		{
 			var rb = cols[i].attachedRigidbody;
 			if (rb)
 			{
+				if (cols[i].transform.position.y < (transform.position + test).y)
+					continue;
+
 				var ingredient = rb.GetComponent<Ingredient>();
 				if (ingredient && !ingredients.Contains(ingredient))
 				{
@@ -81,6 +85,6 @@ public class RecipeCheckArea : MonoBehaviour
 	{
 		Gizmos.color = new Color(1, 0, 0, 0.5f);
 		Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
-		Gizmos.DrawCube(checkOffset, checkExtents);
+		Gizmos.DrawSphere(checkOffset, checkRadius);
 	}
 }

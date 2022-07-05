@@ -8,6 +8,8 @@ public class CheckFridge : MonoBehaviour
 	Vector3 extents;
 	[SerializeField]
 	LayerMask layerMask;
+	[SerializeField]
+	string ignoreTag = "Organ";
 
 	public bool AreAllInBox()
 	{
@@ -16,7 +18,7 @@ public class CheckFridge : MonoBehaviour
 
 		foreach(var ingredient in ingredients)
 		{
-			if (ingredient.ingredientType == IngredientType.RawMeat)
+			if (ingredient.ingredientType == IngredientType.RawMeat && ingredient.gameObject.tag != ignoreTag)
 			{
 				var rb = ingredient.GetComponent<Rigidbody>();
 				bool inBox = false;

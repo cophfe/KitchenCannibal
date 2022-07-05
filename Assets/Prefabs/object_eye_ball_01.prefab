@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 390873372746720292}
   m_Layer: 11
   m_Name: object_eye_ball_01
-  m_TagString: Untagged
+  m_TagString: Organ
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
