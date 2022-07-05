@@ -69,6 +69,9 @@ public class TintInteractable : MonoBehaviour
 
 		m_EmissionEnabled = GetEmissionEnabled();
 		m_TintPropertyBlock = new MaterialPropertyBlock();
+
+		tinted = true;
+		SetTint(false);
 	}
 
 	protected void OnDestroy()

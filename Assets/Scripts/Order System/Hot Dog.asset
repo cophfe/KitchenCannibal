@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39687361632943e49a26e29a59bb3061, type: 3}
   m_Name: Hot Dog
   m_EditorClassIdentifier: 
-  name: BLT
-  description: A Regular BLT
-  completedRecipie: 0
+  name: Hot Dog
+  description: hot dog
+  completedRecipie: 2
   recipeRequirements:
   - ingredient: 6
     amount: 1

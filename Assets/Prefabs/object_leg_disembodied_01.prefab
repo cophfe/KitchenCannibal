@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 1987693510}
   - component: {fileID: 1987693509}
   - component: {fileID: 5889235866812035162}
+  - component: {fileID: 5137096426892843371}
   m_Layer: 11
   m_Name: Bone
   m_TagString: Untagged
@@ -796,6 +797,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5137096426892843371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987693507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94a281391a09c84ca4ceba3b44e16bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  processedAmount: 0
+  timeToCook: 5
+  ingredientAmount: 0.5
+  ingredientType: 4
+  hasBoneShards: 0
 --- !u!1 &2040069598
 GameObject:
   m_ObjectHideFlags: 0

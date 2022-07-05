@@ -44,9 +44,11 @@ public class Order : MonoBehaviour
         GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderFailed);
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
-    }
 
-    public void CreateOrder(Transform spawnTransform)
+		GameManager.Instance.DeregisterOrder();
+	}
+
+	public void CreateOrder(Transform spawnTransform)
     {
 		GameObject prefab;
 		switch (recipe.completedRecipie)
@@ -94,9 +96,12 @@ public class Order : MonoBehaviour
 		else
 			GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
 
-    }
-    private void Awake()
+		GameManager.Instance.DeregisterOrder();
+	}
+	private void Awake()
     {
         startingTime = timeTillFail;
+		if (enabled)
+			GameManager.Instance.RegisterOrder();
     }
 }
