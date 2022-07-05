@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Salad
   completedRecipie: 1
   recipeRequirements:
-  - ingredient: 6
+  - ingredient: 1
     amount: 1
-  - ingredient: 7
+  - ingredient: 3
     amount: 1
