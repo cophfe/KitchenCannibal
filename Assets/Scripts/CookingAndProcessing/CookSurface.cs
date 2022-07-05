@@ -80,6 +80,7 @@ public class CookSurface : MonoBehaviour
 		{
 			cookables.Remove(c);
 		}
+
 	}
 
 	private void FixedUpdate()

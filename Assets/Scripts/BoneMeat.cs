@@ -70,9 +70,15 @@ public class BoneMeat : MonoBehaviour
 			return;
 
 		pieceCount--;
-		var inter = args.interactorObject as CustomGrabInteractable;
-		inter.firstSelectEntered.RemoveListener(OnPickupBonePiece);
-		inter.HandDetectDistanceModifer *= 0.6f;
+		var inter = args.interactableObject as CustomGrabInteractable;
+		if (inter)
+		{
+			inter.firstSelectEntered.RemoveListener(OnPickupBonePiece);
+			inter.HandDetectDistanceModifer *= 0.6f;
+		}
+		else
+			Debug.Log("Could not find interactable component");
+
 		if (src)
 			src.PlayOneShot(pickBone);
 

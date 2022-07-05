@@ -1114,6 +1114,7 @@ MonoBehaviour:
   - {fileID: 2040069600}
   - {fileID: 4496511198821698583}
   - {fileID: 379494318}
+  - {fileID: 83218187}
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 1
   <MoveToDistanceModifier>k__BackingField: 2
@@ -1425,11 +1426,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -158.49896
+    limit: -177
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: -64.61408
+    limit: -30.054447
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
@@ -1521,11 +1522,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -43.184917
+    limit: -82.03433
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 27.001831
+    limit: 67.036476
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
