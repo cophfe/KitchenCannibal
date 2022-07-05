@@ -52,6 +52,14 @@ public class OrderDisplay : MonoBehaviour
                 case CompletedRecipieType.Burger:
                     orderImage.sprite = GameManager.Instance.modelsAndimages.burger;
                     break;
+
+                case CompletedRecipieType.HotDog:
+                    orderImage.sprite = GameManager.Instance.modelsAndimages.hotdog;
+                    break;
+
+                case CompletedRecipieType.Salad:
+                    orderImage.sprite = GameManager.Instance.modelsAndimages.salad;
+                    break;
             }
 
             orderDescription.text = order.recipe.description;
