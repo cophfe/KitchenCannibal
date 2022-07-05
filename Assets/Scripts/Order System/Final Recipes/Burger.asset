@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Burger
   m_EditorClassIdentifier: 
   name: Burger
-  description: 
+  description: Burger
   completedRecipie: 0
   recipeRequirements:
   - ingredient: 6
