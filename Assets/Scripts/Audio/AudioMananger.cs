@@ -52,6 +52,8 @@ public class AudioMananger : MonoBehaviour
     [SerializeField] private List<AudioClip> torsoClips;
     [SerializeField] private List<AudioClip> vegetableClips;
     [SerializeField] private List<AudioClip> bonesClips;
+
+    [SerializeField] private AudioSource audiosource2 = null;
     
 
     /// <summary>
@@ -84,6 +86,10 @@ public class AudioMananger : MonoBehaviour
         clipList[18] = torsoClips;
         clipList[19] = vegetableClips;
         clipList[20] = bonesClips;
+
+        audiosource2.clip = GetClip(SoundSources.Music, 0);
+        audiosource2.loop = true;
+        audiosource2.Play();
     }
 
 
