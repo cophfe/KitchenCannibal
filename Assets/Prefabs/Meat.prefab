@@ -265,9 +265,9 @@ MonoBehaviour:
   ingredientType: 5
   hasBoneShards: 0
   processedThroughCook: 1
-  burntColour: {r: 0.13207549, g: 0.07831072, b: 0.06541474, a: 1}
-  cookedColour: {r: 0.254717, g: 0.078097194, b: 0.09979341, a: 0}
-  renderer: {fileID: 0}
+  burntColour: {r: 0.084905684, g: 0.030037388, b: 0.031736143, a: 1}
+  cookedColour: {r: 0.5411765, g: 0.20784314, b: 0.12156863, a: 0}
+  renderer: {fileID: 1073619327943126487}
   materialIndex: 0
   <OnCookableCook>k__BackingField:
     m_PersistentCalls:
