@@ -34,12 +34,12 @@ public class HealthInspector : MonoBehaviour
     {
         Debug.Log("Health Inspector: Arrive");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.HealthInspector, 7);
-        // Check if all human meat is in the fridge
-        // for each human meat 
-        // if (meat x !infridge)
-        // OnCaught();
-        // else
-        // OnAvoidCaught()
+		// Check if all human meat is in the fridge
+		// for each human meat 
+		if (fridgeChecker.AreAllInBox())
+			OnAvoidCaught();
+        else
+			OnCaught();
     }
 
     private void OnCaught()
