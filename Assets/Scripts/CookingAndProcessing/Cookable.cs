@@ -7,6 +7,8 @@ public class Cookable : Ingredient
 {
 	[SerializeField]
 	bool processedThroughCook = true;
+	[SerializeField]
+	float timeToBurn = 5.0f;
 
 	[SerializeField]
 	Color burntColour;
@@ -32,7 +34,7 @@ public class Cookable : Ingredient
 	public bool PreviousCookState { get; private set; }
 	public bool Cooking { get; set; }
 
-	private void Awake()
+	protected override void Awake()
 	{
 		//will take 
 		cookSpeed = timeToCook == 0 ? Mathf.Infinity : 1.0f / timeToCook;
@@ -50,6 +52,8 @@ public class Cookable : Ingredient
 
 		startColour = material.color;
 		endColour = cookedColour;
+
+		base.Awake();
 	}
 
 	
@@ -83,6 +87,8 @@ public class Cookable : Ingredient
 				}
 				else
 					OnCookableCook?.Invoke();
+
+				cookSpeed = timeToBurn == 0 ? Mathf.Infinity : 1.0f / timeToBurn;
 
 				cooked = true;
 			}

@@ -1037,7 +1037,7 @@ MonoBehaviour:
   - {fileID: 5486002688730186674}
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
-  <MoveToForceModifier>k__BackingField: 0.5
+  <MoveToForceModifier>k__BackingField: 0.8
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &4945327203119519248

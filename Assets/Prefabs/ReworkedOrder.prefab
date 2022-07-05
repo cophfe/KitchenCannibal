@@ -396,7 +396,7 @@ MonoBehaviour:
   <PhysicsLeftHandAttachPoint>k__BackingField: {fileID: 3467995347640494715}
   <PhysicsRightHandAttachPoint>k__BackingField: {fileID: 3068225340332663787}
   <AllColliders>k__BackingField:
-  - {fileID: 0}
+  - {fileID: 662574785807886854}
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
@@ -416,7 +416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 662574785807886854}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1342,7 +1343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f7f8bab9398a37b48a136d33ed1f2ebf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24cff728ac12fb941b9f69f4904af529, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

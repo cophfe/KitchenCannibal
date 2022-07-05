@@ -101,7 +101,8 @@ public class Bone : MonoBehaviour
 		}
 
 		limbIngredient.hasBoneShards = false;
-		blood?.Play();
+		if (blood)
+			blood.Play();
 		audioSource.PlayOneShot(GameManager.Instance.audioManager.GetClip(SoundSources.Bone, 2));
 	}
 }
