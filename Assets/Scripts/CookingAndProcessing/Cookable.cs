@@ -19,6 +19,8 @@ public class Cookable : Ingredient
 	[SerializeField, Min(0)]
 	int materialIndex = 0;
 	[field: SerializeField]
+	public UnityEvent OnStartCooking { get; set; }
+	[field: SerializeField]
 	public UnityEvent OnCookableCook { get; set; }
 	[field: SerializeField]
 	public UnityEvent OnCookableBurn { get; set; }

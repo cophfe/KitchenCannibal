@@ -42,13 +42,17 @@ public class OutOfBounds : MonoBehaviour
 		isOutOfBounds |= (1 << other.gameObject.layer & boundsMask.value) != 0;
 	}
 
-
-	private void Update()
+	private void FixedUpdate()
 	{
 		if (!overrideFade)
 			fadeTarget = isOutOfBounds ? 1 : 0;
-		UpdateFadeEffect();
+	
 		isOutOfBounds = false;
+	}
+
+	private void Update()
+	{
+		UpdateFadeEffect();
 	}
 	void UpdateFadeEffect()
 	{

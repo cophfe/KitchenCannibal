@@ -113,7 +113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1897938940
 Transform:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5268,17 +5268,33 @@ MonoBehaviour:
   ingredientType: 5
   hasBoneShards: 1
   processedThroughCook: 1
+  timeToBurn: 5
   burntColour: {r: 0.08627451, g: 0.03137255, b: 0.03137255, a: 1}
   cookedColour: {r: 0.5411765, g: 0.20784314, b: 0.12156863, a: 0}
   renderer: {fileID: 851657890}
   materialIndex: 0
+  <OnStartCooking>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1897938938}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnCookableCook>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8459076093680370072}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Stop
-        m_Mode: 1
+      - m_Target: {fileID: 8459076093680370074}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5299,10 +5315,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1897938937}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1897938938}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6112,14 +6128,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6597985a616c4a34d9664a8d713ed108, type: 3}
+--- !u!1 &8459076093680370074 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2179299857218092159, guid: 6597985a616c4a34d9664a8d713ed108, type: 3}
+  m_PrefabInstance: {fileID: 7735707858823183845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8459076093680370073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2179299857218092156, guid: 6597985a616c4a34d9664a8d713ed108, type: 3}
-  m_PrefabInstance: {fileID: 7735707858823183845}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8459076093680370072 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2179299857218092157, guid: 6597985a616c4a34d9664a8d713ed108, type: 3}
   m_PrefabInstance: {fileID: 7735707858823183845}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8528334489280022149

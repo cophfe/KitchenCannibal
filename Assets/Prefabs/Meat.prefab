@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TintColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_TintRenderers:
-  - {fileID: 0}
+  - {fileID: 1073619327943126487}
 --- !u!114 &526345771091134073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,10 +266,26 @@ MonoBehaviour:
   ingredientType: 5
   hasBoneShards: 0
   processedThroughCook: 1
+  timeToBurn: 5
   burntColour: {r: 0.084905684, g: 0.030037388, b: 0.031736143, a: 1}
   cookedColour: {r: 0.5411765, g: 0.20784314, b: 0.12156863, a: 0}
   renderer: {fileID: 1073619327943126487}
   materialIndex: 0
+  <OnStartCooking>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7956905199154924817}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnCookableCook>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -297,10 +313,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7956905199154924819}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7956905199154924817}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -605,7 +621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7956905199154924816
 Transform:
   m_ObjectHideFlags: 0
@@ -636,7 +652,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

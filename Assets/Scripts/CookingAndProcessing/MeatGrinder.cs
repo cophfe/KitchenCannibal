@@ -208,9 +208,9 @@ public class MeatGrinder : MonoBehaviour
 
 		Vector3 axis = transform.TransformDirection(handleJoint.axis);
 		if (blade0)
-			blade0.Rotate(axis, angle);
+			blade0.Rotate(axis, -deltaAngle);
 		if (blade1)
-			blade1.Rotate(axis, -angle);
+			blade1.Rotate(axis, deltaAngle);
 	}
 
 	void UpdateMeat()

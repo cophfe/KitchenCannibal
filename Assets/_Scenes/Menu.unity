@@ -480,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
       propertyPath: coolDownOnPressDown
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
       propertyPath: <OnPressed>k__BackingField.m_PersistentCalls.m_Calls.Array.size
@@ -807,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
       propertyPath: coolDownOnPressDown
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
       propertyPath: <OnPressed>k__BackingField.m_PersistentCalls.m_Calls.Array.size
