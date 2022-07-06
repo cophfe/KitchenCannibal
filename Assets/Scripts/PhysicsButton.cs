@@ -88,7 +88,8 @@ public class PhysicsButton : MonoBehaviour
 	void CheckPressed()
 	{
 		float pressDist = Vector3.Dot(transform.localPosition - startPosition, pressAxis);
-		
+
+		Debug.Log("dist: " + pressDist);
 		if (inversePress)
 			CallEvents(pressDist < pressDistance);
 		else

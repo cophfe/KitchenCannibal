@@ -105,7 +105,7 @@ MonoBehaviour:
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 2
-  <MoveToForceModifier>k__BackingField: 0.6
+  <MoveToForceModifier>k__BackingField: 0.9
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &1834372004854339074

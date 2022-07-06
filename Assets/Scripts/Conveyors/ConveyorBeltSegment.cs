@@ -47,7 +47,7 @@ public class ConveyorBeltSegment : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       Order temp = other.GetComponent<Order>();
+		Order temp = other.attachedRigidbody.GetComponent<Order>();
         if(temp != null)
         {
             temp.gameObject.layer = disablePlayerInteractionLayer;

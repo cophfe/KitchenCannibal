@@ -638,8 +638,8 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0.3, z: 0}
   renderer: {fileID: 2781843560503722233}
   coolDownOnPressDown: 0
-  pressAxis: {x: 1, y: 0, z: 0}
-  pressDistance: -0.023
+  pressAxis: {x: 0, y: 1, z: 0}
+  pressDistance: -0.01
   unPressableMass: 100000000
   pressCooldown: 4
   <OnPressed>k__BackingField:
