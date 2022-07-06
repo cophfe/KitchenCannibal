@@ -327,7 +327,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b0dc84b797d9fb40881248ce48c6917, type: 2}
+  - {fileID: 2100000, guid: 2fcb6fb290455b84a8c0824b85322bd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
-  <MoveToForceModifier>k__BackingField: 0.8
+  <MoveToForceModifier>k__BackingField: 1
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &2764882523151403453

@@ -266,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1527839629992976653, guid: a9cd587c9849da044a2bfdfa57973593, type: 3}
       propertyPath: m_Name
-      value: Hotdog Meal
+      value: Hotdog Meal Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1527839629992976654, guid: a9cd587c9849da044a2bfdfa57973593, type: 3}
       propertyPath: m_Mesh
@@ -275,6 +275,14 @@ PrefabInstance:
     - target: {fileID: 1527839629992976655, guid: a9cd587c9849da044a2bfdfa57973593, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343068357586353770, guid: a9cd587c9849da044a2bfdfa57973593, type: 3}
+      propertyPath: m_Drag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343068357586353770, guid: a9cd587c9849da044a2bfdfa57973593, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8343068357586353770, guid: a9cd587c9849da044a2bfdfa57973593, type: 3}
       propertyPath: m_IsKinematic

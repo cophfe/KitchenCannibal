@@ -417,9 +417,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.013
-  m_Height: 0.06623745
+  m_Height: 0.048371077
   m_Direction: 1
-  m_Center: {x: 0, y: -0.06740173, z: -8.881784e-16}
+  m_Center: {x: 0, y: -0.058468543, z: -8.881784e-16}
 --- !u!1 &998607139507856330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 0
   <DropOnLocomote>k__BackingField: 0
-  maxForceApplyDistance: 0.05
+  maxForceApplyDistance: 0.1
   <HandDetectDistanceModifer>k__BackingField: 1
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.5

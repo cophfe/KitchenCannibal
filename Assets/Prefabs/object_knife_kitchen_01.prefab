@@ -566,9 +566,9 @@ MonoBehaviour:
   ignoreCollisionAfterHit: 1
   ignoreTime: 0.2
   sliceTimeout: 0.6
-  noLongerSliceableVolume: 0.00002
+  noLongerSliceableVolume: 0.000009
   deleteSliceableVolume: 0.000006
-  maxSliceAmount: 8
+  maxSliceAmount: 5
   colliders:
   - {fileID: 473375538}
   - {fileID: 631639233}
