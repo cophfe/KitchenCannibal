@@ -22,13 +22,13 @@ public class WinText : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		char score;
-		if (keeper.playerScore > 7)
+		if (keeper.playerScore > 6.0f)
 			score = 'S';
-		else if (keeper.playerScore > 6.0f)
-			score = 'A';
 		else if (keeper.playerScore > 5.0f)
-			score = 'B';
+			score = 'A';
 		else if (keeper.playerScore > 4.0f)
+			score = 'B';
+		else if (keeper.playerScore > 3.0f)
 			score = 'C';
 		else
 			score = 'F';
