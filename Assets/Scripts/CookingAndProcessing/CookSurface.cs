@@ -93,7 +93,10 @@ public class CookSurface : MonoBehaviour
 			if (c)
 			{
 				if (!c.PreviousCookState)
+				{
 					OnCookableEnter?.Invoke(c);
+					c?.OnStartCooking.Invoke();
+				}
 				c.Cooking |= true;
 			}
 		}
