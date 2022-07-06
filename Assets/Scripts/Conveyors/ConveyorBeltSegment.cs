@@ -78,10 +78,17 @@ public class ConveyorBeltSegment : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		foreach(var mover in moving)
+		for (int i = 0; i < moving.Count; i++)
 		{
-			Transform t = mover.transform;
-			t.position = mover.position - Vector3.right * 0.2f * Time.fixedDeltaTime;
+			if (moving[i])
+			{
+				moving[i].position = moving[i].position - Vector3.right * 0.2f * Time.fixedDeltaTime;
+			}
+			else
+			{
+				moving.RemoveAt(i);
+			}
+			
 		}
 	}
 
