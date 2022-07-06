@@ -28,7 +28,7 @@ public class OrderManager : MonoBehaviour
     private Order[] orders = null;
     private int currentOrderIndex = 0;
     [SerializeField] private OrderRack rack = null;
-
+	public float OrderCount => orders.Length;
     public float elaspedTime = 0.0f;
 
     private void Awake()

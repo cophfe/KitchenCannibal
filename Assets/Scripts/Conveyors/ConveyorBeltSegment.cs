@@ -55,6 +55,11 @@ public class ConveyorBeltSegment : MonoBehaviour
 		if (!other.attachedRigidbody)
 			return;
 
+		if (!moving.Contains(other.attachedRigidbody))
+		{
+			moving.Add(other.attachedRigidbody);
+		}
+
 		Order temp = other.attachedRigidbody.GetComponent<Order>();
 
         if(temp != null && !ordersComplete.Contains(temp))
@@ -64,11 +69,6 @@ public class ConveyorBeltSegment : MonoBehaviour
 			temp.gameObject.layer = disablePlayerInteractionLayer;
             temp.OrderComplete();
         }
-
-		if (!moving.Contains(other.attachedRigidbody))
-		{
-			moving.Add(other.attachedRigidbody);
-		}	
 	}
 
 	private void OnTriggerExit(Collider other)

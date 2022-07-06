@@ -151,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968683535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0449, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6566484021070748142}
@@ -1162,10 +1162,10 @@ HingeJoint:
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0.86580163, y: 1.1949066, z: 0.73601663}
-  m_UseSpring: 0
+  m_UseSpring: 1
   m_Spring:
     spring: 0
-    damper: 0
+    damper: 0.6
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -1245,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &833252338962696508
 Transform:
   m_ObjectHideFlags: 0
@@ -1618,7 +1618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8996113024973791979}
   m_LocalRotation: {x: -0.70710707, y: -0, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: -0.0009, y: 0.1535, z: -0.3185}
+  m_LocalPosition: {x: -0.0009, y: 0.1535, z: -0.2654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 833252338962696508}
@@ -1639,9 +1639,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.025
-  m_Height: 0.13221937
+  m_Height: 0.12887466
   m_Direction: 1
-  m_Center: {x: 0, y: -0.0457472, z: 8.881784e-16}
+  m_Center: {x: 0, y: 0.012003951, z: 0}
 --- !u!54 &3318714585930169396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1670,7 +1670,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: -0.12, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00089997053, y: 0.15350008, z: -0.19849999}
+  m_ConnectedAnchor: {x: -0.00089997053, y: 0.15350008, z: -0.1454}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1800,10 +1800,10 @@ MonoBehaviour:
       m_Calls: []
   <FirstInteractorTakesPriority>k__BackingField: 0
   <DisableGravity>k__BackingField: 0
-  <DropOnLocomote>k__BackingField: 0
-  maxForceApplyDistance: 0.1
+  <DropOnLocomote>k__BackingField: 1
+  maxForceApplyDistance: 0.05
   <HandDetectDistanceModifer>k__BackingField: 1
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 968683536}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
   m_VelocityDamping: 0.473
@@ -1811,7 +1811,7 @@ MonoBehaviour:
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
-  m_SmoothPosition: 0
+  m_SmoothPosition: 1
   m_SmoothPositionAmount: 5
   m_TightenPosition: 0.5
   m_TrackRotation: 0

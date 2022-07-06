@@ -25,11 +25,11 @@ public class Order : MonoBehaviour
 
 	private void Update()
     {
-        if (timeStarted)
+        if (timeStarted && orderActive)
         {
             timeTillFail -= Time.deltaTime;
-            if(display != null)
-                display.UpdateTime(timeTillFail / startingTime);
+            if (display != null)
+				display.UpdateTime(timeTillFail / startingTime);
 
             if (timeTillFail <= 0.0f)
                 OrderFailed();
@@ -77,15 +77,17 @@ public class Order : MonoBehaviour
 		tempOrder.hasBones = hasBones;
 		tempOrder.transform.position = spawnTransform.position;
 		tempOrder.transform.rotation = spawnTransform.rotation;
+		tempOrder.timeStarted = false;
 	}
 
 	public void OrderComplete()
     {
+        timeStarted = false;
+		orderActive = false;
+
         if (display == null)
             return;
 
-        timeStarted = false;
-		orderActive = false;
         Debug.Log(recipe.name + " Order complete");
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);

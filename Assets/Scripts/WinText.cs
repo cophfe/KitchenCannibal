@@ -29,7 +29,7 @@ public class WinText : MonoBehaviour
 		else
 			score = 'F';
 
-		OrdersComplete.text = $"ORDERS  COMPLETE: {keeper.OrdersComplete}/{keeper.OrdersComplete + keeper.OrdersFailed}";
+		OrdersComplete.text = $"ORDERS  COMPLETE: {keeper.OrdersComplete}/{GameManager.Instance.orderManager.OrderCount}";
 		Score.text = $"SCORE: {score}";
 		Inspector.text = $"INSPECTORS  FOOLED: {keeper.HealthInspectorPass}/{keeper.HealthInspectorPass + keeper.HealthInspectorFail}";
 		Tainted.text = $"ORDERS  TAINTED: {keeper.TaintedMeals}";
