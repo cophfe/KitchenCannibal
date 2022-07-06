@@ -356,7 +356,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  <FirstInteractorTakesPriority>k__BackingField: 0
+  <FirstInteractorTakesPriority>k__BackingField: 1
   <DisableGravity>k__BackingField: 1
   <DropOnLocomote>k__BackingField: 0
   maxForceApplyDistance: 0.8
@@ -364,16 +364,16 @@ MonoBehaviour:
   m_AttachTransform: {fileID: 1264378582356183938}
   m_AttachEaseInTime: 0.5
   m_MovementType: 0
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
+  m_VelocityDamping: 0.772
+  m_VelocityScale: 0.86
+  m_AngularVelocityDamping: 0.781
+  m_AngularVelocityScale: 0.77
   m_TrackPosition: 1
-  m_SmoothPosition: 0
+  m_SmoothPosition: 1
   m_SmoothPositionAmount: 5
   m_TightenPosition: 0.5
   m_TrackRotation: 1
-  m_SmoothRotation: 0
+  m_SmoothRotation: 1
   m_SmoothRotationAmount: 5
   m_TightenRotation: 0.5
   m_ThrowOnDetach: 1

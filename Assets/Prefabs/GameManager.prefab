@@ -34,7 +34,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2879676784630460662}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,7 +66,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burgerPrefab: {fileID: 5230050713971405304, guid: 9986c483c032d7b47bdca09ae0246d4c, type: 3}
-  BLT: {fileID: 21300000, guid: 96b4826ee3ca0a54fade509243edfdc3, type: 3}
+  hotdogPrefab: {fileID: 0}
+  saladPrefab: {fileID: 0}
+  burger: {fileID: 0}
+  hotdog: {fileID: 0}
+  salad: {fileID: 0}
   buns: {fileID: 21300000, guid: f7f8bab9398a37b48a136d33ed1f2ebf, type: 3}
   cookedMeat: {fileID: 21300000, guid: 630179c9333f3df4b81dba8fcbbff0f2, type: 3}
   tomatoe: {fileID: 21300000, guid: b19a22372e4212b4e9fe8b8a6a7cfe29, type: 3}
@@ -190,6 +195,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9ceb9bb793008fa44b8ccfabd0ec924d, type: 3}
   - {fileID: 8300000, guid: 63364a84e4bffca4c8bbe6ba7d7b9097, type: 3}
   - {fileID: 8300000, guid: 0efec539442af0e44967a12543764584, type: 3}
+  bonesClips: []
+  audiosource2: {fileID: 8045810563512915216}
 --- !u!82 &5190176915361260446
 AudioSource:
   m_ObjectHideFlags: 0
@@ -199,9 +206,9 @@ AudioSource:
   m_GameObject: {fileID: 5190176915361260436}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3966418613768241647, guid: 6b450ca0c8b4b5e4cb87065aea01fe9a, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -298,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214d7a66b920c994e9f830b5f2eea06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winText: {fileID: 0}
   modelsAndimages: {fileID: 0}
   orderManager: {fileID: 0}
   audioManager: {fileID: 0}
@@ -320,10 +328,11 @@ MonoBehaviour:
   display: {fileID: 0}
   startTime: 0
   timeTillFail: 40
-  recipe: {fileID: 11400000, guid: df6521871ed9cfa4289f9d9473498961, type: 2}
+  recipe: {fileID: 0}
   orderRackIndex: 0
   rack: {fileID: 0}
   orderActive: 0
+  hasBones: 0
 --- !u!114 &1401156387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,9 +345,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493ef72c9df830443a378eec17a27156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startOffset: 0
+  healthInspectorTextAnimator: {fileID: 0}
+  healthInspectorVisual: {fileID: 0}
+  healthInspectorText: {fileID: 0}
   timeBetweenInspections: 180
-  warningDuration: 10
+  scanTime: 5
+  warningDurationMin: 10
+  warningDurationMax: 30
+  fridgeChecker: {fileID: 0}
+  doors: []
   counter: 0
+  timeTakenFromBones: 20
 --- !u!114 &5190176914564288696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,3 +370,130 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScore: 0
+--- !u!1 &8538094765551956275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2879676784630460662}
+  - component: {fileID: 8045810563512915216}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2879676784630460662
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538094765551956275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5190176915361260435}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &8045810563512915216
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538094765551956275}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2979933150248058405, guid: 6b450ca0c8b4b5e4cb87065aea01fe9a, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
