@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSliceMaterial: {fileID: 2100000, guid: cd5d53f22b7eff04cba448afe2b1ec9f, type: 2}
-  sliceMinSpeed: 0.16
+  sliceMinSpeed: 0.12
   cutImpulse: 0.7
   localSlicePlaneDirection: {x: 0, y: 0, z: 1}
   localSpeedDirection: {x: 1, y: 0, z: 0}

@@ -18,6 +18,8 @@ public class ConveyorBeltSegment : MonoBehaviour
 	[SerializeField] LayerMask disablePlayerInteractionLayer;
 	List<Order> ordersComplete = new List<Order>();
 
+	List<Rigidbody> moving = new List<Rigidbody>();
+
     private void OnValidate()
     {
         switch (conveyorDirection)
@@ -42,9 +44,10 @@ public class ConveyorBeltSegment : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //other.attachedRigidbody.AddForce(direction * speed * Time.deltaTime);
 		if (other.attachedRigidbody)
-			other.attachedRigidbody.position = other.attachedRigidbody.position + direction * speed * Time.deltaTime;
+		{
+			
+		}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,11 +64,29 @@ public class ConveyorBeltSegment : MonoBehaviour
 			temp.gameObject.layer = disablePlayerInteractionLayer;
             temp.OrderComplete();
         }
-    }
+
+		if (!moving.Contains(other.attachedRigidbody))
+		{
+			moving.Add(other.attachedRigidbody);
+		}	
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		moving.Remove(other.attachedRigidbody);
+	}
+
+	private void FixedUpdate()
+	{
+		foreach(var mover in moving)
+		{
+			Transform t = mover.transform;
+			t.position = mover.position - Vector3.right * 0.2f * Time.fixedDeltaTime;
+		}
+	}
 
 
-
-    private void OnDrawGizmos()
+	private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawLine(transform.position, transform.position + (direction * 0.5f));

@@ -55,13 +55,14 @@ public class OrderManager : MonoBehaviour
 
     public bool CheckRecipe(List<Ingredient> recipe, Transform spawnTransform)
     {
+		bool hasBones = false;
         bool completedOrder = true;
 		for (int i = 0; i < currentOrderIndex; i++)
 		{
+			hasBones = false;
 			// Has searched through all active orders
-			if (!orders[i].orderActive)
+			if (orders[i] == null || !orders[i].orderActive)
 				continue;
-
 			switch (orders[i].recipe.completedRecipie)
 			{
 				case CompletedRecipieType.Burger:
@@ -86,15 +87,19 @@ public class OrderManager : MonoBehaviour
 					var ingredient = recipe[k];
 					if (ingredient.ingredientType == requirement.ingredient)
 					{
-
 						amount += ingredient.ingredientAmount;
 					}
 				}
 
 				if (amount > 0.3f)
+				{
 					requirementsFufilled++;
+				}
 				else
+				{
 					Debug.Log("not enough ingredient found: " + requirement.ingredient);
+					break;
+				}
 			}
 
 			if (requirementsFufilled < orders[i].recipe.recipeRequirements.Count)
@@ -106,6 +111,7 @@ public class OrderManager : MonoBehaviour
 			foreach (var ingredient in recipe)
 			{
 				bool matchFound = false;
+				hasBones |= ingredient.hasBoneShards;
 				foreach (var req in orders[i].recipe.recipeRequirements)
 				{
 					matchFound |= ingredient.ingredientType == req.ingredient;
@@ -126,7 +132,7 @@ public class OrderManager : MonoBehaviour
 
             // A match is found
             orders[i].orderActive = false;
-            orders[i].CreateOrder(spawnTransform);
+            orders[i].CreateOrder(spawnTransform, hasBones);
             return true;
 		}
 

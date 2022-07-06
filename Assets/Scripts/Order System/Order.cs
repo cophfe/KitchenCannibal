@@ -40,7 +40,9 @@ public class Order : MonoBehaviour
     {
         // Run stuff here when order fails
         timeStarted = false;
-        Debug.Log(recipe.name + "Order failed");
+		orderActive = false;
+
+		Debug.Log(recipe.name + "Order failed");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 0);
         GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderFailed);
         rack.RemoveOrder(orderRackIndex);
@@ -49,7 +51,7 @@ public class Order : MonoBehaviour
 		GameManager.Instance.DeregisterOrder();
 	}
 
-	public void CreateOrder(Transform spawnTransform)
+	public void CreateOrder(Transform spawnTransform, bool hasBones)
     {
 		GameObject prefab;
 		switch (recipe.completedRecipie)
@@ -83,11 +85,12 @@ public class Order : MonoBehaviour
             return;
 
         timeStarted = false;
+		orderActive = false;
         Debug.Log(recipe.name + " Order complete");
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
 
-        Debug.Log("Order complete! Points awarded");
+		Debug.Log("Order complete! Points awarded");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
 		if (hasBones)
 		{
