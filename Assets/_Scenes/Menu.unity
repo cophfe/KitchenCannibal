@@ -323,6 +323,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099a807b430df604e9dcb0039c956849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &402059205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
+      propertyPath: m_Name
+      value: XR Device Simulator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
 --- !u!1 &537799896
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +529,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4615558218427950851, guid: 82099173ee23bef43a3e37d069536360, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
+      propertyPath: pressAxis.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
+      propertyPath: pressAxis.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
@@ -651,7 +716,8 @@ PrefabInstance:
       propertyPath: sharedProfile
       value: 
       objectReference: {fileID: 11400000, guid: 5e519590250a47c4589ec08d06d1fb4f, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1097855882, guid: bc63ee9b17f96cb4c95ce7d0bcc1e1b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bc63ee9b17f96cb4c95ce7d0bcc1e1b8, type: 3}
 --- !u!1 &1503698046
 GameObject:
@@ -799,6 +865,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4615558218427950851, guid: 82099173ee23bef43a3e37d069536360, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
+      propertyPath: pressAxis.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
+      propertyPath: pressAxis.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6064332762668252296, guid: 82099173ee23bef43a3e37d069536360, type: 3}
