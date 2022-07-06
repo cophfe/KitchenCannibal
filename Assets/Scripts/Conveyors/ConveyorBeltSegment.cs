@@ -87,6 +87,7 @@ public class ConveyorBeltSegment : MonoBehaviour
 			else
 			{
 				moving.RemoveAt(i);
+				i--;
 			}
 			
 		}
