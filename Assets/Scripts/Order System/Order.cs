@@ -20,7 +20,6 @@ public class Order : MonoBehaviour
     {
         orderActive = true;
         timeStarted = true;
-		GameManager.Instance.RegisterOrder();
 	}
 
 	private void Update()

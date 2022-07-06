@@ -15,7 +15,7 @@ public class ConveyorBeltSegment : MonoBehaviour
     public float speed = 0.5f;
     public ConveyorDirection conveyorDirection;
     private Vector3 direction;
-	[SerializeField] LayerMask disablePlayerInteractionLayer;
+	[SerializeField] string disableLayer;
 	List<Order> ordersComplete = new List<Order>();
 
 	List<Rigidbody> moving = new List<Rigidbody>();
@@ -66,8 +66,9 @@ public class ConveyorBeltSegment : MonoBehaviour
         {
 			ordersComplete.Add(temp);
 
-			temp.gameObject.layer = disablePlayerInteractionLayer;
-            temp.OrderComplete();
+			temp.gameObject.layer = LayerMask.NameToLayer("HandIgnore");
+
+			temp.OrderComplete();
         }
 	}
 

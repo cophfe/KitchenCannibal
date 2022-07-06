@@ -13,6 +13,10 @@ public class WinText : MonoBehaviour
 	public TextMeshPro Inspector { get; private set; }
 	[field: SerializeField]
 	public TextMeshPro Tainted { get; private set; }
+	[SerializeField]
+	AudioSource musicSource;
+	[SerializeField]
+	AudioSource winSource;
 
 	public void SetText(ScoreKeeper keeper)
 	{
@@ -20,19 +24,23 @@ public class WinText : MonoBehaviour
 		char score;
 		if (keeper.playerScore > 7)
 			score = 'S';
-		else if (keeper.playerScore > 6.5f)
+		else if (keeper.playerScore > 6.0f)
 			score = 'A';
-		else if (keeper.playerScore > 5.5f)
-			score = 'B';
 		else if (keeper.playerScore > 5.0f)
+			score = 'B';
+		else if (keeper.playerScore > 4.0f)
 			score = 'C';
 		else
 			score = 'F';
 
 		OrdersComplete.text = $"ORDERS  COMPLETE: {keeper.OrdersComplete}/{GameManager.Instance.orderManager.OrderCount}";
-		Score.text = $"SCORE: {score}";
+		Score.text = $"SCORE: {score} ({keeper.playerScore})";
 		Inspector.text = $"INSPECTORS  FOOLED: {keeper.HealthInspectorPass}/{keeper.HealthInspectorPass + keeper.HealthInspectorFail}";
 		Tainted.text = $"ORDERS  TAINTED: {keeper.TaintedMeals}";
+
+		musicSource.Stop();
+		winSource.Play();
+
 	}
 
 	private void Awake()
