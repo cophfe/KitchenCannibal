@@ -101,6 +101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: object_lettuce_head_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7320451401554738165, guid: dc6ea73d8b6000f4f972e397cc501bde, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6ea73d8b6000f4f972e397cc501bde, type: 3}
 --- !u!4 &6559311930199495534 stripped
@@ -162,6 +166,10 @@ PrefabInstance:
     - target: {fileID: 2299907222517055030, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745469035382110522, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
@@ -225,6 +233,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7745469035382110522, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
 --- !u!4 &1040986443954120677 stripped
@@ -286,6 +298,26 @@ PrefabInstance:
     - target: {fileID: 908502397358659519, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
       propertyPath: m_Name
       value: object_torso_disembodied_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706469961073582627, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574366023403558358, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682507362490918452, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944697068903231986, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246884951270642650, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 219fee92209be1a44bc0b55c76ce05a9, type: 3}
@@ -349,6 +381,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7745469035382110522, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
 --- !u!4 &1040986443968181940 stripped
@@ -411,6 +447,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: object_lettuce_head_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7320451401554738165, guid: dc6ea73d8b6000f4f972e397cc501bde, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6ea73d8b6000f4f972e397cc501bde, type: 3}
 --- !u!4 &6559311931239771301 stripped
@@ -425,6 +465,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1267968667788318253}
     m_Modifications:
+    - target: {fileID: 3230287402769506520, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4900604622721201715, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
       propertyPath: m_Name
       value: object_bun_burger_01 (6)
@@ -487,6 +531,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1267968667788318253}
     m_Modifications:
+    - target: {fileID: 3230287402769506520, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4900604622721201712, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -609,6 +657,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7745469035382110522, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
 --- !u!4 &1040986443514560703 stripped
@@ -670,6 +722,10 @@ PrefabInstance:
     - target: {fileID: 2299907222517055030, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745469035382110522, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
@@ -733,6 +789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: object_lettuce_head_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7320451401554738165, guid: dc6ea73d8b6000f4f972e397cc501bde, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6ea73d8b6000f4f972e397cc501bde, type: 3}
 --- !u!4 &6559311930695391847 stripped
@@ -795,6 +855,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7745469035382110522, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e57adf707ac6e418548dc67b9f68cb, type: 3}
 --- !u!4 &1040986443050390956 stripped
@@ -809,6 +873,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1267968667788318253}
     m_Modifications:
+    - target: {fileID: 3230287402769506520, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4900604622721201712, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -883,6 +951,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1267968667788318253}
     m_Modifications:
+    - target: {fileID: 3230287402769506520, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4900604622721201712, guid: 5a47f62501a22414f97f9edf1a2c7fdf, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -968,6 +1040,10 @@ PrefabInstance:
     - target: {fileID: 781812913777089147, guid: 15ff8708929af804f88ce36fd858753b, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.061404884
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423439031190002955, guid: 15ff8708929af804f88ce36fd858753b, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2819625954785901460, guid: 15ff8708929af804f88ce36fd858753b, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -1193,6 +1269,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.82812876
       objectReference: {fileID: 0}
+    - target: {fileID: 8032818471963273702, guid: 15ff8708929af804f88ce36fd858753b, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8134736011817945296, guid: 15ff8708929af804f88ce36fd858753b, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.7663917
@@ -1230,6 +1310,10 @@ PrefabInstance:
     - target: {fileID: 779967273819982862, guid: 87f536f37d127ba40a76efd5856c4dda, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.000000029802322
+      objectReference: {fileID: 0}
+    - target: {fileID: 913065011533901840, guid: 87f536f37d127ba40a76efd5856c4dda, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1154900762815131537, guid: 87f536f37d127ba40a76efd5856c4dda, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -1346,6 +1430,10 @@ PrefabInstance:
     - target: {fileID: 4616564431659582427, guid: 87f536f37d127ba40a76efd5856c4dda, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 147.543
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889235866812035162, guid: 87f536f37d127ba40a76efd5856c4dda, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900347115030633152, guid: 87f536f37d127ba40a76efd5856c4dda, type: 3}
       propertyPath: m_LocalRotation.w

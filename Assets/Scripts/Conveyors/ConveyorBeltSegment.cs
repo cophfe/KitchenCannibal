@@ -12,46 +12,46 @@ public enum ConveyorDirection
 
 public class ConveyorBeltSegment : MonoBehaviour
 {
-    public float speed = 0.5f;
-    public ConveyorDirection conveyorDirection;
-    private Vector3 direction;
+	public float speed = 0.5f;
+	public ConveyorDirection conveyorDirection;
+	private Vector3 direction;
 	[SerializeField] string disableLayer;
 	List<Order> ordersComplete = new List<Order>();
 
 	List<Rigidbody> moving = new List<Rigidbody>();
 
-    private void OnValidate()
-    {
-        switch (conveyorDirection)
-        {
-            case ConveyorDirection.forward:
-                direction = Vector3.forward;
-                break;
+	private void OnValidate()
+	{
+		switch (conveyorDirection)
+		{
+			case ConveyorDirection.forward:
+				direction = Vector3.forward;
+				break;
 
-            case ConveyorDirection.left:
-                direction = -Vector3.right;
-                break;
+			case ConveyorDirection.left:
+				direction = -Vector3.right;
+				break;
 
-            case ConveyorDirection.right:
-                direction = Vector3.right;
-                break;
+			case ConveyorDirection.right:
+				direction = Vector3.right;
+				break;
 
-            case ConveyorDirection.back:
-                direction = Vector3.back;
-                break;
-        }
-    }
+			case ConveyorDirection.back:
+				direction = Vector3.back;
+				break;
+		}
+	}
 
-    private void OnTriggerStay(Collider other)
-    {
+	private void OnTriggerStay(Collider other)
+	{
 		if (other.attachedRigidbody)
 		{
-			
-		}
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
+		}
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
 		if (!other.attachedRigidbody)
 			return;
 
@@ -62,16 +62,21 @@ public class ConveyorBeltSegment : MonoBehaviour
 
 		Order temp = other.attachedRigidbody.GetComponent<Order>();
 
-        if(temp != null && !ordersComplete.Contains(temp))
-        {
+		if (temp != null && !ordersComplete.Contains(temp))
+		{
 			ordersComplete.Add(temp);
 
-			temp.gameObject.layer = LayerMask.NameToLayer("HandIgnore");
-
+			SetLayer(temp.transform, LayerMask.NameToLayer("HandIgnore"));
 			temp.OrderComplete();
-        }
+		}
 	}
 
+	void SetLayer(Transform obj, int layer)
+	{
+		obj.gameObject.layer = layer;
+		foreach (Transform child in obj)
+			SetLayer(child, layer);
+	}
 	private void OnTriggerExit(Collider other)
 	{
 		moving.Remove(other.attachedRigidbody);
