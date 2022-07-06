@@ -14,11 +14,39 @@ public class Slicer
 	public float DoNotCreateVolume { get; set; }
 	public Material DefaultSliceMaterial { get; set; }
 
+	List<Vector3>[] verts = null;
+	List<Vector2>[] uvs = null;
+	List<ushort>[] tris = null;
+	List<Vector3>[] previousSliceVerts;
+	List<Vector3> intersections = new List<Vector3>();
+
 	public Slicer(float disallowCuttingVolume, float doNotCreateVolume, Material defaultSliceMaterial)
 	{
 		DisallowCuttingVolume = disallowCuttingVolume;
 		DoNotCreateVolume = doNotCreateVolume;
 		DefaultSliceMaterial = defaultSliceMaterial;
+
+		previousSliceVerts = new List<Vector3>[2]
+		{
+			new List<Vector3>(40),
+			new List<Vector3>(40)
+		};
+		verts = new List<Vector3>[2]
+		{
+			new List<Vector3>(100),
+			new List<Vector3>(100)
+		};
+		uvs = new List<Vector2>[2]
+		{
+			new List<Vector2>(100),
+			new List<Vector2>(100)
+		};
+		tris = new List<ushort>[2]
+		{
+			new List<ushort>(300),
+			new List<ushort>(300)
+		};
+		intersections = new List<Vector3>(100);
 	}
 
 	static Vector3 GetIntersection(ref Vector3 p0, ref Vector3 p1, float d0, float d1)
@@ -48,11 +76,11 @@ public class Slicer
 		//float2 | float3 | float4 uv3(8, 12 or 16 bytes)
 		//float2 | float3 | float4 uv4(8, 12 or 16 bytes)
 		//float4 tangent(16 bytes)
-		if (!sliceable)
+		if (!sliceable || sliceable.Held || !sliceable.enabled)
 			return null;
 
 		GameObject target = sliceable.gameObject;
-		MeshFilter mf1 = target.GetComponent<MeshFilter>();
+		MeshFilter mf1 = target.GetComponentInChildren<MeshFilter>();
 		if (!mf1)
 			return null;
 
@@ -62,12 +90,7 @@ public class Slicer
 
 
 		Mesh readMesh = mf1.sharedMesh;
-		List<Vector3>[] verts = null;
-		List<Vector2>[] uvs = null;
-
-		List<Vector3>[] previousSliceVerts = null;
-
-		List<Vector3> intersections = null;
+		
 		Vector3 planeNormal = target.transform.InverseTransformVector(worldPlaneNormal).normalized;
 		float origin = Vector3.Dot(target.transform.InverseTransformPoint(worldOrigin), planeNormal);
 		float[] volume = { 0, 0 };
@@ -81,46 +104,54 @@ public class Slicer
 			data.GetVertices(vertexArray);
 			NativeArray<Vector2> uvArray = new NativeArray<Vector2>(readMesh.vertexCount, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
 			data.GetUVs(0, uvArray);
+			NativeArray<Vector3> normalArray = new NativeArray<Vector3>(readMesh.vertexCount, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
+			data.GetNormals(normalArray);
 
 			var submesh = data.GetSubMesh(0);
 
-			//also get tris
-			var tris = data.GetIndexData<ushort>();
-			verts = new List<Vector3>[2]
-			{
-				new List<Vector3>(submesh.indexCount),
-				new List<Vector3>(submesh.indexCount)
-			};
-			uvs = new List<Vector2>[2]
-			{
-				new List<Vector2>(submesh.indexCount),
-				new List<Vector2>(submesh.indexCount)
-			};
-			intersections = new List<Vector3>(submesh.vertexCount / 2);
+			//this submesh never explodes in vertex count so it shouldn't ever have too many vertices
+			//the slice surface submesh on the other hand... could have some issues
+			//but we ignore those
+			verts[0].Clear();
+			verts[0].Capacity = Mathf.Max(verts[0].Capacity, submesh.indexCount);
+			verts[1].Clear();
+			verts[1].Capacity = Mathf.Max(verts[1].Capacity, submesh.indexCount);
+			uvs[0].Clear();
+			uvs[0].Capacity = Mathf.Max(uvs[0].Capacity, submesh.indexCount);
+			uvs[1].Clear();
+			uvs[1].Capacity = Mathf.Max(uvs[1].Capacity, submesh.indexCount);
+			tris[0].Clear();
+			tris[0].Capacity = Mathf.Max(tris[0].Capacity, submesh.indexCount);
+			tris[1].Clear();
+			tris[1].Capacity = Mathf.Max(tris[1].Capacity, submesh.indexCount);
 
-			CalculateSlices(submesh, verts, uvs, intersections, vertexArray,
-				uvArray, tris, planeNormal, origin, volume);
+			//also get tris
+			var triArray = data.GetIndexData<ushort>();
+
+			intersections.Clear(); 
+
+			CalculateSlices(submesh, verts, uvs, tris, intersections, vertexArray,
+				uvArray, triArray, planeNormal, origin, volume);
 
 			if (sliceable.TimesSliced > 0)
 			{
 				submesh = data.GetSubMesh(1);
-				previousSliceVerts = new List<Vector3>[2]
-				{
-					new List<Vector3>(submesh.indexCount),
-					new List<Vector3>(submesh.indexCount)
-				};
-				
-				CalculateSlicesOnSliceSurface(submesh, previousSliceVerts, intersections, vertexArray, tris, planeNormal, origin, volume);
+				previousSliceVerts[0].Clear();
+				previousSliceVerts[0].Capacity = Mathf.Max(previousSliceVerts[0].Capacity, submesh.indexCount);
+				previousSliceVerts[1].Clear();
+				previousSliceVerts[1].Capacity = Mathf.Max(previousSliceVerts[1].Capacity, submesh.indexCount);
+
+				CalculateSlicesOnSliceSurface(submesh, previousSliceVerts, intersections, vertexArray, triArray, planeNormal, origin, volume);
 			}
 			else
 			{
-				previousSliceVerts = new List<Vector3>[2]
-				{
-					new List<Vector3>(0),
-					new List<Vector3>(0)
-				};
+				previousSliceVerts[0].Clear();
+				previousSliceVerts[1].Clear();
 			}
 			vertexArray.Dispose();
+			uvArray.Dispose();
+			normalArray.Dispose();
+
 		}
 
 		if (intersections.Count == 0)
@@ -139,17 +170,16 @@ public class Slicer
 				intersections[i] = intersections[i + 1];
 				intersections[i + 1] = cache;
 
-
-				intersectionVolume += CalculateTriangleVolume(intersections[i], intersections[i + 1], universalPoint);
-				
 			}
+			intersectionVolume += CalculateTriangleVolume(intersections[i], intersections[i + 1], universalPoint);
 		}
+		//one is inverted because the winding direction is backwards
 		volume[0] += intersectionVolume;
 		volume[1] -= intersectionVolume;
 
 		//https://catlikecoding.com/unity/tutorials/procedural-meshes/creating-a-mesh/
 		//allocate meshes using the better mesh api, for performance
-		//there is a strong possibility I'm making this slower with this method
+		//there is a strong possibility I'm making this slower with this method, i don't know what i am doing
 
 		Mesh[] meshes; 
 		{
@@ -205,17 +235,20 @@ public class Slicer
 				//MemClear(ref rawUVs, 0, rawUVs.Length);
 				vertexAttributes.Dispose();
 
-
+				int mainIndicesCount = tris[i].Count;
 				int intersectIndicesCount = 3 * (intersections.Count - 2) / 2 + previousSliceVerts[i].Count;
-				data.SetIndexBufferParams(verts[i].Count + intersectIndicesCount, IndexFormat.UInt16);
+				data.SetIndexBufferParams(mainIndicesCount + intersectIndicesCount, IndexFormat.UInt16);
 				NativeArray<ushort> triangles = data.GetIndexData<ushort>();
+				
+				//set triangles for first submesh
+				CopyFromList(ref triangles, 0, tris[i], tris[i].Count);
 
 				//set triangles
 				//do the first submesh triangles
-				for (ushort vertIndex = 0; vertIndex < submesh1VertCount; vertIndex++)
-				{
-					triangles[vertIndex] = vertIndex;
-				}
+				//for (ushort vertIndex = 0; vertIndex < submesh1VertCount; vertIndex++)
+				//{
+				//	triangles[vertIndex] = vertIndex;
+				//}
 				
 				//then do the second submesh triangles
 				//second submesh is the slice surface triangles, and is flipped depending on which side it is on
@@ -226,7 +259,7 @@ public class Slicer
 
 				for (int j = 0; j < intersectTriangleCount; j ++)
 				{
-					int triIndex = submesh1VertCount + j * 3;
+					int triIndex = mainIndicesCount + j * 3;
 					triangles[triIndex] = (ushort)(submesh1VertCount + 2 * j + addition);
 					triangles[triIndex + 1] = (ushort)(submesh1VertCount + 2 * j + otherAddition);
 					triangles[triIndex + 2] = lastVertexIndex;
@@ -234,7 +267,7 @@ public class Slicer
 				if (sliceable.TimesSliced > 0)
 				{
 					//the second submesh also contains previous created slice surface
-					int indicesCount = verts[i].Count + intersectIndicesCount;
+					int indicesCount = mainIndicesCount + intersectIndicesCount;
 					ushort startTriangleIndex = (ushort)(indicesCount - previousSliceVerts[i].Count);
 
 					for (ushort j = startTriangleIndex, k = (ushort)(lastVertexIndex + 1); j < indicesCount; j++, k++)
@@ -248,8 +281,8 @@ public class Slicer
 				}
 				//set submeshes
 				data.subMeshCount = 2;
-				data.SetSubMesh(0, new SubMeshDescriptor(0, submesh1VertCount), MeshUpdateFlags.DontRecalculateBounds);
-				data.SetSubMesh(1, new SubMeshDescriptor(submesh1VertCount, intersectIndicesCount));
+				data.SetSubMesh(0, new SubMeshDescriptor(0, mainIndicesCount), MeshUpdateFlags.DontRecalculateBounds);
+				data.SetSubMesh(1, new SubMeshDescriptor(mainIndicesCount, intersectIndicesCount));
 
 				meshes[i] = new Mesh()
 				{ name = "Sliced " + i  };
@@ -258,27 +291,10 @@ public class Slicer
 			Mesh.ApplyAndDisposeWritableMeshData(meshDatas, meshes);
 		}
 
-		//set meshfilter
-		var renderer = mf1.GetComponent<MeshRenderer>();
-
-		if (renderer && (sliceable.SliceMaterial || DefaultSliceMaterial))
-		{
-			if (renderer.sharedMaterials.Length < 2)
-			{
-				Material[] materials = new Material[2];
-				materials[0] = renderer.sharedMaterials[0];
-				materials[1] = sliceable.SliceMaterial ? sliceable.SliceMaterial : DefaultSliceMaterial;
-
-				renderer.sharedMaterials = materials;
-			}
-		}
-
 		Vector3 scale = target.transform.lossyScale;
 		float scaleVol = scale.x * scale.y * scale.z;
-		Debug.Log("Total volume of " + target.name + " before scale: " + (volume[0] + volume[1]));
-		volume[0] *= scaleVol;
-		volume[1] *= scaleVol;
-		Debug.Log("Total volume of " + target.name + " after scale: " + (volume[0] + volume[1]));
+		float volumeRatio = Mathf.Clamp(volume[0] / (volume[0] + volume[1]), 0.1f, 1);
+		//Debug.Log("intersection volume: " + scaleVol * intersectionVolume);
 
 		List<Sliceable> list = new List<Sliceable>(2);
 
@@ -286,24 +302,72 @@ public class Slicer
 		bool targetUsed = false;
 		for (int i = 0; i < 2; i++)
 		{
-			Debug.Log("Slice " + i + " Volume: " + volume[i]);
+			volume[i] *= scaleVol;
+
+			//float actualVolume = 0;
+			//Vector3[] verts = meshes[i].vertices;
+			//int[] tris = meshes[i].triangles;
+			//for (int t = 0; t < tris.Length; t+= 3)
+			//{
+			//	actualVolume += CalculateTriangleVolume(verts[tris[t]], verts[tris[t + 1]], verts[tris[t + 2]]);
+			//}
+			//actualVolume *= scaleVol;
+			//Debug.Log("Slice " + i + " Calculated volume: " + volume[i] + ". Actual volume: " + actualVolume + ". Difference: " + (volume[i] - actualVolume));
+
 
 			if (volume[i] < DoNotCreateVolume)
 				continue;
 
 			GameObject slice;
+			Sliceable sliceableComponent;
+
 			if (targetUsed)
 			{
-				slice = GameObject.Instantiate(target, target.transform.parent);
+				slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+				slice.transform.SetPositionAndRotation(target.transform.position, target.transform.rotation);
+				slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
+				sliceableComponent = slice.GetComponent<Sliceable>();
+				//apparently non serialized values r not cloned (makes sense i guess)
+				sliceableComponent.ParentSliceable = sliceable.ParentSliceable;
+				sliceableComponent.SliceHolder = sliceable.SliceHolder;
+				sliceableComponent.CanBeSliced = sliceable.CanBeSliced;
 			}
 			else
 			{
-				slice = target;
+ 				if (sliceable.TimesSliced == 0)
+				{
+					//the first sliceable is this one, so it is not deleted
+					sliceable.ParentSliceable = sliceable;
+					sliceable.SliceHolder = new GameObject(sliceable.name + " SliceHolder").transform;
+					sliceable.SliceHolder.parent = sliceable.transform.parent;
+					sliceable.SliceHolder.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+					//if first time sliced, process ingredient (turn from lettuce into sliced lettuce
+					if (sliceable.Ingredient)
+						sliceable.Ingredient.Process();
+
+					//if this is the first sliceable, it is not destroyed, but it is disabled
+					slice = GameObject.Instantiate(target, sliceable.SliceHolder);
+					slice.transform.SetPositionAndRotation(target.transform.position, target.transform.rotation);
+					slice.name = sliceable.ParentSliceable.gameObject.name + " Slice";
+					sliceableComponent = slice.GetComponent<Sliceable>();
+					//apparently non serialized values are not cloned (makes sense i guess)
+					sliceableComponent.ParentSliceable = sliceable.ParentSliceable;
+					sliceableComponent.SliceHolder = sliceable.SliceHolder;
+					sliceableComponent.CanBeSliced = sliceable.CanBeSliced;
+
+				}
+				else
+				{
+					slice = target;
+					sliceableComponent = slice.GetComponent<Sliceable>();
+				}
 				targetUsed = true;
+
 			}
 
 			meshes[i].RecalculateBounds();
-			var sliceableComponent = slice.GetComponent<Sliceable>();
+			
+			SetSliceableMaterial(sliceableComponent);
 
 			if (volume[i] < DisallowCuttingVolume)
 			{
@@ -311,23 +375,56 @@ public class Slicer
 				sliceableComponent.CanBeSliced = false;
 			}
 
-			sliceableComponent.TimesSliced = sliceableComponent.TimesSliced + 1;
+			var interactable = sliceableComponent.GetComponent<CustomGrabInteractable>();
+			if (interactable)
+			{
+				//these should only be selected by one hand at a time
+				interactable.FirstInteractorTakesPriority = true;
+			}
+			sliceableComponent.TimesSliced = sliceable.TimesSliced + 1;
 			meshes[i].RecalculateNormals();
-			meshes[i].RecalculateTangents();
+			//meshes[i].RecalculateTangents();
 
-			var mF = slice.GetComponent<MeshFilter>();
+			float sliceVolumeRatio = ((1 - i) * volumeRatio + i * (1.0f - volumeRatio));
+
+			var mF = slice.GetComponentInChildren<MeshFilter>();
 			mF.sharedMesh = meshes[i];
-			var mC = slice.GetComponent<MeshCollider>();
+			var mC = slice.GetComponentInChildren<MeshCollider>();
 			if (mC)
 				mC.sharedMesh = meshes[i];
+			var rb = slice.GetComponent<Rigidbody>();
+			if (rb)
+			{
+				sliceableComponent.AttachedRigidbody = rb;
+				rb.mass = rb.mass * sliceVolumeRatio;
+			}
+			var ingredient = slice.GetComponent<Ingredient>();
+			if (ingredient)
+			{
+
+				sliceableComponent.Ingredient = ingredient;
+				ingredient.ingredientAmount *= sliceVolumeRatio;
+				if (targetUsed)
+					ingredient.PlayKnifeSound();
+			}
 
 			list.Add(sliceableComponent);
+		}
+
+		if (sliceable.TimesSliced == 0)
+		{
+			var mR = sliceable.GetComponentInChildren<MeshRenderer>();
+			if (mR)
+				mR.enabled = false;
+			sliceable.gameObject.SetActive(false);
+			sliceable.ParentSliceable = null;
+			sliceable.enabled = false;
 		}
 
 		return list;
 	}
 
-	void CalculateSlices(SubMeshDescriptor submeshData, List<Vector3>[] verts, List<Vector2>[] uvs, List<Vector3> intersections,
+	void CalculateSlices(SubMeshDescriptor submeshData, List<Vector3>[] verts, List<Vector2>[] uvs, List<ushort>[] tris, List<Vector3> intersections,
 		NativeArray<Vector3> readVerts, NativeArray<Vector2> readUvs, NativeArray<ushort> readTris
 		, Vector3 planeNormal, float origin, float[] volume)
 	{
@@ -361,15 +458,13 @@ public class Slicer
 				//curse you c#
 				int sideIndex = positiveDistance[0] ? 0 : 1;
 
-				verts[sideIndex].Add(p0);
-				verts[sideIndex].Add(p1);
-				verts[sideIndex].Add(p2);
-				uvs[sideIndex].Add(uv0);
-				uvs[sideIndex].Add(uv1);
-				uvs[sideIndex].Add(uv2);
-
-				//find volume of triangles
-				volume[sideIndex] += CalculateTriangleVolume(p0, p1, p2);
+				AddTriangle(verts[sideIndex], uvs[sideIndex], tris[sideIndex], p0, uv0, p1, uv1, p2, uv2, ref volume[sideIndex]);
+				//verts[sideIndex].Add(p0);
+				//verts[sideIndex].Add(p1);
+				//verts[sideIndex].Add(p2);
+				//uvs[sideIndex].Add(uv0);
+				//uvs[sideIndex].Add(uv1);
+				//uvs[sideIndex].Add(uv2);
 			}
 			//otherwise they are intersecting
 			else
@@ -392,33 +487,37 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(p1);
-					verts[sideIndex0].Add(int1);
-
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(int2);
-
-					//do side 2
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(p2);
-					verts[sideIndex1].Add(int2);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p0, uv0, p1, uv1, int1, intUV1, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p0, uv0, int1, intUV1, int2, intUV2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], int1, intUV1, p2, uv2, int2, intUV2, ref volume[sideIndex1]);
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(p1);
+					//verts[sideIndex0].Add(int1);
+					//
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(int2);
+					//
+					////do side 2
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(p2);
+					//verts[sideIndex1].Add(int2);
 
 					//also uvs
 					//do side 1
-					uvs[sideIndex0].Add(uv0);
-					uvs[sideIndex0].Add(uv1);
-					uvs[sideIndex0].Add(intUV1);
-
-					uvs[sideIndex0].Add(uv0);
-					uvs[sideIndex0].Add(intUV1);
-					uvs[sideIndex0].Add(intUV2);
-
-					//do side 2
-					uvs[sideIndex1].Add(intUV1);
-					uvs[sideIndex1].Add(uv2);
-					uvs[sideIndex1].Add(intUV2);
+					//uvs[sideIndex0].Add(uv0);
+					//uvs[sideIndex0].Add(uv1);
+					//uvs[sideIndex0].Add(intUV1);
+					//
+					//uvs[sideIndex0].Add(uv0);
+					//uvs[sideIndex0].Add(intUV1);
+					//uvs[sideIndex0].Add(intUV2);
+					//
+					////do side 2
+					//uvs[sideIndex1].Add(intUV1);
+					//uvs[sideIndex1].Add(uv2);
+					//uvs[sideIndex1].Add(intUV2);
 				}
 				else if (positiveDistance[0] == positiveDistance[2])
 				{
@@ -429,33 +528,38 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p2);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p0, uv0, int1, intUV1, p2, uv2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1, int2, intUV2, p2, uv2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], int1, intUV1, p1, uv1, int2, intUV2, ref volume[sideIndex1]);
 
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(int2);
-					verts[sideIndex0].Add(p2);
-
-					//do side 2
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(p1);
-					verts[sideIndex1].Add(int2);
-
-					//also uvs
-					//do side 1
-					uvs[sideIndex0].Add(uv0);
-					uvs[sideIndex0].Add(intUV1);
-					uvs[sideIndex0].Add(uv2);
-
-					uvs[sideIndex0].Add(intUV1);
-					uvs[sideIndex0].Add(intUV2);
-					uvs[sideIndex0].Add(uv2);
-
-					//do side 2
-					uvs[sideIndex1].Add(intUV1);
-					uvs[sideIndex1].Add(uv1);
-					uvs[sideIndex1].Add(intUV2);
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p2);
+					//
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(int2);
+					//verts[sideIndex0].Add(p2);
+					//
+					////do side 2
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(p1);
+					//verts[sideIndex1].Add(int2);
+					//
+					////also uvs
+					////do side 1
+					//uvs[sideIndex0].Add(uv0);
+					//uvs[sideIndex0].Add(intUV1);
+					//uvs[sideIndex0].Add(uv2);
+					//
+					//uvs[sideIndex0].Add(intUV1);
+					//uvs[sideIndex0].Add(intUV2);
+					//uvs[sideIndex0].Add(uv2);
+					//
+					////do side 2
+					//uvs[sideIndex1].Add(intUV1);
+					//uvs[sideIndex1].Add(uv1);
+					//uvs[sideIndex1].Add(intUV2);
 				}
 				else
 				{
@@ -466,46 +570,64 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					verts[sideIndex1].Add(p0);
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(int2);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1, p1, uv1, p2, uv2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1, p2, uv2, int2, intUV2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], p0, uv0, int1, intUV1, int2, intUV2, ref volume[sideIndex1]);
+					
 
-					//do side 2
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p1);
-					verts[sideIndex0].Add(p2);
+					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1);
+					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p1, uv1);
+					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p2, uv2);
+					//
+					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int1, intUV1);
+					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], p2, uv2);
+					//AddVertex(verts[sideIndex0], uvs[sideIndex0], tris[sideIndex0], int2, intUV2);
+					////side 2
+					//AddVertex(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], p0, uv0);
+					//AddVertex(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], int1, intUV1);
+					//AddVertex(verts[sideIndex1], uvs[sideIndex1], tris[sideIndex1], int2, intUV2);
 
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p2);
-					verts[sideIndex0].Add(int2);
-
-					//also uvs
-					//do side 1
-					uvs[sideIndex1].Add(uv0);
-					uvs[sideIndex1].Add(intUV1);
-					uvs[sideIndex1].Add(intUV2);
-
-					//do side 2
-					uvs[sideIndex0].Add(intUV1);
-					uvs[sideIndex0].Add(uv1);
-					uvs[sideIndex0].Add(uv2);
-
-					uvs[sideIndex0].Add(intUV1);
-					uvs[sideIndex0].Add(uv2);
-					uvs[sideIndex0].Add(intUV2);
+					//verts[sideIndex1].Add(p0);
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(int2);
+					//
+					////do side 2
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p1);
+					//verts[sideIndex0].Add(p2);
+					//
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p2);
+					//verts[sideIndex0].Add(int2);
+					//
+					////also uvs
+					////do side 1
+					//uvs[sideIndex1].Add(uv0);
+					//uvs[sideIndex1].Add(intUV1);
+					//uvs[sideIndex1].Add(intUV2);
+					//
+					////do side 2
+					//uvs[sideIndex0].Add(intUV1);
+					//uvs[sideIndex0].Add(uv1);
+					//uvs[sideIndex0].Add(uv2);
+					//
+					//uvs[sideIndex0].Add(intUV1);
+					//uvs[sideIndex0].Add(uv2);
+					//uvs[sideIndex0].Add(intUV2);
 				}
 
 				//add slice plane
 				intersections.Add(int2);
 				intersections.Add(int1);
 
-				int c0 = verts[sideIndex0].Count;
-				int c1 = verts[sideIndex1].Count;
-				//find volume of triangles
-				volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 3], verts[sideIndex0][c0 - 2], verts[sideIndex0][c0 - 1]);
-				volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 6], verts[sideIndex0][c0 - 5], verts[sideIndex0][c0 - 4]);
-				
-				volume[sideIndex1] += CalculateTriangleVolume(verts[sideIndex1][c1 - 3], verts[sideIndex1][c1 - 2], verts[sideIndex1][c1 - 1]);
+				//int c0 = verts[sideIndex0].Count;
+				//int c1 = verts[sideIndex1].Count;
+				////find volume of triangles
+				//volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 3], verts[sideIndex0][c0 - 2], verts[sideIndex0][c0 - 1]);
+				//volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 6], verts[sideIndex0][c0 - 5], verts[sideIndex0][c0 - 4]);
+				//
+				//volume[sideIndex1] += CalculateTriangleVolume(verts[sideIndex1][c1 - 3], verts[sideIndex1][c1 - 2], verts[sideIndex1][c1 - 1]);
 				
 			}
 		}
@@ -567,19 +689,23 @@ public class Slicer
 					sideIndex0 = positiveDistance[0] ? 0 : 1;
 					sideIndex1 = 1 - sideIndex0;
 
+					AddTriangle(verts[sideIndex0], p0, p1, int1, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], p0, int1, int2, ref volume[sideIndex0]);
+					//side 2					   
+					AddTriangle(verts[sideIndex1], int1, p2, int2, ref volume[sideIndex1]);
 					//do side 1
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(p1);
-					verts[sideIndex0].Add(int1);
-
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(int2);
-
-					//do side 2
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(p2);
-					verts[sideIndex1].Add(int2);
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(p1);
+					//verts[sideIndex0].Add(int1);
+					//
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(int2);
+					//
+					////do side 2
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(p2);
+					//verts[sideIndex1].Add(int2);
 				}
 				else if (positiveDistance[0] == positiveDistance[2])
 				{
@@ -589,19 +715,24 @@ public class Slicer
 					sideIndex0 = positiveDistance[0] ? 0 : 1;
 					sideIndex1 = 1 - sideIndex0;
 
+					AddTriangle(verts[sideIndex0], p0, int1, p2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], int1, int2, p2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], int1, p1, int2, ref volume[sideIndex1]);
+
 					//do side 1
-					verts[sideIndex0].Add(p0);
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p2);
-
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(int2);
-					verts[sideIndex0].Add(p2);
-
-					//do side 2
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(p1);
-					verts[sideIndex1].Add(int2);
+					//verts[sideIndex0].Add(p0);
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p2);
+					//
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(int2);
+					//verts[sideIndex0].Add(p2);
+					//
+					////do side 2
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(p1);
+					//verts[sideIndex1].Add(int2);
 				}
 				else
 				{
@@ -612,32 +743,108 @@ public class Slicer
 					sideIndex1 = 1 - sideIndex0;
 
 					//do side 1
-					verts[sideIndex1].Add(p0);
-					verts[sideIndex1].Add(int1);
-					verts[sideIndex1].Add(int2);
+					AddTriangle(verts[sideIndex0], int1, p1, p2, ref volume[sideIndex0]);
+					AddTriangle(verts[sideIndex0], int1, p2, int2, ref volume[sideIndex0]);
+					//side 2
+					AddTriangle(verts[sideIndex1], p0, int1, int2, ref volume[sideIndex1]);
 
-					//do side 2
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p1);
-					verts[sideIndex0].Add(p2);
+					////do side 1
+					//verts[sideIndex1].Add(p0);
+					//verts[sideIndex1].Add(int1);
+					//verts[sideIndex1].Add(int2);
 
-					verts[sideIndex0].Add(int1);
-					verts[sideIndex0].Add(p2);
-					verts[sideIndex0].Add(int2);
+					////do side 2
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p1);
+					//verts[sideIndex0].Add(p2);
+
+					//verts[sideIndex0].Add(int1);
+					//verts[sideIndex0].Add(p2);
+					//verts[sideIndex0].Add(int2);
 				}
 
 				intersections.Add(int2);
 				intersections.Add(int1);
-
-				int c0 = verts[sideIndex0].Count;
-				int c1 = verts[sideIndex1].Count;
-				//find volume of triangles
-				volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 3], verts[sideIndex0][c0 - 2], verts[sideIndex0][c0 - 1]);
-				volume[sideIndex0] += CalculateTriangleVolume(verts[sideIndex0][c0 - 6], verts[sideIndex0][c0 - 5], verts[sideIndex0][c0 - 4]);
-
-				volume[sideIndex1] += CalculateTriangleVolume(verts[sideIndex1][c1 - 3], verts[sideIndex1][c1 - 2], verts[sideIndex1][c1 - 1]);
 			}
 		}
+	}
+
+	void AddTriangle(List<Vector3> verts, List<Vector2> uvs, List<ushort> tris, Vector3 pA, Vector2 uA,
+		Vector3 pB, Vector2 uB, Vector3 pC, Vector2 uC, ref float volume)
+	{
+		AddVertex(pA, uA);
+		AddVertex(pB, uB);
+		AddVertex(pC, uC);
+		volume += CalculateTriangleVolume(pA, pB, pC);
+
+		int AddVertex(Vector3 vertex, Vector2 uv)
+		{
+			int index = FindLastIndexOf(vertex, verts);
+			if (index == -1)
+			{
+				tris.Add((ushort)verts.Count);
+				verts.Add(vertex);
+				uvs.Add(uv);
+			}
+			else
+				tris.Add((ushort)index);
+
+			return index;
+		}
+	}
+
+	void AddTriangle(List<Vector3> verts, Vector3 pA,
+		Vector3 pB, Vector3 pC, ref float volume)
+	{
+		verts.Add(pA);
+		verts.Add(pB);
+		verts.Add(pC);
+		volume += CalculateTriangleVolume(pA, pB, pC);
+	}
+
+	//int AddVertex(List<Vector3> verts, List<Vector2> uvs, List<ushort> tris, Vector3 vertex, Vector2 uv)
+	//{
+	//	int index = FindLastIndexOf(vertex, verts);
+	//	if (index == -1)
+	//	{
+	//		tris.Add((ushort)verts.Count);
+	//		verts.Add(vertex);
+	//		uvs.Add(uv);
+	//	}
+	//	else
+	//		tris.Add((ushort)index);
+	//
+	//	return index;
+	//}
+
+	int FindLastIndexOf(Vector3 vertex, Vector3 normal, NativeArray<Vector3> vertices, NativeArray<Vector3> normals)
+	{
+		for (int i = vertices.Length - 1; i >= 0; i--)
+		{
+			if (CheckEqual(vertex, vertices[i], normal, normals[i]))
+				return i;
+		}
+		return -1;
+	}
+
+	int FindLastIndexOf(Vector3 vertex, List<Vector3> vertices)
+	{
+		for (int i = vertices.Count - 1; i >= 0; i--)
+		{
+			if (CheckEqual(vertex, vertices[i]))
+				return i;
+		}
+		return -1;
+	}
+
+	static bool CheckEqual(Vector3 a, Vector3 b)
+	{
+		return (a - b).sqrMagnitude < 0.000001f;
+	}
+
+	static bool CheckEqual(Vector3 a, Vector3 b, Vector3 normalA, Vector3 normalB)
+	{
+		return (a - b).sqrMagnitude < 0.000001f && (normalA - normalB).sqrMagnitude < 0.000001f;
 	}
 
 	static unsafe void CopyFromList(ref NativeArray<float3> nativeArray, int offset, List<Vector3> list, int count) 
@@ -658,6 +865,16 @@ public class Slicer
 		{
 			UnsafeUtility.MemCpy((float2*)NativeArrayUnsafeUtility.GetUnsafeBufferPointerWithoutChecks(nativeArray) + offset,
 			vertexBufferPointer, count * (long)UnsafeUtility.SizeOf<float2>());
+		}
+	}
+	static unsafe void CopyFromList(ref NativeArray<ushort> nativeArray, int offset, List<ushort> list, int count)
+	{
+		//two memcpys and an allocation vs 1 memcpy, 1 allocation & a iterate through the list
+		var array = list.ToArray();
+		fixed (void* vertexBufferPointer = array)
+		{
+			UnsafeUtility.MemCpy((ushort*)NativeArrayUnsafeUtility.GetUnsafeBufferPointerWithoutChecks(nativeArray) + offset,
+			vertexBufferPointer, count * (long)UnsafeUtility.SizeOf<ushort>());
 		}
 	}
 
@@ -685,5 +902,27 @@ public class Slicer
 	{
 
 		return Vector3.Dot(Vector3.Cross(p0, p1), p2) / 6.0f;
+	}
+
+	void SetSliceableMaterial(Sliceable sliceable)
+	{
+		var renderer = sliceable.GetComponentInChildren<MeshRenderer>();
+		if (renderer && (sliceable.SliceMaterial || DefaultSliceMaterial))
+		{
+			if (renderer.sharedMaterials.Length < 2)
+			{
+				Material[] materials = new Material[2];
+				materials[0] = renderer.sharedMaterials[0];
+				materials[1] = sliceable.SliceMaterial ? sliceable.SliceMaterial : DefaultSliceMaterial;
+
+				renderer.sharedMaterials = materials;
+			}
+			else
+			{
+				Material[] materials = renderer.sharedMaterials;
+				materials[1] = sliceable.SliceMaterial ? sliceable.SliceMaterial : DefaultSliceMaterial;
+				renderer.sharedMaterials = materials;
+			}
+		}
 	}
 }

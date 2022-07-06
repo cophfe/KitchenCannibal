@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: HandInfo
   m_EditorClassIdentifier: 
   <InteractableLayer>k__BackingField: Interactable
-  <MoveToInteractableDistance>k__BackingField: 0.001
-  <InteractableAttachAngle>k__BackingField: 1
-  <InteractableAttachDistance>k__BackingField: 0.000001
+  <IgnoreHandsLayer>k__BackingField: HandIgnore
+  <InteractableTravellingLayer>k__BackingField: InteractableTravel
+  <MoveToInteractableDistance>k__BackingField: 0.004
+  <InteractableAttachAngle>k__BackingField: 3
+  <InteractableAttachDistance>k__BackingField: 0.0003
+  <InteractableJointMassScale>k__BackingField: 1000
+  <TintStartDistance>k__BackingField: 0.25
+  <TintEndDistance>k__BackingField: 0.15
+  <TintAlreadySelectedModifier>k__BackingField: 0.3
   <ControllerVisibleStart>k__BackingField: 0.1
   <ControllerVisibleRange>k__BackingField: 0.1
   <FingerSpeed>k__BackingField: 20
@@ -34,12 +40,48 @@ MonoBehaviour:
   - <Name>k__BackingField: Grab
     <isFullHandPose>k__BackingField: 1
     <SpeedModifier>k__BackingField: 1
-  - <Name>k__BackingField: Grab Knife
+  - <Name>k__BackingField: Arm
     <isFullHandPose>k__BackingField: 1
     <SpeedModifier>k__BackingField: 1
-  - <Name>k__BackingField: Grab Ball
+  - <Name>k__BackingField: Bone
     <isFullHandPose>k__BackingField: 1
     <SpeedModifier>k__BackingField: 1
-  - <Name>k__BackingField: Grab Handle
+  - <Name>k__BackingField: Handle
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Heart
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Knife
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Knob
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Leg
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Lung
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Plate
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Torso
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Ball
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Large Ball
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Order
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Meat
+    <isFullHandPose>k__BackingField: 1
+    <SpeedModifier>k__BackingField: 1
+  - <Name>k__BackingField: Bread
     <isFullHandPose>k__BackingField: 1
     <SpeedModifier>k__BackingField: 1

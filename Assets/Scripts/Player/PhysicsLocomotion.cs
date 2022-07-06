@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR;
 using Unity.XR.CoreUtils;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 public class PhysicsLocomotion : TeleportationProvider
 {
@@ -180,7 +181,10 @@ public class PhysicsLocomotion : TeleportationProvider
 	protected void OnDisable()
 	{
 		leftHandSnapTurnAction.action.canceled -= LCancelled;
-		leftHandSnapTurnAction.action.canceled -= RCancelled;
+		rightHandSnapTurnAction.action.canceled -= RCancelled;
+
+		leftHandSnapTurnAction.action.performed -= LPerformed;
+		rightHandSnapTurnAction.action.performed -= RPerformed;
 	}
 
 	private void SetInputActionProperty(ref InputActionProperty property, InputActionProperty value)

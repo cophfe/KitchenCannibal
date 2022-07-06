@@ -4,50 +4,88 @@ using UnityEngine;
 
 public class RecipeCheckArea : MonoBehaviour
 {
-    public List<RecipeRequirement> ingredientsPresent;
     [SerializeField] OrderManager orderManager = null;
-    public List<GameObject> objects;
-    [SerializeField] private GameObject foodSpawnLocation = null;
+    public List<Ingredient> ingredients;
+	public float checkRadius = 0.1f;
+	public Vector3 checkOffset;
+	public float checkUnderDistance = 0.05f;
+	[SerializeField]
+	AudioSource audioSource = null;
+	[SerializeField]
+	AudioClip correct = null;
+	[SerializeField]
+	AudioClip incorrect = null;
+	[SerializeField]
+	float cooldown = 1.0f;
 
-    private void OnTriggerEnter(Collider other)
+	[SerializeField] private GameObject foodSpawnLocation = null;
+
+	float cooldownTimer = 0.0f;
+	private void Awake()
+	{
+		audioSource = GetComponent<AudioSource>();
+	}
+	private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger: " + other.name);
+		if (!enabled)
+			return;
+		if (!other.attachedRigidbody)
+			return;
 
-        Ingredient newIngredient = other.gameObject.GetComponent<Ingredient>();
-        if(newIngredient != null)
+
+        else if(cooldownTimer <= 0 && other.tag == "Check")
         {
-            objects.Add(other.gameObject);
-            bool ingredientFound = false;
-
-            // Check if ingredient already exists and add a count of one to it
-            for(int i = 0; i < ingredientsPresent.Count; i++)
-            {
-                if(ingredientsPresent[i].ingredient == newIngredient.ingredientType)
-                {
-                    ingredientsPresent[i].amount++;
-                    ingredientFound = true;
-                    break;
-                }
-            }
-
-            if(!ingredientFound)
-            {
-                RecipeRequirement temp = new RecipeRequirement();
-                temp.amount = 1;
-                temp.ingredient = newIngredient.ingredientType;
-                ingredientsPresent.Add(temp);
-            }
-        }
-
-        else if(other.tag == "Check")
-        {
-            orderManager.CheckRecipe(ingredientsPresent, foodSpawnLocation.transform.position);
-            ingredientsPresent.Clear();
-            for(int i = 0;i < objects.Count;i++)
-            {
-                Destroy(objects[i]);
-            }
-            objects.Clear();
-        }
+			CheckIngredients();
+		}
     }
+
+	public void CheckIngredients()
+	{
+		cooldownTimer = cooldown;
+		Vector3 test = transform.TransformDirection(checkOffset);
+		var cols = Physics.OverlapSphere(transform.position + test, checkRadius);
+		for (int i = 0; i < cols.Length; i++)
+		{
+			var rb = cols[i].attachedRigidbody;
+			if (rb)
+			{
+				if (cols[i].transform.position.y + checkUnderDistance < (transform.position + test).y)
+					continue;
+
+				var ingredient = rb.GetComponent<Ingredient>();
+				if (ingredient && !ingredients.Contains(ingredient))
+				{
+					ingredients.Add(ingredient);
+				}
+			}
+		}
+
+		if (orderManager.CheckRecipe(ingredients, foodSpawnLocation.transform))
+		{
+			for (int i = 0; i < ingredients.Count; i++)
+			{
+				Destroy(ingredients[i].gameObject);
+			}
+
+
+			if (audioSource && correct && ingredients.Count > 0)
+				audioSource.PlayOneShot(correct);
+		}
+		else if (audioSource && incorrect && ingredients.Count > 0)
+			audioSource.PlayOneShot(incorrect);
+		
+		ingredients.Clear();
+	}
+
+	private void Update()
+	{
+		cooldownTimer -= Time.deltaTime;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = new Color(1, 0, 0, 0.5f);
+		Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+		Gizmos.DrawSphere(checkOffset, checkRadius);
+	}
 }

@@ -7,7 +7,9 @@ public class KnifeCut : MonoBehaviour
 	[SerializeField]
 	Material defaultSliceMaterial;
 	[SerializeField]
-	float sliceSpeed = 0.5f;
+	float sliceMinSpeed = 0.5f;
+	[SerializeField]
+	float cutImpulse = 0.04f;
 	[SerializeField]
 	Vector3 localSlicePlaneDirection = Vector3.right;
 	[SerializeField]
@@ -18,6 +20,8 @@ public class KnifeCut : MonoBehaviour
 	bool doOnTrigger = false;
 	[SerializeField]
 	bool doOnCollision= true;
+	[SerializeField]
+	string interactableLayer = "Interactable";
 
 	[SerializeField]
 	bool ignoreCollisionAfterHit = true;
@@ -43,7 +47,7 @@ public class KnifeCut : MonoBehaviour
 	
 	Rigidbody rb;
 	float sliceTimer = 0;
-
+	int interactableLayerIndex;
 	List<ColData> justSliced;
 	struct ColData
 	{
@@ -61,6 +65,8 @@ public class KnifeCut : MonoBehaviour
 
 		if (!sliceOrigin)
 			sliceOrigin = transform;
+
+		interactableLayerIndex = LayerMask.NameToLayer(interactableLayer);
 	}
 
 #if UNITY_EDITOR
@@ -76,9 +82,7 @@ public class KnifeCut : MonoBehaviour
 		if (!enabled || !doOnTrigger)
 			return;
 
-		ConsiderSlicing(other.gameObject);
-
-
+		ConsiderSlicing(other.attachedRigidbody);
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -93,45 +97,73 @@ public class KnifeCut : MonoBehaviour
 			{
 				if (col == colliders[i])
 				{
-					ConsiderSlicing(collision.gameObject);
+					//Debug.Log("Cutter: " + col.name);
+					ConsiderSlicing(collision.rigidbody);
 					return;
 				}
 			}
 		}
 		else
-			ConsiderSlicing(collision.gameObject);
+			ConsiderSlicing(collision.rigidbody);
 	}
 
-	void ConsiderSlicing(GameObject objectToSlice)
+	void ConsiderSlicing(Rigidbody objectToSlice)
 	{
+		if (!objectToSlice)
+			return;
+
 		Sliceable sliceable = objectToSlice.GetComponent<Sliceable>();
 		if (sliceable != null && sliceTimer < 0 && sliceable.CanBeSliced && sliceable.TimesSliced < maxSliceAmount)
 		{
 			float velocity = Vector3.Dot(rb.velocity, transform.TransformDirection(localSpeedDirection.normalized));
-			Debug.Log(velocity);
-			if (velocity > sliceSpeed)
+			//Debug.Log(velocity);
+			if (velocity > sliceMinSpeed)
 			{
-				List<Sliceable> sliceables = slicer.Slice(sliceable, transform.TransformDirection(localSlicePlaneDirection).normalized, sliceOrigin ? sliceOrigin.position : transform.position);
+				Vector3 origin = sliceOrigin ? sliceOrigin.position : transform.position;
+				Vector3 sliceDirection  = transform.TransformDirection(localSlicePlaneDirection).normalized;
 
-				if (sliceable != null)
+				//this is a quick solution to cutting something after picking it up
+				sliceable.gameObject.layer = interactableLayerIndex;
+
+				List<Sliceable> sliceables = slicer.Slice(sliceable, sliceDirection, origin);
+
+				if (sliceables != null && sliceables.Count > 0)
+				{
 					sliceTimer = sliceTimeout;
 
-				if (colliders != null && ignoreCollisionAfterHit && sliceables != null && sliceables.Count > 0)
-				{
-					for (int i = 0; i < sliceables.Count; i++)
+					if (colliders != null && ignoreCollisionAfterHit)
 					{
-						var col = sliceables[i].GetComponent<MeshCollider>();
-
-						if (col)
+						for (int i = 0; i < sliceables.Count; i++)
 						{
-							for (int j = 0; j < colliders.Length; j++)
+							//ignore mesh collider until it moves away
+							var col = sliceables[i].GetComponent<MeshCollider>();
+
+							if (col)
 							{
-								Physics.IgnoreCollision(col, colliders[j]);
+								for (int j = 0; j < colliders.Length; j++)
+								{
+									Physics.IgnoreCollision(col, colliders[j]);
+								}
+								justSliced.Add(new ColData() { timeElapsed = 0, collider = col });
 							}
-							justSliced.Add(new ColData() { timeElapsed = 0, collider = col }) ;
+						}
+
+						//also apply a force tangential to the cut plane
+						for (int i = 0; i < sliceables.Count; i++)
+						{
+							var rb = sliceables[i].GetComponent<Rigidbody>();
+							if (rb != null)
+							{
+								float direction = Mathf.Sign(Vector3.Dot(sliceDirection, rb.worldCenterOfMass) - Vector3.Dot(sliceDirection, origin));
+								rb.AddForce(direction * sliceDirection * cutImpulse, ForceMode.VelocityChange);
+							}
 						}
 					}
 				}
+
+				
+
+				
 			}
 		}
 	}

@@ -944,7 +944,7 @@
                 {
                     "name": "",
                     "id": "9c6e2d25-a53f-4080-b5fb-6814b9c317c3",
-                    "path": "<XRController>{RightHand}/Primary2DAxis",
+                    "path": "<OculusTouchController>{RightHand}/thumbstick",
                     "interactions": "Sector(directions=1,pressPoint=0.75)",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -1021,7 +1021,7 @@
                 {
                     "name": "",
                     "id": "3f215410-5edc-4f26-a81c-030b86902e93",
-                    "path": "<XRController>{LeftHand}/Primary2DAxis",
+                    "path": "<OculusTouchController>{LeftHand}/thumbstick",
                     "interactions": "Sector(directions=1,pressPoint=0.75)",
                     "processors": "",
                     "groups": "Noncontinuous Move",

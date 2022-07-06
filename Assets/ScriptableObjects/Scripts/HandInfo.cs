@@ -8,11 +8,24 @@ public class HandInfo : ScriptableObject
 	[field: SerializeField]
 	public string InteractableLayer { get; private set; } = "Interactable";
 	[field: SerializeField]
+	public string IgnoreHandsLayer { get; private set; } = "HandIgnore";
+	[field: SerializeField]
+	public string InteractableTravellingLayer { get; private set; } = "InteractableTravel";
+	[field: SerializeField]
 	public float MoveToInteractableDistance { get; private set; } = 0.05f;
 	[field: SerializeField]
 	public float InteractableAttachAngle { get; private set; } = 3.0f;
 	[field: SerializeField]
 	public float InteractableAttachDistance { get; private set; } = 0.05f;
+	[field: SerializeField]
+	public float InteractableJointMassScale { get; private set; } = 1000.0f;
+
+	[field: SerializeField]
+	public float TintStartDistance { get; private set; } = 0.3f;
+	[field: SerializeField]
+	public float TintEndDistance { get; private set; } = 0.0f;
+	[field: SerializeField]
+	public float TintAlreadySelectedModifier { get; private set; } = 0.3f;
 
 	[field: SerializeField]
 	public float ControllerVisibleStart { get; private set; } = 2.0f;
