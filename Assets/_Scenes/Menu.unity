@@ -182,15 +182,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: KITCHEN CANNIBAL
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c68821361c1875f47bd8e948935651d7, type: 2}
+  m_sharedMaterial: {fileID: 1209625424658182585, guid: c68821361c1875f47bd8e948935651d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280558763
-  m_fontColor: {r: 0.6698113, g: 0.14217694, b: 0.14217694, a: 1}
+    rgba: 4280953563
+  m_fontColor: {r: 0.8584906, g: 0.16602883, b: 0.16602883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -271,7 +271,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 1209625424658182585, guid: c68821361c1875f47bd8e948935651d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
