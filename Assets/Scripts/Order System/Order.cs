@@ -37,6 +37,8 @@ public class Order : MonoBehaviour
 
     public void OrderFailed()
     {
+		GameManager.Instance.DeregisterOrder();
+		
 		//Debug.Log("ORDER FAILED IN OBJECT " + gameObject.name);
         // Run stuff here when order fails
         timeStarted = false;
@@ -48,7 +50,6 @@ public class Order : MonoBehaviour
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
 
-		GameManager.Instance.DeregisterOrder();
 	}
 
 	public Order CreateOrder(Transform spawnTransform, bool hasBones)
@@ -86,7 +87,9 @@ public class Order : MonoBehaviour
 
 	public void OrderComplete()
     {
-        timeStarted = false;
+		GameManager.Instance.DeregisterOrder();
+        
+		timeStarted = false;
 		orderActive = false;
 
         if (display == null)
@@ -106,7 +109,6 @@ public class Order : MonoBehaviour
 		else
 			GameManager.Instance.scoreKeeper.ChangeScore(ScoreChange.OrderComplete);
 
-		GameManager.Instance.DeregisterOrder();
 	}
 	private void Awake()
     {
