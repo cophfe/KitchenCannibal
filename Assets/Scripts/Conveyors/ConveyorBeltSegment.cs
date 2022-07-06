@@ -15,7 +15,8 @@ public class ConveyorBeltSegment : MonoBehaviour
     public float speed = 0.5f;
     public ConveyorDirection conveyorDirection;
     private Vector3 direction;
-   [SerializeField] LayerMask disablePlayerInteractionLayer;
+	[SerializeField] LayerMask disablePlayerInteractionLayer;
+	List<Order> ordersComplete = new List<Order>();
 
     private void OnValidate()
     {
@@ -48,9 +49,12 @@ public class ConveyorBeltSegment : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 		Order temp = other.attachedRigidbody.GetComponent<Order>();
-        if(temp != null)
+
+        if(temp != null && !ordersComplete.Contains(temp))
         {
-            temp.gameObject.layer = disablePlayerInteractionLayer;
+			ordersComplete.Add(temp);
+
+			temp.gameObject.layer = disablePlayerInteractionLayer;
             temp.OrderComplete();
         }
     }

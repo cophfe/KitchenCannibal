@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 403432565059060838}
   - component: {fileID: 1207568464}
   - component: {fileID: 1084856336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHand Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 403432565476917360}
   - component: {fileID: 1593640033}
   - component: {fileID: 593723490}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHand Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}

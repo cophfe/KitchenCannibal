@@ -219,7 +219,6 @@ GameObject:
   - component: {fileID: 4650892591162382999}
   - component: {fileID: 8324519124002917011}
   - component: {fileID: 7375163265662709332}
-  - component: {fileID: 6557658715274699634}
   m_Layer: 0
   m_Name: Tutorial Note
   m_TagString: Untagged
@@ -358,25 +357,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3568353833919032923}
   m_Mesh: {fileID: 0}
---- !u!95 &6557658715274699634
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3568353833919032923}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 705b547a21b5f324d87ec59d30974e55, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4326453722298143067
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +667,7 @@ MonoBehaviour:
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
-  <MoveToForceModifier>k__BackingField: 0.5
+  <MoveToForceModifier>k__BackingField: 0.8
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &2764882523151403453
