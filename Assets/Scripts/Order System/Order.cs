@@ -38,6 +38,7 @@ public class Order : MonoBehaviour
 
     public void OrderFailed()
     {
+		//Debug.Log("ORDER FAILED IN OBJECT " + gameObject.name);
         // Run stuff here when order fails
         timeStarted = false;
 		orderActive = false;
@@ -51,8 +52,9 @@ public class Order : MonoBehaviour
 		GameManager.Instance.DeregisterOrder();
 	}
 
-	public void CreateOrder(Transform spawnTransform, bool hasBones)
+	public Order CreateOrder(Transform spawnTransform, bool hasBones)
     {
+		//Debug.Log("ORDER SUCCEEDED IN OBJECT " + gameObject.name);
 		GameObject prefab;
 		switch (recipe.completedRecipie)
 		{
@@ -66,7 +68,7 @@ public class Order : MonoBehaviour
 				prefab = GameManager.Instance.modelsAndimages.hotdogPrefab;
 				break;
 			default:
-				return;
+				return null;
 		}
 		GameObject temp = Instantiate(prefab);
         Order tempOrder = temp.GetComponent<Order>();
@@ -78,6 +80,9 @@ public class Order : MonoBehaviour
 		tempOrder.transform.position = spawnTransform.position;
 		tempOrder.transform.rotation = spawnTransform.rotation;
 		tempOrder.timeStarted = false;
+
+		Destroy(this);
+		return tempOrder;
 	}
 
 	public void OrderComplete()
@@ -88,10 +93,10 @@ public class Order : MonoBehaviour
         if (display == null)
             return;
 
-        Debug.Log(recipe.name + " Order complete");
         rack.RemoveOrder(orderRackIndex);
         Destroy(display.gameObject);
 
+		Debug.Log(recipe.name + " Order complete");
 		Debug.Log("Order complete! Points awarded");
         GameManager.Instance.audioManager.PlayOneShot(SoundSources.Order, 1);
 		if (hasBones)

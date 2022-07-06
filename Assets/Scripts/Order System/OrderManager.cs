@@ -55,7 +55,7 @@ public class OrderManager : MonoBehaviour
 
     public bool CheckRecipe(List<Ingredient> recipe, Transform spawnTransform)
     {
-		bool hasBones = false;
+		bool hasBones;
         bool completedOrder = true;
 		for (int i = 0; i < currentOrderIndex; i++)
 		{
@@ -132,8 +132,10 @@ public class OrderManager : MonoBehaviour
 
             // A match is found
             orders[i].orderActive = false;
-            orders[i].CreateOrder(spawnTransform, hasBones);
-            return true;
+            var order = orders[i].CreateOrder(spawnTransform, hasBones);
+			if (order)
+				orders[i] = order;
+			return true;
 		}
 
 		// Nothing is found
