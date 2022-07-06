@@ -3227,10 +3227,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7915069123507688510, guid: a032535542538c44abad766e006020f2, type: 3}
     - target: {fileID: 5190176915361260444, guid: c99c96adecc2bc34bb26e38e1228d286, type: 3}
-      propertyPath: burgerPrefab
-      value: 
-      objectReference: {fileID: 4923652759077902854, guid: 2ff390bc541377f42812b03a2ab09f00, type: 3}
-    - target: {fileID: 5190176915361260444, guid: c99c96adecc2bc34bb26e38e1228d286, type: 3}
       propertyPath: hotdogPrefab
       value: 
       objectReference: {fileID: 4923652759077902854, guid: 2ff390bc541377f42812b03a2ab09f00, type: 3}

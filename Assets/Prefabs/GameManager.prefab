@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827e28526b342b546b364128a86a91f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burgerPrefab: {fileID: 5230050713971405304, guid: 9986c483c032d7b47bdca09ae0246d4c, type: 3}
+  burgerPrefab: {fileID: 1474801553705598345, guid: 55651881134f7fd45a9569a7496aaabb, type: 3}
   hotdogPrefab: {fileID: 0}
   saladPrefab: {fileID: 0}
   burger: {fileID: 0}
