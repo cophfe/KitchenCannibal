@@ -5371,7 +5371,7 @@ MonoBehaviour:
   nothingMask:
     m_Bits: 0
   boneParent: {fileID: 2065815784776217561}
-  pickBone: {fileID: 8300000, guid: 9a18bf6b409d9c649bf27c0bb051a5e4, type: 3}
+  pickBone: {fileID: 8300000, guid: a4dc0bf80707255498870d0f31c1aca4, type: 3}
 --- !u!82 &4995280452103270942
 AudioSource:
   m_ObjectHideFlags: 0
