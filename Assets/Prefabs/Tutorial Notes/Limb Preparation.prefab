@@ -173,7 +173,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322399427283630746}
-  - component: {fileID: 2593615739400989709}
   - component: {fileID: 3474497586623737011}
   - component: {fileID: 5409581228171377386}
   - component: {fileID: 7355718558014558004}
@@ -204,31 +203,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -7.368, y: 0, z: 0}
---- !u!114 &2593615739400989709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322399427283630747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1048cbc3219b7f2449946b4092fdb1cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderImage: {fileID: 2486780323618507417}
-  orderIngredientImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  orderIngredientAmount:
-  - {fileID: 308321801827619331}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  orderDescription: {fileID: 0}
-  amountLeft: {fileID: 0}
 --- !u!54 &3474497586623737011
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -266,7 +240,7 @@ MonoBehaviour:
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
-  <MoveToForceModifier>k__BackingField: 0.5
+  <MoveToForceModifier>k__BackingField: 0.8
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &7355718558014558004
@@ -809,7 +783,6 @@ GameObject:
   - component: {fileID: 54429281021729822}
   - component: {fileID: 3732559431208471578}
   - component: {fileID: 2743750887510976733}
-  - component: {fileID: 1966787521541416443}
   m_Layer: 0
   m_Name: Tutorial Note
   m_TagString: Untagged
@@ -918,7 +891,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b0dc84b797d9fb40881248ce48c6917, type: 2}
+  - {fileID: 2100000, guid: 2fcb6fb290455b84a8c0824b85322bd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -948,25 +921,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8200848114332035282}
   m_Mesh: {fileID: 0}
---- !u!95 &1966787521541416443
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200848114332035282}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 705b547a21b5f324d87ec59d30974e55, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8953353644865722322
 GameObject:
   m_ObjectHideFlags: 0

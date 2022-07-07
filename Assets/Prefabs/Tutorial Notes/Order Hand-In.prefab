@@ -341,7 +341,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b0dc84b797d9fb40881248ce48c6917, type: 2}
+  - {fileID: 2100000, guid: 2fcb6fb290455b84a8c0824b85322bd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -544,7 +544,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5507214799311690315}
-  - component: {fileID: 9063998025488092380}
   - component: {fileID: 7926459377785769058}
   - component: {fileID: 1523664305194687035}
   - component: {fileID: 4045172435125809125}
@@ -575,31 +574,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -7.368, y: 0, z: 0}
---- !u!114 &9063998025488092380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5507214799311690314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1048cbc3219b7f2449946b4092fdb1cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderImage: {fileID: 8986163866352396872}
-  orderIngredientImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  orderIngredientAmount:
-  - {fileID: 6516977904631771858}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  orderDescription: {fileID: 0}
-  amountLeft: {fileID: 0}
 --- !u!54 &7926459377785769058
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -637,7 +611,7 @@ MonoBehaviour:
   <PermanantIgnoreColliders>k__BackingField: []
   <RestrictedMovement>k__BackingField: 0
   <MoveToDistanceModifier>k__BackingField: 1
-  <MoveToForceModifier>k__BackingField: 0.5
+  <MoveToForceModifier>k__BackingField: 0.8
   <UniformAttachTransform>k__BackingField: 0
   <AttachPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &4045172435125809125

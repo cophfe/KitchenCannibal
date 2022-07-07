@@ -12,52 +12,95 @@ public enum ConveyorDirection
 
 public class ConveyorBeltSegment : MonoBehaviour
 {
-    public float speed = 0.5f;
-    public ConveyorDirection conveyorDirection;
-    private Vector3 direction;
-   [SerializeField] LayerMask disablePlayerInteractionLayer;
+	public float speed = 0.5f;
+	public ConveyorDirection conveyorDirection;
+	private Vector3 direction;
+	[SerializeField] string disableLayer;
+	List<Order> ordersComplete = new List<Order>();
 
-    private void OnValidate()
-    {
-        switch (conveyorDirection)
-        {
-            case ConveyorDirection.forward:
-                direction = Vector3.forward;
-                break;
+	List<Rigidbody> moving = new List<Rigidbody>();
 
-            case ConveyorDirection.left:
-                direction = -Vector3.right;
-                break;
+	private void OnValidate()
+	{
+		switch (conveyorDirection)
+		{
+			case ConveyorDirection.forward:
+				direction = Vector3.forward;
+				break;
 
-            case ConveyorDirection.right:
-                direction = Vector3.right;
-                break;
+			case ConveyorDirection.left:
+				direction = -Vector3.right;
+				break;
 
-            case ConveyorDirection.back:
-                direction = Vector3.back;
-                break;
-        }
-    }
+			case ConveyorDirection.right:
+				direction = Vector3.right;
+				break;
 
-    private void OnTriggerStay(Collider other)
-    {
-        //other.attachedRigidbody.AddForce(direction * speed * Time.deltaTime);
-        other.attachedRigidbody.position = other.attachedRigidbody.position + direction * speed * Time.deltaTime;
-    }
+			case ConveyorDirection.back:
+				direction = Vector3.back;
+				break;
+		}
+	}
 
-    private void OnTriggerEnter(Collider other)
-    {
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.attachedRigidbody)
+		{
+
+		}
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (!other.attachedRigidbody)
+			return;
+
+		if (!moving.Contains(other.attachedRigidbody))
+		{
+			moving.Add(other.attachedRigidbody);
+		}
+
 		Order temp = other.attachedRigidbody.GetComponent<Order>();
-        if(temp != null)
-        {
-            temp.gameObject.layer = disablePlayerInteractionLayer;
-            temp.OrderComplete();
-        }
-    }
+
+		if (temp != null && !ordersComplete.Contains(temp))
+		{
+			ordersComplete.Add(temp);
+
+			SetLayer(temp.transform, LayerMask.NameToLayer("HandIgnore"));
+			temp.OrderComplete();
+		}
+	}
+
+	void SetLayer(Transform obj, int layer)
+	{
+		obj.gameObject.layer = layer;
+		foreach (Transform child in obj)
+			SetLayer(child, layer);
+	}
+	private void OnTriggerExit(Collider other)
+	{
+		moving.Remove(other.attachedRigidbody);
+	}
+
+	private void FixedUpdate()
+	{
+		for (int i = 0; i < moving.Count; i++)
+		{
+			if (moving[i])
+			{
+				moving[i].position = moving[i].position - Vector3.right * 0.2f * Time.fixedDeltaTime;
+			}
+			else
+			{
+				moving.RemoveAt(i);
+				i--;
+			}
+			
+		}
+	}
 
 
-
-    private void OnDrawGizmos()
+	private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawLine(transform.position, transform.position + (direction * 0.5f));

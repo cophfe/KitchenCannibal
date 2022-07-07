@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public List<Ingredient> activeIngredients = null;
     public float minimumCollisionVelocity = 0.5f;
 
-	int currentOrderCount = 0;
+	int completedOrderCount = 0;
     #region Singleton/Initialize
     private static GameManager m_Instance;                       // The current instance of MenuController
     public static GameManager Instance                           // The public current instance of MenuController
@@ -63,16 +63,11 @@ public class GameManager : MonoBehaviour
         scoreKeeper.ResetScore();
     }
 
-	public void RegisterOrder()
-	{
-		currentOrderCount++;
-	}
-
 	public void DeregisterOrder()
 	{
-		currentOrderCount--;
+		completedOrderCount++;
 
-		if (winText && currentOrderCount <= 0)
+		if (winText && completedOrderCount >= orderManager.OrderCount)
 		{
 			winText.SetText(scoreKeeper);
 			healthInspector.Disable();
